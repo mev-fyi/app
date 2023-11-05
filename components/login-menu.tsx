@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { type Session } from 'next-auth'
-import { signIn, signOut } from 'next-auth/react'
+import { signOut, signIn } from 'next-auth/react'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -23,26 +23,13 @@ function getUserInitials(name: string) {
   return lastName ? `${firstName[0]}${lastName[0]}` : firstName.slice(0, 2)
 }
 
-export function UserMenu({ user }: UserMenuProps) {
+export function LoginMenu({ user }: UserMenuProps) {
   return (
     <div className="flex items-center justify-between">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="pl-0">
-            {user?.image ? (
-              <Image
-                className="w-6 h-6 transition-opacity duration-300 rounded-full select-none ring-1 ring-zinc-100/10 hover:opacity-80"
-                src={user?.image ? `${user.image}&s=60` : ''}
-                alt={user.name ?? 'Avatar'}
-                height={48}
-                width={48}
-              />
-            ) : (
-              <div className="flex items-center justify-center text-xs font-medium uppercase rounded-full select-none h-7 w-7 shrink-0 bg-muted/50 text-muted-foreground">
-                {user?.name ? getUserInitials(user?.name) : null}
-              </div>
-            )}
-            <span className="ml-2">{user?.name}</span>
+            Login
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent sideOffset={8} align="start" className="w-[180px]">
@@ -53,24 +40,29 @@ export function UserMenu({ user }: UserMenuProps) {
           <DropdownMenuSeparator />
           <DropdownMenuItem asChild>
             <a
-              href="https://www.flashbots.net/"
+              onClick={() => {
+                signIn('github', { callbackUrl: '/' })
+              }}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-between w-full text-xs"
             >
-              Flashbots Homepage
+              Login with Github
               <IconExternalLink className="w-3 h-3 ml-auto" />
             </a>
           </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() =>
-              signOut({
-                callbackUrl: '/'
-              })
-            }
-            className="text-xs"
-          >
-            Log Out
+          <DropdownMenuItem>
+            <a
+              onClick={() => {
+                signIn('github', { callbackUrl: '/' })
+              }}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-between w-full text-xs"
+            >
+              Login with Gmail
+              <IconExternalLink className="w-3 h-3 ml-auto" />
+            </a>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

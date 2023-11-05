@@ -1,7 +1,7 @@
 'use client'
 
 import { useChat, type Message } from 'ai/react'
-
+import { Separator } from './ui/separator'
 import { cn } from '@/lib/utils'
 import { ChatList } from '@/components/chat-list'
 import { ChatPanel } from '@/components/chat-panel'
@@ -20,6 +20,7 @@ import { useState } from 'react'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { toast } from 'react-hot-toast'
+import { Skeleton } from './skeleton'
 
 const IS_PREVIEW = process.env.VERCEL_ENV === 'preview'
 export interface ChatProps extends React.ComponentProps<'div'> {
@@ -50,16 +51,26 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     })
   return (
     <>
-      <div className={cn('pb-[200px] pt-4 md:pt-10', className)}>
+      <div className={cn('pb-[200px] pt-4 md:pt-10 mx-20', className)}>
         {messages.length ? (
-          <>
-            <ChatList messages={messages} />
-            <ChatScrollAnchor trackVisibility={isLoading} />
-          </>
+          <div className="flex flex-row space-x-4">
+            <div className="flex flex-col flex-2">
+              <ChatList messages={messages} />
+              <ChatScrollAnchor trackVisibility={isLoading} />
+            </div>
+            <Separator orientation="vertical" />
+            <div className="flex-1">
+              <Skeleton className="w-full h-[20px] rounded-full m-10" />
+              <Skeleton className="w-full h-[20px] rounded-full m-10" />
+              <Skeleton className="w-full h-[20px] rounded-full m-10" />
+              <Skeleton className="w-full h-[20px] rounded-full m-10" />
+            </div>
+          </div>
         ) : (
           <EmptyScreen setInput={setInput} />
         )}
       </div>
+
       <ChatPanel
         id={id}
         isLoading={isLoading}
