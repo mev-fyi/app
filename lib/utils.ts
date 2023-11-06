@@ -2,6 +2,9 @@ import { clsx, type ClassValue } from 'clsx'
 import { customAlphabet } from 'nanoid'
 import { twMerge } from 'tailwind-merge'
 
+// Assuming you've set REACT_APP_BACKEND_URL in your environment variables
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
@@ -11,11 +14,13 @@ export const nanoid = customAlphabet(
   7
 ) // 7-character random string
 
+// Modify the fetcher function to prepend the backend URL
 export async function fetcher<JSON = any>(
-  input: RequestInfo,
+  endpoint: string,
   init?: RequestInit
 ): Promise<JSON> {
-  const res = await fetch(input, init)
+  // Prepend the backend URL to the endpoint
+  const res = await fetch(`${backendUrl}${endpoint}`, init)
 
   if (!res.ok) {
     const json = await res.json()
