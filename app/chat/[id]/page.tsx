@@ -40,9 +40,9 @@ export default async function ChatPage({ params }: ChatPageProps) {
   // const chat = await getChat(params.id, session.user.id)
   const chat = await getChat(params.id, 'anonymous') // Again, replaced with 'anonymous' for the example.
 
-  // if (!chat) {
-  //   notFound()
-  // }
+  if (!chat) {
+    notFound()
+  }
 
   // if (chat?.userId !== session?.user?.id) {
   //   notFound()
