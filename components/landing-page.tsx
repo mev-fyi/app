@@ -14,8 +14,8 @@ export function LandingPage() {
       </h1>
       <p className="mb-2 leading-normal">
         mev.fyi is the Maximal Extractable Value (MEV) research chatbot.
-        Created by <ExternalLink href="https://twitter.com/unlock_VALue">Valentin</ExternalLink> and funded by <ExternalLink href="https://www.flashbots.net/">Flashbots'</ExternalLink> grant.
-        mev.fyi thrives to lower the level of education required to be onboarded and contribute to
+        Created by <ExternalLink href="https://twitter.com/unlock_VALue">Valentin</ExternalLink> and funded by <ExternalLink href="https://www.flashbots.net/">Flashbots'</ExternalLink> grant, with special thanks to <ExternalLink href="https://www.twitter.com/freddmannen">Fred</ExternalLink>.
+        mev.fyi thrives to lower the level of education required to onboard and contribute to
         MEV-related research, across mechanism design, auction theory, incentives alignment ... from research papers and YouTube videos.
         <p className="mb-2 leading-normal">
           Right now, mev.fyi provides a scalable way of contributing and
