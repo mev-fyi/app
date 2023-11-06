@@ -1,30 +1,18 @@
-// SignInClientSide.tsx
-import { useSession } from 'next-auth/react';
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { GithubLoginButton, GoogleLoginButton } from '@/components/login-button';
+import { useClientSideEffect } from '../../lib/hooks/use-client-side-effect'; // Adjust the path as necessary
+import { GithubLoginButton, GoogleLoginButton } from '../../components/login-button'; // Adjust the import path as necessary
 
 export default function SignInClientSide() {
-  const { data: session } = useSession();
-  const router = useRouter();
+  // Now using our custom hook which internally uses useEffect
+  useClientSideEffect();
 
-  useEffect(() => {
-    if (session) {
-      router.push('/');
-    }
-  }, [session, router]);
-
-  if (!session) {
-    return (
-      <div className="flex h-screen items-center justify-center p-4">
-        <div>
-          <GithubLoginButton showGithubIcon />
-          <GoogleLoginButton showGoogleIcon />
-        </div>
+  // The component will always render the login buttons
+  // Redirection will be handled by the hook after login
+  return (
+    <div className="flex h-screen items-center justify-center p-4">
+      <div>
+        <GithubLoginButton showGithubIcon />
+        <GoogleLoginButton showGoogleIcon />
       </div>
-    );
-  }
-
-  // If session exists or while loading the session, show a loader or similar
-  return null; // Or some placeholder while loading
+    </div>
+  );
 }
