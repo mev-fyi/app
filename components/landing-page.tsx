@@ -13,13 +13,10 @@ export function LandingPage() {
         <code>mev.fyi</code>
       </h1>
       <p className="mb-2 leading-normal">
-        <code>
-          <ExternalLink href="https://nextjs.org">mev.fyi</ExternalLink>
-        </code>
-        aims to lower the level of education required to contribute to
-        MEV-related research. The current vision of mev.fyi is to provide a
-        conversational tool, to directly frame and quote definitions provided by
-        industry leaders and researchers.
+        mev.fyi is the Maximal Extractable Value (MEV) research chatbot.
+        Created by <ExternalLink href="https://twitter.com/unlock_VALue">Valentin</ExternalLink> and funded by <ExternalLink href="https://www.flashbots.net/">Flashbots'</ExternalLink> grant.
+        mev.fyi thrives to lower the level of education required to be onboarded and contribute to
+        MEV-related research, across mechanism design, auction theory, incentives alignment ... from research papers and YouTube videos.
         <p className="mb-2 leading-normal">
           Right now, mev.fyi provides a scalable way of contributing and
           displaying research content via the Typeform add.mev.fyi and the

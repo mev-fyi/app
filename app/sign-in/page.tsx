@@ -1,33 +1,21 @@
-import { useSession } from 'next-auth/react';
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { GithubLoginButton, GoogleLoginButton } from '@/components/login-button';
+import dynamic from 'next/dynamic';
 import { LandingPage } from '@/components/landing-page';
 
+// Use dynamic import to import the SignInClientSide component without server-side rendering.
+const SignInClientSide = dynamic(
+  () => import('./SignInClientSide'), // Assuming SignInClientSide is in the same directory
+  { ssr: false } // This disables server-side rendering for the component
+);
+
 export default function SignInPage() {
-  const { data: session } = useSession();
-  const router = useRouter();
+  // Here you don't need any server-side logic related to the sign-in process
+  // because it is being handled on the client side by the SignInClientSide component.
 
-  // If there's a session (meaning the user is logged in), redirect to the home page
-  useEffect(() => {
-    if (session) {
-      router.push('/'); // Redirect to the home page or dashboard
-    }
-  }, [session, router]);
-
-  // If there's no active session, display the sign-in options
-  if (!session) {
-    return (
-      <div className="flex h-screen items-center justify-center p-4">
-        <div>
-          <GithubLoginButton showGithubIcon />
-          <GoogleLoginButton showGoogleIcon />
-          {/* Render any other sign-in buttons here */}
-        </div>
-      </div>
-    );
-  }
-
-  // If session exists or while loading the session, show the landing page or a loader
-  return <LandingPage />;
+  // The return statement of your functional component.
+  return (
+    <>
+      <SignInClientSide />
+      <LandingPage />
+    </>
+  );
 }
