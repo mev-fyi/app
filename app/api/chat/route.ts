@@ -1,67 +1,70 @@
 import { kv } from '@vercel/kv'
-import { OpenAIStream, StreamingTextResponse } from 'ai'
-import { Configuration, OpenAIApi } from 'openai-edge'
+import { auth } from '@/auth';
+import { fetcher, nanoid } from '@/lib/utils';
 
-import { auth } from '@/auth'
-import { nanoid } from '@/lib/utils'
-
-export const runtime = 'edge'
-
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY
-})
-
-const openai = new OpenAIApi(configuration)
+export const runtime = 'edge';
 
 export async function POST(req: Request) {
-  const json = await req.json()
-  const { messages, previewToken } = json
-  const userId = (await auth())?.user.id
+  const json = await req.json();
+  const { message } = json; // Assuming `message` is the correct field that contains the chat message
 
+  const userId = (await auth())?.user.id;
+
+  // Check if user ID exists, if not, return Unauthorized
   if (!userId) {
     return new Response('Unauthorized', {
       status: 401
-    })
+    });
   }
 
-  if (previewToken) {
-    configuration.apiKey = previewToken
+  try {
+    // Use the `fetcher` function from utils.ts to send a request to your Flask backend
+    const response = await fetcher('/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ message })
+    });
+
+    // Handle the response from your Flask backend
+    // Assuming response from Flask backend is in the same format that your frontend expects
+    const id = json.id ?? nanoid();
+    const createdAt = Date.now();
+    const path = `/chat/${id}`;
+    const payload = {
+      id,
+      title: message.substring(0, 100),
+      userId,
+      createdAt,
+      path,
+      messages: [
+        ...json.messages,
+        {
+          content: response.response, // Assuming `response` is the key where the chat response is stored
+          role: 'assistant'
+        }
+      ]
+    };
+
+    // Save the chat payload to your data store
+    await kv.hmset(`chat:${id}`, payload);
+    await kv.zadd(`user:chat:${userId}`, {
+      score: createdAt,
+      member: `chat:${id}`
+    });
+
+    // Send the payload back in the response
+    return new Response(JSON.stringify(payload), {
+      headers: { 'Content-Type': 'application/json' },
+      status: 200
+    });
+
+  } catch (error: any) { // TypeScript 4.0+ supports this catch clause typing
+    // Assuming error is always going to have `message` and `status`
+    return new Response(JSON.stringify({ error: error.message }), {
+      headers: { 'Content-Type': 'application/json' },
+      status: error.status || 500
+    });
   }
-
-  const res = await openai.createChatCompletion({
-    model: 'gpt-3.5-turbo',
-    messages,
-    temperature: 0.7,
-    stream: true
-  })
-
-  const stream = OpenAIStream(res, {
-    async onCompletion(completion) {
-      const title = json.messages[0].content.substring(0, 100)
-      const id = json.id ?? nanoid()
-      const createdAt = Date.now()
-      const path = `/chat/${id}`
-      const payload = {
-        id,
-        title,
-        userId,
-        createdAt,
-        path,
-        messages: [
-          ...messages,
-          {
-            content: completion,
-            role: 'assistant'
-          }
-        ]
-      }
-      await kv.hmset(`chat:${id}`, payload)
-      await kv.zadd(`user:chat:${userId}`, {
-        score: createdAt,
-        member: `chat:${id}`
-      })
-    }
-  })
-
-  return new StreamingTextResponse(stream)
 }
