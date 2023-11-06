@@ -1,5 +1,5 @@
-export { GET, POST } from '@/auth';
-export const runtime = 'edge'
+// export { GET, POST } from '@/auth';
+// export const runtime = 'edge'
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import GitHubProvider from 'next-auth/providers/github';
