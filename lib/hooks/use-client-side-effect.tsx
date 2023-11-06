@@ -14,3 +14,4 @@
 //     }
 //   }, [session, router]); // router.pathname isn't changing so it's not included in the dependencies
 // }
+export {};
