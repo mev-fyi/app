@@ -1,3 +1,5 @@
+"use client";
+
 import { useClientSideEffect } from '../../lib/hooks/use-client-side-effect'; // Adjust the path as necessary
 import { GithubLoginButton, GoogleLoginButton } from '../../components/login-button'; // Adjust the import path as necessary
 

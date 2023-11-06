@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
@@ -8,7 +10,7 @@ export function useClientSideEffect() {
 
   useEffect(() => {
     if (session) {
-      router.push('/dashboard'); // Replace '/dashboard' with the route you want to redirect to after login
+      router.push('/');
     }
   }, [session, router]);
 }

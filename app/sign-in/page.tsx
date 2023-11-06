@@ -1,3 +1,5 @@
+"use client";
+
 import dynamic from 'next/dynamic';
 import { LandingPage } from '@/components/landing-page';
 
