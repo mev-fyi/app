@@ -6,16 +6,16 @@ import { IconArrowRight } from '@/components/ui/icons'
 
 const exampleMessages = [
   {
-    heading: 'Explain technical concepts',
-    message: `What is a "serverless function"?`
+    heading: 'What is loss-versus-rebalancing (LVR)?',
+    message: `What is loss-versus-rebalancing (LVR)?`
   },
   {
-    heading: 'Summarize an article',
-    message: 'Summarize the following article for a 2nd grader: \n'
+    heading: 'What are intents?',
+    message: 'What are intents?'
   },
   {
-    heading: 'Draft an email',
-    message: `Draft an email to my boss about the following: \n`
+    heading: 'Describe exhaustively the MEV supply chain',
+    message: `Describe exhaustively the MEV supply chain`
   }
 ]
 
@@ -24,14 +24,13 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
     <div className="mx-auto max-w-2xl px-4">
       <div className="rounded-lg border bg-background p-8">
         <h1 className="mb-2 text-lg font-semibold">
-          Welcome to Next.js AI Chatbot!
+          Welcome to mev.fyi Chatbot!
         </h1>
         <p className="mb-2 leading-normal text-muted-foreground">
-          This is an open source AI chatbot app template built with{' '}
-          <ExternalLink href="https://nextjs.org">Next.js</ExternalLink> and{' '}
-          <ExternalLink href="https://vercel.com/storage/kv">
-            Vercel KV
-          </ExternalLink>
+        mev.fyi is the Maximal Extractable Value (MEV) research chatbot.
+        Created by <ExternalLink href="https://twitter.com/unlock_VALue">Valentin</ExternalLink> and funded by <ExternalLink href="https://www.flashbots.net/">Flashbots'</ExternalLink> grant, with special thanks to <ExternalLink href="https://www.twitter.com/freddmannen">Fred</ExternalLink>.
+        mev.fyi thrives to lower the level of education required to onboard and contribute to
+        MEV-related research, across mechanism design, auction theory, incentives alignment ... from research papers and YouTube videos.
           .
         </p>
         <p className="leading-normal text-muted-foreground">

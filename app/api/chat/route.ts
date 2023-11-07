@@ -1,5 +1,5 @@
 import { kv } from '@vercel/kv'
-// import { auth } from '@/auth';
+import { auth } from '@/auth';
 import { fetcher, nanoid } from '@/lib/utils';
 
 export const runtime = 'edge';
@@ -8,28 +8,25 @@ export async function POST(req: Request) {
   const json = await req.json();
   const { message } = json; // Assuming `message` is the correct field that contains the chat message
 
-  // const userId = (await auth())?.user.id;
+  const userId = (await auth())?.user.id;
 
   // Check if user ID exists, if not, return Unauthorized
-  // if (!userId) {
-  //   return new Response('Unauthorized', {
-  //     status: 401
-  //   });
-  // }
-  // Instead of using the userId from the session, use a fixed value or remove the dependency
-  const userId = 'anonymous'; // Assign a default userId since you're not using auth anymore
-
+  if (!userId) {
+    return new Response('Unauthorized', {
+      status: 401
+    });
+  }
 
   try {
     // Make sure to use the full URL from the environment variable
     const backendUrl = `${process.env.REACT_APP_BACKEND_URL}/chat`;
 
-    const response = await fetcher(backendUrl, {
+    const response = await fetch(backendUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ message })
+      body: JSON.stringify({ message: message })  // Make sure this matches the structure expected by the backend
     });
 
     // Handle the response from your Flask backend
