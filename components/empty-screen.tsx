@@ -19,19 +19,17 @@ const exampleMessages = [
   }
 ]
 
+// Created by <ExternalLink href="https://twitter.com/unlock_VALue">Valentin</ExternalLink> and funded by <ExternalLink href="https://www.flashbots.net/">Flashbots'</ExternalLink> grant, with special thanks to <ExternalLink href="https://www.twitter.com/freddmannen">Fred</ExternalLink>.
 export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
   return (
     <div className="mx-auto max-w-2xl px-4">
       <div className="rounded-lg border bg-background p-8">
         <h1 className="mb-2 text-lg font-semibold">
-          Welcome to mev.fyi Chatbot!
+          Welcome to the mev.fyi Chatbot!
         </h1>
         <p className="mb-2 leading-normal text-muted-foreground">
         mev.fyi is the Maximal Extractable Value (MEV) research chatbot.
-        Created by <ExternalLink href="https://twitter.com/unlock_VALue">Valentin</ExternalLink> and funded by <ExternalLink href="https://www.flashbots.net/">Flashbots'</ExternalLink> grant, with special thanks to <ExternalLink href="https://www.twitter.com/freddmannen">Fred</ExternalLink>.
-        mev.fyi thrives to lower the level of education required to onboard and contribute to
-        MEV-related research, across mechanism design, auction theory, incentives alignment ... from research papers and YouTube videos.
-          .
+        mev.fyi onboards you to the latest MEV-related research, across mechanism design, auctions, information privacy, from research papers and YouTube videos.
         </p>
         <p className="leading-normal text-muted-foreground">
           You can start a conversation here or try the following examples:
