@@ -14,12 +14,11 @@ const exampleMessages = [
     message: 'What are intents?'
   },
   {
-    heading: 'Describe exhaustively the MEV supply chain',
-    message: `Describe exhaustively the MEV supply chain`
+    heading: 'Describe exhaustively the MEV supply chain.',
+    message: `Describe exhaustively the MEV supply chain.`
   }
 ]
 
-// Created by <ExternalLink href="https://twitter.com/unlock_VALue">Valentin</ExternalLink> and funded by <ExternalLink href="https://www.flashbots.net/">Flashbots'</ExternalLink> grant, with special thanks to <ExternalLink href="https://www.twitter.com/freddmannen">Fred</ExternalLink>.
 export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
   return (
     <div className="mx-auto max-w-2xl px-4">
@@ -29,7 +28,10 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
         </h1>
         <p className="mb-2 leading-normal text-muted-foreground">
         mev.fyi is the Maximal Extractable Value (MEV) research chatbot.
-        mev.fyi onboards you to the latest MEV-related research, across mechanism design, auctions, information privacy, from research papers and YouTube videos.
+        </p>
+        <p className="mb-2 leading-normal text-muted-foreground"></p>
+        mev.fyi onboards you to the latest MEV-related research, 
+        across mechanism design, auctions, information privacy, from research papers and YouTube videos.
         </p>
         <p className="leading-normal text-muted-foreground">
           You can start a conversation here or try the following examples:

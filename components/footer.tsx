@@ -12,10 +12,9 @@ export function FooterText({ className, ...props }: React.ComponentProps<'p'>) {
       )}
       {...props}
     >
-      Created by <ExternalLink href="https://twitter.com/unlock_VALue">Valentin</ExternalLink> and 
-      funded by <ExternalLink href="https://www.flashbots.net/">Flashbots'</ExternalLink> grant, 
-      with special thanks to <ExternalLink href="https://www.twitter.com/freddmannen">Fred</ExternalLink>.
-      .
+      Crafted by <ExternalLink href="https://twitter.com/unlock_VALue">@unlock_VALue</ExternalLink>, 
+      championed by <ExternalLink href="https://www.twitter.com/freddmannen">@freddmannen</ExternalLink>, 
+      and supported by a <ExternalLink href="https://www.flashbots.net/">Flashbots'</ExternalLink> grant.
     </p>
   )
 }
