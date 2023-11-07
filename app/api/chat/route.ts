@@ -28,9 +28,11 @@ export async function POST(req: Request) {
       },
       body: JSON.stringify({ message: message })  // Make sure this matches the structure expected by the backend
     });
-
-    // Handle the response from your Flask backend
-    // Assuming response from Flask backend is in the same format that your frontend expects
+    
+    // Here we parse the response to get the data
+    const responseData = await response.json(); // This line extracts the JSON body content from the Response object
+    
+    // Now you can use responseData.response
     const id = json.id ?? nanoid();
     const createdAt = Date.now();
     const path = `/chat/${id}`;
@@ -43,7 +45,7 @@ export async function POST(req: Request) {
       messages: [
         ...json.messages,
         {
-          content: response.response, // Assuming `response` is the key where the chat response is stored
+          content: responseData.response, // Here you use the parsed data
           role: 'assistant'
         }
       ]
