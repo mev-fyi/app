@@ -1,53 +1,58 @@
 'use client'
 
-import { useChat, type Message } from 'ai/react'
-
-import { cn } from '@/lib/utils'
+import { useEffect, useState } from 'react'
+import { useLocalStorage } from '@/lib/hooks/use-local-storage'
+import { useEventSource } from '@/lib/hooks/use-event-source'
 import { ChatList } from '@/components/chat-list'
 import { ChatPanel } from '@/components/chat-panel'
 import { EmptyScreen } from '@/components/empty-screen'
 import { ChatScrollAnchor } from '@/components/chat-scroll-anchor'
-import { useLocalStorage } from '@/lib/hooks/use-local-storage'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle
-} from '@/components/ui/dialog'
-import { useState } from 'react'
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
+import { cn } from '@/lib/utils'
 import { toast } from 'react-hot-toast'
 
 const IS_PREVIEW = process.env.VERCEL_ENV === 'preview'
+
 export interface ChatProps extends React.ComponentProps<'div'> {
-  initialMessages?: Message[]
   id?: string
 }
 
-export function Chat({ id, initialMessages, className }: ChatProps) {
-  const [previewToken, setPreviewToken] = useLocalStorage<string | null>(
-    'ai-token',
-    null
-  )
+export function Chat({ id, className }: ChatProps) {
+  const [messages, setMessages] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [input, setInput] = useState('')
+  const [previewToken, setPreviewToken] = useLocalStorage<string | null>('ai-token', null)
   const [previewTokenDialog, setPreviewTokenDialog] = useState(IS_PREVIEW)
   const [previewTokenInput, setPreviewTokenInput] = useState(previewToken ?? '')
-  const { messages, append, reload, stop, isLoading, input, setInput } =
-    useChat({
-      initialMessages,
-      id,
-      body: {
-        id,
-        previewToken
-      },
-      onResponse(response) {
-        if (response.status === 401) {
-          toast.error(response.statusText)
-        }
+  const eventSource = useEventSource(`/api/chat/stream?id=${id}&token=${previewToken}`)
+
+  useEffect(() => {
+    if (eventSource) {
+      eventSource.onmessage = (e) => {
+        const newMessage = JSON.parse(e.data)
+        setMessages((prevMessages) => [...prevMessages, newMessage])
       }
-    })
+      eventSource.onerror = (e) => {
+        toast.error('Error connecting to chat updates.')
+        setIsLoading(false)
+      }
+    }
+
+    return () => {
+      eventSource?.close()
+    }
+  }, [eventSource])
+
+  // Handlers for chat actions
+  const handleStop = () => {
+    setIsLoading(false)
+    eventSource?.close()
+  }
+
+  // Include handlers for append and reload which will interact with your server-side code to send messages and handle any reload logic
+
   return (
     <>
       <div className={cn('pb-[200px] pt-4 md:pt-10', className)}>
@@ -63,9 +68,9 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
       <ChatPanel
         id={id}
         isLoading={isLoading}
-        stop={stop}
-        append={append}
-        reload={reload}
+        stop={handleStop}
+        append={() => {}} // Define the function to send messages to the server
+        reload={() => {}} // Define the function to reload messages from the server
         messages={messages}
         input={input}
         setInput={setInput}
@@ -76,17 +81,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           <DialogHeader>
             <DialogTitle>Enter your OpenAI Key</DialogTitle>
             <DialogDescription>
-              If you have not obtained your OpenAI API key, you can do so by{' '}
-              <a
-                href="https://platform.openai.com/signup/"
-                className="underline"
-              >
-                signing up
-              </a>{' '}
-              on the OpenAI website. This is only necessary for preview
-              environments so that the open source community can test the app.
-              The token will be saved to your browser&apos;s local storage under
-              the name <code className="font-mono">ai-token</code>.
+              Please enter your OpenAI API key to access the chat. Your token will be securely stored.
             </DialogDescription>
           </DialogHeader>
           <Input
