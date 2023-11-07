@@ -1,22 +1,10 @@
-// Add this directive to indicate that this component should be treated as a Client Component
-"use client";
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { nanoid } from '@/lib/utils';
+import { nanoid } from '@/lib/utils'
+import { Chat } from '@/components/chat'
 
-export const runtime = 'edge'; // Keep this if you are running at the Edge runtime
+export const runtime = 'edge'
 
 export default function IndexPage() {
-  const router = useRouter();
+  const id = nanoid()
 
-  useEffect(() => {
-    // Generate a new unique chat ID
-    const id = nanoid();
-    // Redirect to the chat page with the generated ID
-    router.push(`/chat/${id}`);
-  }, [router]);
-
-  // You can render a loading indicator here
-  return <div>Loading...</div>;
+  return <Chat id={id} />
 }
-

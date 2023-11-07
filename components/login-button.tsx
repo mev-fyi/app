@@ -9,13 +9,12 @@ import { IconGitHub, IconSpinner } from '@/components/ui/icons'
 
 interface LoginButtonProps extends ButtonProps {
   showGithubIcon?: boolean
-  showGoogleIcon?: boolean
   text?: string
 }
 
-export function GithubLoginButton({
-  text = 'Login with Github',
-  showGithubIcon = false,
+export function LoginButton({
+  text = 'Login with GitHub',
+  showGithubIcon = true,
   className,
   ...props
 }: LoginButtonProps) {
@@ -35,35 +34,6 @@ export function GithubLoginButton({
       {isLoading ? (
         <IconSpinner className="mr-2 animate-spin" />
       ) : showGithubIcon ? (
-        <IconGitHub className="mr-2" />
-      ) : null}
-      {text}
-    </Button>
-  )
-}
-
-export function GoogleLoginButton({
-  text = 'Login with Google',
-  showGoogleIcon = false,
-  className,
-  ...props
-}: LoginButtonProps) {
-  const [isLoading, setIsLoading] = React.useState(false)
-  return (
-    <Button
-      variant="outline"
-      onClick={() => {
-        setIsLoading(true)
-        // next-auth signIn() function doesn't work yet at Edge Runtime due to usage of BroadcastChannel
-        signIn('google', { callbackUrl: `/` })
-      }}
-      disabled={isLoading}
-      className={cn(className)}
-      {...props}
-    >
-      {isLoading ? (
-        <IconSpinner className="mr-2 animate-spin" />
-      ) : showGoogleIcon ? (
         <IconGitHub className="mr-2" />
       ) : null}
       {text}
