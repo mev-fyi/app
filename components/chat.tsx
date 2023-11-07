@@ -51,7 +51,53 @@ export function Chat({ id, className }: ChatProps) {
     eventSource?.close()
   }
 
-  // Include handlers for append and reload which will interact with your server-side code to send messages and handle any reload logic
+  // Append function to send a message to the server
+  const append = async (messageContent: string) => {
+    setIsLoading(true);
+    try {
+      const response = await fetch('/api/chat/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${previewToken}`
+        },
+        body: JSON.stringify({ id, message: messageContent }),
+      });
+
+      if (response.ok) {
+        setInput(''); // Clear the input after sending the message
+      } else {
+        toast.error('Message sending failed.');
+      }
+    } catch (error) {
+      toast.error('Failed to send message.');
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  // Reload function to refresh the chat history from the server
+  const reload = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(`/api/chat/history?id=${id}`, {
+        headers: {
+          'Authorization': `Bearer ${previewToken}`
+        }
+      });
+
+      if (response.ok) {
+        const history = await response.json();
+        setMessages(history);
+      } else {
+        toast.error('Failed to reload chat history.');
+      }
+    } catch (error) {
+      toast.error('Failed to reload chat history.');
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   return (
     <>
@@ -69,8 +115,8 @@ export function Chat({ id, className }: ChatProps) {
         id={id}
         isLoading={isLoading}
         stop={handleStop}
-        append={() => {}} // Define the function to send messages to the server
-        reload={() => {}} // Define the function to reload messages from the server
+        append={append}
+        reload={reload}
         messages={messages}
         input={input}
         setInput={setInput}
