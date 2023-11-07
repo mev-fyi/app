@@ -21,8 +21,10 @@ export async function POST(req: Request) {
 
 
   try {
-    // Use the `fetcher` function from utils.ts to send a request to your Flask backend
-    const response = await fetcher('/chat', {
+    // Make sure to use the full URL from the environment variable
+    const backendUrl = `${process.env.REACT_APP_BACKEND_URL}/chat`;
+
+    const response = await fetcher(backendUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
