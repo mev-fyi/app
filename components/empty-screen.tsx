@@ -29,7 +29,7 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
         <p className="mb-2 leading-normal text-muted-foreground">
         mev.fyi is the Maximal Extractable Value (MEV) research chatbot.
         </p>
-        <p className="mb-2 leading-normal text-muted-foreground"></p>
+        <p className="mb-2 leading-normal text-muted-foreground">
         mev.fyi onboards you to the latest MEV-related research, 
         across mechanism design, auctions, information privacy, from research papers and YouTube videos.
         </p>
