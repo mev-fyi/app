@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react'
 import { useLocalStorage } from '@/lib/hooks/use-local-storage'
-import { useEventSource } from '@/lib/hooks/use-event-source'
 import { ChatList } from '@/components/chat-list'
 import { ChatPanel } from '@/components/chat-panel'
 import { EmptyScreen } from '@/components/empty-screen'
@@ -26,24 +25,36 @@ export function Chat({ id, className }: ChatProps) {
   const [previewToken, setPreviewToken] = useLocalStorage<string | null>('ai-token', null)
   const [previewTokenDialog, setPreviewTokenDialog] = useState(IS_PREVIEW)
   const [previewTokenInput, setPreviewTokenInput] = useState(previewToken ?? '')
-  const eventSource = useEventSource(`/api/chat/stream?id=${id}&token=${previewToken}`)
+  const [jobId, setJobId] = useState<string | null>(null); // State to store the job ID from the backend
+  const [eventSource, setEventSource] = useState<EventSource | null>(null);
+
+  useEffect(() => {
+    if (jobId) {
+      const newEventSource = new EventSource(`/api/stream/${jobId}`);
+      setEventSource(newEventSource);
+
+      return () => {
+        newEventSource.close();
+      };
+    }
+  }, [jobId]);
 
   useEffect(() => {
     if (eventSource) {
       eventSource.onmessage = (e) => {
-        const newMessage = JSON.parse(e.data)
-        setMessages((prevMessages) => [...prevMessages, newMessage])
-      }
+        const newMessage = JSON.parse(e.data);
+        setMessages((prevMessages) => {
+          // Avoid adding duplicate messages if they are already displayed
+          const messageIds = new Set(prevMessages.map(msg => msg.id));
+          return messageIds.has(newMessage.id) ? prevMessages : [...prevMessages, newMessage];
+        });
+      };
       eventSource.onerror = (e) => {
-        toast.error('Error connecting to chat updates.')
-        setIsLoading(false)
-      }
+        toast.error('Error connecting to chat updates.');
+        setIsLoading(false);
+      };
     }
-
-    return () => {
-      eventSource?.close()
-    }
-  }, [eventSource])
+  }, [eventSource]);
 
   // Handlers for chat actions
   const handleStop = () => {
@@ -55,26 +66,30 @@ export function Chat({ id, className }: ChatProps) {
   const append = async (messageContent: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch('/api/chat/send', {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${previewToken}`
+          // Include the `Authorization` header if your backend requires it
+          'Authorization': `Bearer ${previewToken}`,
         },
         body: JSON.stringify({ id, message: messageContent }),
       });
 
-      if (response.ok) {
-        setInput(''); // Clear the input after sending the message
-      } else {
-        toast.error('Message sending failed.');
+      if (!response.ok) {
+        throw new Error('Error sending message to backend.');
       }
+
+      const { job_id } = await response.json(); // Extract `job_id` from backend response
+      setJobId(job_id); // Prepare to listen for updates from this job ID
+      setInput(''); // Clear the input field after sending the message
+
     } catch (error) {
-      toast.error('Failed to send message.');
+      toast.error('Message sending failed.');
     } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   // Reload function to refresh the chat history from the server
   const reload = async () => {

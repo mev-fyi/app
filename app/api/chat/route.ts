@@ -1,96 +1,67 @@
 import { kv } from '@vercel/kv';
 import { auth } from '@/auth';
-import { fetcher, nanoid } from '@/lib/utils';
+import { nanoid } from '@/lib/utils';
 
 export const runtime = 'edge';
 
 export async function POST(req: Request) {
   const json = await req.json();
-  const { message } = json; // Assuming `message` is the correct field that contains the chat message
+  const { message } = json;
 
   const user = await auth();
 
-  // Check if user ID exists, if not, return Unauthorized
   if (!user?.id) {
-    return new Response('Unauthorized', {
-      status: 401
-    });
+    return new Response('Unauthorized', { status: 401 });
   }
 
   const userId = user.id;
+  
+  // Generate a unique ID for the chat if it's not provided
+  const id = json.id ?? nanoid();
+  
+  // Compose the backend chat endpoint URL
+  const backendChatUrl = `${process.env.REACT_APP_BACKEND_URL}/chat`;
 
   try {
-    // Make sure to use the full URL from the environment variable
-    const backendChatUrl = `${process.env.REACT_APP_BACKEND_URL}/chat`;
-    const backendSSEUrl = `${process.env.REACT_APP_BACKEND_URL}/stream/`; // SSE endpoint
-
-    // Send the message to the backend
+    // Send the chat message to the backend
     const chatResponse = await fetch(backendChatUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ message: message }) // Match the structure expected by the backend
+      body: JSON.stringify({ message })
     });
 
-    // Parse the job id from the backend response
+    if (!chatResponse.ok) {
+      throw new Error('Backend failed to start processing chat message.');
+    }
+
+    // Extract the job ID from the backend response
     const { job_id } = await chatResponse.json();
-    let chatResult;
 
-    // Open an SSE connection to listen for the result with the given job_id
-    const eventSource = new EventSource(`${backendSSEUrl}${job_id}`);
+    // The backend will process the message and event streams will be used to retrieve the response asynchronously
+    // Instead of listening for the message here, we return the job_id to the client
 
-    // Listen for messages
-    eventSource.onmessage = function(event) {
-      chatResult = JSON.parse(event.data);
-      if (chatResult && chatResult.response) {
-        // Process the result here
-        eventSource.close(); // Close the connection as we've got the result
-      }
-    };
-
-    // Listen for errors
-    eventSource.onerror = function(event) {
-      console.error('EventSource failed:', event);
-      eventSource.close();
-      throw new Error('Failed to get chatbot response.');
-    };
-
-    // Rest of the processing remains the same...
-
-    // Create a unique ID for the chat if not provided
-    const id = json.id ?? nanoid();
+    // Create a record for the chat message using nanoid or json.id if provided.
     const createdAt = Date.now();
-    const path = `/chat/${id}`;
-
-    // Payload to store and send back
-    const payload = {
+    const chatRecord = {
       id,
-      title: message.substring(0, 100),
+      title: message.substring(0, 100), // A short title for the chat, if relevant
       userId,
       createdAt,
-      path,
-      messages: [
-        ...(json.messages || []), // Ensure messages array exists or default to an empty array
-        {
-          content: chatResult.response, // Use the chatbot response from the backend
-          role: 'assistant'
-        }
-      ]
+      job_id, // Include the job ID here so that the frontend can access it
     };
 
-    // Save the chat payload to the data store
-    await kv.set(`chat:${id}`, JSON.stringify(payload));
+    // Save the chat record to the Vercel KV store
+    await kv.set(`chat:${id}`, JSON.stringify(chatRecord));
     await kv.zadd(`user:chat:${userId}`, createdAt, `chat:${id}`);
 
-    // Send the payload back in the response
-    return new Response(JSON.stringify(payload), {
+    return new Response(JSON.stringify({ job_id }), {
       headers: { 'Content-Type': 'application/json' },
       status: 200
     });
 
-  } catch (error: any) { // Catching error with any type as TypeScript supports catch clause typing
-    // Error handling, returning the error message and status code
+  } catch (error: any) {
     return new Response(JSON.stringify({ error: error.message }), {
       headers: { 'Content-Type': 'application/json' },
       status: error.status || 500
