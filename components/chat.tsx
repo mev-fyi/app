@@ -15,12 +15,12 @@ import { toast } from 'react-hot-toast';
 
 const IS_PREVIEW = process.env.VERCEL_ENV === 'preview';
 
-// export interface Message {
-//   // Define the shape of a message, e.g.:
-//   id: string;
-//   content: string;
-//   // Add other message properties here
-// }
+export interface CreateMessage {
+  // Define the shape of a message, e.g.:
+  id: string;
+  content: string;
+  // Add other message properties here
+}
 
 export interface ChatProps extends React.ComponentProps<'div'> {
   id?: string
@@ -69,7 +69,15 @@ useEffect(() => {
   }
 
   // Append function to send a message to the server
-  const append = async ({ id, content, role }: Message) => {
+  const append = async (message: Message | CreateMessage): Promise<string | null | undefined> => {
+    const { id, content, role } = message;
+    // If `id` is undefined for a CreateMessage, handle it appropriately
+    // For example, if an `id` is required to send a message, you might want to return early or throw an error
+    if (id === undefined) {
+      toast.error('Message must have an ID.');
+      return; // or throw new Error('Message must have an ID.');
+    }
+
     setIsLoading(true);
     try {
       const response = await fetch('/api/chat', {
@@ -80,17 +88,18 @@ useEffect(() => {
         },
         body: JSON.stringify({ id, message: content }),
       });
-  
+
       if (!response.ok) {
         throw new Error('Error sending message to backend.');
       }
-  
+
       const { job_id } = await response.json();
       setJobId(job_id);
       setInput('');
-  
+      return job_id; // Assuming job_id is a string
     } catch (error) {
       toast.error('Message sending failed.');
+      return null; // Return null in case of error
     } finally {
       setIsLoading(false);
     }
