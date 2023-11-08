@@ -69,7 +69,7 @@ useEffect(() => {
   }
 
   // Append function to send a message to the server
-  const append = async ({ id, content, role }: CreateMessage) => {
+  const append = async ({ id, content, role }: Message) => {
     setIsLoading(true);
     try {
       const response = await fetch('/api/chat', {
