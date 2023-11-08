@@ -132,11 +132,10 @@ useEffect(() => {
         return null; // Return null to indicate success without a specific result
       } else {
         toast.error('Failed to reload chat history.');
-        console.error('Failed to reload chat history:', error);
         return undefined; // Return undefined to indicate failure
       }
     } catch (error) {
-      console.error(error); // Log the error for debugging
+      console.error('Failed to reload chat history:', error);
       toast.error('Failed to reload chat history.');
       return undefined; // Return undefined to indicate failure
     } finally {
