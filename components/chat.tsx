@@ -72,10 +72,10 @@ useEffect(() => {
     const { id, content, role } = message;
     // If `id` is undefined for a CreateMessage, handle it appropriately
     // For example, if an `id` is required to send a message, you might want to return early or throw an error
-    if (id === undefined) {
-      toast.error('Message must have an ID.');
-      return; // or throw new Error('Message must have an ID.');
-    }
+    // if (id === undefined) {
+    //   toast.error('Message must have an ID.');
+    //   return; // or throw new Error('Message must have an ID.');
+    // }
 
     setIsLoading(true);
     try {
