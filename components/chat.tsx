@@ -105,7 +105,7 @@ useEffect(() => {
   };
 
   // Reload function to refresh the chat history from the server
-  const reload = async () => {
+  const reload = async (): Promise<string | null | undefined> => {
     setIsLoading(true);
     try {
       const response = await fetch(`/api/chat/history?id=${id}`, {
@@ -113,15 +113,19 @@ useEffect(() => {
           'Authorization': `Bearer ${previewToken}`
         }
       });
-
+  
       if (response.ok) {
         const history = await response.json();
         setMessages(history);
+        return null; // Return null to indicate success without a specific result
       } else {
         toast.error('Failed to reload chat history.');
+        return undefined; // Return undefined to indicate failure
       }
     } catch (error) {
+      console.error(error); // Log the error for debugging
       toast.error('Failed to reload chat history.');
+      return undefined; // Return undefined to indicate failure
     } finally {
       setIsLoading(false);
     }
