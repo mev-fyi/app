@@ -8,13 +8,13 @@ export async function POST(req: Request) {
   const json = await req.json();
   const { message } = json;
 
-  const user = await auth();
+  const session = await auth();
 
-  if (!user?.id) {
+  const userId = session?.user?.id; // Adjusted to match the extended session structure
+
+  if (!userId) {
     return new Response('Unauthorized', { status: 401 });
   }
-
-  const userId = user.id;
   
   // Generate a unique ID for the chat if it's not provided
   const id = json.id ?? nanoid();
