@@ -1,6 +1,6 @@
 'use client';
 
-import { useChat, type Message } from 'ai/react'
+import { useChat, type Message, type CreateMessage } from 'ai/react'
 import { useEffect, useState } from 'react';
 import { useLocalStorage } from '@/lib/hooks/use-local-storage';
 import { ChatList } from '@/components/chat-list';
@@ -15,11 +15,11 @@ import { toast } from 'react-hot-toast';
 
 const IS_PREVIEW = process.env.VERCEL_ENV === 'preview';
 
-export interface CreateMessage {
-  id: string;
-  content: string;
-  role: string;
-}
+// export interface CreateMessage {
+//   id: string;
+//   content: string;
+//   role: string;
+// }
 
 export interface ChatProps extends React.ComponentProps<'div'> {
   id?: string
@@ -68,7 +68,7 @@ useEffect(() => {
   }
 
   // Append function to send a message to the server
-  const append = async (message: Message | CreateMessage): Promise<string | null | undefined> => {
+  const append = async (message: Message | CreateMessage): Promise<string | null> => {
     const { id, content, role } = message;
     // If `id` is undefined for a CreateMessage, handle it appropriately
     // For example, if an `id` is required to send a message, you might want to return early or throw an error
