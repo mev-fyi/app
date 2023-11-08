@@ -69,27 +69,26 @@ useEffect(() => {
   }
 
   // Append function to send a message to the server
-  const append = async (messageContent: string) => {
+  const append = async ({ id, content, role }: CreateMessage) => {
     setIsLoading(true);
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // Include the `Authorization` header if your backend requires it
           'Authorization': `Bearer ${previewToken}`,
         },
-        body: JSON.stringify({ id, message: messageContent }),
+        body: JSON.stringify({ id, message: content }),
       });
-
+  
       if (!response.ok) {
         throw new Error('Error sending message to backend.');
       }
-
-      const { job_id } = await response.json(); // Extract `job_id` from backend response
-      setJobId(job_id); // Prepare to listen for updates from this job ID
-      setInput(''); // Clear the input field after sending the message
-
+  
+      const { job_id } = await response.json();
+      setJobId(job_id);
+      setInput('');
+  
     } catch (error) {
       toast.error('Message sending failed.');
     } finally {

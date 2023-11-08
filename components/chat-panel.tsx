@@ -59,12 +59,14 @@ export function ChatPanel({
         </div>
         <div className="space-y-4 border-t bg-background px-4 py-2 shadow-lg sm:rounded-t-xl sm:border md:py-4">
           <PromptForm
-            onSubmit={async value => {
-              await append({
-                id,
-                content: value,
-                role: 'user'
-              })
+            onSubmit={async (value) => {
+              if (id) { // Only append if id is provided
+                await append({
+                  id: id,
+                  content: value,
+                  role: 'user' // assuming 'role' is part of the message
+                });
+              }
             }}
             input={input}
             setInput={setInput}
