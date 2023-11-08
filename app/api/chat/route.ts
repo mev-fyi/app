@@ -5,25 +5,33 @@ import { nanoid } from '@/lib/utils';
 export const runtime = 'edge';
 
 export async function POST(req: Request) {
-  const json = await req.json();
+  let json;
+  try {
+    json = await req.json();
+  } catch (error) {
+    console.error('Error parsing JSON body:', error);
+    return new Response('Bad request', { status: 400 });
+  }
+
   const { message } = json;
 
   const session = await auth();
 
-  const userId = session?.user?.id; // Adjusted to match the extended session structure
-
-  if (!userId) {
+  if (!session?.user) {
+    console.error('Unauthorized request: No session user found.');
     return new Response('Unauthorized', { status: 401 });
   }
-  
-  // Generate a unique ID for the chat if it's not provided
+
+  const userId = session.user.id;
   const id = json.id ?? nanoid();
-  
+
   // Compose the backend chat endpoint URL
   const backendChatUrl = `${process.env.REACT_APP_BACKEND_URL}/chat`;
 
   try {
-    // Send the chat message to the backend
+    // Log the attempt to send a chat message
+    console.log(`Attempting to send chat message for user ${userId} with id ${id}`);
+
     const chatResponse = await fetch(backendChatUrl, {
       method: 'POST',
       headers: {
@@ -33,38 +41,55 @@ export async function POST(req: Request) {
     });
 
     if (!chatResponse.ok) {
-      throw new Error('Backend failed to start processing chat message.');
+      throw new Error('Backend failed to process chat message.');
     }
 
-    // Extract the job ID from the backend response
     const { job_id } = await chatResponse.json();
 
-    // The backend will process the message and event streams will be used to retrieve the response asynchronously
-    // Instead of listening for the message here, we return the job_id to the client
-
-    // Create a record for the chat message using nanoid or json.id if provided.
     const createdAt = Date.now();
     const chatRecord = {
       id,
-      title: message.substring(0, 100), // A short title for the chat, if relevant
+      title: message.substring(0, 100),
       userId,
       createdAt,
-      job_id, // Include the job ID here so that the frontend can access it
+      job_id,
     };
 
-    // Save the chat record to the Vercel KV store
+    // Log that we are saving the chat record
+    console.log(`Saving chat record for job ${job_id} and chat id ${id}`);
+
     await kv.set(`chat:${id}`, JSON.stringify(chatRecord));
     await kv.zadd(`user:chat:${userId}`, { score: createdAt, member: `chat:${id}` });
+
+    // Log the successful response
+    console.log(`Chat message sent and recorded with job id ${job_id}`);
 
     return new Response(JSON.stringify({ job_id }), {
       headers: { 'Content-Type': 'application/json' },
       status: 200
     });
 
-  } catch (error: any) {
-    return new Response(JSON.stringify({ error: error.message }), {
-      headers: { 'Content-Type': 'application/json' },
-      status: error.status || 500
-    });
+  } catch (error: unknown) {
+    const isErrorResponse = (x: any): x is { message: string; status?: number } =>
+      x && typeof x.message === 'string';
+
+    if (isErrorResponse(error)) {
+      console.error('Error handling chat message POST request:', error.message);
+
+      const status = error.status || 500;
+      const errorMessage = `Error processing request: ${error.message}`;
+
+      return new Response(JSON.stringify({ error: errorMessage }), {
+        headers: { 'Content-Type': 'application/json' },
+        status: status
+      });
+    } else {
+      // Log the unknown error before sending a generic internal server error response
+      console.error('An unexpected error occurred:', error);
+      
+      return new Response('Internal server error', {
+        status: 500
+      });
+    }
   }
 }

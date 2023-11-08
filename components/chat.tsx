@@ -40,6 +40,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 useEffect(() => {
   if (jobId) {
     const newEventSource = new EventSource(`/api/stream/${jobId}`);
+    console.log(`Established EventSource connection with jobId: ${jobId}`);
     setEventSource(newEventSource);
 
     newEventSource.onmessage = (e) => {
@@ -51,13 +52,20 @@ useEffect(() => {
     };
 
     newEventSource.onerror = (e) => {
+      if (e instanceof MessageEvent) {
+        console.error('EventSource failed:', e.data);
+      } else {
+        console.error('EventSource encountered an error:', e);
+      }
       toast.error('Error connecting to chat updates.');
       setIsLoading(false);
       newEventSource.close();
     };
+    
 
     return () => {
       newEventSource.close();
+      console.log(`Closed EventSource connection with jobId: ${jobId}`);
     };
   }
 }, [jobId]);
@@ -93,12 +101,14 @@ useEffect(() => {
       }
 
       const { job_id } = await response.json();
+      console.log('Message sent successfully with job_id:', job_id);
       setJobId(job_id);
       setInput('');
       return job_id; // Assuming job_id is a string
     } catch (error) {
+      console.error('Error sending message:', error);
       toast.error('Message sending failed.');
-      return null; // Return null in case of error
+      return null;
     } finally {
       setIsLoading(false);
     }
@@ -106,6 +116,7 @@ useEffect(() => {
 
   // Reload function to refresh the chat history from the server
   const reload = async (): Promise<string | null | undefined> => {
+    console.log('Reloading chat history...');
     setIsLoading(true);
     try {
       const response = await fetch(`/api/chat/history?id=${id}`, {
@@ -117,9 +128,11 @@ useEffect(() => {
       if (response.ok) {
         const history = await response.json();
         setMessages(history);
+        console.log('Chat history reloaded successfully.');
         return null; // Return null to indicate success without a specific result
       } else {
         toast.error('Failed to reload chat history.');
+        console.error('Failed to reload chat history:', error);
         return undefined; // Return undefined to indicate failure
       }
     } catch (error) {
@@ -168,14 +181,20 @@ useEffect(() => {
             onChange={e => setPreviewTokenInput(e.target.value)}
           />
           <DialogFooter className="items-center">
-            <Button
-              onClick={() => {
-                setPreviewToken(previewTokenInput)
-                setPreviewTokenDialog(false)
-              }}
-            >
-              Save Token
-            </Button>
+          <Button
+            onClick={(e) => {
+              console.log(`Saving OpenAI API token... Event type: ${e.type}`);
+              if (previewTokenInput) {
+                setPreviewToken(previewTokenInput);
+                console.log('Token saved successfully.');
+                setPreviewTokenDialog(false);
+              } else {
+                console.error('Token input is empty.');
+              }
+            }}
+          >
+            Save Token
+          </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
