@@ -21,9 +21,9 @@ export interface Message {
   // Add other message properties here
 }
 
-export interface ChatProps {
-  id: string;
-  initialMessages?: Message[]; // Include the initialMessages here
+export interface ChatProps extends React.ComponentProps<'div'> {
+  id?: string
+  initialMessages?: Message[]
 }
 
 export function Chat({ id, initialMessages, className }: ChatProps) {
