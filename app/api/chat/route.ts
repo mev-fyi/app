@@ -54,7 +54,7 @@ export async function POST(req: Request) {
 
     // Save the chat record to the Vercel KV store
     await kv.set(`chat:${id}`, JSON.stringify(chatRecord));
-    await kv.zadd(`user:chat:${userId}`, createdAt, `chat:${id}`);
+    await kv.zadd(`user:chat:${userId}`, { [`chat:${id}`]: createdAt });
 
     return new Response(JSON.stringify({ job_id }), {
       headers: { 'Content-Type': 'application/json' },
