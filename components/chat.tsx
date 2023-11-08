@@ -1,5 +1,6 @@
 'use client';
 
+import { useChat, type Message } from 'ai/react'
 import { useEffect, useState } from 'react';
 import { useLocalStorage } from '@/lib/hooks/use-local-storage';
 import { ChatList } from '@/components/chat-list';
@@ -14,12 +15,12 @@ import { toast } from 'react-hot-toast';
 
 const IS_PREVIEW = process.env.VERCEL_ENV === 'preview';
 
-export interface Message {
-  // Define the shape of a message, e.g.:
-  id: string;
-  content: string;
-  // Add other message properties here
-}
+// export interface Message {
+//   // Define the shape of a message, e.g.:
+//   id: string;
+//   content: string;
+//   // Add other message properties here
+// }
 
 export interface ChatProps extends React.ComponentProps<'div'> {
   id?: string
