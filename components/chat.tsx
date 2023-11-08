@@ -16,10 +16,9 @@ import { toast } from 'react-hot-toast';
 const IS_PREVIEW = process.env.VERCEL_ENV === 'preview';
 
 export interface CreateMessage {
-  // Define the shape of a message, e.g.:
   id: string;
   content: string;
-  // Add other message properties here
+  role: string;
 }
 
 export interface ChatProps extends React.ComponentProps<'div'> {
