@@ -1,65 +1,70 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from 'react'
-import { useLocalStorage } from '@/lib/hooks/use-local-storage'
-import { ChatList } from '@/components/chat-list'
-import { ChatPanel } from '@/components/chat-panel'
-import { EmptyScreen } from '@/components/empty-screen'
-import { ChatScrollAnchor } from '@/components/chat-scroll-anchor'
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { Button } from './ui/button'
-import { Input } from './ui/input'
-import { cn } from '@/lib/utils'
-import { toast } from 'react-hot-toast'
+import { useEffect, useState } from 'react';
+import { useLocalStorage } from '@/lib/hooks/use-local-storage';
+import { ChatList } from '@/components/chat-list';
+import { ChatPanel } from '@/components/chat-panel';
+import { EmptyScreen } from '@/components/empty-screen';
+import { ChatScrollAnchor } from '@/components/chat-scroll-anchor';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+import { cn } from '@/lib/utils';
+import { toast } from 'react-hot-toast';
 
-const IS_PREVIEW = process.env.VERCEL_ENV === 'preview'
+const IS_PREVIEW = process.env.VERCEL_ENV === 'preview';
 
-export interface ChatProps extends React.ComponentProps<'div'> {
-  id?: string
+export interface Message {
+  // Define the shape of a message, e.g.:
+  id: string;
+  content: string;
+  // Add other message properties here
 }
 
-export function Chat({ id, className }: ChatProps) {
-  const [messages, setMessages] = useState([])
+export interface ChatProps {
+  id: string;
+  initialMessages?: Message[]; // Include the initialMessages here
+}
+
+export function Chat({ id, initialMessages, className }: ChatProps) {
+  const [messages, setMessages] = useState<Message[]>(initialMessages || []);
   const [isLoading, setIsLoading] = useState(false)
   const [input, setInput] = useState('')
   const [previewToken, setPreviewToken] = useLocalStorage<string | null>('ai-token', null)
   const [previewTokenDialog, setPreviewTokenDialog] = useState(IS_PREVIEW)
   const [previewTokenInput, setPreviewTokenInput] = useState(previewToken ?? '')
-  const [jobId, setJobId] = useState<string | null>(null); // State to store the job ID from the backend
+  const [jobId, setJobId] = useState<string | null>(null);
   const [eventSource, setEventSource] = useState<EventSource | null>(null);
 
-  useEffect(() => {
-    if (jobId) {
-      const newEventSource = new EventSource(`/api/stream/${jobId}`);
-      setEventSource(newEventSource);
+// This useEffect sets up the EventSource connection
+useEffect(() => {
+  if (jobId) {
+    const newEventSource = new EventSource(`/api/stream/${jobId}`);
+    setEventSource(newEventSource);
 
-      return () => {
-        newEventSource.close();
-      };
-    }
-  }, [jobId]);
+    newEventSource.onmessage = (e) => {
+      const newMessage = JSON.parse(e.data);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        newMessage,
+      ]);
+    };
 
-  useEffect(() => {
-    if (eventSource) {
-      eventSource.onmessage = (e) => {
-        const newMessage = JSON.parse(e.data);
-        setMessages((prevMessages) => {
-          // Avoid adding duplicate messages if they are already displayed
-          const messageIds = new Set(prevMessages.map(msg => msg.id));
-          return messageIds.has(newMessage.id) ? prevMessages : [...prevMessages, newMessage];
-        });
-      };
-      eventSource.onerror = (e) => {
-        toast.error('Error connecting to chat updates.');
-        setIsLoading(false);
-      };
-    }
-  }, [eventSource]);
+    newEventSource.onerror = (e) => {
+      toast.error('Error connecting to chat updates.');
+      setIsLoading(false);
+      newEventSource.close();
+    };
+
+    return () => {
+      newEventSource.close();
+    };
+  }
+}, [jobId]);
 
   // Handlers for chat actions
   const handleStop = () => {
     setIsLoading(false)
-    eventSource?.close()
   }
 
   // Append function to send a message to the server
