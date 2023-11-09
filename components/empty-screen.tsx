@@ -71,7 +71,7 @@ const questions = [
   "How can the user initiating a transaction get shielded from MEV?",
 ]
 
-export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
+export function EmptyScreen({ setInput }) {
   const [selectedQuestions, setSelectedQuestions] = useState<string[]>([]);
 
   useEffect(() => {
@@ -83,17 +83,17 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
   return (
     <div className="mx-auto max-w-2xl px-4">
       <div className="rounded-lg border bg-background p-8 text-left">
-        <h1 className="mb-2 text-lg font-semibold text-white"> {/* Updated the text color class */}
+        <h1 className="mb-2 text-lg font-semibold text-white">
           Welcome to the mev.fyi Chatbot!
         </h1>
-        <p className="mb-2 leading-normal text-white"> {/* Updated the text color class */}
+        <p className="mb-2 leading-normal text-muted-foreground">
           mev.fyi is the Maximal Extractable Value (MEV) research chatbot.
         </p>
-        <p className="mb-2 leading-normal text-white"> {/* Updated the text color class */}
+        <p className="mb-2 leading-normal text-muted-foreground">
           mev.fyi onboards you to the latest MEV-related research, 
           across mechanism design, auctions, information privacy, from research papers and YouTube videos.
         </p>
-        <p className="leading-normal text-white"> {/* Updated the text color class */}
+        <p className="leading-normal text-white"> {/* Keep the instructions white */}
           You can start a conversation here or try the following examples:
         </p>
         <div className="mt-4 flex flex-col space-y-2">
@@ -101,11 +101,11 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
             <Button
               key={index}
               variant="link"
-              className="flex w-full items-center text-left p-0 text-base text-white" // Added flex to align items, updated text color class
+              className="flex w-full items-start text-left p-0 text-base text-white" // Ensuring items are aligned to the start and text is white
               onClick={() => setInput(question)}
             >
-              <IconArrowRight className="mr-2 align-middle" /> {/* Removed unnecessary classes */}
-              <span className="break-words">{question}</span> {/* Ensure wrapping */}
+              <IconArrowRight className="mr-2" /> {/* Arrow always on the left */}
+              <span className="break-words">{question}</span> {/* Text is white and wraps */}
             </Button>
           ))}
         </div>
