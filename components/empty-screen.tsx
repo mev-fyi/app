@@ -71,7 +71,7 @@ const questions = [
   "How can the user initiating a transaction get shielded from MEV?",
 ]
 
-export function EmptyScreen({ setInput }) {
+export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
   const [selectedQuestions, setSelectedQuestions] = useState<string[]>([]);
 
   useEffect(() => {
