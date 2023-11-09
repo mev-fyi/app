@@ -89,23 +89,21 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
         <p className="mb-2 leading-normal text-muted-foreground">
           mev.fyi is the Maximal Extractable Value (MEV) research chatbot.
         </p>
-        <p className="mb-2 leading-normal text-muted-foreground">
+        <p className="mb-4 leading-normal text-muted-foreground">
           mev.fyi onboards you to the latest MEV-related research, 
           across mechanism design, auctions, information privacy, from research papers and YouTube videos.
         </p>
-        <p className="leading-normal text-white"> {/* Keep the instructions white */}
-          You can start a conversation here or try the following examples:
-        </p>
-        <div className="mt-4 flex flex-col space-y-2">
+        <div className="mt-4 flex flex-col space-y-2 items-start">
           {selectedQuestions.map((question, index) => (
             <Button
               key={index}
               variant="link"
-              className="flex w-full items-start text-left p-0 text-base text-white" // Ensuring items are aligned to the start and text is white
+              className="text-left p-0 text-base text-white flex items-center w-full"
               onClick={() => setInput(question)}
+              style={{ justifyContent: 'flex-start' }} // Use inline styles to override any existing flexbox styles
             >
-              <IconArrowRight className="mr-2" /> {/* Arrow always on the left */}
-              <span className="break-words">{question}</span> {/* Text is white and wraps */}
+              <IconArrowRight className="flex-shrink-0 mr-2" /> {/* Prevent the arrow from shrinking */}
+              <span className="break-words flex-grow">{question}</span> {/* Allow the text to grow and wrap as needed */}
             </Button>
           ))}
         </div>
