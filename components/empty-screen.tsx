@@ -75,36 +75,37 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
   const [selectedQuestions, setSelectedQuestions] = useState<string[]>([]);
 
   useEffect(() => {
-    const shuffled = questions.sort(() => 0.5 - Math.random());
+    // It's important to clone the array before sorting to avoid mutating the original list.
+    const shuffled = [...questions].sort(() => 0.5 - Math.random());
     setSelectedQuestions(shuffled.slice(0, 4));
-  }, []); // Removed questions and setSelectedQuestions from dependency array
+  }, []); // Empty array means useEffect runs once on mount
 
   return (
     <div className="mx-auto max-w-2xl px-4">
-      <div className="rounded-lg border bg-background p-8 text-left"> {/* Changed to text-left */}
-        <h1 className="mb-2 text-lg font-semibold">
+      <div className="rounded-lg border bg-background p-8 text-left">
+        <h1 className="mb-2 text-lg font-semibold text-white"> {/* Updated the text color class */}
           Welcome to the mev.fyi Chatbot!
         </h1>
-        <p className="mb-2 leading-normal text-muted-foreground">
+        <p className="mb-2 leading-normal text-white"> {/* Updated the text color class */}
           mev.fyi is the Maximal Extractable Value (MEV) research chatbot.
         </p>
-        <p className="mb-2 leading-normal text-muted-foreground">
+        <p className="mb-2 leading-normal text-white"> {/* Updated the text color class */}
           mev.fyi onboards you to the latest MEV-related research, 
           across mechanism design, auctions, information privacy, from research papers and YouTube videos.
         </p>
-        <p className="leading-normal text-muted-foreground">
+        <p className="leading-normal text-white"> {/* Updated the text color class */}
           You can start a conversation here or try the following examples:
         </p>
-        <div className="mt-4 flex flex-col items-start space-y-2">
+        <div className="mt-4 flex flex-col space-y-2">
           {selectedQuestions.map((question, index) => (
             <Button
               key={index}
               variant="link"
-              className="h-auto w-full text-left p-0 text-base" // Added w-full text-left for full width and text alignment
+              className="flex w-full items-center text-left p-0 text-base text-white" // Added flex to align items, updated text color class
               onClick={() => setInput(question)}
             >
-              <IconArrowRight className="inline-block mr-2 text-muted-foreground align-middle" /> {/* Added inline-block and align-middle classes */}
-              <span className="inline-block align-middle text-muted-foreground break-words">{question}</span> {/* Ensure wrapping and alignment */}
+              <IconArrowRight className="mr-2 align-middle" /> {/* Removed unnecessary classes */}
+              <span className="break-words">{question}</span> {/* Ensure wrapping */}
             </Button>
           ))}
         </div>
