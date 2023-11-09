@@ -48,7 +48,6 @@ const questions = [
   "What is the role of the Ethereum Foundation?",
   "How does Flashbots contribute to the MEV space?",
   "Give me talks from Barnabe Monnot",
-  "Given your knowledge of transaction ordering, market microstructure and design, what Uniswap V4 hook designs would you recommend to mitigate LVR?",
   "What is atomic composability?",
   "What are the main advantages and challenges that decentralised finance face relative to traditional finance?",
   "What is the number one thing which make decentralised finance better than traditional finance and why?",
@@ -72,26 +71,26 @@ const questions = [
   "How can the user initiating a transaction get shielded from MEV?",
 ]
 
-export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
+export function EmptyScreen({ setInput }) {
   const [selectedQuestions, setSelectedQuestions] = useState<string[]>([]);
 
   useEffect(() => {
     const shuffled = questions.sort(() => 0.5 - Math.random());
     setSelectedQuestions(shuffled.slice(0, 4));
-  }, [questions, setSelectedQuestions]);
+  }, []); // Removed questions and setSelectedQuestions from dependency array
 
   return (
     <div className="mx-auto max-w-2xl px-4">
-      <div className="rounded-lg border bg-background p-8">
+      <div className="rounded-lg border bg-background p-8 text-left"> {/* Changed to text-left */}
         <h1 className="mb-2 text-lg font-semibold">
           Welcome to the mev.fyi Chatbot!
         </h1>
         <p className="mb-2 leading-normal text-muted-foreground">
-        mev.fyi is the Maximal Extractable Value (MEV) research chatbot.
+          mev.fyi is the Maximal Extractable Value (MEV) research chatbot.
         </p>
         <p className="mb-2 leading-normal text-muted-foreground">
-        mev.fyi onboards you to the latest MEV-related research, 
-        across mechanism design, auctions, information privacy, from research papers and YouTube videos.
+          mev.fyi onboards you to the latest MEV-related research, 
+          across mechanism design, auctions, information privacy, from research papers and YouTube videos.
         </p>
         <p className="leading-normal text-muted-foreground">
           You can start a conversation here or try the following examples:
@@ -101,11 +100,11 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
             <Button
               key={index}
               variant="link"
-              className="h-auto p-0 text-base"
+              className="h-auto w-full text-left p-0 text-base" // Added w-full text-left for full width and text alignment
               onClick={() => setInput(question)}
             >
-              <IconArrowRight className="mr-2 text-muted-foreground" />
-              {question}
+              <IconArrowRight className="inline-block mr-2 text-muted-foreground align-middle" /> {/* Added inline-block and align-middle classes */}
+              <span className="inline-block align-middle text-muted-foreground break-words">{question}</span> {/* Ensure wrapping and alignment */}
             </Button>
           ))}
         </div>
