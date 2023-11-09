@@ -82,6 +82,8 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     // Log the request content before sending
     console.log(`Sending message to backend: `, message);
     
+    setInput(''); // This will immediately hide EmptyScreen when the user sends a message
+
     setIsLoading(true);
     try {
       const response = await fetch('/api/chat', {
