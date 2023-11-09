@@ -36,39 +36,39 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   const [jobId, setJobId] = useState<string | null>(null);
   const [eventSource, setEventSource] = useState<EventSource | null>(null);
 
-// This useEffect sets up the EventSource connection
-useEffect(() => {
-  if (jobId) {
-    const newEventSource = new EventSource(`/api/stream/${jobId}`);
-    console.log(`Established EventSource connection with jobId: ${jobId}`);
-    setEventSource(newEventSource);
+  // This useEffect sets up the EventSource connection
+  useEffect(() => {
+    if (jobId) {
+      const newEventSource = new EventSource(`/api/stream/${jobId}`);
+      console.log(`Established EventSource connection with jobId: ${jobId}`);
+      setEventSource(newEventSource);
 
-    newEventSource.onmessage = (e) => {
-      const newMessage = JSON.parse(e.data);
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        newMessage,
-      ]);
-    };
+      newEventSource.onmessage = (e) => {
+        const newMessage = JSON.parse(e.data);
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          newMessage,
+        ]);
+      };
 
-    newEventSource.onerror = (e) => {
-      if (e instanceof MessageEvent) {
-        console.error('EventSource failed:', e.data);
-      } else {
-        console.error('EventSource encountered an error:', e);
-      }
-      toast.error('Error connecting to chat updates.');
-      setIsLoading(false);
-      newEventSource.close();
-    };
-    
+      newEventSource.onerror = (e) => {
+        if (e instanceof MessageEvent) {
+          console.error('EventSource failed:', e.data);
+        } else {
+          console.error('EventSource encountered an error:', e);
+        }
+        toast.error('Error connecting to chat updates.');
+        setIsLoading(false);
+        newEventSource.close();
+      };
+      
 
-    return () => {
-      newEventSource.close();
-      console.log(`Closed EventSource connection with jobId: ${jobId}`);
-    };
-  }
-}, [jobId]);
+      return () => {
+        newEventSource.close();
+        console.log(`Closed EventSource connection with jobId: ${jobId}`);
+      };
+    }
+  }, [jobId]);
 
   // Handlers for chat actions
   const handleStop = () => {
@@ -77,35 +77,48 @@ useEffect(() => {
 
   // Append function to send a message to the server
   const append = async (message: Message | CreateMessage): Promise<string | null> => {
-    const { id, content, role } = message;
-    // If `id` is undefined for a CreateMessage, handle it appropriately
-    // For example, if an `id` is required to send a message, you might want to return early or throw an error
-    // if (id === undefined) {
-    //   toast.error('Message must have an ID.');
-    //   return; // or throw new Error('Message must have an ID.');
-    // }
-
+    const { content, role } = message;
+    
+    // Log the request content before sending
+    console.log(`Sending message to backend: `, message);
+    
     setIsLoading(true);
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${previewToken}`,
+          // Include Authorization only if previewToken is used by the backend
+          ...(previewToken ? { 'Authorization': `Bearer ${previewToken}` } : {}),
         },
-        body: JSON.stringify({ id, message: content }),
+        body: JSON.stringify({ message: content }), // Backend expects key 'message'
       });
 
+      const responseBody = await response.json();
+
+      // Log the response received from the backend
+      console.log(`Received response from backend:`, responseBody);
+
       if (!response.ok) {
-        throw new Error('Error sending message to backend.');
+        throw new Error(`Backend error: ${response.status}`);
       }
 
-      const { job_id } = await response.json();
-      console.log('Message sent successfully with job_id:', job_id);
-      setJobId(job_id);
-      setInput('');
-      return job_id; // Assuming job_id is a string
+      // Use optional chaining in case job_id doesn't exist in the response
+      const job_id = responseBody?.job_id;
+      if (job_id) {
+        // If job_id is present, log success and add to state
+        console.log('Message sent successfully with job_id:', job_id);
+        setJobId(job_id);
+        setInput('');
+        return job_id; // Assuming job_id is a string
+      } else {
+        // Handle case where job_id is not present in the response
+        toast.error('Backend response does not contain job_id.');
+        console.error('Backend response does not contain job_id:', responseBody);
+        return null;
+      }
     } catch (error) {
+      // If an error occurs, log and show an error message
       console.error('Error sending message:', error);
       toast.error('Message sending failed.');
       return null;
@@ -113,7 +126,7 @@ useEffect(() => {
       setIsLoading(false);
     }
   };
-
+  
   // Reload function to refresh the chat history from the server
   const reload = async (): Promise<string | null | undefined> => {
     console.log('Reloading chat history...');

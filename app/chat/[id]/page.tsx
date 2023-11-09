@@ -17,42 +17,48 @@ export async function generateMetadata({ params }: ChatPageProps): Promise<Metad
   const session = await auth();
 
   if (!session?.user) {
-    console.log(`User not authenticated, metadata generation skipped for chat ID: ${params.id}`);
+    console.warn(`[${new Date().toISOString()}] Metadata generation: User not authenticated for chat ID: ${params.id}`);
     return {};
   }
 
+  console.info(`[${new Date().toISOString()}] Metadata generation: User authenticated, generating metadata for chat ID: ${params.id}`);
   const chat = await getChat(params.id, session.user.id);
-  return {
-    title: chat?.title.toString().slice(0, 50) ?? 'Chat',
-  };
+  const title = chat?.title.toString().slice(0, 50) ?? 'Chat';
+  
+  console.info(`[${new Date().toISOString()}] Metadata generated with title: ${title} for chat ID: ${params.id}`);
+  return { title };
 }
 
 export default async function ChatPage({ params }: ChatPageProps) {
   const session = await auth();
 
+  console.info(`[${new Date().toISOString()}] Chat page request for ID: ${params.id}`);
+
   if (!session?.user) {
-    console.log(`User not authenticated, redirecting to sign-in for chat ID: ${params.id}`);
+    console.warn(`[${new Date().toISOString()}] Chat page access denied: User not authenticated. Redirecting for chat ID: ${params.id}`);
     redirect(`/sign-in?next=/chat/${params.id}`);
+    return null;
   }
 
   const chat = await getChat(params.id, session.user.id);
 
   if (!chat) {
-    console.log(`Chat not found for ID: ${params.id}, sending 404 response.`);
+    console.warn(`[${new Date().toISOString()}] Chat page not found: No chat for ID: ${params.id}. Sending 404.`);
     notFound();
+    return null;
   }
 
   if (chat?.userId !== session?.user?.id) {
-    console.log(`User ID does not match chat user ID for chat ID: ${params.id}, sending 404 response.`);
+    console.warn(`[${new Date().toISOString()}] Chat page access denied: User ID mismatch for chat ID: ${params.id}. Sending 404.`);
     notFound();
+    return null;
   }
 
+  console.info(`[${new Date().toISOString()}] Rendering chat: Chat found and user verified for ID: ${params.id}`);
   const initialProps: ChatProps = {
     id: chat.id,
     initialMessages: chat.messages,
   };
-
-  console.log(`Rendering chat for ID: ${params.id}`);
 
   return <Chat {...initialProps} />;
 }

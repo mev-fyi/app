@@ -30,7 +30,7 @@ export async function POST(req: Request) {
 
   try {
     // Log the attempt to send a chat message
-    console.log(`Attempting to send chat message for user ${userId} with id ${id}`);
+    console.log(`[${new Date().toISOString()}] Attempting to send chat message for user ${userId} with id ${id}`);
 
     const chatResponse = await fetch(backendChatUrl, {
       method: 'POST',
@@ -40,11 +40,16 @@ export async function POST(req: Request) {
       body: JSON.stringify({ message })
     });
 
+    // Parse the JSON body once
+    const responseBody = await chatResponse.json();
+    console.log(`[${new Date().toISOString()}] Received response from backend:`, responseBody);
+
     if (!chatResponse.ok) {
-      throw new Error('Backend failed to process chat message.');
+      throw new Error(`Backend failed to process chat message with status ${chatResponse.status}`);
     }
 
-    const { job_id } = await chatResponse.json();
+    const job_id = responseBody?.job_id;
+    console.log(`[${new Date().toISOString()}] Chat message sent and recorded with job id ${job_id}`);
 
     const createdAt = Date.now();
     const chatRecord = {
@@ -55,14 +60,9 @@ export async function POST(req: Request) {
       job_id,
     };
 
-    // Log that we are saving the chat record
-    console.log(`Saving chat record for job ${job_id} and chat id ${id}`);
-
+    // Perform the KV set and sorted set operations
     await kv.set(`chat:${id}`, JSON.stringify(chatRecord));
     await kv.zadd(`user:chat:${userId}`, { score: createdAt, member: `chat:${id}` });
-
-    // Log the successful response
-    console.log(`Chat message sent and recorded with job id ${job_id}`);
 
     return new Response(JSON.stringify({ job_id }), {
       headers: { 'Content-Type': 'application/json' },
@@ -70,26 +70,19 @@ export async function POST(req: Request) {
     });
 
   } catch (error: unknown) {
-    const isErrorResponse = (x: any): x is { message: string; status?: number } =>
-      x && typeof x.message === 'string';
+    // Improved error handling with added context
+    console.error(`[${new Date().toISOString()}] Error on POST /api/chat for user ${userId}:`, error);
 
-    if (isErrorResponse(error)) {
-      console.error('Error handling chat message POST request:', error.message);
-
-      const status = error.status || 500;
-      const errorMessage = `Error processing request: ${error.message}`;
-
-      return new Response(JSON.stringify({ error: errorMessage }), {
-        headers: { 'Content-Type': 'application/json' },
-        status: status
-      });
-    } else {
-      // Log the unknown error before sending a generic internal server error response
-      console.error('An unexpected error occurred:', error);
-      
-      return new Response('Internal server error', {
-        status: 500
-      });
+    let status = 500;
+    let errorMessage = 'Internal server error';
+    if (error instanceof Error && 'status' in error) {
+      status = (error as any).status || 500;
+      errorMessage = error.message || errorMessage;
     }
+
+    return new Response(JSON.stringify({ error: errorMessage }), {
+      headers: { 'Content-Type': 'application/json' },
+      status: status
+    });
   }
 }

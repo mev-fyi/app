@@ -16,6 +16,7 @@ export interface ChatMessageProps {
 }
 
 export function ChatMessage({ message, ...props }: ChatMessageProps) {
+  console.log('ChatMessage message:', message);  // Log individual message to inspect
   return (
     <div
       className={cn('group relative mb-4 flex items-start md:-ml-12')}
