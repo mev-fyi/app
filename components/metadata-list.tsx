@@ -12,7 +12,7 @@ const MetadataList: React.FC<MetadataListProps> = ({ entries }) => {
         <li key={index}>
           <a href={entry.link} target="_blank" rel="noopener noreferrer">{entry.title}</a>
           <span> ({entry.extraInfoType}: {entry.extraInfo})</span>
-          <span> - {entry.publishedDate.toISOString().split('T')[0]}</span>
+          {entry.publishedDateString && <span> - {entry.publishedDateString}</span>}
         </li>
       ))}
     </ol>

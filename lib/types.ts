@@ -24,6 +24,7 @@ export interface ParsedMetadataEntry {
   extraInfo: string;
   extraInfoType: string;
   publishedDate: Date;
+  publishedDateString: string;
 }
 
 // Extend the Message type to include structured_metadata

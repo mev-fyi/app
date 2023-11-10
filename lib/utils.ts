@@ -59,7 +59,8 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
       extraInfoType: extraInfoType,
       link: details[3],
       extraInfo: details[2],
-      publishedDate: new Date(details[videoDetails ? 4 : 5])
+      publishedDate: new Date(details[videoDetails ? 4 : 5]),
+      publishedDateString: details[videoDetails ? 4 : 5] // Store the original string
     } : null;
   }).filter(Boolean) as ParsedMetadataEntry[];
 
