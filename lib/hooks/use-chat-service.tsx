@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react';
 import { useLocalStorage } from '@/lib/hooks/use-local-storage';
 import { toast } from 'react-hot-toast';
 import { type Message, type CreateMessage } from 'ai/react';
-import MetadataList from "@/components/metadata-list"
-import { parseMetadata } from '@/lib/utils';
+import { ExtendedMessage } from '../types';
+
 
 export interface UseChatService {
-  messages: Message[];
+  messages: ExtendedMessage[]; // Updated to use ExtendedMessage[]
   sendMessage: (message: Message | CreateMessage) => Promise<string | null>;
   isLoading: boolean;
   setInput: React.Dispatch<React.SetStateAction<string>>;
@@ -23,9 +23,8 @@ export interface UseChatService {
   previewTokenInputValue: string;
 }
 
-
 export function useChatService(initialMessages: Message[] = []): UseChatService {
-  const [messages, setMessages] = useState<Message[]>(initialMessages);
+  const [messages, setMessages] = useState<ExtendedMessage[]>(initialMessages); // Updated type here
   const [isLoading, setIsLoading] = useState(false);
   const [currentInput, setCurrentInput] = useState('');
   const [previewToken, setPreviewToken] = useLocalStorage<string | null>('ai-token', null);
