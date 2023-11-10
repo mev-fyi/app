@@ -34,19 +34,18 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
 
   const sendMessage = async (message: Message | CreateMessage): Promise<string | null> => {
     startLoading();
-    
+      
     // Append the user's message to messages state immediately.
     setMessages(prevMessages => [
       ...prevMessages,
       {
-        ...message,                // Spread the message content that was submitted by the user
-        id: 'temp-id',             // Temporarily assign an id, can be replaced with backend response id later
-        timestamp: new Date().toISOString(), // Assign current timestamp, replace with correct key names as needed
-        // Include any other properties needed for the message to display correctly
+        ...message,
+        id: 'temp-id',                         // Temporarily assign an id
+        createdAt: new Date(),                 // Use createdAt instead of timestamp
       }
     ]);
     setCurrentInput('');
-  
+    
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
@@ -56,35 +55,48 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
         },
         body: JSON.stringify({ message: message.content }),
       });
-  
+    
       if (!response.ok) {
-        // If the request fails, inform the user and don't append the server response
+        // If the request fails, remove the temporary user message and inform the user
+        setMessages(prevMessages => prevMessages.filter(msg => msg.id !== 'temp-id'));
         toast.error(`Failed to send message: ${response.statusText}`);
         return null;
       }
   
       const responseBody = await response.json();
       console.log('Response body after sending message:', responseBody);
-  
+    
       // Assuming the responseBody contains the response message from the server
-      const responseMessage = responseBody?.response;
+      const responseContent = responseBody?.response?.response;
+      const job_id = responseBody?.job_id;
   
-      // This responseMessage should be structured similarly to how you would format a Message object
-  
-      // Once server's response is received, update the messages state to include the response.
-      if (responseMessage) {
+      if (responseContent && job_id) {
+        // Append the server's response message to the messages state
         setMessages(prevMessages => [
-          ...prevMessages.filter(msg => msg.id !== 'temp-id'), // Remove the temporary user message
-          { ...message, id: responseBody?.job_id }, // Re-add the user's message with the correct id from the server
-          responseMessage // Add the server's response message
+          // Keep all messages, including the temporary one since we no longer re-append the user's message
+          ...prevMessages,
+          {
+            content: responseContent,
+            id: job_id,
+            createdAt: new Date(),
+            role: 'assistant',                // Assuming the server's response is from the assistant
+          }
         ]);
-        return responseBody?.job_id;
+        return job_id;
       } else {
+        // If server response is not in expected format, show an error and remove temporary message
+        setMessages(prevMessages => prevMessages.filter(msg => msg.id !== 'temp-id'));
         toast.error('Backend did not return the expected response object.');
         return null;
       }
     } catch (error) {
-      toast.error('Failed to send message.');
+      // On failure, remove temporary message and show error
+      setMessages(prevMessages => prevMessages.filter(msg => msg.id !== 'temp-id'));
+      if (error instanceof Error) {
+          toast.error('Failed to send message: ' + error.message);
+      } else {
+          toast.error('An unknown error occurred.');
+      }
       return null;
     } finally {
       stopLoading();
