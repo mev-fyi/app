@@ -46,6 +46,7 @@ export async function POST(req: Request) {
 
     const job_id = responseBody.job_id;
     const responseContent = responseBody.response?.response || responseBody.response;
+    const formattedMetadata = responseBody.formatted_metadata; // Extract formatted_metadata from the backend response
 
     console.log(`[${new Date().toISOString()}] Chat message sent and recorded with job id ${job_id}`);
 
@@ -56,7 +57,7 @@ export async function POST(req: Request) {
     await kv.zadd(`user:chat:${userId}`, { score: createdAt, member: `chat:${id}` });
 
     // Return to the client side both the job_id and the response content
-    return new Response(JSON.stringify({ job_id, response: responseBody }), {
+    return new Response(JSON.stringify({ job_id, response: responseContent, formatted_metadata: formattedMetadata }), {
       headers: { 'Content-Type': 'application/json' },
       status: 200
     });

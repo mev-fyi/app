@@ -78,7 +78,7 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
         setMessages(prevMessages => [
           ...prevMessages,
           {
-            content: fullResponseContent, // Contains both response content and metadata
+            content: fullResponseContent,
             id: job_id,
             createdAt: new Date(),
             role: 'assistant',
