@@ -64,10 +64,11 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
       }
   
       const responseBody = await response.json();
-      console.log('Response body after sending message:', responseBody);
+      console.log('Raw response received from backend:', response);
+      console.log('Response body received from backend:', responseBody);
     
       // Assuming the responseBody contains the response message from the server
-      const responseContent = responseBody?.response?.response;
+      const responseContent = responseBody?.response;
       const job_id = responseBody?.job_id;
   
       if (responseContent && job_id) {
