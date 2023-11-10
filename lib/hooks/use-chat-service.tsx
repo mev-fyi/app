@@ -35,19 +35,20 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
       
   const sendMessage = async (message: Message | CreateMessage): Promise<string | null> => {
     startLoading();
-        
+  
     // Append the user's message to messages state immediately.
     setMessages(prevMessages => [
       ...prevMessages,
       {
         ...message,
-        id: 'temp-id',                         // Temporarily assign an id
-        createdAt: new Date(),                 // Use createdAt instead of timestamp
-        role: 'user',                          // Assuming the user role for the message
+        id: 'temp-id', // Temporarily assign an id
+        createdAt: new Date(),
+        role: 'user', // Assuming the user role for the message
       }
     ]);
+  
     setCurrentInput('');
-    
+  
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
@@ -67,35 +68,37 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
   
       const responseBody = await response.json();
       console.log('Response body received from backend:', responseBody);
-    
+  
       // Assuming the responseBody contains the response message from the server
       const responseContent = responseBody?.response?.response || responseBody?.response;
+      const formattedMetadata = responseBody?.formatted_metadata;
       const job_id = responseBody?.job_id;
   
+      // Append the server's response message to the messages state
       if (responseContent && job_id) {
-        // Append the server's response message to the messages state
+        const fullResponseContent = `${responseContent}\n\n${formattedMetadata || ''}`;
         setMessages(prevMessages => [
           // Keep all messages, excluding the temporary one
           ...prevMessages.filter(msg => msg.id !== 'temp-id'),
           {
-            content: responseContent,
-            id: job_id,
+            content: fullResponseContent,
+            id: job_id, // Use job_id from the server response
             createdAt: new Date(),
-            role: 'assistant',                // Assuming the server's response is from the assistant
+            role: 'assistant', // Assuming the server's response is from the assistant
           }
         ]);
         return job_id;
       } else {
-        // If server response is not in expected format, show an error
+        // If server response is not in the expected format, show an error
         toast.error('Backend did not return the expected response object.');
         return null;
       }
     } catch (error) {
       // On failure, show error
       if (error instanceof Error) {
-          toast.error('Failed to send message: ' + error.message);
+        toast.error('Failed to send message: ' + error.message);
       } else {
-          toast.error('An unknown error occurred.');
+        toast.error('An unknown error occurred.');
       }
       return null;
     } finally {
