@@ -1,6 +1,8 @@
 import { clsx, type ClassValue } from 'clsx'
 import { customAlphabet } from 'nanoid'
 import { twMerge } from 'tailwind-merge'
+import { ParsedMetadataEntry } from 'lib/types';
+
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -40,4 +42,28 @@ export function formatDate(input: string | number | Date): string {
     day: 'numeric',
     year: 'numeric'
   })
+}
+
+
+
+export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] {
+  const formattedEntries = formattedMetadata.split(', [Title]: ');
+  const parsedEntries: ParsedMetadataEntry[] = formattedEntries.map((entry, index): ParsedMetadataEntry | null => {
+    const videoDetails = entry.match(/\[Title\]: (.*?), \[Channel name\]: (.*?), \[Video Link\]: (.*?), \[Published date\]: ([\d-]+)/);
+    const paperDetails = entry.match(/\[Title\]: (.*?), \[Authors\]: (.*?), \[Link\]: (.*?), \[Release date\]: ([\d-]+)/);
+
+    let details = videoDetails || paperDetails;
+    let extraInfoType = videoDetails ? 'Channel name' : 'Authors';
+
+    return details ? {
+      index: index + 1,
+      title: details[1],
+      extraInfoType: extraInfoType,
+      link: details[3],
+      extraInfo: details[2],
+      publishedDate: new Date(details[videoDetails ? 4 : 5])
+    } : null;
+  }).filter(Boolean) as ParsedMetadataEntry[];
+
+  return parsedEntries.sort((a, b) => b.publishedDate.getTime() - a.publishedDate.getTime());
 }

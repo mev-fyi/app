@@ -1,6 +1,8 @@
 import { kv } from '@vercel/kv';
 import { auth } from '@/auth';
 import { nanoid } from '@/lib/utils';
+import { parseMetadata } from '@/lib/utils';
+import { ParsedMetadataEntry } from '@/lib/types';
 
 export const runtime = 'edge';
 
@@ -46,7 +48,12 @@ export async function POST(req: Request) {
 
     const job_id = responseBody.job_id;
     const responseContent = responseBody.response?.response || responseBody.response;
-    const formattedMetadata = responseBody.formatted_metadata; // Extract formatted_metadata from the backend response
+    // Process formattedMetadata on the server-side
+    let structuredMetadata: ParsedMetadataEntry[] = [];
+
+    if (responseBody.formatted_metadata) {
+      structuredMetadata = parseMetadata(responseBody.formatted_metadata);
+    }
 
     console.log(`[${new Date().toISOString()}] Chat message sent and recorded with job id ${job_id}`);
 
@@ -56,12 +63,12 @@ export async function POST(req: Request) {
     await kv.set(`chat:${id}`, JSON.stringify(chatRecord));
     await kv.zadd(`user:chat:${userId}`, { score: createdAt, member: `chat:${id}` });
 
-    // Return to the client side both the job_id and the response content
-    return new Response(JSON.stringify({ job_id, response: responseContent, formatted_metadata: formattedMetadata }), {
-      headers: { 'Content-Type': 'application/json' },
-      status: 200
-    });
-
+   // Return to the client server-processed metadata along with job_id and content
+   return new Response(JSON.stringify({ job_id, response: responseContent, structured_metadata: structuredMetadata }), {
+    headers: { 'Content-Type': 'application/json' },
+    status: 200
+  });
+  
   } catch (error: unknown) {
     console.error(`[${new Date().toISOString()}] Error on POST /api/chat for user ${userId}:`, error);
 

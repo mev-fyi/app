@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { useLocalStorage } from '@/lib/hooks/use-local-storage';
 import { toast } from 'react-hot-toast';
 import { type Message, type CreateMessage } from 'ai/react';
+import MetadataList from "@/components/metadata-list"
+import { parseMetadata } from '@/lib/utils';
 
 export interface UseChatService {
   messages: Message[];
@@ -19,51 +21,6 @@ export interface UseChatService {
   updatePreviewTokenInput: (value: string) => void;
   submitPreviewToken: () => void;
   previewTokenInputValue: string;
-}
-
-
-// Define the structure of a parsed metadata entry that can accommodate both videos and research papers
-interface ParsedMetadataEntry {
-  index: number;
-  title: string;
-  link: string;    // URL of the video or research paper
-  extraInfo: string; // 'Channel name' for videos or 'Authors' for research papers
-  extraInfoType: string; // Either 'Channel name' or 'Authors'
-  publishedDate: Date;
-}
-
-// Define the input type for the formattedMetadata parameter
-type FormattedMetadata = string;
-
-// The parseAndFormatMetadata function with type annotations
-function parseAndFormatMetadata(formattedMetadata: FormattedMetadata): string {
-  const formattedEntries = formattedMetadata.split(', [Title]: ');
-  const parsedEntries: ParsedMetadataEntry[] = formattedEntries.map((entry, index): ParsedMetadataEntry | null => {
-    // Extract details using regex that works for both videos and research papers
-    const videoDetails = entry.match(/\[Title\]: (.*?), \[Channel name\]: (.*?), \[Video Link\]: (.*?), \[Published date\]: ([\d-]+)/);
-    const paperDetails = entry.match(/\[Title\]: (.*?), \[Authors\]: (.*?), \[Link\]: (.*?), \[Release date\]: ([\d-]+)/);
-
-    let details = videoDetails || paperDetails;
-    let extraInfoType = videoDetails ? 'Channel name' : 'Authors';
-
-    return details ? {
-      index: index + 1,
-      title: details[1],
-      extraInfoType: extraInfoType,
-      link: details[3],
-      extraInfo: details[2],
-      publishedDate: new Date(details[videoDetails ? 4 : 5])
-    } : null;
-  }).filter(Boolean) as ParsedMetadataEntry[];
-
-  // Sort by published date
-  const formattedList = parsedEntries.sort((a, b) => b.publishedDate.getTime() - a.publishedDate.getTime())
-    .map((entry): string => `
-      ${entry.index}. <a href="${entry.link}" target="_blank" rel="noopener noreferrer">${entry.title}</a> 
-      (${entry.extraInfoType}: ${entry.extraInfo}) - ${entry.publishedDate.toISOString().split('T')[0]}
-    `).join('<br>');
-
-  return formattedList;
 }
 
 
@@ -113,42 +70,28 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
       }
   
       const responseBody = await response.json();
-      console.log('Response body received from backend:', responseBody);
-  
-      const responseContent = responseBody?.response?.response || responseBody?.response;
-      const formattedMetadata = responseBody?.formatted_metadata;
-      const job_id = responseBody?.job_id;
-  
-      if (responseContent && job_id) {
-         // Format the metadata using the provided function
-        const formattedMetadataHtml = formattedMetadata
-        ? parseAndFormatMetadata(formattedMetadata)
-        : '';
+      if (response.ok) {
+        const { job_id, response: responseContent, structured_metadata } = responseBody;
 
-        // Combine the backend response content with the formatted metadata HTML
-        const fullResponseContent = `${responseContent}\n\n${formattedMetadataHtml}`;
-
+        // Update the messages state with the new message and the structured metadata
         setMessages(prevMessages => [
           ...prevMessages,
           {
-            content: fullResponseContent,
+            content: JSON.stringify(responseContent),  // Convert content to a string if it's not already one
             id: job_id,
             createdAt: new Date(),
             role: 'assistant',
-          }
+            structured_metadata             // Store the structured metadata
+          },
         ]);
+        // No need to render a component here; just store the metadata in state
         return job_id;
       } else {
-        toast.error('Backend did not return the expected response object.');
+        toast.error(`Failed to send message: ${responseBody.error || 'Unknown error'}`);
         return null;
       }
     } catch (error) {
-      // On failure, show error
-      if (error instanceof Error) {
-        toast.error('Failed to send message: ' + error.message);
-      } else {
-        toast.error('An unknown error occurred.');
-      }
+      toast.error(`Failed to send message: ${error instanceof Error ? error.message : 'Unknown error'}`);
       return null;
     } finally {
       stopLoading();
