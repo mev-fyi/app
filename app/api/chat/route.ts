@@ -56,7 +56,7 @@ export async function POST(req: Request) {
     await kv.zadd(`user:chat:${userId}`, { score: createdAt, member: `chat:${id}` });
 
     // Return to the client side both the job_id and the response content
-    return new Response(JSON.stringify({ job_id, response: responseContent }), {
+    return new Response(JSON.stringify({ job_id, response: responseBody }), {
       headers: { 'Content-Type': 'application/json' },
       status: 200
     });
