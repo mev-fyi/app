@@ -1,0 +1,18 @@
+/* src/styles/styles.css */
+.metadata-list {
+  list-style: none;
+  padding: 0;
+}
+
+.metadata-list li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.metadata-list a {
+  color: #0070f3;
+}
+
+.metadata-list span {
+  color: #333;
+}
