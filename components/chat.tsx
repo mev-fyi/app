@@ -7,7 +7,7 @@ import { ChatList } from '@/components/chat-list';
 import { ChatPanel } from '@/components/chat-panel';
 import { EmptyScreen } from '@/components/empty-screen';
 import { ChatScrollAnchor } from '@/components/chat-scroll-anchor';
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
@@ -51,49 +51,48 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 
   // Render function
   return (
-    <div className={cn('chat-container', className)}>
-      {messages.length > 0 ? (
-        <>
-          <ChatList messages={messages} />
-          <ChatScrollAnchor trackVisibility={isLoading} />
-          {messages.map((msg, index) =>
-            msg.structured_metadata ? (
-              <MetadataList key={index} entries={msg.structured_metadata} />
-            ) : null
-          )}
-          <ChatPanel
-            id={id}
-            isLoading={isLoading}
-            stop={stopLoading}
-            append={sendMessage}
-            reload={handleReloadChatHistory}
-            messages={messages}
-            input={currentInput}
-            setInput={setInput}
-          />
-        </>
-      ) : (
-        <EmptyScreen setInput={setInput} />
-      )}
+    <>
+      <div className={cn('pb-[200px] pt-4 md:pt-10', className)}>
+        {messages.length ? (
+          <>
+            <ChatList messages={messages} />
+            <ChatScrollAnchor trackVisibility={isLoading} />
+          </>
+        ) : (
+          <EmptyScreen setInput={setInput} />
+        )}
+      </div>
+      <ChatPanel
+        id={id}
+        isLoading={isLoading}
+        stop={stopLoading}
+        append={sendMessage}
+        reload={handleReloadChatHistory} // Changed to call the new function
+        messages={messages}
+        input={currentInput}
+        setInput={setInput}
+      />
 
       <Dialog open={displayPreviewTokenDialog} onOpenChange={setPreviewTokenDialogVisibility}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Enter your OpenAI Key</DialogTitle>
+            <DialogDescription>
+              Please enter your OpenAI API key to access the chat. Your token will be securely stored.
+            </DialogDescription>
           </DialogHeader>
           <Input
             value={previewTokenInputValue}
             placeholder="OpenAI API key"
-            onChange={(e) => updatePreviewTokenInput(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && submitPreviewToken()}
+            onChange={e => updatePreviewTokenInput(e.target.value)} // Updated to `updatePreviewTokenInput`
           />
-          <DialogFooter>
-            <Button onClick={submitPreviewToken}>Save Token</Button>
+          <DialogFooter className="items-center">
+            <Button onClick={submitPreviewToken}> // Updated to `submitPreviewToken`
+              Save Token
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </div>
+    </>
   );
 }
-
-export default Chat;
