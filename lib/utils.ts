@@ -44,8 +44,6 @@ export function formatDate(input: string | number | Date): string {
   })
 }
 
-
-
 export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] {
   const formattedEntries = formattedMetadata.split(', [Title]: ');
   const parsedEntries: ParsedMetadataEntry[] = formattedEntries.map((entry, index): ParsedMetadataEntry | null => {

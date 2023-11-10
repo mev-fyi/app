@@ -55,7 +55,17 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
       <div className={cn('pb-[200px] pt-4 md:pt-10', className)}>
         {messages.length ? (
           <>
-            <ChatList messages={messages} />
+            {messages.map((msg, index) => (
+              <React.Fragment key={index}>
+                {/* Render the message */}
+                <ChatList messages={[msg]} />
+
+                {/* If the message has structured_metadata, render it immediately after */}
+                {msg.role === 'assistant' && msg.structured_metadata && (
+                  <MetadataList entries={msg.structured_metadata} />
+                )}
+              </React.Fragment>
+            ))}
             <ChatScrollAnchor trackVisibility={isLoading} />
           </>
         ) : (
@@ -67,7 +77,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         isLoading={isLoading}
         stop={stopLoading}
         append={sendMessage}
-        reload={handleReloadChatHistory} // Changed to call the new function
+        reload={handleReloadChatHistory}
         messages={messages}
         input={currentInput}
         setInput={setInput}
