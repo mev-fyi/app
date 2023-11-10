@@ -43,28 +43,32 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
         },
         body: JSON.stringify({ message: message.content }),
       });
-
+  
       if (!response.ok) {
         toast.error(`Failed to send message: ${response.statusText}`);
         return null;
       }
-      
+  
       const responseBody = await response.json();
       console.log('Response body after sending message:', responseBody);
-      const job_id = responseBody?.job_id;
-
-      if (job_id) {
-        const newMessage = {
-          ...message,       // Spread the message content that was submitted
-          id: job_id        // Add the job_id returned from the server
-          // Add any other necessary properties that your API and components expect
-          // for a full message object, such as timestamp, sender, etc.
+  
+      // Assuming the responseBody contains the response message from the server
+      const responseMessage = responseBody?.response;
+  
+      // This responseMessage should be structured similarly to how you would format a Message object
+  
+      if (responseMessage) {
+        // Append both user's message and server's response to the messages state
+        const newUserMessage = {
+          ...message,       // Spread the message content that was submitted by the user
+          id: responseBody?.job_id
         };
-        setMessages(prevMessages => [...prevMessages, newMessage]);
+        
+        setMessages(prevMessages => [...prevMessages, newUserMessage, responseMessage]);
         setCurrentInput('');
-        return job_id;
+        return responseBody?.job_id;
       } else {
-        toast.error('Backend did not return a job identifier.');
+        toast.error('Backend did not return the expected response object.');
         return null;
       }
     } catch (error) {
