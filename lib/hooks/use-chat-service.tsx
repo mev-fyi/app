@@ -54,8 +54,13 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
       const job_id = responseBody?.job_id;
 
       if (job_id) {
-        const newMessagesArray = [...messages, { ...responseBody.response, id: job_id }]; // Adjust based on actual response structure
-        setMessages(newMessagesArray);
+        const newMessage = {
+          ...message,       // Spread the message content that was submitted
+          id: job_id        // Add the job_id returned from the server
+          // Add any other necessary properties that your API and components expect
+          // for a full message object, such as timestamp, sender, etc.
+        };
+        setMessages(prevMessages => [...prevMessages, newMessage]);
         setCurrentInput('');
         return job_id;
       } else {
