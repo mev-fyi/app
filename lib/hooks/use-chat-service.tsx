@@ -69,27 +69,23 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
       const responseBody = await response.json();
       console.log('Response body received from backend:', responseBody);
   
-      // Assuming the responseBody contains the response message from the server
       const responseContent = responseBody?.response?.response || responseBody?.response;
       const formattedMetadata = responseBody?.formatted_metadata;
       const job_id = responseBody?.job_id;
   
-      // Append the server's response message to the messages state
       if (responseContent && job_id) {
         const fullResponseContent = `${responseContent}\n\n${formattedMetadata || ''}`;
         setMessages(prevMessages => [
-          // Keep all messages, excluding the temporary one
-          ...prevMessages.filter(msg => msg.id !== 'temp-id'),
+          ...prevMessages,
           {
-            content: fullResponseContent,
-            id: job_id, // Use job_id from the server response
+            content: fullResponseContent, // Contains both response content and metadata
+            id: job_id,
             createdAt: new Date(),
-            role: 'assistant', // Assuming the server's response is from the assistant
+            role: 'assistant',
           }
         ]);
         return job_id;
       } else {
-        // If server response is not in the expected format, show an error
         toast.error('Backend did not return the expected response object.');
         return null;
       }
