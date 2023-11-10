@@ -32,9 +32,10 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
   const startLoading = () => setIsLoading(true);
   const stopLoading = () => setIsLoading(false);
 
+      
   const sendMessage = async (message: Message | CreateMessage): Promise<string | null> => {
     startLoading();
-      
+        
     // Append the user's message to messages state immediately.
     setMessages(prevMessages => [
       ...prevMessages,
@@ -42,6 +43,7 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
         ...message,
         id: 'temp-id',                         // Temporarily assign an id
         createdAt: new Date(),                 // Use createdAt instead of timestamp
+        role: 'user',                          // Assuming the user role for the message
       }
     ]);
     setCurrentInput('');
@@ -55,7 +57,7 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
         },
         body: JSON.stringify({ message: message.content }),
       });
-    
+  
       if (!response.ok) {
         // If the request fails, remove the temporary user message and inform the user
         setMessages(prevMessages => prevMessages.filter(msg => msg.id !== 'temp-id'));
@@ -64,22 +66,17 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
       }
   
       const responseBody = await response.json();
-      try{
-       console.log('Raw response received from backend:', response);
-      } catch(error ){
-        console.log('Cant log raw response as is');
-      }
       console.log('Response body received from backend:', responseBody);
     
       // Assuming the responseBody contains the response message from the server
-      const responseContent = responseBody?.response;
+      const responseContent = responseBody?.response?.response || responseBody?.response;
       const job_id = responseBody?.job_id;
   
       if (responseContent && job_id) {
         // Append the server's response message to the messages state
         setMessages(prevMessages => [
-          // Keep all messages, including the temporary one since we no longer re-append the user's message
-          ...prevMessages,
+          // Keep all messages, excluding the temporary one
+          ...prevMessages.filter(msg => msg.id !== 'temp-id'),
           {
             content: responseContent,
             id: job_id,
@@ -89,14 +86,12 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
         ]);
         return job_id;
       } else {
-        // If server response is not in expected format, show an error and remove temporary message
-        setMessages(prevMessages => prevMessages.filter(msg => msg.id !== 'temp-id'));
+        // If server response is not in expected format, show an error
         toast.error('Backend did not return the expected response object.');
         return null;
       }
     } catch (error) {
-      // On failure, remove temporary message and show error
-      setMessages(prevMessages => prevMessages.filter(msg => msg.id !== 'temp-id'));
+      // On failure, show error
       if (error instanceof Error) {
           toast.error('Failed to send message: ' + error.message);
       } else {
