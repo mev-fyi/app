@@ -30,7 +30,9 @@ export async function POST(req: Request) {
 
   try {
     // Log the attempt to send a chat message
-    console.log(`[${new Date().toISOString()}] Attempting to send chat message for user ${userId} with id ${id}`);
+    // log the content of the chat message and the user who sent it
+    console.log(`[${new Date().toISOString()}] Sending chat message from user ${userId}:`, message);
+
 
     const chatResponse = await fetch(backendChatUrl, {
       method: 'POST',

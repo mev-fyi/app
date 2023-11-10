@@ -54,6 +54,8 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
       const job_id = responseBody?.job_id;
 
       if (job_id) {
+        const newMessagesArray = [...messages, { ...responseBody.response, id: job_id }]; // Adjust based on actual response structure
+        setMessages(newMessagesArray);
         setCurrentInput('');
         return job_id;
       } else {

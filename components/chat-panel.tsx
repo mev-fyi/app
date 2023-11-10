@@ -54,16 +54,24 @@ export function ChatPanel({
         <div className="space-y-4 border-t bg-background px-4 py-2 shadow-lg sm:rounded-t-xl sm:border md:py-4">
           <PromptForm
             onSubmit={async (value) => {
-              if (id) {
+              console.log(`Submitting message: ${value}`);
+              if (id && value.trim()) {
                 await append({
                   id: id,
                   content: value,
                   role: 'user',
                 });
               }
+              console.log('Message appended:', value);
+              
+              // Check messages state to see if the new message has been added
+              console.log('Current messages state:', messages);
             }}
             input={input}
-            setInput={setInput}
+            setInput={(newValue) => {
+              console.log(`Setting input: ${newValue}`);
+              setInput(newValue);
+            }}
             isLoading={isLoading}
           />
           <FooterText className="hidden sm:block" />
