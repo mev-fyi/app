@@ -120,7 +120,14 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
       const job_id = responseBody?.job_id;
   
       if (responseContent && job_id) {
-        const fullResponseContent = `${responseContent}\n\n${formattedMetadata || ''}`;
+         // Format the metadata using the provided function
+        const formattedMetadataHtml = formattedMetadata
+        ? parseAndFormatMetadata(formattedMetadata)
+        : '';
+
+        // Combine the backend response content with the formatted metadata HTML
+        const fullResponseContent = `${responseContent}\n\n${formattedMetadataHtml}`;
+
         setMessages(prevMessages => [
           ...prevMessages,
           {
