@@ -64,7 +64,11 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
       }
   
       const responseBody = await response.json();
-      console.log('Raw response received from backend:', response);
+      try{
+       console.log('Raw response received from backend:', response);
+      } catch(error ){
+        console.log('Cant log raw response as is');
+      }
       console.log('Response body received from backend:', responseBody);
     
       // Assuming the responseBody contains the response message from the server
