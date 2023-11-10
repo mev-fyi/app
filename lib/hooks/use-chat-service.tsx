@@ -1,3 +1,4 @@
+'use client'
 import { useState, useEffect } from 'react';
 import { useLocalStorage } from '@/lib/hooks/use-local-storage';
 import { toast } from 'react-hot-toast';

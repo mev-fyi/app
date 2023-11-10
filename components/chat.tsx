@@ -1,3 +1,4 @@
+'use client'
 import { useChatService } from '@/lib/hooks/use-chat-service';
 import { type Message } from 'ai/react';
 import React from 'react';
