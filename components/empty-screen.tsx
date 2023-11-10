@@ -24,7 +24,6 @@ const questions = [
   "What is account abstraction?",
   "What is ERC-4337?",
   "What is EIP-1559?",
-  "Who are the most active individuals in the MEV space?",
   "How will account abstraction affect the MEV supply chain?",
   "What is the difference between account abstraction and intents?",
   "Is it bad that MEV is a centralizing force?",
@@ -47,7 +46,6 @@ const questions = [
   "Return a selection of papers and videos that will introduce me to MEV",
   "What is the role of the Ethereum Foundation?",
   "How does Flashbots contribute to the MEV space?",
-  "Give me talks from Barnabe Monnot",
   "What is atomic composability?",
   "What are the main advantages and challenges that decentralised finance face relative to traditional finance?",
   "What is the number one thing which make decentralised finance better than traditional finance and why?",
@@ -66,7 +64,6 @@ const questions = [
   "What is a searcher?",
   "What is a validator?",
   "What is an attester?",
-  "What is an integrated searcher builder?",
   "How do searchers, builders, relays and validators interact with one another?",
   "How can the user initiating a transaction get shielded from MEV?",
 ]
