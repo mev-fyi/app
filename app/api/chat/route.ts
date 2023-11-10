@@ -29,54 +29,44 @@ export async function POST(req: Request) {
   const backendChatUrl = `${process.env.REACT_APP_BACKEND_URL}/chat`;
 
   try {
-    // Log the attempt to send a chat message
-    // log the content of the chat message and the user who sent it
     console.log(`[${new Date().toISOString()}] Sending chat message from user ${userId}:`, message);
-
 
     const chatResponse = await fetch(backendChatUrl, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message })
     });
-
-    // Parse the JSON body once
-    const responseBody = await chatResponse.json();
-    console.log(`[${new Date().toISOString()}] Received response from backend:`, responseBody);
 
     if (!chatResponse.ok) {
       throw new Error(`Backend failed to process chat message with status ${chatResponse.status}`);
     }
 
-    const job_id = responseBody?.job_id;
+    const responseBody = await chatResponse.json();
+    console.log(`[${new Date().toISOString()}] Received response from backend:`, responseBody);
+
+    const job_id = responseBody.job_id;
+    const responseContent = responseBody.response?.response || responseBody.response;
+
     console.log(`[${new Date().toISOString()}] Chat message sent and recorded with job id ${job_id}`);
 
     const createdAt = Date.now();
-    const chatRecord = {
-      id,
-      title: message.substring(0, 100),
-      userId,
-      createdAt,
-      job_id,
-    };
+    const chatRecord = { id, title: message.substring(0, 100), userId, createdAt, job_id };
 
-    // Perform the KV set and sorted set operations
     await kv.set(`chat:${id}`, JSON.stringify(chatRecord));
     await kv.zadd(`user:chat:${userId}`, { score: createdAt, member: `chat:${id}` });
 
-    return new Response(JSON.stringify({ job_id }), {
+    // Return to the client side both the job_id and the response content
+    return new Response(JSON.stringify({ job_id, response: responseContent }), {
       headers: { 'Content-Type': 'application/json' },
       status: 200
     });
 
   } catch (error: unknown) {
-    // Improved error handling with added context
     console.error(`[${new Date().toISOString()}] Error on POST /api/chat for user ${userId}:`, error);
 
     let status = 500;
     let errorMessage = 'Internal server error';
+
     if (error instanceof Error && 'status' in error) {
       status = (error as any).status || 500;
       errorMessage = error.message || errorMessage;
