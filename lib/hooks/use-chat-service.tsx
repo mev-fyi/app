@@ -10,7 +10,7 @@ export interface UseChatService {
   isLoading: boolean;
   setInput: React.Dispatch<React.SetStateAction<string>>;
   currentInput: string;
-  jobIdentifier: string | null;
+  // jobIdentifier: string | null;
   startLoading: () => void;
   stopLoading: () => void;
   updateMessages: (messages: Message[]) => void;
@@ -29,27 +29,27 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
   const [previewToken, setPreviewToken] = useLocalStorage<string | null>('ai-token', null);
   const [previewTokenInputValue, setPreviewTokenInputValue] = useState(previewToken ?? '');
   const [displayPreviewTokenDialog, setDisplayPreviewTokenDialog] = useState(process.env.VERCEL_ENV === 'preview');
-  const [jobIdentifier, setJobIdentifier] = useState<string | null>(null);
+  // const [jobIdentifier, setJobIdentifier] = useState<string | null>(null);
 
-  useEffect(() => {
-    if (jobIdentifier) {
-      const eventSource = new EventSource(`/api/stream/${jobIdentifier}`);
-      eventSource.onmessage = (event) => {
-        const newMessage = JSON.parse(event.data);
-        setMessages((prevMessages) => [...prevMessages, newMessage]);
-      };
-
-      eventSource.onerror = () => {
-        toast.error('Connection error while receiving updates.');
-        setIsLoading(false);
-        eventSource.close();
-      };
-
-      return () => {
-        eventSource.close();
-      };
-    }
-  }, [jobIdentifier]);
+  // useEffect(() => {
+  //   if (jobIdentifier) {
+  //     const eventSource = new EventSource(`/api/stream/${jobIdentifier}`);
+  //     eventSource.onmessage = (event) => {
+  //       const newMessage = JSON.parse(event.data);
+  //       setMessages((prevMessages) => [...prevMessages, newMessage]);
+  //     };
+  // 
+  //     eventSource.onerror = () => {
+  //       toast.error('Connection error while receiving updates.');
+  //       setIsLoading(false);
+  //       eventSource.close();
+  //     };
+  // 
+  //     return () => {
+  //       eventSource.close();
+  //     };
+  //   }
+  // }, [jobIdentifier]);
 
   const startLoading = () => setIsLoading(true);
   const stopLoading = () => setIsLoading(false);
@@ -75,7 +75,7 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
       const job_id = responseBody?.job_id;
 
       if (job_id) {
-        setJobIdentifier(job_id);
+        // setJobIdentifier(job_id);
         setCurrentInput('');
         return job_id;
       } else {
@@ -132,7 +132,7 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
     isLoading,
     currentInput,
     setInput: setCurrentInput,
-    jobIdentifier,
+    // jobIdentifier,
     startLoading,
     stopLoading,
     updateMessages: setMessages,

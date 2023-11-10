@@ -23,7 +23,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     isLoading,
     setInput,
     currentInput,
-    jobIdentifier,
+    // jobIdentifier,
     startLoading,
     stopLoading,
     reloadChatHistory,
