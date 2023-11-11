@@ -1,18 +1,37 @@
-/* src/styles/styles.css */
+/* Adjustments to the metadata-list styles for a more compact look */
 .metadata-list {
   list-style: none;
   padding: 0;
+  max-width: 250px; /* Set a max-width for the metadata section */
+  font-size: 0.875rem; /* Smaller font size for metadata */
 }
 
 .metadata-list li {
   margin-bottom: 0.5rem;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 .metadata-list a {
   color: #0070f3;
+  text-decoration: none; /* Optional: remove underline */
 }
 
 .metadata-list span {
   color: #333;
+  display: block; /* Makes every piece of metadata start on a new line */
+}
+
+/* Add a scrollbar if the content overflows */
+.metadata-list {
+  overflow-y: auto;
+  height: 100%; /* Set a fixed height to enable scrolling */
+}
+
+/* Styles to ensure the chat panel remains centered */
+.flex-auto {
+  flex: 1 1 auto; /* This will make the chat panel grow and shrink as needed */
+}
+
+.w-64 {
+  width: 16rem; /* This sets a fixed width to the metadata panel */
 }

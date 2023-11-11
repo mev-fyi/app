@@ -53,8 +53,8 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   };
 
   return (
-    <div className={cn('flex h-full', className)}>
-      <div className="flex-1 overflow-auto">
+    <div className={cn('flex h-full max-w-7xl mx-auto', className)}>
+      <div className="flex-grow overflow-auto">
         {/* Chat messages */}
         {messages.length > 0 ? (
           <>
@@ -75,7 +75,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           setInput={setInput}
         />
       </div>
-      <div className="w-1/3 bg-gray-100 p-4">
+      <div className="w-80 p-4 overflow-auto">
         {/* Metadata section */}
         <MetadataList entries={metadataEntries} />
       </div>
