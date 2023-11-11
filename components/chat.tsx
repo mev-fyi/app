@@ -14,7 +14,7 @@ import { cn } from '@/lib/utils';
 
 // Extend the Message type to include structured_metadata
 interface MetadataMessage extends Message {
-  structured_metadata?: any[]; // Use the correct metadata type here
+  structured_metadata?: any[]; // Ideally, define a more specific type instead of any[]
 }
 
 export interface ChatProps extends React.ComponentProps<'div'> {
@@ -23,9 +23,7 @@ export interface ChatProps extends React.ComponentProps<'div'> {
 }
 
 export function Chat({ id, initialMessages, className }: ChatProps) {
-  // Make sure that initialMessages is of type ExtendedMessage[] to match the new structure including structured_metadata
   const {
-    // Now messages is of type ExtendedMessage[] which includes structured_metadata
     messages,
     sendMessage,
     isLoading,
@@ -39,7 +37,12 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     updatePreviewTokenInput,
     submitPreviewToken,
     previewTokenInputValue,
-  } = useChatService(initialMessages);  // Update the useChatService hook to accept ExtendedMessage[] if it doesn't already
+  } = useChatService(initialMessages);
+
+  // Extract all metadata entries into a single array
+  const metadataEntries = messages.flatMap(msg => 
+    msg.role === 'assistant' && msg.structured_metadata ? msg.structured_metadata : []
+  );
 
   // Assuming we don't need chatRequestOptions in this context, and it's safe to ignore it
   const handleReloadChatHistory = async (_chatRequestOptions?: unknown): Promise<string | null> => {
@@ -49,39 +52,33 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     return null;  // Now correctly returning a string | null
   };
 
-  // Render function
   return (
-    <>
-      <div className={cn('pb-[200px] pt-4 md:pt-10', className)}>
-        {messages.length ? (
+    <div className={cn('flex h-full', className)}>
+      <div className="flex-1 overflow-auto">
+        {/* Chat messages */}
+        {messages.length > 0 ? (
           <>
-            {messages.map((msg, index) => (
-              <React.Fragment key={index}>
-                {/* Render the message */}
-                <ChatList messages={[msg]} />
-
-                {/* If the message has structured_metadata, render it immediately after */}
-                {msg.role === 'assistant' && msg.structured_metadata && (
-                  <MetadataList entries={msg.structured_metadata} />
-                )}
-              </React.Fragment>
-            ))}
+            <ChatList messages={messages} />
             <ChatScrollAnchor trackVisibility={isLoading} />
           </>
         ) : (
           <EmptyScreen setInput={setInput} />
         )}
+        <ChatPanel
+          id={id}
+          isLoading={isLoading}
+          stop={stopLoading}
+          append={sendMessage}
+          reload={handleReloadChatHistory}
+          messages={messages}
+          input={currentInput}
+          setInput={setInput}
+        />
       </div>
-      <ChatPanel
-        id={id}
-        isLoading={isLoading}
-        stop={stopLoading}
-        append={sendMessage}
-        reload={handleReloadChatHistory}
-        messages={messages}
-        input={currentInput}
-        setInput={setInput}
-      />
+      <div className="w-1/3 bg-gray-100 p-4">
+        {/* Metadata section */}
+        <MetadataList entries={metadataEntries} />
+      </div>
 
       <Dialog open={displayPreviewTokenDialog} onOpenChange={setPreviewTokenDialogVisibility}>
         <DialogContent>
@@ -94,15 +91,17 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           <Input
             value={previewTokenInputValue}
             placeholder="OpenAI API key"
-            onChange={e => updatePreviewTokenInput(e.target.value)} // Updated to `updatePreviewTokenInput`
+            onChange={e => updatePreviewTokenInput(e.target.value)}
           />
           <DialogFooter className="items-center">
-            <Button onClick={submitPreviewToken}> // Updated to `submitPreviewToken`
+            <Button onClick={submitPreviewToken}>
               Save Token
             </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </>
+    </div>
   );
 }
+
+export default Chat;
