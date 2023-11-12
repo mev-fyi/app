@@ -15,11 +15,10 @@ import {
   DialogHeader,
   DialogTitle
 } from '@/components/ui/dialog'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { toast } from 'react-hot-toast'
-import { ExtendedMessage } from 'lib/types'; // Adjust the import path as needed
 import MetadataList from '@/components/metadata-list';
 
 
@@ -43,27 +42,11 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   const [previewTokenDialog, setPreviewTokenDialog] = useState(IS_PREVIEW)
   const [previewTokenInput, setPreviewTokenInput] = useState(previewToken ?? '')
 
-// function useExtendedChat(options: UseChatOptions) {
-//     const chat = useChat(options);
-//     const [extendedMessages, setExtendedMessages] = useState<ExtendedMessage[]>([]);
-//   
-//     useEffect(() => {
-//       // Map over messages and ensure that each one has the structured_metadata property
-//       const updatedMessages = chat.messages.map((message) => ({
-//         ...message,
-//         // Add structured_metadata if it doesn't exist on the message
-//         structured_metadata: 'structured_metadata' in message ? (message.structured_metadata as any[]) : [],
-//       }));
-//       setExtendedMessages(updatedMessages);
-//     }, [chat.messages]);
-//   
-//     return { ...chat, messages: extendedMessages };
-//   }
-  
-// State to hold structured metadata entries
+  // State to hold structured metadata entries
   const [structuredMetadataEntries, setStructuredMetadataEntries] = useState([]);
+  const [messages, setMessages] = useState(initialMessages || []);
 
-  const { messages, append, reload, stop, isLoading, input, setInput } =
+  const { _, append, reload, stop, isLoading, input, setInput } =
   useChat({  // useExtendedChat
       initialMessages,
       id,
@@ -80,6 +63,8 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           try {
             const responseData = await response.json();
             setStructuredMetadataEntries(responseData.structured_metadata || []);
+            setMessages(responseData.messages);
+
           } catch (error) {
             console.error('Error reading response data:', error);
             // Handle error scenario
@@ -88,53 +73,8 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
       }
     })
   
-    console.log('Messages state:', messages);
-
-   // Extract all metadata entries into a single array
-   // const metadataEntries = messages.flatMap(msg => 
-   //   msg.role === 'assistant' && msg.structured_metadata ? msg.structured_metadata : []
-   // );
-
-  //  const metadataEntries = messages.flatMap(msg => 
-  //   msg.role === 'assistant' && msg.structured_metadata ? msg.structured_metadata : []
-  // );
-  // const metadataEntries = [
-  //   {
-  //     index: 1,
-  //     title: "Futuristic Skyline: Architecture of Tomorrow",
-  //     link: "https://example.com/architecture",
-  //     extraInfo: "Skyline Studios",
-  //     extraInfoType: "Production Company",
-  //     publishedDate: new Date('2023-08-01'),
-  //     publishedDateString: "2023-08-01"
-  //   },
-  //   {
-  //     index: 2,
-  //     title: "The Dawn of Cybernetic Enhancements",
-  //     link: "https://example.com/cybernetics",
-  //     extraInfo: "CyberTech Inc.",
-  //     extraInfoType: "Manufacturer",
-  //     publishedDate: new Date('2023-07-20'),
-  //     publishedDateString: "2023-07-20"
-  //   },
-  //   {
-  //     index: 3,
-  //     title: "Exploring the Neon Markets of Neo-Tokyo",
-  //     link: "https://example.com/neon-markets",
-  //     extraInfo: "Neon Adventures",
-  //     extraInfoType: "Travel Blog",
-  //     publishedDate: new Date('2023-09-12'),
-  //     publishedDateString: "2023-09-12"
-  //   }
-  // ];
-  
+  console.log('Messages state:', messages);
   console.log('Metadata entries:', structuredMetadataEntries);
-
-   // <div className="w-full md:w-80 p-4 overflow-auto">
-   //      {/* Metadata section */}
-   //      <MetadataList entries={metadataEntries} />
-   // </div>
-
 
   return (
     <>
