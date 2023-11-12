@@ -61,34 +61,33 @@ export async function POST(req: Request) {
 
   console.log(`[${new Date().toISOString()}] Chat message sent and recorded with job id ${job_id}`);
 
-  const stream = OpenAIStream(responseContent, {
-    async onCompletion() {
-      const title = json.messages[0].content.substring(0, 100)
-      const id = json.id ?? nanoid()
-      const createdAt = Date.now()
-      const path = `/chat/${id}`
-      const payload = {
-        id,
-        title,
-        userId,
-        createdAt,
-        path,
-        messages: [
-          ...messages,
-          {
-            content: responseContent,
-            role: 'assistant',
-            structured_metadata: structuredMetadata, // Add structured metadata if available
-          }
-        ]
-      }
-      await kv.hmset(`chat:${id}`, payload)
-      await kv.zadd(`user:chat:${userId}`, {
-        score: createdAt,
-        member: `chat:${id}`
-      })
-    }
-  })
+  // Construct the chat record
+  const title = messages[0]?.content.substring(0, 100) || "New Chat";
+  const id = json.id ?? nanoid();
+  const createdAt = Date.now();
+  const path = `/chat/${id}`;
+  const payload = {
+    id,
+    title,
+    userId,
+    createdAt,
+    path,
+    messages: [
+      ...messages,
+      {
+        content: responseContent,
+        role: 'assistant',
+        structured_metadata: structuredMetadata,
+      },
+    ],
+  };
 
-  return new StreamingTextResponse(stream)
+  // Store the chat record
+  await kv.set(`chat:${id}`, JSON.stringify(payload));
+  await kv.zadd(`user:chat:${userId}`, { score: createdAt, member: `chat:${id}` });
+
+  // Send back the complete chat record as a response
+  return new Response(JSON.stringify(payload), {
+    headers: { 'Content-Type': 'application/json' },
+  });
 }
