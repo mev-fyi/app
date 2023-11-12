@@ -1,0 +1,9 @@
+.textareaWithButton {
+    padding-left: 3rem; /* Adjust the padding to match the button size */
+  }
+  
+  .newChatButton {
+    position: absolute;
+    left: 1rem; /* Adjust this value so the button does not overlap the text */
+    top: 1rem;
+  }

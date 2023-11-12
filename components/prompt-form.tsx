@@ -6,6 +6,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { useEnterSubmit } from '@/lib/hooks/use-enter-submit'
 import { useRouter } from 'next/navigation'
 import React, { useRef, useEffect } from 'react'
+import styles from './MetadataList.module.css'; // Import the CSS module
 
 export interface PromptProps extends Pick<UseChatHelpers, 'input' | 'setInput'> {
   onSubmit: (value: string) => Promise<void>
@@ -32,13 +33,13 @@ export function PromptForm({ onSubmit, input, setInput, isLoading }: PromptProps
       }}
       ref={formRef}
     >
-      <div className="relative flex w-full flex-col overflow-hidden bg-background px-4 py-2 sm:rounded-md sm:border">
+        <div className="relative flex w-full flex-col overflow-hidden bg-background px-4 py-2 sm:rounded-md sm:border">
         <Tooltip>
           <TooltipTrigger asChild>
             <button
               type="button"
               onClick={() => router.push('/')}
-              className="absolute left-0 top-2 h-8 w-8 rounded-full bg-background p-0"
+              className={styles.newChatButton} // Use the style from the module
             >
               <IconPlus />
               <span className="sr-only">New Chat</span>
@@ -46,17 +47,17 @@ export function PromptForm({ onSubmit, input, setInput, isLoading }: PromptProps
           </TooltipTrigger>
           <TooltipContent>New Chat</TooltipContent>
         </Tooltip>
-        <Textarea
-          ref={inputRef}
-          tabIndex={0}
-          onKeyDown={onKeyDown}
-          rows={1}
-          value={input}
-          onChange={e => setInput(e.target.value)}
-          placeholder="Send a message."
-          spellCheck={false}
-          className="w-full resize-none bg-transparent text-sm focus:outline-none"
-        />
+          <Textarea
+            ref={inputRef}
+            tabIndex={0}
+            onKeyDown={onKeyDown}
+            rows={1}
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            placeholder="Send a message."
+            spellCheck={false}
+            className={`${styles.textareaWithButton} w-full resize-none bg-transparent text-sm focus:outline-none`} // Use the style from the module
+          />
         <div className="absolute right-0 top-2">
           <Tooltip>
             <TooltipTrigger asChild>

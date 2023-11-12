@@ -1,28 +1,49 @@
-/* MetadataList.module.css or styles.css */
-
-.metadata-list {
+.metadataList {
     list-style: none;
     padding: 0;
     font-size: 0.875rem; /* Smaller font size for metadata */
   }
   
-  .metadata-list li {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle delimiter line */
+  .metadataListItem {
+    border-bottom: 1px solid #ffffff; /* Thin white line for separator */
     padding-bottom: 0.5rem;
     margin-bottom: 0.5rem;
     color: #ccc; /* Adjust color as needed */
   }
   
-  .metadata-list li:last-child {
+  .metadataListItem:last-child {
     border-bottom: none; /* No border for the last item */
   }
   
-  .metadata-list a {
+  .metadataListLink {
     color: #0070f3;
     text-decoration: none; /* Remove underline */
+    display: block; /* Title on its own line */
   }
   
-  .metadata-list span {
+  .metadataListSpan {
     color: #ccc; /* Lighter text color for less emphasis */
     display: block; /* Each metadata attribute on a new line */
   }
+  
+  .metadataListDetails {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .metadataListExtraInfo {
+    margin-right: 0.5rem; /* Space before the dot */
+  }
+  
+  .metadataListDot {
+    font-size: 1.5rem; /* Larger size for the dot */
+    line-height: 0; /* Adjust line height to align the dot vertically */
+  }
+
+  .metadataInfo {
+    display: block; /* Makes sure the author and date are on a new line */
+    white-space: nowrap; /* Prevents wrapping */
+  }
+
+  

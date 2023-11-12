@@ -72,6 +72,11 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
       if (response.ok) {
         const { id, job_id, response: responseContent, structured_metadata } = responseBody;
 
+        // Replace the temporary ID with the actual ID
+        setMessages(prevMessages => prevMessages.map(msg =>
+          msg.id === 'temp-id' ? { ...msg, id: job_id } : msg
+        ));
+
         // Update the messages state with the new message and the structured metadata
         setMessages(prevMessages => [
           ...prevMessages,

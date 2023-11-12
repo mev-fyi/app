@@ -14,8 +14,11 @@ const MetadataList: React.FC<MetadataListProps> = ({ entries }) => {
           <a href={entry.link} target="_blank" rel="noopener noreferrer" className={styles.metadataListLink}>
             {entry.title}
           </a>
-          <span className={styles.metadataListSpan}> ({entry.extraInfoType}: {entry.extraInfo})</span>
-          {entry.publishedDateString && <span className={styles.metadataListSpan}> - {entry.publishedDateString}</span>}
+          <div className={styles.metadataListDetails}>
+            <span className={styles.metadataListExtraInfo}>{entry.extraInfo}</span>
+            <span className={styles.metadataListDot}>&middot;</span>
+            <span>{entry.publishedDateString}</span>
+          </div>
         </li>
       ))}
     </ol>
