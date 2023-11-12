@@ -71,15 +71,18 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         id,
         previewToken
       },
-      onResponse: async (response) => {
-        if (response.status === 401) {
-          toast.error(response.statusText)
-        } else if (response.ok) {
+      onResponse: async (originalResponse) => {
+        if (originalResponse.status === 401) {
+          toast.error(originalResponse.statusText)
+        } else if (originalResponse.ok) {
+          // Clone the response before reading it to avoid "already read" errors
+          const response = originalResponse.clone();
           try {
-            const responseData = await response.json(); // This reads the stream and parses the JSON.
+            const responseData = await response.json();
             setStructuredMetadataEntries(responseData.structured_metadata || []);
           } catch (error) {
             console.error('Error reading response data:', error);
+            // Handle error scenario
           }
         }
       }
