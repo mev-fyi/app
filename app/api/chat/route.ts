@@ -4,14 +4,16 @@ import { Configuration, OpenAIApi } from 'openai-edge'
 
 import { auth } from '@/auth'
 import { nanoid } from '@/lib/utils'
+import { parseMetadata } from '@/lib/utils';
+import { ParsedMetadataEntry } from '@/lib/types';
+
+
 
 export const runtime = 'edge'
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY
 })
-
-const openai = new OpenAIApi(configuration)
 
 export async function POST(req: Request) {
   const json = await req.json()
@@ -28,15 +30,39 @@ export async function POST(req: Request) {
     configuration.apiKey = previewToken
   }
 
-  const res = await openai.createChatCompletion({
-    model: 'gpt-3.5-turbo',
-    messages,
-    temperature: 0.7,
-    stream: true
-  })
+  // get message which is the last item from messages
+  const mostRecentMessageContent = messages.length > 0 ? messages[messages.length - 1].content : "No messages yet.";
 
-  const stream = OpenAIStream(res, {
-    async onCompletion(completion) {
+  // Compose the backend chat endpoint URL
+  const backendChatUrl = `${process.env.REACT_APP_BACKEND_URL}/chat`;
+  const chatResponse = await fetch(backendChatUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ mostRecentMessageContent })
+  });
+
+  if (!chatResponse.ok) {
+    throw new Error(`Backend failed to process chat message with status ${chatResponse.status}`);
+  }
+
+  const responseBody = await chatResponse.json();
+  console.log(`[${new Date().toISOString()}] Received response from backend:`, responseBody);
+
+  const job_id = responseBody.job_id;
+  const responseContent = responseBody.response?.response || responseBody.response;
+  // Process formattedMetadata on the server-side
+  let structuredMetadata: ParsedMetadataEntry[] = [];
+
+  if (responseBody.formatted_metadata) {
+    structuredMetadata = parseMetadata(responseBody.formatted_metadata);
+    console.log('parsedEntries:', JSON.stringify(structuredMetadata, null, 2));
+
+  }
+
+  console.log(`[${new Date().toISOString()}] Chat message sent and recorded with job id ${job_id}`);
+
+  const stream = OpenAIStream(responseContent, {
+    async onCompletion() {
       const title = json.messages[0].content.substring(0, 100)
       const id = json.id ?? nanoid()
       const createdAt = Date.now()
@@ -50,8 +76,9 @@ export async function POST(req: Request) {
         messages: [
           ...messages,
           {
-            content: completion,
-            role: 'assistant'
+            content: responseContent,
+            role: 'assistant',
+            structured_metadata: structuredMetadata, // Add structured metadata if available
           }
         ]
       }

@@ -24,20 +24,20 @@ import MetadataList from '@/components/metadata-list';
 
 
 // Extend the Message type to include structured_metadata
-// interface MetadataMessage extends Message {
-//   structured_metadata?: any[]; // Ideally, define a more specific type instead of any[]
-// }
+interface MetadataMessage extends Message {
+  structured_metadata?: any[]; // Ideally, define a more specific type instead of any[]
+}
 
 
 const IS_PREVIEW = process.env.VERCEL_ENV === 'preview'
-export interface ChatProps extends React.ComponentProps<'div'> {
-  initialMessages?: Message[]
-  id?: string
-}
 // export interface ChatProps extends React.ComponentProps<'div'> {
-//   initialMessages?: MetadataMessage[]
+//   initialMessages?: Message[]
 //   id?: string
 // }
+export interface ChatProps extends React.ComponentProps<'div'> {
+  initialMessages?: MetadataMessage[]
+  id?: string
+}
 
 export function Chat({ id, initialMessages, className }: ChatProps) {
   const [previewToken, setPreviewToken] = useLocalStorage<string | null>(
@@ -47,7 +47,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   const [previewTokenDialog, setPreviewTokenDialog] = useState(IS_PREVIEW)
   const [previewTokenInput, setPreviewTokenInput] = useState(previewToken ?? '')
   const { messages, append, reload, stop, isLoading, input, setInput } =
-  useChat({  // useExtendedChat({
+  useExtendedChat({  // useChat({
       initialMessages,
       id,
       body: {
@@ -62,14 +62,14 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     })
   
     // Extract all metadata entries into a single array
-  // const metadataEntries = messages.flatMap(msg => 
-  //   msg.role === 'assistant' && msg.structured_metadata ? msg.structured_metadata : []
-  // );
+   const metadataEntries = messages.flatMap(msg => 
+     msg.role === 'assistant' && msg.structured_metadata ? msg.structured_metadata : []
+   );
 
-  // <div className="w-full md:w-80 p-4 overflow-auto">
-  //   {/* Metadata section */}
-  //   <MetadataList entries={metadataEntries} />
-  // </div>
+   <div className="w-full md:w-80 p-4 overflow-auto">
+     {/* Metadata section */}
+     <MetadataList entries={metadataEntries} />
+   </div>
 
   return (
     <>
