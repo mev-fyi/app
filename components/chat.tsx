@@ -43,25 +43,25 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   const [previewTokenDialog, setPreviewTokenDialog] = useState(IS_PREVIEW)
   const [previewTokenInput, setPreviewTokenInput] = useState(previewToken ?? '')
 
-function useExtendedChat(options: UseChatOptions) {
-    const chat = useChat(options);
-    const [extendedMessages, setExtendedMessages] = useState<ExtendedMessage[]>([]);
-  
-    useEffect(() => {
-      // Map over messages and ensure that each one has the structured_metadata property
-      const updatedMessages = chat.messages.map((message) => ({
-        ...message,
-        // Add structured_metadata if it doesn't exist on the message
-        structured_metadata: 'structured_metadata' in message ? (message.structured_metadata as any[]) : [],
-      }));
-      setExtendedMessages(updatedMessages);
-    }, [chat.messages]);
-  
-    return { ...chat, messages: extendedMessages };
-  }
+// function useExtendedChat(options: UseChatOptions) {
+//     const chat = useChat(options);
+//     const [extendedMessages, setExtendedMessages] = useState<ExtendedMessage[]>([]);
+//   
+//     useEffect(() => {
+//       // Map over messages and ensure that each one has the structured_metadata property
+//       const updatedMessages = chat.messages.map((message) => ({
+//         ...message,
+//         // Add structured_metadata if it doesn't exist on the message
+//         structured_metadata: 'structured_metadata' in message ? (message.structured_metadata as any[]) : [],
+//       }));
+//       setExtendedMessages(updatedMessages);
+//     }, [chat.messages]);
+//   
+//     return { ...chat, messages: extendedMessages };
+//   }
 
   const { messages, append, reload, stop, isLoading, input, setInput } =
-  useExtendedChat({
+  useChat({  // useExtendedChat
       initialMessages,
       id,
       body: {
@@ -78,11 +78,16 @@ function useExtendedChat(options: UseChatOptions) {
     console.log('Messages state:', messages);
 
     // Extract all metadata entries into a single array
-   const metadataEntries = messages.flatMap(msg => 
-     msg.role === 'assistant' && msg.structured_metadata ? msg.structured_metadata : []
-   );
+   // const metadataEntries = messages.flatMap(msg => 
+   //   msg.role === 'assistant' && msg.structured_metadata ? msg.structured_metadata : []
+   // );
 
-   console.log('Metadata entries:', metadataEntries);
+   // console.log('Metadata entries:', metadataEntries);
+
+   // <div className="w-full md:w-80 p-4 overflow-auto">
+   //      {/* Metadata section */}
+   //      <MetadataList entries={metadataEntries} />
+   // </div>
 
   return (
     <>
@@ -106,10 +111,7 @@ function useExtendedChat(options: UseChatOptions) {
         input={input}
         setInput={setInput}
       />
-      <div className="w-full md:w-80 p-4 overflow-auto">
-        {/* Metadata section */}
-        <MetadataList entries={metadataEntries} />
-      </div>
+      
       <Dialog open={previewTokenDialog} onOpenChange={setPreviewTokenDialog}>
         <DialogContent>
           <DialogHeader>
