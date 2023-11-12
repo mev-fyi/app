@@ -16,3 +16,18 @@ export type ServerActionResult<Result> = Promise<
       error: string
     }
 >
+
+export interface ParsedMetadataEntry {
+  index: number;
+  title: string;
+  link: string;
+  extraInfo: string;
+  extraInfoType: string;
+  publishedDate: Date;
+  publishedDateString: string;
+}
+
+// Extend the Message type to include structured_metadata
+export interface ExtendedMessage extends Message {
+  structured_metadata?: any[]; // Use the correct metadata type here
+}
