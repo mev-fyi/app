@@ -74,10 +74,13 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
       onResponse: async (response) => {
         if (response.status === 401) {
           toast.error(response.statusText)
-        } else if (response.ok && response.body){
-          // const messageData = JSON.parse(response.body);
-          const messageData = await response.json(); // This reads the stream and parses the JSON.
-          setStructuredMetadataEntries(messageData.structured_metadata || []);
+        } else if (response.ok) {
+          try {
+            const responseData = await response.json(); // This reads the stream and parses the JSON.
+            setStructuredMetadataEntries(responseData.structured_metadata || []);
+          } catch (error) {
+            console.error('Error reading response data:', error);
+          }
         }
       }
     })
