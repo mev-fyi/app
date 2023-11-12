@@ -1,67 +1,76 @@
 import { kv } from '@vercel/kv'
-import { OpenAIStream, StreamingTextResponse } from 'ai'
-import { Configuration, OpenAIApi } from 'openai-edge'
-
+import { Configuration } from 'openai-edge'
 import { auth } from '@/auth'
 import { nanoid } from '@/lib/utils'
 import { parseMetadata } from '@/lib/utils';
 import { ParsedMetadataEntry } from '@/lib/types';
 
-
-
 export const runtime = 'edge'
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY
-})
+});
 
 export async function POST(req: Request) {
-  const json = await req.json()
-  const { messages, previewToken } = json
-  const userId = (await auth())?.user.id
+  console.log('Received POST request');
 
-  if (!userId) {
-    return new Response('Unauthorized', {
-      status: 401
-    })
+  let json;
+  try {
+    json = await req.json();
+    console.log('JSON body parsed:', json);
+  } catch (error) {
+    console.error('Error parsing JSON body:', error);
+    return new Response('Bad request', { status: 400 });
   }
+
+  const { messages, previewToken } = json;
+  const session = await auth();
+
+  if (!session?.user) {
+    console.error('Unauthorized request: No session user found.');
+    return new Response('Unauthorized', { status: 401 });
+  }
+
+  console.log('User authenticated, user ID:', session.user.id);
 
   if (previewToken) {
-    configuration.apiKey = previewToken
+    console.log('Using preview token for API key');
+    configuration.apiKey = previewToken;
   }
 
-  // get message which is the last item from messages
   const mostRecentMessageContent = messages.length > 0 ? messages[messages.length - 1].content : "No messages yet.";
+  console.log('Most recent message content:', mostRecentMessageContent);
 
-  // Compose the backend chat endpoint URL
   const backendChatUrl = `${process.env.REACT_APP_BACKEND_URL}/chat`;
-  const chatResponse = await fetch(backendChatUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ mostRecentMessageContent })
-  });
+  console.log('Backend chat URL:', backendChatUrl);
+
+  let chatResponse;
+  try {
+    chatResponse = await fetch(backendChatUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ mostRecentMessageContent })
+    });
+    console.log('Chat response received', chatResponse);
+  } catch (error) {
+    console.error('Fetch to backend chat failed:', error);
+    return new Response('Internal Server Error', { status: 500 });
+  }
 
   if (!chatResponse.ok) {
-    throw new Error(`Backend failed to process chat message with status ${chatResponse.status}`);
+    console.error(`Backend failed to process chat message with status ${chatResponse.status}`);
+    return new Response(`Error from backend service: ${chatResponse.statusText}`, { status: chatResponse.status });
   }
 
   const responseBody = await chatResponse.json();
-  console.log(`[${new Date().toISOString()}] Received response from backend:`, responseBody);
+  console.log(`Received response from backend:`, responseBody);
 
-  const job_id = responseBody.job_id;
-  const responseContent = responseBody.response?.response || responseBody.response;
-  // Process formattedMetadata on the server-side
   let structuredMetadata: ParsedMetadataEntry[] = [];
-
   if (responseBody.formatted_metadata) {
     structuredMetadata = parseMetadata(responseBody.formatted_metadata);
-    console.log('parsedEntries:', JSON.stringify(structuredMetadata, null, 2));
-
+    console.log('Parsed metadata:', structuredMetadata);
   }
 
-  console.log(`[${new Date().toISOString()}] Chat message sent and recorded with job id ${job_id}`);
-
-  // Construct the chat record
   const title = messages[0]?.content.substring(0, 100) || "New Chat";
   const id = json.id ?? nanoid();
   const createdAt = Date.now();
@@ -69,24 +78,28 @@ export async function POST(req: Request) {
   const payload = {
     id,
     title,
-    userId,
+    userId: session.user.id,
     createdAt,
     path,
     messages: [
       ...messages,
       {
-        content: responseContent,
+        content: responseBody.response?.response || responseBody.response,
         role: 'assistant',
         structured_metadata: structuredMetadata,
       },
     ],
   };
 
-  // Store the chat record
-  await kv.set(`chat:${id}`, JSON.stringify(payload));
-  await kv.zadd(`user:chat:${userId}`, { score: createdAt, member: `chat:${id}` });
+  try {
+    await kv.set(`chat:${id}`, JSON.stringify(payload));
+    await kv.zadd(`user:chat:${session.user.id}`, { score: createdAt, member: `chat:${id}` });
+    console.log('Chat record stored');
+  } catch (error) {
+    console.error('Failed to store chat record:', error);
+    return new Response('Internal Server Error', { status: 500 });
+  }
 
-  // Send back the complete chat record as a response
   return new Response(JSON.stringify(payload), {
     headers: { 'Content-Type': 'application/json' },
   });
