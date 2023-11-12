@@ -59,6 +59,9 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 //   
 //     return { ...chat, messages: extendedMessages };
 //   }
+  
+// State to hold structured metadata entries
+  const [structuredMetadataEntries, setStructuredMetadataEntries] = useState([]);
 
   const { messages, append, reload, stop, isLoading, input, setInput } =
   useChat({  // useExtendedChat
@@ -68,9 +71,13 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         id,
         previewToken
       },
-      onResponse(response) {
+      onResponse: async (response) => {
         if (response.status === 401) {
           toast.error(response.statusText)
+        } else if (response.ok && response.body){
+          // const messageData = JSON.parse(response.body);
+          const messageData = await response.json(); // This reads the stream and parses the JSON.
+          setStructuredMetadataEntries(messageData.structured_metadata || []);
         }
       }
     })
@@ -85,42 +92,43 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   //  const metadataEntries = messages.flatMap(msg => 
   //   msg.role === 'assistant' && msg.structured_metadata ? msg.structured_metadata : []
   // );
-  const metadataEntries = [
-    {
-      index: 1,
-      title: "Futuristic Skyline: Architecture of Tomorrow",
-      link: "https://example.com/architecture",
-      extraInfo: "Skyline Studios",
-      extraInfoType: "Production Company",
-      publishedDate: new Date('2023-08-01'),
-      publishedDateString: "2023-08-01"
-    },
-    {
-      index: 2,
-      title: "The Dawn of Cybernetic Enhancements",
-      link: "https://example.com/cybernetics",
-      extraInfo: "CyberTech Inc.",
-      extraInfoType: "Manufacturer",
-      publishedDate: new Date('2023-07-20'),
-      publishedDateString: "2023-07-20"
-    },
-    {
-      index: 3,
-      title: "Exploring the Neon Markets of Neo-Tokyo",
-      link: "https://example.com/neon-markets",
-      extraInfo: "Neon Adventures",
-      extraInfoType: "Travel Blog",
-      publishedDate: new Date('2023-09-12'),
-      publishedDateString: "2023-09-12"
-    }
-  ];
+  // const metadataEntries = [
+  //   {
+  //     index: 1,
+  //     title: "Futuristic Skyline: Architecture of Tomorrow",
+  //     link: "https://example.com/architecture",
+  //     extraInfo: "Skyline Studios",
+  //     extraInfoType: "Production Company",
+  //     publishedDate: new Date('2023-08-01'),
+  //     publishedDateString: "2023-08-01"
+  //   },
+  //   {
+  //     index: 2,
+  //     title: "The Dawn of Cybernetic Enhancements",
+  //     link: "https://example.com/cybernetics",
+  //     extraInfo: "CyberTech Inc.",
+  //     extraInfoType: "Manufacturer",
+  //     publishedDate: new Date('2023-07-20'),
+  //     publishedDateString: "2023-07-20"
+  //   },
+  //   {
+  //     index: 3,
+  //     title: "Exploring the Neon Markets of Neo-Tokyo",
+  //     link: "https://example.com/neon-markets",
+  //     extraInfo: "Neon Adventures",
+  //     extraInfoType: "Travel Blog",
+  //     publishedDate: new Date('2023-09-12'),
+  //     publishedDateString: "2023-09-12"
+  //   }
+  // ];
   
-  console.log('Metadata entries:', metadataEntries);
+  console.log('Metadata entries:', structuredMetadataEntries);
 
    // <div className="w-full md:w-80 p-4 overflow-auto">
    //      {/* Metadata section */}
    //      <MetadataList entries={metadataEntries} />
    // </div>
+
 
   return (
     <>
@@ -146,7 +154,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
       />
       <div className="w-full md:w-80 p-4 overflow-auto">
         {/* Metadata section */}
-        <MetadataList entries={metadataEntries} />
+        <MetadataList entries={structuredMetadataEntries} />
       </div>
       <Dialog open={previewTokenDialog} onOpenChange={setPreviewTokenDialog}>
         <DialogContent>
