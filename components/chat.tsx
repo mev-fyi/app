@@ -31,6 +31,10 @@ interface MetadataMessage extends Message {
 
 
 const IS_PREVIEW = process.env.VERCEL_ENV === 'preview'
+// export interface ChatProps extends React.ComponentProps<'div'> {
+//   initialMessages?: MetadataMessage[]
+//   id?: string
+// }
 export interface ChatProps extends React.ComponentProps<'div'> {
   initialMessages?: MetadataMessage[]
   id?: string
