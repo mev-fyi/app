@@ -21,11 +21,12 @@
   display: block; /* Makes every piece of metadata start on a new line */
 }
 
-/* Add a scrollbar if the content overflows */
-.metadata-list {
-  overflow-y: auto;
-  height: 100%; /* Set a fixed height to enable scrolling */
-}
+/* Add a scrollbar if the content overflows 
+// .metadata-list {
+//   overflow-y: auto;
+//   height: 100%; /* Set a fixed height to enable scrolling
+// }
+*/
 
 /* Styles to ensure the chat panel remains centered */
 .flex-auto {
