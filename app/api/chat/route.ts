@@ -64,7 +64,7 @@ export async function POST(req: Request) {
     await kv.zadd(`user:chat:${userId}`, { score: createdAt, member: `chat:${id}` });
 
    // Return to the client server-processed metadata along with job_id and content
-   return new Response(JSON.stringify({ job_id, response: responseContent, structured_metadata: structuredMetadata, role:'assistant'}), {
+   return new Response(JSON.stringify({id, job_id, response: responseContent, structured_metadata: structuredMetadata, role:'assistant'}), {
     headers: { 'Content-Type': 'application/json' },
     status: 200
   });

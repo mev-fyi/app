@@ -16,7 +16,6 @@ export interface ChatMessageProps {
 }
 
 export function ChatMessage({ message, ...props }: ChatMessageProps) {
-  console.log('ChatMessage message:', message);  // Log individual message to inspect
   const messageTextStyle = "text-sm"; // This sets the text size to small
   return (
     <div

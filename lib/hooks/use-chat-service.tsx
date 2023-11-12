@@ -70,21 +70,22 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
   
       const responseBody = await response.json();
       if (response.ok) {
-        const { job_id, response: responseContent, structured_metadata } = responseBody;
+        const { id, job_id, response: responseContent, structured_metadata } = responseBody;
 
         // Update the messages state with the new message and the structured metadata
         setMessages(prevMessages => [
           ...prevMessages,
           {
             content: JSON.stringify(responseContent),  // Convert content to a string if it's not already one
-            id: job_id,
+            id: id,
+            job_id: job_id,
             createdAt: new Date(),
             role: 'assistant',
             structured_metadata             // Store the structured metadata
           },
         ]);
-        // No need to render a component here; just store the metadata in state
-        return job_id;
+
+        return id;
       } else {
         toast.error(`Failed to send message: ${responseBody.error || 'Unknown error'}`);
         return null;
@@ -112,10 +113,7 @@ export function useChatService(initialMessages: Message[] = []): UseChatService 
       }
       
       const history = await response.json();
-      console.log('Chat history after reloading:', history);
       setMessages(history);
-      // log the history to the console to show the message
-      console.log('Chat history after reloading:', history);
     } catch (error) {
       toast.error('Failed to reload chat history.');
     } finally {
