@@ -1,6 +1,6 @@
 'use client'
 
-import { useChat, UseChatOptions, type Message } from 'ai/react';
+import { type Message } from 'ai/react';
 import { cn } from '@/lib/utils'
 import { ChatList } from '@/components/chat-list'
 import { ChatPanel } from '@/components/chat-panel'
@@ -19,10 +19,18 @@ import { useState } from 'react'
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { toast } from 'react-hot-toast'
+import { useExtendedChat } from 'lib/hooks/use-extended-chat';
+import MetadataList from '@/components/metadata-list';
+
+
+// Extend the Message type to include structured_metadata
+interface MetadataMessage extends Message {
+  structured_metadata?: any[]; // Ideally, define a more specific type instead of any[]
+}
 
 const IS_PREVIEW = process.env.VERCEL_ENV === 'preview'
 export interface ChatProps extends React.ComponentProps<'div'> {
-  initialMessages?: Message[]
+  initialMessages?: MetadataMessage[]
   id?: string
 }
 
@@ -34,7 +42,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   const [previewTokenDialog, setPreviewTokenDialog] = useState(IS_PREVIEW)
   const [previewTokenInput, setPreviewTokenInput] = useState(previewToken ?? '')
   const { messages, append, reload, stop, isLoading, input, setInput } =
-  useChat({
+  useExtendedChat({
       initialMessages,
       id,
       body: {
@@ -48,6 +56,13 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
       }
     })
   
+    // Extract all metadata entries into a single array
+   const metadataEntries = messages.flatMap(msg => 
+     msg.role === 'assistant' && msg.structured_metadata ? msg.structured_metadata : []
+   );
+
+
+
   return (
     <>
       <div className={cn('pb-[200px] pt-4 md:pt-10', className)}>
@@ -70,6 +85,10 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         input={input}
         setInput={setInput}
       />
+      <div className="w-full md:w-80 p-4 overflow-auto">
+        {/* Metadata section */}
+        <MetadataList entries={metadataEntries} />
+      </div>
       <Dialog open={previewTokenDialog} onOpenChange={setPreviewTokenDialog}>
         <DialogContent>
           <DialogHeader>
