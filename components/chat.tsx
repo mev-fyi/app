@@ -61,10 +61,6 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
      msg.role === 'assistant' && msg.structured_metadata ? msg.structured_metadata : []
    );
 
-  //  <div className="w-full md:w-80 p-4 overflow-auto">
-  //  {/* Metadata section */}
-  //  <MetadataList entries={metadataEntries} />
-  // </div>
 
 
   return (
@@ -89,10 +85,10 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         input={input}
         setInput={setInput}
       />
-      
-      
-      
-      
+      <div className="w-full md:w-80 p-4 overflow-auto">
+        {/* Metadata section */}
+        <MetadataList entries={metadataEntries} />
+      </div>
       <Dialog open={previewTokenDialog} onOpenChange={setPreviewTokenDialog}>
         <DialogContent>
           <DialogHeader>

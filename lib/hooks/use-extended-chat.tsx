@@ -7,8 +7,13 @@ export function useExtendedChat(options: UseChatOptions) {
     const [extendedMessages, setExtendedMessages] = useState<ExtendedMessage[]>([]);
   
     useEffect(() => {
-      // Convert the messages from useChat to ExtendedMessage type
-      setExtendedMessages(chat.messages as ExtendedMessage[]);
+      // Map over messages and ensure that each one has the structured_metadata property
+      const updatedMessages = chat.messages.map((message) => ({
+        ...message,
+        // Add structured_metadata if it doesn't exist on the message
+        structured_metadata: 'structured_metadata' in message ? (message.structured_metadata as any[]) : [],
+      }));
+      setExtendedMessages(updatedMessages);
     }, [chat.messages]);
   
     return { ...chat, messages: extendedMessages };
