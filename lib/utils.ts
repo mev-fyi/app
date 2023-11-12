@@ -63,6 +63,9 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
       publishedDateString: details[videoDetails ? 4 : 5] // Store the original string
     } : null;
   }).filter(Boolean) as ParsedMetadataEntry[];
-  console.log(`parsedEntries: ${parsedEntries}`)
+  
+  console.log('parsedEntries:', parsedEntries);
+  console.log('parsedEntries:', JSON.stringify(parsedEntries, null, 2));
+
   return parsedEntries.sort((a, b) => b.publishedDate.getTime() - a.publishedDate.getTime());
 }

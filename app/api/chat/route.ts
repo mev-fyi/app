@@ -53,7 +53,10 @@ export async function POST(req: Request) {
 
     if (responseBody.formatted_metadata) {
       structuredMetadata = parseMetadata(responseBody.formatted_metadata);
-      console.log(`Parsed metadata: ${console}`)
+      
+      console.log('Parsed metadata:', structuredMetadata);
+      console.log('parsedEntries:', JSON.stringify(structuredMetadata, null, 2));
+
     }
 
     console.log(`[${new Date().toISOString()}] Chat message sent and recorded with job id ${job_id}`);
