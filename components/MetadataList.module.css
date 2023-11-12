@@ -8,7 +8,7 @@
     border-bottom: 1px solid #ffffff; /* Thin white line for separator */
     padding-bottom: 0.5rem;
     margin-bottom: 0.5rem;
-    color: #ccc; /* Adjust color as needed */
+    color: #bbb; /* Slightly faded white color */
   }
   
   .metadataListItem:last-child {
@@ -16,14 +16,15 @@
   }
   
   .metadataListLink {
-    color: #0070f3;
+    color: #ffffff; /* Bold white color for links */
     text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Make title bold */
     display: block; /* Title on its own line */
   }
   
   .metadataListSpan {
-    color: #ccc; /* Lighter text color for less emphasis */
-    display: block; /* Each metadata attribute on a new line */
+    display: block; /* Info on its own line */
+    margin-top: 0.5rem; /* Space between title and info */
   }
   
   .metadataListDetails {

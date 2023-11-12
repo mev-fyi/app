@@ -56,7 +56,7 @@ export function PromptForm({ onSubmit, input, setInput, isLoading }: PromptProps
             onChange={e => setInput(e.target.value)}
             placeholder="Send a message."
             spellCheck={false}
-            className={`${styles.textareaWithButton} w-full resize-none bg-transparent text-sm focus:outline-none`} // Use the style from the module
+            className={`${styles.textareaWithButton} w-full resize-none bg-transparent text-sm focus:outline-none`}
           />
         <div className="absolute right-0 top-2">
           <Tooltip>
