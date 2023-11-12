@@ -86,10 +86,11 @@ export async function POST(req: Request) {
       ...messages,
       {
         content: responseBody.response?.response || responseBody.response,
-        role: 'assistant',
-        structured_metadata: structuredMetadata,
+        role: 'assistant'//,
+        //structured_metadata: structuredMetadata,
       },
     ],
+    structured_metadata: structuredMetadata,
   };
 
   try {

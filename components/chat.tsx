@@ -77,12 +77,45 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   
     console.log('Messages state:', messages);
 
-    // Extract all metadata entries into a single array
+   // Extract all metadata entries into a single array
    // const metadataEntries = messages.flatMap(msg => 
    //   msg.role === 'assistant' && msg.structured_metadata ? msg.structured_metadata : []
    // );
 
-   // console.log('Metadata entries:', metadataEntries);
+  //  const metadataEntries = messages.flatMap(msg => 
+  //   msg.role === 'assistant' && msg.structured_metadata ? msg.structured_metadata : []
+  // );
+  const metadataEntries = [
+    {
+      index: 1,
+      title: "Futuristic Skyline: Architecture of Tomorrow",
+      link: "https://example.com/architecture",
+      extraInfo: "Skyline Studios",
+      extraInfoType: "Production Company",
+      publishedDate: new Date('2023-08-01'),
+      publishedDateString: "2023-08-01"
+    },
+    {
+      index: 2,
+      title: "The Dawn of Cybernetic Enhancements",
+      link: "https://example.com/cybernetics",
+      extraInfo: "CyberTech Inc.",
+      extraInfoType: "Manufacturer",
+      publishedDate: new Date('2023-07-20'),
+      publishedDateString: "2023-07-20"
+    },
+    {
+      index: 3,
+      title: "Exploring the Neon Markets of Neo-Tokyo",
+      link: "https://example.com/neon-markets",
+      extraInfo: "Neon Adventures",
+      extraInfoType: "Travel Blog",
+      publishedDate: new Date('2023-09-12'),
+      publishedDateString: "2023-09-12"
+    }
+  ];
+  
+  console.log('Metadata entries:', metadataEntries);
 
    // <div className="w-full md:w-80 p-4 overflow-auto">
    //      {/* Metadata section */}
@@ -111,7 +144,10 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         input={input}
         setInput={setInput}
       />
-      
+      <div className="w-full md:w-80 p-4 overflow-auto">
+        {/* Metadata section */}
+        <MetadataList entries={metadataEntries} />
+      </div>
       <Dialog open={previewTokenDialog} onOpenChange={setPreviewTokenDialog}>
         <DialogContent>
           <DialogHeader>
