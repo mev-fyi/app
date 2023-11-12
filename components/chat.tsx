@@ -44,9 +44,9 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 
   // State to hold structured metadata entries
   const [structuredMetadataEntries, setStructuredMetadataEntries] = useState([]);
-  const [messages, setMessages] = useState(initialMessages || []);
+  const [newMessages, setMessages] = useState(initialMessages || []);
 
-  const { _, append, reload, stop, isLoading, input, setInput } =
+  const { messages, append, reload, stop, isLoading, input, setInput } =
   useChat({  // useExtendedChat
       initialMessages,
       id,
@@ -94,7 +94,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         stop={stop}
         append={append}
         reload={reload}
-        messages={messages}
+        messages={newMessages}
         input={input}
         setInput={setInput}
       />
