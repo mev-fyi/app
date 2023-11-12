@@ -46,10 +46,11 @@ export async function POST(req: Request) {
 
   let chatResponse;
   try {
+    console.log('Attempting to send request to backend: ', mostRecentMessageContent)
     chatResponse = await fetch(backendChatUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ mostRecentMessageContent })
+      body: JSON.stringify({ message: mostRecentMessageContent })
     });
     console.log('Chat response received', chatResponse);
   } catch (error) {
