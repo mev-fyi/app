@@ -35,6 +35,7 @@ export interface ChatProps extends React.ComponentProps<'div'> {
 }
 
 export function Chat({ id, initialMessages, className }: ChatProps) {
+  console.log('Chat component rendering with id:', id);
   const [previewToken, setPreviewToken] = useLocalStorage<string | null>(
     'ai-token',
     null
@@ -56,12 +57,14 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
       }
     })
   
+    console.log('Messages state:', messages);
+
     // Extract all metadata entries into a single array
    const metadataEntries = messages.flatMap(msg => 
      msg.role === 'assistant' && msg.structured_metadata ? msg.structured_metadata : []
    );
 
-
+   console.log('Metadata entries:', metadataEntries);
 
   return (
     <>
