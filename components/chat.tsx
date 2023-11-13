@@ -65,27 +65,46 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             setStructuredMetadataEntries(responseData.structured_metadata || []);
             // if newMessages is not empty, append responseData.messages to newMessages
             // else, do `setMessages(responseData.messages);`
-            setMessages(newMessages => {
-              // Check if there are any messages in responseData
-               if (responseData.messages && responseData.messages.length > 2) {
-                // Get the last message
-                const lastTwoMessages = responseData.messages.slice(-2); // Grabs the last two elements
-                
-                console.log('responseData.messages:', responseData.messages);  
-                console.log('lastTwoMessages:', lastTwoMessages);
-
-                // Return the new array with the last message appended
-                return [...newMessages, lastTwoMessages];
-
-               } else if (responseData.messages && responseData.messages.length > 0) {
-                console.log('responseData.messages:', responseData.messages);  
-                return responseData.messages
-              
-               } else {
-                 // If there are no messages in responseData, return the existing messages
-                 return newMessages;
+            // setMessages(newMessages => {
+            //   // Check if there are any messages in responseData
+            //    if (responseData.messages && responseData.messages.length > 2) {
+            //     // Get the last message
+            //     const lastTwoMessages = responseData.messages.slice(-2); // Grabs the last two elements
+            //     
+            //     console.log('responseData.messages:', responseData.messages);  
+            //     console.log('lastTwoMessages:', lastTwoMessages);
+// 
+            //     // Return the new array with the last message appended
+            //     return [...newMessages, lastTwoMessages];
+// 
+            //    } else if (responseData.messages && responseData.messages.length > 0) {
+            //     console.log('responseData.messages:', responseData.messages);  
+            //     return responseData.messages
+            //   
+            //    } else {
+            //      // If there are no messages in responseData, return the existing messages
+            //      return newMessages;
+            //   }
+            responseData.messages = responseData.messages.map((message: Message) => {
+              if (message.role === "assistant") {
+                  try {
+                      // Try to parse the content as JSON
+                      const parsedContent = JSON.parse(message.content);
+                      
+                      // Check if parsedContent has a messages array and it's not empty
+                      if (parsedContent.messages && parsedContent.messages.length > 0) {
+                          // Replace content with the last message of the messages array
+                          message.content = parsedContent.messages[parsedContent.messages.length - 1].content;
+                      }
+                  } catch (error) {
+                      // If parsing fails or doesn't meet criteria, leave content as is
+                      console.error("Error parsing message content:", error);
+                  }
               }
-          });
+              return message;
+            
+            });
+            setMessages(responseData.messages);
 
           } catch (error) {
             console.error('Error reading response data:', error);
