@@ -22,7 +22,7 @@ export async function fetcher<JSON = any>(
 ): Promise<JSON> {
   // Prepend the backend URL to the endpoint
   const res = await fetch(`${backendUrl}${endpoint}`, init)
-  
+
   if (!res.ok) {
     const json = await res.json()
     if (json.error) {

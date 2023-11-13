@@ -15,7 +15,7 @@ const MetadataList: React.FC<MetadataListProps> = ({ entries }) => {
             {entry.title}
           </a>
           <span className={styles.metadataListSpan}>
-            {entry.extraInfoType}: {entry.extraInfo} &middot; {entry.publishedDateString}
+            {entry.extraInfo} &middot; {entry.publishedDateString}
           </span>
         </li>
       ))}
