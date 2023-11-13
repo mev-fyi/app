@@ -98,9 +98,9 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 
   return (
     <>
-    {/* Flex container for chatlist and metadata */}
-    <div className={cn(styles.flexContainer, className)}> 
-      <div className="max-w-5xl w-full mx-auto">
+  {/* Flex container for chatlist and metadata */}
+  <div className={cn(styles.flexContainer, className)}>
+        {/* Chatlist container with defined width */}
         <div className={styles.chatListContainer}>
           {messages.length ? (
             <>
@@ -116,8 +116,6 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         <div className={styles.metadataContainer}>
           <MetadataList entries={structuredMetadataEntries} />
         </div>
-      </div>
-
       </div>
       <ChatPanel
         id={id}

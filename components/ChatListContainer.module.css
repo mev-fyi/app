@@ -1,20 +1,19 @@
-.chatListContainer {
-  max-height: 80vh; /* Adjust the height as needed */
-  overflow-y: auto; /* Enables vertical scrolling */
-  flex-grow: 1; /* Takes up available space */
-  padding-bottom: 200px; /* Keep your existing padding */
-  padding-top: 16px; /* 4 * 4px assuming base size of 4px */
-}
-/* Outer container */
 .flexContainer {
   display: flex;
   justify-content: center; /* Centers children horizontally */
-  gap: 20px; /* Adds space between children */
+  gap: 20px; /* Adjust if the gap is too wide */
 }
 
-/* Metadata list container */
+.chatListContainer {
+  max-height: 80vh;
+  overflow-y: auto;
+  flex-grow: 1;
+  padding-bottom: 200px;
+  padding-top: 16px;
+}
+
 .metadataContainer {
   flex-grow: 0;
   flex-shrink: 0;
-  flex-basis: 300px; /* Adjust this to give more space */
+  flex-basis: 300px; /* Adjust if the container is too narrow or too wide */
 }
