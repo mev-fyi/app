@@ -98,36 +98,42 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 
   return (
     <>
-      {/* Main flex container for chatlist and metadata */}
-      <div className={cn(styles.flexContainer, className)}> 
-        {/* Chatlist container with scrollable content */}
-        <div className={styles.chatListContainer}>
-          {messages.length ? (
-            <>
-              <ChatList messages={newMessages} />
-              <ChatScrollAnchor trackVisibility={isLoading} />
-            </>
-          ) : (
-            <EmptyScreen setInput={setInput} />
-          )}
+      <div className={styles.chatAndPromptContainer}>
+        {/* Main flex container for chatlist and metadata */}
+        <div className={styles.flexContainer}> 
+          {/* Chatlist container with scrollable content */}
+          <div className={styles.chatListContainer}>
+            {messages.length ? (
+              <>
+                <ChatList messages={newMessages} />
+                <ChatScrollAnchor trackVisibility={isLoading} />
+              </>
+            ) : (
+              <EmptyScreen setInput={setInput} />
+            )}
+          </div>
+          
+          {/* Metadata section */}
+          <div className={styles.metadataContainer}>
+            <div className={styles.metadataTitle}>Top Sources</div>
+            <MetadataList entries={structuredMetadataEntries} />
+          </div>
         </div>
-        
-        {/* Metadata section, ensure this is styled to be on the right side */}
-        <div className={styles.metadataContainer}>
-          <MetadataList entries={structuredMetadataEntries} />
+    
+        {/* ChatPanel component */}
+        <div className={styles.promptFormContainer}>
+          <ChatPanel
+            id={id}
+            isLoading={isLoading}
+            stop={stop}
+            append={append}
+            reload={reload}
+            messages={newMessages}
+            input={input}
+            setInput={setInput}
+          />
         </div>
       </div>
-
-      <ChatPanel
-        id={id}
-        isLoading={isLoading}
-        stop={stop}
-        append={append}
-        reload={reload}
-        messages={newMessages}
-        input={input}
-        setInput={setInput}
-      />
       <Dialog open={previewTokenDialog} onOpenChange={setPreviewTokenDialog}>
         <DialogContent>
           <DialogHeader>

@@ -67,8 +67,9 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
       extraInfoType: extraInfoType,
       link: details[3],
       extraInfo: details[2],
-      publishedDate: new Date(details[videoDetails ? 4 : 5]),
-      publishedDateString: details[videoDetails ? 4 : 5]
+      // Correct the index for the published date based on whether it's video or paper
+      publishedDate: new Date(details[4]),
+      publishedDateString: details[4] // This should be the same index as the publishedDate
     } : null;
   });
 
