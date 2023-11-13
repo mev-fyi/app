@@ -66,11 +66,23 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             // if newMessages is not empty, append responseData.messages to newMessages
             // else, do `setMessages(responseData.messages);`
             setMessages(newMessages => {
+              // Check if there are any messages in responseData
+               if (responseData.messages && responseData.messages.length >= 2) {
+                // Get the last message
                 const lastTwoMessages = responseData.messages.slice(-2); // Grabs the last two elements
                 
                 // Return the new array with the last message appended
                 return [...newMessages, lastTwoMessages];
-              })
+
+               } else if (responseData.messages && responseData.messages.length > 0) {
+                  return responseData.messages
+              
+               } else {
+                 // If there are no messages in responseData, return the existing messages
+                 return newMessages;
+              }
+          });
+
           } catch (error) {
             console.error('Error reading response data:', error);
             // Handle error scenario
