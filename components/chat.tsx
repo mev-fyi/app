@@ -99,9 +99,9 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   return (
     <>
     {/* Flex container for chatlist and metadata */}
-    <div className={cn('flex justify-center', className)}> 
-      <div className="flex flex-row max-w-5xl w-full mx-auto">
-        <div className="chatListContainer">
+    <div className={cn(styles.flexContainer, className)}> 
+      <div className="max-w-5xl w-full mx-auto">
+        <div className={styles.chatListContainer}>
           {messages.length ? (
             <>
               <ChatList messages={newMessages} />
@@ -113,7 +113,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         </div>
         
         {/* Metadata section */}
-        <div className="w-80 p-4 overflow-auto flex-shrink-0 hidden md:block">
+        <div className={styles.metadataContainer}>
           <MetadataList entries={structuredMetadataEntries} />
         </div>
       </div>
