@@ -98,9 +98,9 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 
   return (
     <>
-  {/* Flex container for chatlist and metadata */}
-  <div className={cn(styles.flexContainer, className)}>
-        {/* Chatlist container with defined width */}
+      {/* Main flex container for chatlist and metadata */}
+      <div className={cn(styles.flexContainer, className)}> 
+        {/* Chatlist container with scrollable content */}
         <div className={styles.chatListContainer}>
           {messages.length ? (
             <>
@@ -112,11 +112,12 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           )}
         </div>
         
-        {/* Metadata section */}
+        {/* Metadata section, ensure this is styled to be on the right side */}
         <div className={styles.metadataContainer}>
           <MetadataList entries={structuredMetadataEntries} />
         </div>
       </div>
+
       <ChatPanel
         id={id}
         isLoading={isLoading}
