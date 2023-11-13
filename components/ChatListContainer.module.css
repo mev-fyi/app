@@ -10,10 +10,12 @@
 
 .chatListContainer {
   max-height: 80vh; /* Adjust height as needed */
+  overflow-x: hidden; /* Hides horizontal scrollbar */
   overflow-y: auto; /* Adds scroll to the container */
   padding-bottom: 200px; /* Adjust padding as needed */
-  padding-top: 16px; /* Adjust padding as needed */
+  padding-top: 5px; /* Adjust padding as needed */
   flex-grow: 1; /* Allows the chatlist to grow and fill space */
+  box-sizing: border-box; /* Include padding and borders in the element's total width and height */
 }
 
 .metadataContainer {
