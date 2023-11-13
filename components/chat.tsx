@@ -63,7 +63,9 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           try {
             const responseData = await response.json();
             setStructuredMetadataEntries(responseData.structured_metadata || []);
-            setMessages(responseData.messages);
+            // if newMessages is not empty, append responseData.messages to newMessages
+            // else, do `setMessages(responseData.messages);`
+            setMessages(prevMessages => [...prevMessages, ...responseData.messages]);
 
           } catch (error) {
             console.error('Error reading response data:', error);
