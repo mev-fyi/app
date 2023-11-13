@@ -67,13 +67,21 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             // else, do `setMessages(responseData.messages);`
             setMessages(newMessages => {
               // Check if there are any messages in responseData
-              if (responseData.messages && responseData.messages.length >= 2) {
+               if (responseData.messages && responseData.messages.length >= 2) {
+                // Get the last message
+                const lastTwoMessages = responseData.messages.slice(-2); // Grabs the last two elements
+                
+                // Return the new array with the last message appended
+                return [...newMessages, lastTwoMessages];
+
+               } else if (responseData.messages && responseData.messages.length > 0) {
                   // Get the last message
-                  const lastTwoMessages = responseData.messages.slice(-2); // Grabs the last two elements
-                  
+                  const lastMessage = responseData.messages[responseData.messages.length - 1];
+
                   // Return the new array with the last message appended
-                  return [...newMessages, lastTwoMessages];
-              } else {
+                  return [...newMessages, lastMessage];
+              
+                } else {
                   // If there are no messages in responseData, return the existing messages
                   return newMessages;
               }
