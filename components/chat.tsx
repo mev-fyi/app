@@ -65,7 +65,21 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             setStructuredMetadataEntries(responseData.structured_metadata || []);
             // if newMessages is not empty, append responseData.messages to newMessages
             // else, do `setMessages(responseData.messages);`
-            setMessages(prevMessages => [...prevMessages, ...responseData.messages]);
+            setMessages(newMessages => {
+              // Check if there are any messages in responseData
+              if (responseData.messages && responseData.messages.length > 0) {
+                  // Get the last message
+                  const lastMessage = responseData.messages[responseData.messages.length - 1];
+                  
+                  console.log('lastMessage is:', messages);
+
+                  // Return the new array with the last message appended
+                  return [...newMessages, lastMessage];
+              } else {
+                  // If there are no messages in responseData, return the existing messages
+                  return newMessages;
+              }
+          });
 
           } catch (error) {
             console.error('Error reading response data:', error);
@@ -74,8 +88,8 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         }
       }
     })
-  
-  console.log('Messages state:', messages);
+
+    console.log('Messages state:', messages);
   console.log('Metadata entries:', structuredMetadataEntries);
 
   return (
