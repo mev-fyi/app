@@ -78,15 +78,25 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 
   return (
     <>
-      <div className={cn('pb-[200px] pt-4 md:pt-10', className)}>
-        {messages.length ? (
-          <>
-            <ChatList messages={newMessages} />
-            <ChatScrollAnchor trackVisibility={isLoading} />
-          </>
-        ) : (
-          <EmptyScreen setInput={setInput} />
-        )}
+      {/* Flex container for chatlist and metadata */}
+      <div className={cn('flex flex-row', className)}> 
+        {/* Chatlist */}
+        <div className="flex-grow pb-[200px] pt-4 md:pt-10">
+          {messages.length ? (
+            <>
+              <ChatList messages={newMessages} />
+              <ChatScrollAnchor trackVisibility={isLoading} />
+            </>
+          ) : (
+            <EmptyScreen setInput={setInput} />
+          )}
+        </div>
+        
+        {/* Metadata section */}
+        <div className="w-full md:w-80 p-4 overflow-auto flex-shrink-0">
+          <MetadataList entries={structuredMetadataEntries} />
+        </div>
+        
       </div>
       <ChatPanel
         id={id}
@@ -98,10 +108,6 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         input={input}
         setInput={setInput}
       />
-      <div className="w-full md:w-80 p-4 overflow-auto">
-        {/* Metadata section */}
-        <MetadataList entries={structuredMetadataEntries} />
-      </div>
       <Dialog open={previewTokenDialog} onOpenChange={setPreviewTokenDialog}>
         <DialogContent>
           <DialogHeader>
