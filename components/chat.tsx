@@ -35,7 +35,6 @@ export interface ChatProps extends React.ComponentProps<'div'> {
 }
 
 export function Chat({ id, initialMessages, className }: ChatProps) {
-  console.log('Chat component rendering with id:', id);
   const [previewToken, setPreviewToken] = useLocalStorage<string | null>(
     'ai-token',
     null
@@ -46,6 +45,11 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   // State to hold structured metadata entries
   const [structuredMetadataEntries, setStructuredMetadataEntries] = useState([]);
   const [newMessages, setMessages] = useState(initialMessages || []);
+
+  const [isMetadataVisible, setIsMetadataVisible] = useState(false);
+  const toggleMetadataVisibility = () => {
+    setIsMetadataVisible(!isMetadataVisible);
+  };
 
   const { messages, append, reload, stop, isLoading, input, setInput } =
   useChat({  // useExtendedChat
@@ -93,9 +97,6 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
       }
     })
 
-    console.log('Messages state:', messages);
-  console.log('Metadata entries:', structuredMetadataEntries);
-
   return (
     <>
       <div className={styles.chatAndPromptContainer}>
@@ -113,8 +114,18 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             )}
           </div>
           
+           {/* Toggle button for the metadata view on mobile */}
+          <div 
+            className={styles.toggleMetadataButton}
+            onClick={toggleMetadataVisibility}
+          >
+            {isMetadataVisible ? 'Hide Sources' : 'Show Sources'}
+          </div>
+          
           {/* Metadata section */}
-          <div className={styles.metadataContainer}>
+          <div 
+            className={`${styles.metadataContainer} ${isMetadataVisible ? styles.metadataContainerActive : ''}`}
+          >
             <div className={styles.metadataTitle}>Top Sources</div>
             <MetadataList entries={structuredMetadataEntries} />
           </div>
