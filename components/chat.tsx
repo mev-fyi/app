@@ -20,6 +20,7 @@ import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { toast } from 'react-hot-toast'
 import MetadataList from '@/components/metadata-list';
+import styles from './ChatListContainer.module.css'; // Import the CSS module
 
 
 // Extend the Message type to include structured_metadata
@@ -63,28 +64,6 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           try {
             const responseData = await response.json();
             setStructuredMetadataEntries(responseData.structured_metadata || []);
-            // if newMessages is not empty, append responseData.messages to newMessages
-            // else, do `setMessages(responseData.messages);`
-            // setMessages(newMessages => {
-            //   // Check if there are any messages in responseData
-            //    if (responseData.messages && responseData.messages.length > 2) {
-            //     // Get the last message
-            //     const lastTwoMessages = responseData.messages.slice(-2); // Grabs the last two elements
-            //     
-            //     console.log('responseData.messages:', responseData.messages);  
-            //     console.log('lastTwoMessages:', lastTwoMessages);
-// 
-            //     // Return the new array with the last message appended
-            //     return [...newMessages, lastTwoMessages];
-// 
-            //    } else if (responseData.messages && responseData.messages.length > 0) {
-            //     console.log('responseData.messages:', responseData.messages);  
-            //     return responseData.messages
-            //   
-            //    } else {
-            //      // If there are no messages in responseData, return the existing messages
-            //      return newMessages;
-            //   }
             responseData.messages = responseData.messages.map((message: Message) => {
               if (message.role === "assistant") {
                   try {
@@ -121,10 +100,8 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     <>
     {/* Flex container for chatlist and metadata */}
     <div className={cn('flex justify-center', className)}> 
-      {/* Chatlist container with max-width */}
       <div className="flex flex-row max-w-5xl w-full mx-auto">
-        {/* Chatlist */}
-        <div className="flex-grow pb-[200px] pt-4 md:pt-10">
+        <div className="chatListContainer">
           {messages.length ? (
             <>
               <ChatList messages={newMessages} />

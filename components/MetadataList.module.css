@@ -6,8 +6,8 @@
   
   .metadataListItem {
     border-bottom: 1px solid #ffffff; /* Thin white line for separator */
-    padding-bottom: 0.5rem;
-    margin-bottom: 0.5rem;
+    padding-bottom: 1rem; /* Increased space */
+    margin-bottom: 1rem; /* Increased space */
     color: #bbb; /* Slightly faded white color */
   }
   
@@ -20,6 +20,8 @@
     text-decoration: none; /* Remove underline */
     font-weight: bold; /* Make title bold */
     display: block; /* Title on its own line */
+    white-space: normal; /* Allow wrapping if needed */
+    margin-right: 1rem; /* Space to the right */
   }
   
   .metadataListSpan {
@@ -45,6 +47,8 @@
   .metadataInfo {
     display: block; /* Makes sure the author and date are on a new line */
     white-space: nowrap; /* Prevents wrapping */
+    overflow: hidden; /* Prevents overflow */
+    text-overflow: ellipsis; /* Adds an ellipsis for overflowed text */
   }
 
   
