@@ -1,23 +1,28 @@
 'use client'
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { parseCookies, nanoid } from '@/lib/utils';
+import { nanoid } from '@/lib/utils';
 import { getChat } from '@/app/actions';
-import { ChatPageProps } from '@/lib/types';
 import { Chat as ChatComponent } from '@/components/chat';
 import { type Chat } from '@/lib/types'
 
+// Define the props based on what's actually used and available client-side
+export interface ChatPageClientProps {
+  params: {
+    id: string;
+  };
+  // No 'req' here as it's not available in client-side context
+}
 
-export default function ChatPage({ params, req }: ChatPageProps) {
-  // Assuming chatData has a similar structure to what Chat component expects
+export default function ChatPage({ params }: ChatPageClientProps) {
   const [chatData, setChatData] = useState<Chat | null>(null);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
     async function fetchData() {
-      const cookies = parseCookies(req);
-      let sessionId = cookies.get('session_id') || nanoid();
+      // Use client-side logic to retrieve session ID from cookies
+      const sessionId = document.cookie.split('; ').find(row => row.startsWith('session_id='))?.split('=')[1] || nanoid();
 
       if (!sessionId) {
         // Set the cookie and redirect if session ID is not found
@@ -30,7 +35,7 @@ export default function ChatPage({ params, req }: ChatPageProps) {
             setChatData(chat);
           } else {
             console.error('Chat not found');
-            // notFound();
+            // Implement a notFound logic or redirect
           }
         } catch (error) {
           console.error('Error fetching chat:', error);
@@ -44,11 +49,11 @@ export default function ChatPage({ params, req }: ChatPageProps) {
   }, [params.id, router]);
 
   if (loading) {
-    return <div>Loading...</div>;  // Or any other loading state
+    return <div>Loading...</div>;
   }
 
   if (!chatData) {
-    return <div>Chat not found.</div>;  // Or any other error state
+    return <div>Chat not found.</div>;
   }
 
   return <ChatComponent id={chatData.id} initialMessages={chatData.messages} />;
