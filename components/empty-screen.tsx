@@ -27,7 +27,7 @@ const questions = [
   "How will account abstraction affect the MEV supply chain?",
   "What is the difference between account abstraction and intents?",
   "Is it bad that MEV is a centralizing force?",
-  "How is MEV on Solana different from MEV on Ethereum?",
+  "Tell me about MEV on Solana",
   "Explain to me the differences between Uniswap v2, v3 and v4",
   "What are commit/reveal schemes?",
   "What is the impact of latency in MEV?",

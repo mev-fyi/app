@@ -2,6 +2,8 @@
 .layoutContainer {
   display: flex;
   height: 100vh; /* Full height of the viewport */
+  justify-content: center; /* This centers the middle panel horizontally */
+  align-items: flex-start; /* This aligns the panels to the top */
 }
 
 /* Left empty panel */
@@ -12,7 +14,7 @@
 
 /* Middle panel for chatlist and prompt form */
 .middlePanel {
-  flex: 4; /* Takes up 2 parts of the available space, adjust as needed */
+  flex: 2; /* Takes up 2 parts of the available space, adjust as needed */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -22,7 +24,10 @@
 /* Right panel for metadata list */
 .rightPanel {
   /* The styles here will be overridden by the .metadataContainer styles on mobile */
-  flex: 2; /* Takes up 1 part of the available space, adjust as needed */
+  flex: 1; /* Takes up 1 part of the available space, adjust as needed */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns metadata to the start of the right panel */
 }
 
 /* Chatlist container with scrollable content */
@@ -38,7 +43,7 @@
 
 /* Metadata container */
 .metadataContainer {
-  width: 500px; /* Set a fixed width */
+  width: 80%; /* Use 80% of the rightPanel width */
   padding: 1rem;
   overflow-y: auto;
   transition: transform 0.3s; /* Smooth transition for sliding in/out */
