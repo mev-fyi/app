@@ -1,42 +1,55 @@
 'use client'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { type Metadata } from 'next';
-import { notFound } from 'next/navigation';
 import { parseCookies, nanoid } from '@/lib/utils';
 import { getChat } from '@/app/actions';
-import { Chat } from '@/components/chat';
-import { type ChatPageProps } from 'lib/types'
-
-export const runtime = 'edge';
-export const preferredRegion = 'home';
+import { ChatPageProps } from '@/lib/types';
+import { Chat as ChatComponent } from '@/components/chat';
+import { type Chat } from '@/lib/types'
 
 
-export default async function ChatPage({ params, req }: ChatPageProps) {
+export default function ChatPage({ params, req }: ChatPageProps) {
+  // Assuming chatData has a similar structure to what Chat component expects
+  const [chatData, setChatData] = useState<Chat | null>(null);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
-  const cookies = parseCookies(req);
-  let sessionId = cookies.get('session_id');
 
   useEffect(() => {
-    // Immediately generate and set a new session ID if it's not found
-    if (!sessionId) {
-      sessionId = nanoid();
-      document.cookie = `session_id=${sessionId}; Path=/; Max-Age=2592000; Secure; SameSite=Lax`; // Set the cookie
-      router.push(`/chat/${sessionId}`); // Redirect to the new chat session page
+    async function fetchData() {
+      const cookies = parseCookies(req);
+      let sessionId = cookies.get('session_id') || nanoid();
+
+      if (!sessionId) {
+        // Set the cookie and redirect if session ID is not found
+        document.cookie = `session_id=${sessionId}; Path=/; Max-Age=2592000; Secure; SameSite=Lax`;
+        router.push(`/chat/${sessionId}`);
+      } else {
+        try {
+          const chat = await getChat(params.id, sessionId);
+          if (chat) {
+            setChatData(chat);
+          } else {
+            console.error('Chat not found');
+            // notFound();
+          }
+        } catch (error) {
+          console.error('Error fetching chat:', error);
+          // Handle error appropriately
+        }
+      }
+      setLoading(false);
     }
-  }, [sessionId, router]);
 
-  // Ensure sessionId is defined before calling getChat
-  if (!sessionId) {
-    console.error('Session ID is undefined');
-    return notFound(); // or handle this scenario appropriately
+    fetchData();
+  }, [params.id, router]);
+
+  if (loading) {
+    return <div>Loading...</div>;  // Or any other loading state
   }
 
-  const chat = await getChat(params.id, sessionId);
-
-  if (!chat) {
-    return notFound();
+  if (!chatData) {
+    return <div>Chat not found.</div>;  // Or any other error state
   }
 
-  return <Chat id={chat.id} initialMessages={chat.messages} />;
+  return <ChatComponent id={chatData.id} initialMessages={chatData.messages} />;
 }
