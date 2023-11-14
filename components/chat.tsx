@@ -99,9 +99,14 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 
   return (
     <>
-      <div className={styles.chatAndPromptContainer}>
-        {/* Main flex container for chatlist and metadata */}
-        <div className={styles.flexContainer}> 
+        <div className={styles.layoutContainer}>
+        {/* Left empty panel */}
+        <div className={styles.leftPanel}>
+          {/* This panel is intentionally left empty */}
+        </div>
+
+        {/* Middle panel for chatlist and prompt form */}
+        <div className={styles.middlePanel}>
           {/* Chatlist container with scrollable content */}
           <div className={styles.chatListContainer}>
             {messages.length ? (
@@ -113,38 +118,38 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
               <EmptyScreen setInput={setInput} />
             )}
           </div>
-          
-           {/* Toggle button for the metadata view on mobile */}
-          <div 
-            className={styles.toggleMetadataButton}
-            onClick={toggleMetadataVisibility}
-          >
-            {isMetadataVisible ? 'Hide Sources' : 'Show Sources'}
+
+          {/* ChatPanel component */}
+          <div className={styles.promptFormContainer}>
+            <ChatPanel
+              id={id}
+              isLoading={isLoading}
+              stop={stop}
+              append={append}
+              reload={reload}
+              messages={newMessages}
+              input={input}
+              setInput={setInput}
+            />
           </div>
-          
+        </div>
+
+        {/* Right panel for metadata list */}
+        <div className={`${styles.rightPanel} ${isMetadataVisible ? styles.metadataContainerActive : ''}`}>
           {/* Metadata section */}
-          <div 
-            className={`${styles.metadataContainer} ${isMetadataVisible ? styles.metadataContainerActive : ''}`}
-          >
+          <div className={styles.metadataContainer}>
             <div className={styles.metadataTitle}>Top Sources</div>
             <MetadataList entries={structuredMetadataEntries} />
-          </div>
         </div>
-    
-        {/* ChatPanel component */}
-        <div className={styles.promptFormContainer}>
-          <ChatPanel
-            id={id}
-            isLoading={isLoading}
-            stop={stop}
-            append={append}
-            reload={reload}
-            messages={newMessages}
-            input={input}
-            setInput={setInput}
-          />
+      
+          {/* This button could be in your middle panel or fixed at the bottom of the viewport */}
+        <button onClick={toggleMetadataVisibility} className={styles.toggleMetadataButton}>
+          {isMetadataVisible ? 'Back to Chat' : 'Show Top Sources'}
+        </button>
+        
         </div>
       </div>
+      
       <Dialog open={previewTokenDialog} onOpenChange={setPreviewTokenDialog}>
         <DialogContent>
           <DialogHeader>
