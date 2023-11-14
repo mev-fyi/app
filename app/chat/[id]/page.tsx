@@ -1,50 +1,59 @@
-import { type Metadata } from 'next'
-import { notFound, redirect } from 'next/navigation'
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { type Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import { parseCookies, nanoid } from '@/lib/utils';
+import { getChat } from '@/app/actions';
+import { Chat } from '@/components/chat';
 
-import { auth } from '@/auth'
-import { getChat } from '@/app/actions'
-import { Chat } from '@/components/chat'
-
-export const runtime = 'edge'
-export const preferredRegion = 'home'
+export const runtime = 'edge';
+export const preferredRegion = 'home';
 
 export interface ChatPageProps {
   params: {
-    id: string
-  }
+    id: string;
+  };
+  req: Request;
 }
 
 export async function generateMetadata({
-  params
+  params,
+  req,
 }: ChatPageProps): Promise<Metadata> {
-  const session = await auth()
+  const cookies = parseCookies(req);
+  const sessionId = cookies.get('session_id') || nanoid();
 
-  if (!session?.user) {
-    return {}
-  }
-
-  const chat = await getChat(params.id, session.user.id)
+  const chat = await getChat(params.id, sessionId);
   return {
-    title: chat?.title.toString().slice(0, 50) ?? 'Chat'
-  }
+    title: chat?.title?.toString().slice(0, 50) ?? 'Chat',
+  };
 }
 
-export default async function ChatPage({ params }: ChatPageProps) {
-  const session = await auth()
+export default async function ChatPage({ params, req }: ChatPageProps) {
+  const router = useRouter();
+  const cookies = parseCookies(req);
+  let sessionId = cookies.get('session_id');
 
-  if (!session?.user) {
-    redirect(`/sign-in?next=/chat/${params.id}`)
+  useEffect(() => {
+    // Immediately generate and set a new session ID if it's not found
+    if (!sessionId) {
+      sessionId = nanoid();
+      document.cookie = `session_id=${sessionId}; Path=/; Max-Age=2592000; Secure; SameSite=Lax`; // Set the cookie
+      router.push(`/chat/${sessionId}`); // Redirect to the new chat session page
+    }
+  }, [sessionId, router]);
+
+  // Ensure sessionId is defined before calling getChat
+  if (!sessionId) {
+    console.error('Session ID is undefined');
+    return notFound(); // or handle this scenario appropriately
   }
 
-  const chat = await getChat(params.id, session.user.id)
+  const chat = await getChat(params.id, sessionId);
 
   if (!chat) {
-    notFound()
+    return notFound();
   }
 
-  if (chat?.userId !== session?.user?.id) {
-    notFound()
-  }
-
-  return <Chat id={chat.id} initialMessages={chat.messages} />
+  return <Chat id={chat.id} initialMessages={chat.messages} />;
 }

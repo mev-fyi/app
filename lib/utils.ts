@@ -79,3 +79,30 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
   // Sort the entries based on the published date
   return filteredEntries.sort((a, b) => b.publishedDate.getTime() - a.publishedDate.getTime());
 }
+
+// Helper function to parse cookies
+export function parseCookies(request: Request): Map<string, string> {
+  const cookies = new Map<string, string>();
+  const cookieString = request.headers.get('Cookie');
+  if (cookieString) {
+    cookieString.split(';').forEach((cookie) => {
+      const [name, ...rest] = cookie.split('=');
+      cookies.set(name.trim(), rest.join('=').trim());
+    });
+  }
+  return cookies;
+}
+
+import { IncomingMessage } from 'http';
+
+export function parseServerSideCookies(req: IncomingMessage): Map<string, string> {
+  const cookies = new Map<string, string>();
+  const cookieHeader = req.headers.cookie || '';
+
+  cookieHeader.split('; ').forEach(cookie => {
+    const [key, value] = cookie.split('=');
+    cookies.set(key, value);
+  });
+
+  return cookies;
+}

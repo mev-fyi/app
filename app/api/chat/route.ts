@@ -1,11 +1,27 @@
 import { kv } from '@vercel/kv'
 import { Configuration } from 'openai-edge'
-import { auth } from '@/auth'
+import { parseCookies } from '@/lib/utils';
 import { nanoid } from '@/lib/utils'
 import { parseMetadata } from '@/lib/utils';
 import { ParsedMetadataEntry } from '@/lib/types';
 
 export const runtime = 'edge'
+
+
+
+// Helper function to create a Response with a Set-Cookie header
+function withSessionCookie(payload: any, sessionId: string): Response {
+  // Calculate an expiry date for the cookie, e.g., 30 days from now
+  const expiryDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString();
+
+  const response = new Response(JSON.stringify(payload), {
+    headers: { 
+      'Content-Type': 'application/json',
+      'Set-Cookie': `session_id=${sessionId}; Path=/; Expires=${expiryDate}; HttpOnly; SameSite=Lax; Secure` // Set the Secure attribute if served over HTTPS
+    },
+  });
+  return response;
+}
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY
@@ -24,14 +40,13 @@ export async function POST(req: Request) {
   }
 
   const { messages, previewToken } = json;
-  const session = await auth();
-
-  if (!session?.user) {
-    console.error('Unauthorized request: No session user found.');
-    return new Response('Unauthorized', { status: 401 });
-  }
-
-  console.log('User authenticated, user ID:', session.user.id);
+   
+  let sessionId = parseCookies(req).get('session_id');
+    // If there's no session ID, create a new one and attach it to the response later
+    const shouldSetCookie = !sessionId;
+    if (!sessionId) {
+      sessionId = nanoid(); // Generate a new session ID
+    }
 
   if (previewToken) {
     console.log('Using preview token for API key');
@@ -62,6 +77,11 @@ export async function POST(req: Request) {
     console.error(`Backend failed to process chat message with status ${chatResponse.status}`);
     return new Response(`Error from backend service: ${chatResponse.statusText}`, { status: chatResponse.status });
   }
+  
+  // If we need to set a new session cookie, modify the response to include it
+  if (shouldSetCookie) {
+    return withSessionCookie(chatResponse, sessionId);
+  }
 
   const responseBody = await chatResponse.json();
   console.log(`Received response from backend:`, responseBody);
@@ -79,7 +99,7 @@ export async function POST(req: Request) {
   const payload = {
     id,
     title,
-    userId: session.user.id,
+    userId: sessionId,
     createdAt,
     path,
     messages: [
@@ -95,14 +115,21 @@ export async function POST(req: Request) {
 
   try {
     await kv.set(`chat:${id}`, JSON.stringify(payload));
-    await kv.zadd(`user:chat:${session.user.id}`, { score: createdAt, member: `chat:${id}` });
+    await kv.zadd(`user:chat:${sessionId}`, { score: createdAt, member: `chat:${id}` });
     console.log('Chat record stored');
   } catch (error) {
     console.error('Failed to store chat record:', error);
     return new Response('Internal Server Error', { status: 500 });
   }
 
+  // If you need to set a new session cookie, create a new response with the payload and the cookie
+  if (shouldSetCookie) {
+    const responseWithCookie = withSessionCookie(payload, sessionId);
+    return responseWithCookie;
+  } else {
+  // If no new cookie needs to be set, just return the payload
   return new Response(JSON.stringify(payload), {
     headers: { 'Content-Type': 'application/json' },
   });
+  }
 }
