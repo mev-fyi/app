@@ -17,6 +17,13 @@ export type ServerActionResult<Result> = Promise<
     }
 >
 
+export interface ChatPageProps {
+  params: {
+    id: string;
+  };
+  req: Request;
+}
+
 export interface ParsedMetadataEntry {
   index: number;
   title: string;

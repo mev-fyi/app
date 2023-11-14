@@ -6,29 +6,11 @@ import { notFound } from 'next/navigation';
 import { parseCookies, nanoid } from '@/lib/utils';
 import { getChat } from '@/app/actions';
 import { Chat } from '@/components/chat';
+import { type ChatPageProps } from 'lib/types'
 
 export const runtime = 'edge';
 export const preferredRegion = 'home';
 
-export interface ChatPageProps {
-  params: {
-    id: string;
-  };
-  req: Request;
-}
-
-export async function generateMetadata({
-  params,
-  req,
-}: ChatPageProps): Promise<Metadata> {
-  const cookies = parseCookies(req);
-  const sessionId = cookies.get('session_id') || nanoid();
-
-  const chat = await getChat(params.id, sessionId);
-  return {
-    title: chat?.title?.toString().slice(0, 50) ?? 'Chat',
-  };
-}
 
 export default async function ChatPage({ params, req }: ChatPageProps) {
   const router = useRouter();
