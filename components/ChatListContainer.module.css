@@ -12,7 +12,7 @@
 
 /* Middle panel for chatlist and prompt form */
 .middlePanel {
-  flex: 4; /* Takes up 2 parts of the available space, adjust as needed */
+  flex: 3; /* Takes up 2 parts of the available space, adjust as needed */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -22,7 +22,7 @@
 /* Right panel for metadata list */
 .rightPanel {
   /* The styles here will be overridden by the .metadataContainer styles on mobile */
-  flex: 3; /* Takes up 1 part of the available space, adjust as needed */
+  flex: 2; /* Takes up 1 part of the available space, adjust as needed */
 }
 
 /* Chatlist container with scrollable content */
@@ -38,7 +38,7 @@
 
 /* Metadata container */
 .metadataContainer {
-  width: 400px; /* Set a fixed width */
+  width: 600px; /* Set a fixed width */
   padding: 1rem;
   overflow-y: auto;
   transition: transform 0.3s; /* Smooth transition for sliding in/out */
@@ -90,5 +90,5 @@
   color: #fff;
   font-weight: bold;
   font-size: 1.25rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
