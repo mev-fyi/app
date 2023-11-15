@@ -20,6 +20,7 @@ export default function ChatPage({ params }: ChatPageClientProps) {
   const router = useRouter();
 
   useEffect(() => {
+    if (!router.isReady) return; // Exit early if router is not ready
     async function fetchData() {
       // Use client-side logic to retrieve session ID from cookies
       const sessionId = document.cookie.split('; ').find(row => row.startsWith('session_id='))?.split('=')[1] || nanoid();
