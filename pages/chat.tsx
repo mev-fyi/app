@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { type Chat } from '@/lib/types';
 
-interface ChatPageProps {
-  chatData: Chat;
-}
-
-const ChatPage = ({ chatData }: ChatPageProps) => {
+const ChatPage = () => {
   const [ChatComponent, setChatComponent] = useState<React.ComponentType<{ id: string; initialMessages: any[] }> | null>(null);
+  const [chatData, setChatData] = useState<Chat | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
+    // Fetch chat data based on session ID (you might need to adjust the API call)
+    fetch('/api/chat')
+      .then((res) => res.json())
+      .then((data) => {
+        setChatData(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching chat data:', error);
+        // Handle error, e.g., redirect to an error page or show a message
+      });
+
     if (typeof window !== 'undefined') {
       import('@/components/chat').then((mod) => {
         setChatComponent(() => mod.Chat);
@@ -17,7 +27,7 @@ const ChatPage = ({ chatData }: ChatPageProps) => {
   }, []);
 
   if (!chatData) {
-    return <div>Chat not found.</div>;
+    return <p>Loading chat...</p>;
   }
 
   return (
@@ -26,6 +36,5 @@ const ChatPage = ({ chatData }: ChatPageProps) => {
     </div>
   );
 };
-
 
 export default ChatPage;
