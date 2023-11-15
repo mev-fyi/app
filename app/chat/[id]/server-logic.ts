@@ -1,8 +1,7 @@
-import { parseCookies, parseServerSideCookies, nanoid } from '@/lib/utils';
+import { parseCookies, nanoid } from '@/lib/utils';
 import { getChat } from '@/app/actions';
 import { type Metadata } from 'next';
 import { type ChatPageProps } from 'lib/types'
-import { GetServerSideProps } from 'next';
 
 
 export const runtime = 'edge';

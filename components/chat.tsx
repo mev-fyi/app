@@ -188,3 +188,4 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     </>
   )
 }
+export default Chat;  // Make sure this is present
