@@ -1,14 +1,8 @@
 import { GetServerSideProps } from 'next';
-import dynamic from 'next/dynamic';  // Import dynamic from next/dynamic
 import { type Chat } from '@/lib/types';
 import { manageSessionID } from '@/lib/utils';
 import { getChat } from '@/app/actions';
-
-// Dynamically import the Chat component with ssr set to false
-const ChatComponent = dynamic(import('@/components/chat'), {
-  ssr: false,
-  loading: () => <p>Loading...</p>,
-});
+import { Chat as ChatComponent } from '@/components/chat'
 
 interface ChatPageProps {
   chatData: Chat;
@@ -19,8 +13,15 @@ function ChatPage({ chatData }: ChatPageProps) {
     return <div>Chat not found.</div>;
   }
 
-  // ChatComponent will only be rendered on the client side
-  return <ChatComponent id={chatData.id} initialMessages={chatData.messages} />;
+  return (
+    <div>
+      {/* Render the chat data or a loading state here */}
+      {/* Client-side specific code will go here */}
+      {typeof window !== 'undefined' && (
+        <ChatComponent id={chatData.id} initialMessages={chatData.messages} />
+      )}
+    </div>
+  );
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -35,5 +36,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return { props: { chatData } };
 };
 
-// Export the component and getServerSideProps
-// export default ChatPage;
+export default ChatPage;
