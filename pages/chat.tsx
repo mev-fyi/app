@@ -1,23 +1,19 @@
-import { useEffect, useState } from 'react';
-import { GetServerSideProps } from 'next';
-import dynamic from 'next/dynamic';
+import React, { useEffect, useState } from 'react';
 import { type Chat } from '@/lib/types';
-import { manageSessionID } from '@/lib/utils';
-import { getChat } from '@/app/actions';
-
-// Dynamically import the Chat component with ssr set to false
-const ChatComponent = dynamic(() => import('@/components/chat'), { ssr: false });
 
 interface ChatPageProps {
   chatData: Chat;
 }
 
-function ChatPage({ chatData }: ChatPageProps) {
-  const [isClientSide, setIsClientSide] = useState(false);
+const ChatPage = ({ chatData }: ChatPageProps) => {
+  const [ChatComponent, setChatComponent] = useState<React.ComponentType<{ id: string; initialMessages: any[] }> | null>(null);
 
   useEffect(() => {
-    // Set state to true when component mounts in the browser
-    setIsClientSide(typeof window !== 'undefined');
+    if (typeof window !== 'undefined') {
+      import('@/components/chat').then((mod) => {
+        setChatComponent(() => mod.Chat);
+      });
+    }
   }, []);
 
   if (!chatData) {
@@ -26,22 +22,10 @@ function ChatPage({ chatData }: ChatPageProps) {
 
   return (
     <div>
-      {/* Client-side specific code will render here */}
-      {isClientSide && <ChatComponent id={chatData.id} initialMessages={chatData.messages} />}
+      {ChatComponent ? <ChatComponent id={chatData.id} initialMessages={chatData.messages} /> : <p>Loading chat...</p>}
     </div>
   );
-}
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const sessionId = manageSessionID(context.req, context.res);
-  const { id } = context.params || {};
-  
-  if (typeof id !== 'string') {
-    return { notFound: true };
-  }
-
-  const chatData = await getChat(id, sessionId);
-  return { props: { chatData } };
 };
+
 
 export default ChatPage;
