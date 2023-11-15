@@ -2,6 +2,7 @@ import { clsx, type ClassValue } from 'clsx'
 import { customAlphabet } from 'nanoid'
 import { twMerge } from 'tailwind-merge'
 import { ParsedMetadataEntry } from 'lib/types';
+import { ServerResponse, IncomingMessage } from 'http';
 
 
 export function cn(...inputs: ClassValue[]) {
@@ -93,7 +94,7 @@ export function parseCookies(request: Request): Map<string, string> {
   return cookies;
 }
 
-import { IncomingMessage } from 'http';
+
 
 export function parseServerSideCookies(req: IncomingMessage): Map<string, string> {
   const cookies = new Map<string, string>();
@@ -106,3 +107,17 @@ export function parseServerSideCookies(req: IncomingMessage): Map<string, string
 
   return cookies;
 }
+
+
+export const manageSessionID = (req: IncomingMessage, res: ServerResponse) => {
+  const cookies = parseServerSideCookies(req);
+  let sessionId = cookies.get('session_id') || nanoid();
+
+  if (!cookies.get('session_id')) {
+    // Set the cookie using Node.js' ServerResponse
+    const cookie = `session_id=${sessionId}; Path=/; Max-Age=2592000; Secure; SameSite=Lax`;
+    res.setHeader('Set-Cookie', cookie);
+  }
+
+  return sessionId;
+};

@@ -22,21 +22,3 @@ export async function generateMetadata({
   }
   
   
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    const { id } = context.params || {};
-
-    if (typeof id !== 'string') {
-      return { notFound: true }; // or redirect to an error page or handle as needed
-    }
-  
-    const cookies = parseServerSideCookies(context.req);
-    let sessionId = cookies.get('session_id') || nanoid();
-
-    if (cookies.get('session_id')) {
-        context.res.setHeader('Set-Cookie', `session_id=${sessionId}; Path=/; Max-Age=2592000; Secure; SameSite=Lax`);
-    }
-
-    const chatData = await getChat(id, sessionId);
-
-    return { props: { chatData } };
-};
