@@ -9,22 +9,35 @@ const ChatPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log('Fetching chat data...');
+    console.log('Initializing chat...');
 
-    fetch('/api/chat')
+    // Example payload, modify as needed for your use case
+    const payload = {
+      messages: [], // Assuming no initial messages
+      // Add any other necessary data
+    };
+
+    fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
       .then((res) => {
         console.log('Response from /api/chat:', res);
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
         return res.json();
       })
       .then((data) => {
         console.log('Chat data:', data);
         setChatData(data);
-        setIsLoading(false);
       })
       .catch((error) => {
-        console.error('Error fetching chat data:', error);
+        console.error('Error initializing chat:', error);
+      })
+      .finally(() => {
         setIsLoading(false);
-        // Handle error, e.g., redirect to an error page or show a message
       });
 
     if (typeof window !== 'undefined') {
@@ -39,16 +52,14 @@ const ChatPage = () => {
   }, []);
 
   if (isLoading) {
-    return <p>Loading chat...</p>;
+    return <p>Initializing chat...</p>;
   }
 
   if (!chatData || !ChatComponent) {
-    return <p>Chat not found or failed to load component.</p>;
+    return <p>Unable to load chat.</p>;
   }
 
-  return (
-    <ChatComponent id={chatData.id} initialMessages={chatData.messages} />
-  );
+  return <ChatComponent id={chatData.id} initialMessages={chatData.messages} />;
 };
 
 export default ChatPage;
