@@ -70,7 +70,7 @@ export const questions = [
     "Give me videos about Order Flow Auctions (OFAs)",
     "Give me videos about intents",
     "Give me videos discussing Uniswap v4",
-    "What are the contributions of Jason Milionas to research?",
+    "What are the contributions of Jason Milionis to research?",
     "What are the contributions of Ciamac Moallemi to LVR and MEV?",
     "What's an automated market maker (AMM)?",
     "What are the different types of AMMs?",
