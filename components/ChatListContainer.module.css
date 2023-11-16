@@ -64,11 +64,12 @@
 
 /* Middle panel for chatlist and prompt form */
 .middlePanel {
-  flex: 2; /* Allow the middle panel to take the remaining space */
+  flex-grow: 2; /* Let it grow to use available space */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding-top: 20px; /* Adds some top padding */
+  align-items: center; /* Center children horizontally */
+  padding: 20px;
+  position: relative; /* Needed for absolute positioning of questions container */
 }
 
 /* Right panel for metadata list */
@@ -84,16 +85,13 @@
 /* Chatlist container with scrollable content */
 .chatListContainer {
   max-height: calc(100vh - 120px - 150px);
-  max-width: 650px; /* Set a max-width for the chat list container */
-  /*margin-left: auto; /* NOTE 2023-11-16: auto-adjusting margins remove user/assistant icons */
-  /*margin-right: auto; /* NOTE 2023-11-16: auto-adjusting margins remove user/assistant icons */
+  width: calc(100% - 40px); /* Subtract the total padding or margin reserved for icons */
+  max-width: 650px; /* But don't exceed 650px */
   margin: auto; /* Center within the middlePanel */
+  padding: 10px 20px; /* Padding for content, adjust as needed for icons */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
   overflow-y: auto;
   padding-bottom: 200px;
-  padding-top: 5px;
-  flex-grow: 1;
-  box-sizing: border-box;
-  overflow-x: hidden;
 }
 
 /* Style scrollbar for chat list container */
