@@ -16,7 +16,7 @@ const questions = [
   "What are the papers that deal with LVR?",
   "What are solutions to mitigate front-running and sandwich attacks?",
   "Give me several sources about L2 sequencing",
-  "Give me several sources about SUAVE?",
+  "Give me several sources about SUAVE",
   "Tell me about transaction ordering on L2s",
   "What are Order Flow Auctions (OFAs)?",
   "Can you tell me how the definition of MEV evolved over the years?",
@@ -50,11 +50,11 @@ const questions = [
   "What are the main advantages and challenges that decentralised finance face relative to traditional finance?",
   "What is the number one thing which make decentralised finance better than traditional finance and why?",
   "What is referred to as good versus bad MEV? How would you explain that to a layman?",
-  "What are the consensus trade-offs that a protocol must make between MEV and decentralization?",
-  "What are the consensus trade-offs that a protocol must make to obtain a higher transaction throughput?",
+  // "What are the consensus trade-offs that a protocol must make between MEV and decentralization?",
+  // "What are the consensus trade-offs that a protocol must make to obtain a higher transaction throughput?",
   "What are credible commitments?",
   "What is at the intersection of AI and crypto?",
-  "Would a spot ETH ETF be good for the crypto ecosystem? Would that be a centralising force?",
+  // "Would a spot ETH ETF be good for the crypto ecosystem? Would that be a centralising force?",
   "How can auction theory be used to design a better MEV auction?",
   "What are all the subjects that are needed to understand MEV?",
   "What are all the subjects you are an expert in?",
@@ -66,6 +66,7 @@ const questions = [
   "What is an attester?",
   "How do searchers, builders, relays and validators interact with one another?",
   "How can the user initiating a transaction get shielded from MEV?",
+  "Give me lectures about mechanism design",
 ]
 
 export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
@@ -116,7 +117,7 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
             className="text-white" // Add additional styling as needed
             onClick={shuffleQuestions}
           >
-            Shuffle another four questions!
+            Shuffle new questions
           </Button>
         </div>
       </div>
