@@ -41,6 +41,23 @@
   overflow-x: hidden;
 }
 
+/* Style scrollbar for chat list container */
+.chat-list-container::-webkit-scrollbar {
+  width: 10px; /* Adjust the width of the scrollbar */
+}
+
+.chat-list-container::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Track color */
+}
+
+.chat-list-container::-webkit-scrollbar-thumb {
+  background: #888; /* Handle color */
+}
+
+.chat-list-container::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Handle color on hover */
+}
+
 /* Metadata container */
 .metadataContainer {
   width: 100%; /* Use 80% of the rightPanel width */
