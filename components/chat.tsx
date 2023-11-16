@@ -124,10 +124,12 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   return (
     <>
         <div className={styles.layoutContainer}>
+  
         {/* Left empty panel */}
         <div className={styles.leftPanel}>
           {/* This panel is intentionally left empty */}
         </div>
+  
         {/* Middle panel for chatlist and prompt form */}
         <div className={styles.middlePanel}>
           {/* Chatlist container with scrollable content */}
@@ -141,21 +143,21 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
               <EmptyScreen setInput={setInput} />
             )}
           </div>
+        </div>
 
-          {/* ChatPanel component */}
-          <div className={styles.promptFormContainer}>
-            <ChatPanel
-              id={id}
-              isLoading={isLoading}
-              stop={stop}
-              append={append}
-              reload={reload}
-              messages={newMessages}
-              input={input}
-              setInput={setInput}
-              onSubmit={handleUserInputSubmit} // Pass the function to ChatPanel
-            />
-          </div>
+        {/* ChatPanel component */}
+        <div>
+          <ChatPanel
+            id={id}
+            isLoading={isLoading}
+            stop={stop}
+            append={append}
+            reload={reload}
+            messages={newMessages}
+            input={input}
+            setInput={setInput}
+            onSubmit={handleUserInputSubmit} // Pass the function to ChatPanel
+          />
         </div>
 
         {/* Right panel for metadata list */}
