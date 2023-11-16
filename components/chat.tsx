@@ -51,6 +51,16 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     setIsMetadataVisible(!isMetadataVisible);
   };
 
+  // Function to handle user input submission
+  const handleUserInputSubmit = async (value: string) => {
+    append({
+      id,
+      content: value,
+      role: 'user'
+    });
+    // Additional logic (e.g., sending to backend) can be added here
+  };
+  
   const { messages, append, reload, stop, isLoading, input, setInput } =
   useChat({  // useExtendedChat
       initialMessages,
@@ -130,6 +140,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
               messages={newMessages}
               input={input}
               setInput={setInput}
+              onSubmit={handleUserInputSubmit} // Pass the function to ChatPanel
             />
           </div>
         </div>
