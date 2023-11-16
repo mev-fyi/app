@@ -2,8 +2,8 @@
 .layoutContainer {
   display: flex;
   height: 100vh; /* Full height of the viewport */
-  justify-content: space-between; /* This will place .leftPanel at the start, .middlePanel in the center, and .rightPanel at the end */
-  align-items: flex-start; /* This aligns the panels to the top */
+  justify-content: space-between; /* Space between ensures elements are pushed to the edges */
+  align-items: flex-start; /* Aligns items to the top */
 }
 
 /* Left panel for question list */
@@ -13,32 +13,41 @@
 
 /* Middle panel for chatlist and prompt form */
 .middlePanel {
-  flex-grow: 2; /* Let it grow to use available space */
+  position: absolute; /* Position absolute to place it over the layoutContainer */
+  left: 50%; /* Position to the center of the layoutContainer */
+  transform: translateX(-50%); /* Translate to the left by half its width to center */
+  width: calc(100% - 800px); /* Subtracting total width of left and right panels */
+  max-width: 650px; /* Maximum width */
+  min-width: 300px; /* Minimum width to ensure it doesn't get too small */
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center children horizontally */
-  padding: 35px;
-  position: relative; /* Needed for absolute positioning of questions container */
+  justify-content: space-between;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 200px;
 }
 
 /* Right panel for metadata list */
 .rightPanel {
-  flex: 0 0 550px; /* Fixed width for the right panel */
+  flex: 1; /* Allows rightPanel to grow */
+  min-width: 250px; /* Minimum width */
+  max-width: 550px; /* Maximum width */
+  width: 100%; /* Takes as much width as it can */
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Aligns metadata to the start of the right panel */
-  overflow: hidden; /* Ensure no overflow affects the layout */
+  align-items: flex-start;
+  overflow: hidden;
 }
-
 
 /* Chatlist container with scrollable content */
 .chatListContainer {
   max-height: calc(100vh - 120px - 150px);
   width: 100%;
-  max-width: 650px; /* But don't exceed 650px */
-  margin: auto; /* Center within the middlePanel */
-  padding: 20px 50px; /* Padding for content, adjust as needed for icons */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  margin: auto;
+  padding: 20px 50px;
+  box-sizing: border-box;
   overflow-y: auto;
   overflow-x: hidden;
   padding-bottom: 200px;
