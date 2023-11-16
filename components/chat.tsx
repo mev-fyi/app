@@ -53,12 +53,14 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 
   // Function to handle user input submission
   const handleUserInputSubmit = async (value: string) => {
-    append({
-      id,
+    const newUserMessage: MetadataMessage = {
+      id: id || '',  // Provide a fallback value for 'id' to ensure it's not undefined
       content: value,
-      role: 'user'
-    });
-    // Additional logic (e.g., sending to backend) can be added here
+      role: 'user',  // Assuming 'user' is an acceptable value for 'role'
+      structured_metadata: []  // Assuming this matches the type in MetadataMessage
+    };
+    setMessages(prevMessages => [...prevMessages, newUserMessage]);
+    append(newUserMessage);
   };
   
   const { messages, append, reload, stop, isLoading, input, setInput } =
