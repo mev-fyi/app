@@ -33,8 +33,8 @@
 /* Chatlist container with scrollable content */
 .chatListContainer {
   max-height: calc(100vh - 120px - 150px);
-  max-width: 600px; /* Set a max-width for the chat list container */
-  margin-left: auto; /* Automatic margin on the left */
+  max-width: 700px; /* Set a max-width for the chat list container */
+  /* margin-left: auto; */ /* Automatic margin on the left */
   margin-right: auto; /* Automatic margin on the right */
   overflow-y: auto;
   padding-bottom: 200px;
@@ -63,8 +63,10 @@
 
 /* Metadata container */
 .metadataContainer {
-  width: 100%; /* Use 80% of the rightPanel width */
-  max-width: 400px; /* Example max-width */
+  width: 100%; /* Use 100% of the rightPanel width */
+  max-width: 500px; /* Example max-width */
+  margin-left: 0; /* Align to the left by setting left margin to 0 */
+  margin-right: auto; /* Keeps right margin automatic */
   padding: 1rem;
   overflow-y: auto;
   transition: transform 0.3s; /* Smooth transition for sliding in/out */
