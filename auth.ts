@@ -1,34 +1,63 @@
-import NextAuth, { type DefaultSession } from 'next-auth'
-import GitHub from 'next-auth/providers/github'
+import NextAuth from 'next-auth';
+import GitHub from 'next-auth/providers/github';
+import { nanoid } from '@/lib/utils';
+import { setCookie, removeCookie } from '@/lib/utils';
 
 declare module 'next-auth' {
   interface Session {
-    user: {
-      /** The user's id. */
-      id: string
-    } & DefaultSession['user']
+    accessToken?: string;
+    sessionId?: string;
   }
 }
 
-export const {
-  handlers: { GET, POST },
-  auth,
-  CSRF_experimental // will be removed in future
-} = NextAuth({
+declare module 'next-auth' {
+  interface User {
+    sessionId?: string;
+  }
+}
+
+
+export default NextAuth({
   providers: [GitHub],
+
   callbacks: {
-    jwt({ token, profile }) {
-      if (profile) {
-        token.id = profile.id
-        token.image = profile.avatar_url || profile.picture
+    async jwt({ token, user, account }) {
+      if (user) {
+        // Assign a new session ID on sign-in
+        token.sessionId = token.sessionId || nanoid();
       }
-      return token
+      if (account) {
+        // Include the access token in the JWT
+        token.accessToken = account.access_token;
+      }
+      return token;
     },
-    authorized({ auth }) {
-      return !!auth?.user // this ensures there is a logged in user for -every- request
+
+    async session({ session, token }) {
+      if (typeof token.accessToken === 'string') {
+        session.accessToken = token.accessToken;
+      }
+      if (typeof token.sessionId === 'string') {
+        session.sessionId = token.sessionId;
+      }
+      return session;
     }
   },
+
+  events: {
+    signIn({ user }) {
+      // Set a cookie with the session ID when the user signs in
+      if (user && user.sessionId) {
+        setCookie('session_id', user.sessionId, 30); // Set for 30 days
+      }
+    },
+    signOut() {
+      // Clear the session cookie when the user signs out
+      removeCookie('session_id');
+    }
+  },
+
   pages: {
-    signIn: '/sign-in' // overrides the next-auth default signin page https://authjs.dev/guides/basics/pages
-  }
-})
+    signIn: '/sign-in', // Custom sign-in page if needed
+  },
+});

@@ -1,7 +1,7 @@
 import { kv } from '@vercel/kv'
 import { Configuration } from 'openai-edge'
-import { auth } from '@/auth'
-import { nanoid } from '@/lib/utils'
+import { auth } from '@/auth-utils'
+import { nanoid, parseCookies } from '@/lib/utils'
 import { parseMetadata } from '@/lib/utils';
 import { ParsedMetadataEntry } from '@/lib/types';
 
@@ -24,14 +24,15 @@ export async function POST(req: Request) {
   }
 
   const { messages, previewToken } = json;
-  const session = await auth();
+  const cookies = parseCookies(req);
+  const sessionId = cookies.get('session_id');
 
-  if (!session?.user) {
+  if (!sessionId) {
     console.error('Unauthorized request: No session user found.');
     return new Response('Unauthorized', { status: 401 });
   }
 
-  console.log('User authenticated, user ID:', session.user.id);
+  console.log('Session ID validated:', sessionId);
 
   if (previewToken) {
     console.log('Using preview token for API key');
@@ -79,7 +80,7 @@ export async function POST(req: Request) {
   const payload = {
     id,
     title,
-    userId: session.user.id,
+    userId: sessionId,
     createdAt,
     path,
     messages: [
@@ -95,7 +96,7 @@ export async function POST(req: Request) {
 
   try {
     await kv.set(`chat:${id}`, JSON.stringify(payload));
-    await kv.zadd(`user:chat:${session.user.id}`, { score: createdAt, member: `chat:${id}` });
+    await kv.zadd(`user:chat:${sessionId}`, { score: createdAt, member: `chat:${id}` });
     console.log('Chat record stored');
   } catch (error) {
     console.error('Failed to store chat record:', error);

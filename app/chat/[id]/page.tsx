@@ -1,7 +1,7 @@
-import { type Metadata } from 'next'
+import { type Metadata, GetServerSidePropsContext, GetServerSideProps } from 'next';
 import { notFound, redirect } from 'next/navigation'
 
-import { auth } from '@/auth'
+import { auth } from '@/auth-utils'
 import { getChat } from '@/app/actions'
 import { Chat } from '@/components/chat'
 
@@ -10,15 +10,15 @@ export const preferredRegion = 'home'
 
 export interface ChatPageProps {
   params: {
-    id: string
-  }
+    id: string;
+  };
+  session: any; // Replace 'any' with your session type if you have a specific one
 }
 
-export async function generateMetadata({
-  params
-}: ChatPageProps): Promise<Metadata> {
-  const session = await auth()
 
+export async function generateMetadata({
+  params, session
+}: ChatPageProps): Promise<Metadata> {
   if (!session?.user) {
     return {}
   }
@@ -29,9 +29,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function ChatPage({ params }: ChatPageProps) {
-  const session = await auth()
-
+export default async function ChatPage({ params, session }: ChatPageProps) {
   if (!session?.user) {
     redirect(`/sign-in?next=/chat/${params.id}`)
   }
@@ -48,3 +46,15 @@ export default async function ChatPage({ params }: ChatPageProps) {
 
   return <Chat id={chat.id} initialMessages={chat.messages} />
 }
+
+
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+  const session = await auth(context);
+
+  return {
+    props: {
+      params: context.params,
+      session,
+    },
+  };
+};
