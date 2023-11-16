@@ -33,7 +33,7 @@
 /* Chatlist container with scrollable content */
 .chatListContainer {
   max-height: calc(100vh - 120px - 150px);
-  max-width: 700px; /* Set a max-width for the chat list container */
+  max-width: 800px; /* Set a max-width for the chat list container */
   margin-left: auto; /* Automatic margin on the left */
   margin-right: auto; /* Automatic margin on the right */
   overflow-y: auto;
