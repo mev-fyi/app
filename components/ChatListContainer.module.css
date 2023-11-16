@@ -11,51 +11,6 @@
   flex: 1; /* Fixed width for the left panel */
 }
 
-/* Questions container */
-.questionsContainer {
-  position: absolute; /* Position absolutely to hover above */
-  bottom: 100px; /* Position above the chat input */
-  left: 50%; /* Center horizontally */
-  transform: translateX(-50%); /* Adjust for centering */
-  display: flex;
-  flex-wrap: wrap; /* Wrap questions if more than one line */
-  justify-content: center; /* Center questions */
-  align-items: center; /* Center items vertically */
-  z-index: 10; /* Above chat list */
-}
-
-/* Individual question container */
-.question {
-  background: #333; /* Example background */
-  color: #fff; /* Text color */
-  margin: 5px; /* Space between questions */
-  padding: 10px 20px; /* Padding inside questions */
-  border-radius: 20px; /* Rounded corners */
-  cursor: pointer; /* Pointer on hover */
-}
-
-/* Chat input container */
-.chatInputContainer {
-  position: absolute; /* Position absolutely within middle panel */
-  bottom: 0; /* Align with the bottom */
-  left: 0; /* Align with the left */
-  width: 100%; /* Full width */
-}
-
-
-@media (max-width: 767px) {
-  .questionsContainer {
-    bottom: 60px; /* Adjust for mobile keyboard */
-    padding: 0 10px; /* Padding to ensure visibility within screen bounds */
-  }
-  .question {
-    margin: 3px; /* Smaller margins for compact display */
-    padding: 5px 10px; /* Smaller padding */
-    font-size: 0.8rem; /* Smaller font size */
-  }
-}
-
-
 /* Middle panel for chatlist and prompt form */
 .middlePanel {
   flex-grow: 2; /* Let it grow to use available space */
@@ -82,7 +37,7 @@
   width: 100%;
   max-width: 650px; /* But don't exceed 650px */
   margin: auto; /* Center within the middlePanel */
-  padding: 20px 20px; /* Padding for content, adjust as needed for icons */
+  padding: 20px 30px; /* Padding for content, adjust as needed for icons */
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
   overflow-y: auto;
   overflow-x: hidden;
@@ -109,7 +64,7 @@
 /* Metadata container */
 .metadataContainer {
   width: 100%; /* Use 100% of the rightPanel width */
-  max-width: 500px; /* Example max-width */
+  max-width: 400px; /* Example max-width */
   margin-left: 0; /* Align to the left by setting left margin to 0 */
   margin-right: auto; /* Keeps right margin automatic */
   padding: 1rem;
@@ -166,3 +121,48 @@
   font-size: 1.25rem;
   margin-bottom: 2rem;
 }
+
+/* Questions container */
+.questionsContainer {
+  position: absolute; /* Position absolutely to hover above */
+  bottom: 100px; /* Position above the chat input */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Adjust for centering */
+  display: flex;
+  flex-wrap: wrap; /* Wrap questions if more than one line */
+  justify-content: center; /* Center questions */
+  align-items: center; /* Center items vertically */
+  z-index: 10; /* Above chat list */
+}
+
+/* Individual question container */
+.question {
+  background: #333; /* Example background */
+  color: #fff; /* Text color */
+  margin: 5px; /* Space between questions */
+  padding: 10px 20px; /* Padding inside questions */
+  border-radius: 20px; /* Rounded corners */
+  cursor: pointer; /* Pointer on hover */
+}
+
+/* Chat input container */
+.chatInputContainer {
+  position: absolute; /* Position absolutely within middle panel */
+  bottom: 0; /* Align with the bottom */
+  left: 0; /* Align with the left */
+  width: 100%; /* Full width */
+}
+
+
+@media (max-width: 767px) {
+  .questionsContainer {
+    bottom: 60px; /* Adjust for mobile keyboard */
+    padding: 0 10px; /* Padding to ensure visibility within screen bounds */
+  }
+  .question {
+    margin: 3px; /* Smaller margins for compact display */
+    padding: 5px 10px; /* Smaller padding */
+    font-size: 0.8rem; /* Smaller font size */
+  }
+}
+
