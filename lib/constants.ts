@@ -64,9 +64,16 @@ export const questions = [
     "Give me videos links with Robert Miller",
     "Give me videos links with Jon Charbonneau",
     "Give me videos links with Barnabe Monnot",
+    "Give me videos links with Tarun Chitra",
+    "Give me videos links with Dan Robinson",
     "Give me videos about Trusted Execution Environment (TEE)",
     "Give me videos about Order Flow Auctions (OFAs)",
     "Give me videos about intents",
     "Give me videos discussing Uniswap v4",
+    "What are the contributions of Jason Milionas to research?",
+    "What are the contributions of Ciamac Moallemi to LVR and MEV?",
+    "What's an automated market maker (AMM)?",
+    "What are the different types of AMMs?",
+    "What are Uniswap v4 hooks and do you have some examples?"
   ]
   
