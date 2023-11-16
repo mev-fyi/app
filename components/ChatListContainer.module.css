@@ -9,7 +9,7 @@
 /* Left panel for quesiton list */
 .leftPanel {
   flex: 1;
-  padding-top: 60px; /* Add top padding to align with middle panel */
+  padding-top: 240px; /* Add top padding to align with middle panel */
   display: flex;
   flex-direction: column;
   align-items: center; /* Center the content horizontally */
@@ -18,8 +18,8 @@
 /* Container for the questions list */
 .questionListContainer {
   width: 100%; /* Full width of the left panel */
-  max-width: 300px; /* Max width for better readability */
-  padding: 10px; /* Padding around the questions */
+  max-width: 400px; /* Max width for better readability */
+  padding: 30px; /* Padding around the questions */
   margin-bottom: 20px; /* Space below the container */
   box-sizing: border-box;
 }
