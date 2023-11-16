@@ -6,27 +6,29 @@
   align-items: flex-start; /* This aligns the panels to the top */
 }
 
-/* Left panel for quesiton list */
+/* Left panel for question list */
 .leftPanel {
-  flex: 1;
+  flex: 0 0 20%; /* Flex grow, shrink, and basis set to maintain width */
   padding-top: 240px; /* Add top padding to align with middle panel */
   display: flex;
   flex-direction: column;
   align-items: center; /* Center the content horizontally */
+  /* Ensure no overflow affects the layout */
+  overflow: hidden;
 }
 
 /* Container for the questions list */
 .questionListContainer {
   width: 100%; /* Full width of the left panel */
   max-width: 400px; /* Max width for better readability */
-  padding: 30px; /* Padding around the questions */
+  padding: 60px; /* Padding around the questions */
   margin-bottom: 20px; /* Space below the container */
   box-sizing: border-box;
 }
 
 /* Middle panel for chatlist and prompt form */
 .middlePanel {
-  flex: 2; /* Takes up 2 parts of the available space, adjust as needed */
+  flex: 0 0 60%; /* Flex grow, shrink, and basis set to maintain width */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -35,12 +37,13 @@
 
 /* Right panel for metadata list */
 .rightPanel {
-  /* The styles here will be overridden by the .metadataContainer styles on mobile */
-  flex: 1; /* Takes up 1 part of the available space, adjust as needed */
+  flex: 0 0 20%; /* Flex grow, shrink, and basis set to maintain width */
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* Aligns metadata to the start of the right panel */
+  overflow: hidden; /* Ensure no overflow affects the layout */
 }
+
 
 /* Chatlist container with scrollable content */
 .chatListContainer {
