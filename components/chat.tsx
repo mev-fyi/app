@@ -118,7 +118,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         <div className={styles.layoutContainer}>
         {/* Left empty panel */}
         <div className={styles.leftPanel}>
-          {lastMessageRole === 'assistant' && (
+        {lastMessageRole === 'assistant' && messages.length > 0 && (
           <div className={styles.questionListContainer}>
             <QuestionList setInput={setInput} />
           </div>
