@@ -66,7 +66,11 @@ const questions = [
   "What is an attester?",
   "How do searchers, builders, relays and validators interact with one another?",
   "How can the user initiating a transaction get shielded from MEV?",
-  "Give me lectures about mechanism design",
+  "Give me lectures links about mechanism design",
+  "Give me videos links with Hasu",
+  "Give me videos links with Robert Miller",
+  "Give me videos links with Jon Charbonneau",
+  "Give me videos links with Barnabe Monnot",
 ]
 
 export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
