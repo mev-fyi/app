@@ -61,6 +61,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     };
     setMessages(prevMessages => [...prevMessages, newUserMessage]);
     append(newUserMessage);
+    console.log("Received input from user!")
   };
   
   const { messages, append, reload, stop, isLoading, input, setInput } =
