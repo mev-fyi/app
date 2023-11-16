@@ -31,7 +31,7 @@ const questions = [
   "Explain to me the differences between Uniswap v2, v3 and v4",
   "What are commit/reveal schemes?",
   "What is the impact of latency in MEV?",
-  "What is PEPC?",
+  "What is Protocol enforced Proposer commitments (PEPC)?",
   "Are roll-ups real?",
   "Are intents real?",
   "What are relays?",
@@ -72,11 +72,16 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
   const [selectedQuestions, setSelectedQuestions] = useState<string[]>([]);
 
   useEffect(() => {
-    // It's important to clone the array before sorting to avoid mutating the original list.
-    const shuffled = [...questions].sort(() => 0.5 - Math.random());
-    setSelectedQuestions(shuffled.slice(0, 4));
+    shuffleQuestions();
   }, []); // Empty array means useEffect runs once on mount
 
+  // Function to shuffle and select four questions
+  const shuffleQuestions = () => {
+    const shuffled = [...questions].sort(() => 0.5 - Math.random());
+    setSelectedQuestions(shuffled.slice(0, 4));
+  };
+
+  
   return (
     <div className="mx-auto max-w-2xl px-4">
       <div className="rounded-lg border bg-background p-8 text-left">
@@ -103,6 +108,16 @@ export function EmptyScreen({ setInput }: Pick<UseChatHelpers, 'setInput'>) {
               <span className="break-words flex-grow">{question}</span> {/* Allow the text to grow and wrap as needed */}
             </Button>
           ))}
+        </div>
+        {/* New Button to shuffle and select four questions */}
+        <div className="mt-4">
+          <Button
+            variant="outline" // Corrected variant value
+            className="text-white" // Add additional styling as needed
+            onClick={shuffleQuestions}
+          >
+            Shuffle another four questions!
+          </Button>
         </div>
       </div>
     </div>
