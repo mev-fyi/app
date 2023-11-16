@@ -16,8 +16,9 @@ export interface ChatMessageProps {
 }
 
 export function ChatMessage({ message, ...props }: ChatMessageProps) {
-  console.log("Received message in ChatMessage!");
-  console.log(message); // Add this to inspect the messages
+  // console.log("Received message in ChatMessage!");
+  // console.log(message); // Add this to inspect the messages
+  // {message.role === 'user' ? <IconUser /> : <IconOpenAI />}
   return (
     <div
       className={cn('group relative mb-4 flex items-start md:-ml-12')}
@@ -31,7 +32,8 @@ export function ChatMessage({ message, ...props }: ChatMessageProps) {
             : 'bg-primary text-primary-foreground'
         )}
       >
-        {message.role === 'user' ? <IconUser /> : <IconOpenAI />}
+        
+        {<IconUser />}
       </div>
       <div className="flex-1 px-1 ml-4 space-y-2 overflow-hidden">
         <MemoizedReactMarkdown

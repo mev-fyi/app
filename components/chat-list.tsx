@@ -11,8 +11,8 @@ export function ChatList({ messages }: ChatList) {
   if (!messages.length) {
     return null
   }
-  console.log("Received messages in chatlist! with messages:"); // Add this to inspect the messages
-  console.log(messages); // Add this to inspect the messages
+  // console.log("Received messages in chatlist! with messages:"); // Add this to inspect the messages
+  // console.log(messages); // Add this to inspect the messages
   return (
     <div className="relative mx-auto max-w-2xl px-4">
       {messages.map((message, index) => (
