@@ -74,6 +74,10 @@ export const questions = [
     "What are the contributions of Ciamac Moallemi to LVR and MEV?",
     "What's an automated market maker (AMM)?",
     "What are the different types of AMMs?",
-    "What are Uniswap v4 hooks and do you have some examples?"
+    "What are Uniswap v4 hooks and do you have some examples?",
+    "What is the mempool?",
+    "How do private mempools influence MEV?",
+    "What is the difference between a private mempool and a dark pool?",
+    "What protections can we use against MEV?"
   ]
   
