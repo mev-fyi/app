@@ -23,7 +23,7 @@
   flex-direction: column;
   justify-content: space-between;
   /*padding: 30px;*/
-  font-size: 0.8rem; /* Adjust the font size as needed */
+  font-size: 0.6rem; /* Adjust the font size as needed */
   box-sizing: border-box;
   overflow-y: auto;
   overflow-x: hidden;
@@ -51,7 +51,8 @@
   box-sizing: border-box;
   overflow-y: auto;
   overflow-x: hidden;
-  padding-bottom: 200px;
+  padding-bottom: 20px;
+  padding-top: 60px;
 }
 
 /* Style scrollbar for chat list container */
