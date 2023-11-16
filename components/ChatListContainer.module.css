@@ -28,6 +28,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   padding-bottom: 200px;
+  font-size: 0.95rem; /* Adjust the font size as needed */
 }
 
 /* Right panel for metadata list */
@@ -179,5 +180,5 @@
 
 
 .customMarkdownFont {
-  font-size: 0.85rem; /* Adjust the font size as needed */
+  font-size: 0.90rem; /* Adjust the font size as needed */
 }
