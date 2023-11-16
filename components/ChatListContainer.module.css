@@ -37,7 +37,7 @@
   width: 100%;
   max-width: 650px; /* But don't exceed 650px */
   margin: auto; /* Center within the middlePanel */
-  padding: 20px 30px; /* Padding for content, adjust as needed for icons */
+  padding: 20px 50px; /* Padding for content, adjust as needed for icons */
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
   overflow-y: auto;
   overflow-x: hidden;
@@ -64,7 +64,7 @@
 /* Metadata container */
 .metadataContainer {
   width: 100%; /* Use 100% of the rightPanel width */
-  max-width: 400px; /* Example max-width */
+  max-width: 700px; /* Example max-width */
   margin-left: 0; /* Align to the left by setting left margin to 0 */
   margin-right: auto; /* Keeps right margin automatic */
   padding: 1rem;
