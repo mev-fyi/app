@@ -10,6 +10,7 @@ import { CodeBlock } from '@/components/ui/codeblock'
 import { MemoizedReactMarkdown } from '@/components/markdown'
 import { IconOpenAI, IconUser } from '@/components/ui/icons'
 import { ChatMessageActions } from '@/components/chat-message-actions'
+import styles from './ChatListContainer.module.css'; // Import the CSS module
 
 export interface ChatMessageProps {
   message: Message
@@ -37,7 +38,7 @@ export function ChatMessage({ message, ...props }: ChatMessageProps) {
       </div>
       <div className="flex-1 px-1 ml-4 space-y-2 overflow-hidden">
         <MemoizedReactMarkdown
-          className="prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0"
+          className={`prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 ${styles.customMarkdownFont}`}
           remarkPlugins={[remarkGfm, remarkMath]}
           components={{
             p({ children }) {
