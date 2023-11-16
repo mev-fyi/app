@@ -2,19 +2,13 @@
 .layoutContainer {
   display: flex;
   height: 100vh; /* Full height of the viewport */
-  justify-content: center; /* This centers the middle panel horizontally */
+  justify-content: space-between; /* This will place .leftPanel at the start, .middlePanel in the center, and .rightPanel at the end */
   align-items: flex-start; /* This aligns the panels to the top */
 }
 
 /* Left panel for question list */
 .leftPanel {
   flex: 1; /* Fixed width for the left panel */
-  /*padding-top: 280px; /* Add top padding to align with middle panel */
-  /*display: flex;
-  /*flex-direction: column;
-  align-items: center; /* Center the content horizontally */
-  /* Ensure no overflow affects the layout */
-  /*overflow: hidden;*/
 }
 
 /* Questions container */
@@ -74,7 +68,7 @@
 
 /* Right panel for metadata list */
 .rightPanel {
-  flex: 1; /* Fixed width for the right panel */
+  flex: 0 0 250px; /* Fixed width for the right panel */
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* Aligns metadata to the start of the right panel */
@@ -85,12 +79,13 @@
 /* Chatlist container with scrollable content */
 .chatListContainer {
   max-height: calc(100vh - 120px - 150px);
-  width: calc(100% - 40px); /* Subtract the total padding or margin reserved for icons */
+  width: calc(100% - 30px); /* Subtract the total padding or margin reserved for icons */
   max-width: 650px; /* But don't exceed 650px */
   margin: auto; /* Center within the middlePanel */
   padding: 10px 20px; /* Padding for content, adjust as needed for icons */
   box-sizing: border-box; /* Include padding and border in the element's total width and height */
   overflow-y: auto;
+  overflow-x: hidden;
   padding-bottom: 200px;
 }
 
@@ -121,6 +116,7 @@
   overflow-y: auto;
   transition: transform 0.3s; /* Smooth transition for sliding in/out */
   z-index: 10; /* Ensure it's above other content */
+  padding-right: 10%
 }
 
 /* Style for the button to toggle the metadata view */
