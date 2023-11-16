@@ -33,9 +33,9 @@
 /* Chatlist container with scrollable content */
 .chatListContainer {
   max-height: calc(100vh - 120px - 150px);
-  max-width: 800px; /* Set a max-width for the chat list container */
-  /*margin-left: auto; /* Automatic margin on the left */
-  /*margin-right: auto; /* Automatic margin on the right */
+  max-width: 650px; /* Set a max-width for the chat list container */
+  /*margin-left: auto; /* NOTE 2023-11-16: auto-adjusting margins remove user/assistant icons */
+  /*margin-right: auto; /* NOTE 2023-11-16: auto-adjusting margins remove user/assistant icons */
   overflow-y: auto;
   padding-bottom: 200px;
   padding-top: 5px;

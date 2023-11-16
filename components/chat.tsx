@@ -21,6 +21,7 @@ import { Input } from './ui/input'
 import { toast } from 'react-hot-toast'
 import MetadataList from '@/components/metadata-list';
 import styles from './ChatListContainer.module.css'; // Import the CSS module
+import { QuestionList } from './questions-list'
 
 
 // Extend the Message type to include structured_metadata
@@ -45,6 +46,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   // State to hold structured metadata entries
   const [structuredMetadataEntries, setStructuredMetadataEntries] = useState([]);
   const [newMessages, setMessages] = useState(initialMessages || []);
+  const [lastMessageRole, setLastMessageRole] = useState('assistant');
 
   const [isMetadataVisible, setIsMetadataVisible] = useState(false);
   const toggleMetadataVisibility = () => {
@@ -61,6 +63,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     };
     setMessages(prevMessages => [...prevMessages, newUserMessage]);
     append(newUserMessage);
+    setLastMessageRole('user');
   };
   
   const { messages, append, reload, stop, isLoading, input, setInput } =
@@ -100,6 +103,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             
             });
             setMessages(responseData.messages);
+            setLastMessageRole('assistant');
 
           } catch (error) {
             console.error('Error reading response data:', error);
@@ -114,7 +118,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         <div className={styles.layoutContainer}>
         {/* Left empty panel */}
         <div className={styles.leftPanel}>
-          {/* This panel is intentionally left empty */}
+          {lastMessageRole === 'assistant' && <QuestionList setInput={setInput} />}
         </div>
 
         {/* Middle panel for chatlist and prompt form */}
