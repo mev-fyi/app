@@ -8,8 +8,8 @@
 
 /* Left panel for question list */
 .leftPanel {
-  flex: 0 0 20%; /* Flex grow, shrink, and basis set to maintain width */
-  padding-top: 240px; /* Add top padding to align with middle panel */
+  flex: 0 0 250px; /* Fixed width for the left panel */
+  padding-top: 280px; /* Add top padding to align with middle panel */
   display: flex;
   flex-direction: column;
   align-items: center; /* Center the content horizontally */
@@ -28,7 +28,7 @@
 
 /* Middle panel for chatlist and prompt form */
 .middlePanel {
-  flex: 0 0 60%; /* Flex grow, shrink, and basis set to maintain width */
+  flex-grow: 1; /* Allow the middle panel to take the remaining space */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -37,7 +37,7 @@
 
 /* Right panel for metadata list */
 .rightPanel {
-  flex: 0 0 20%; /* Flex grow, shrink, and basis set to maintain width */
+  flex: 0 0 250px; /* Fixed width for the right panel */
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* Aligns metadata to the start of the right panel */

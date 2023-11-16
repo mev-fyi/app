@@ -19,16 +19,16 @@ export const QuestionList = ({ setInput }: Pick<UseChatHelpers, 'setInput'>) => 
   return (
     <div>
       {selectedQuestions.map((question, index) => (
-        <Button
-          key={index}
-          variant="link"
-          className="text-left p-0 text-base text-white flex items-center w-full"
-          onClick={() => setInput(question)}
-          style={{ justifyContent: 'flex-start' }} // Use inline styles to override any existing flexbox styles
-        >
-          <IconArrowRight className="flex-shrink-0 mr-2" /> {/* Prevent the arrow from shrinking */}
-          <span className="break-words flex-grow">{question}</span> {/* Allow the text to grow and wrap as needed */}
-        </Button>
+        <div key={index} className="mb-4"> {/* Add margin-bottom to each question */}
+          <Button
+            variant="link"
+            className="text-left text-base text-white flex items-center w-full"
+            onClick={() => setInput(question)}
+          >
+            <IconArrowRight className="flex-shrink-0 mr-2" />
+            <span className="break-words flex-grow">{question}</span>
+          </Button>
+        </div>
       ))}
       {/* New Button to shuffle and select four questions */}
       <div className="mt-4">
