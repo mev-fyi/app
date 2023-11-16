@@ -17,14 +17,50 @@
   /*overflow: hidden;*/
 }
 
-/* Container for the questions list */
-/*.questionListContainer {
-  width: 100%; /* Full width of the left panel */
-  /*max-width: 400px; /* Max width for better readability */
-  /*padding: 60px; /* Padding around the questions */
-  /*margin-bottom: 20px; /* Space below the container */
-  /*box-sizing: border-box;
-}*/
+/* Questions container */
+.questionsContainer {
+  position: absolute; /* Position absolutely to hover above */
+  bottom: 100px; /* Position above the chat input */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Adjust for centering */
+  display: flex;
+  flex-wrap: wrap; /* Wrap questions if more than one line */
+  justify-content: center; /* Center questions */
+  align-items: center; /* Center items vertically */
+  z-index: 10; /* Above chat list */
+}
+
+/* Individual question container */
+.question {
+  background: #333; /* Example background */
+  color: #fff; /* Text color */
+  margin: 5px; /* Space between questions */
+  padding: 10px 20px; /* Padding inside questions */
+  border-radius: 20px; /* Rounded corners */
+  cursor: pointer; /* Pointer on hover */
+}
+
+/* Chat input container */
+.chatInputContainer {
+  position: absolute; /* Position absolutely within middle panel */
+  bottom: 0; /* Align with the bottom */
+  left: 0; /* Align with the left */
+  width: 100%; /* Full width */
+}
+
+
+@media (max-width: 767px) {
+  .questionsContainer {
+    bottom: 60px; /* Adjust for mobile keyboard */
+    padding: 0 10px; /* Padding to ensure visibility within screen bounds */
+  }
+  .question {
+    margin: 3px; /* Smaller margins for compact display */
+    padding: 5px 10px; /* Smaller padding */
+    font-size: 0.8rem; /* Smaller font size */
+  }
+}
+
 
 /* Middle panel for chatlist and prompt form */
 .middlePanel {
@@ -50,7 +86,7 @@
   max-height: calc(100vh - 120px - 150px);
   max-width: 650px; /* Set a max-width for the chat list container */
   /*margin-left: auto; /* NOTE 2023-11-16: auto-adjusting margins remove user/assistant icons */
-  /*margin-right: auto; /* NOTE 2023-11-16: auto-adjusting margins remove user/assistant icons */
+  margin-right: auto; /* NOTE 2023-11-16: auto-adjusting margins remove user/assistant icons */
   overflow-y: auto;
   padding-bottom: 200px;
   padding-top: 5px;
