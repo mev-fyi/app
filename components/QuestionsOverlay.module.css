@@ -1,0 +1,49 @@
+/* questions-overlay.css */
+.questionsOverlay {
+    position: absolute;
+    bottom: 100%; /* Position it above the prompt container */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; /* Space between boxes */
+    justify-content: center;
+    align-items: center;
+    z-index: 10; /* Above other elements */
+  }
+  
+  .questionBox {
+    border: 2px solid white; /* Outline effect */
+    border-radius: 8px; /* Rounded corners */
+    padding: 8px 16px; /* Padding inside the box */
+    cursor: pointer; /* Pointer to indicate clickable */
+    background-color: transparent; /* No background */
+    color: white; /* Text color */
+    transition: background-color 0.3s, color 0.3s; /* Transition for hover effect */
+  }
+  
+  .questionBox:hover {
+    background-color: white; /* Background on hover */
+    color: black; /* Text color on hover */
+  }
+  
+
+  .resampleButtonContainer {
+    position: absolute;
+    top: -30px; /* Adjust as necessary to position the button above the boxes */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .resampleButton {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px; /* Adjust size as necessary */
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }

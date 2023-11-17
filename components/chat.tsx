@@ -22,6 +22,7 @@ import { toast } from 'react-hot-toast'
 import MetadataList from '@/components/metadata-list';
 import styles from './ChatListContainer.module.css'; // Import the CSS module
 import { QuestionList } from './questions-list'
+import { QuestionsOverlay } from './question-overlay';
 
 
 // Extend the Message type to include structured_metadata
@@ -143,6 +144,14 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
               <EmptyScreen setInput={setInput} />
             )}
           </div>
+        </div>
+
+        <div className={styles.leftPanel}>
+         {lastMessageRole === 'assistant' && messages.length > 0 && (
+                <QuestionsOverlay
+                setInput={setInput}
+              />
+           )}
         </div>
 
         {/* ChatPanel component */}
