@@ -15,7 +15,7 @@ import {
   DialogHeader,
   DialogTitle
 } from '@/components/ui/dialog'
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { toast } from 'react-hot-toast'
@@ -67,6 +67,16 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     setLastMessageRole('user');
   };
   
+  // Create a ref for the end of the chat list
+  const chatListEndRef = useRef<HTMLDivElement>(null);
+
+  // Scroll to bottom whenever messages update
+  useEffect(() => {
+    if (chatListEndRef.current) {
+      chatListEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [newMessages]); // Ensure that messages is declared in the component scope
+
   const { messages, append, reload, stop, isLoading, input, setInput } =
   useChat({
       initialMessages,
@@ -137,12 +147,9 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
               <EmptyScreen/>
             )}
           </div>
-
-          
-          <QuestionsOverlay setInput={setInput} />
-          
-
         </div>
+        
+        <QuestionsOverlay setInput={setInput} />
 
         <div>  {/* ChatPanel component */}
           <ChatPanel
