@@ -1,6 +1,6 @@
 import React from 'react';
 import { QuestionList } from '@/components/questions-list';
-import styles from './questions-overlay.module.css'; // Ensure the path and filename match your CSS module
+import styles from './QuestionsOverlay.module.css'; // Import the CSS module
 
 interface QuestionsOverlayProps {
   setInput: (input: string) => void; // Function to set the chat input
