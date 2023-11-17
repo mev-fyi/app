@@ -114,10 +114,9 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
       }
     })
 
-    // {lastMessageRole === 'assistant' && messages.length > 0 && (
-    //   <QuestionsOverlay
-    //   setInput={setInput}
-    // />
+
+    // { (lastMessageRole === 'assistant' || messages.length === 0) && (
+    //   <QuestionsOverlay setInput={setInput} />
     // )}
   return (
     <>
@@ -139,9 +138,9 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             )}
           </div>
 
-          { (lastMessageRole === 'assistant' || messages.length === 0) && (
-            <QuestionsOverlay setInput={setInput} />
-          )}
+          
+          <QuestionsOverlay setInput={setInput} />
+          
 
         </div>
 
