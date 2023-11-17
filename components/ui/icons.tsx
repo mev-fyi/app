@@ -212,6 +212,26 @@ function IconPlus({ className, ...props }: React.ComponentProps<'svg'>) {
   )
 }
 
+function IconNewChat({ className, ...props }: React.ComponentProps<'svg'>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 256 256"
+      fill="currentColor"
+      className={cn('h-6 w-6', className)} // Adjust the size as needed
+      {...props}
+    >
+      <rect x="10" y="10" width="236" height="236" rx="20" fill="#333" /> {/* Example fill color */}
+      <text x="50%" y="40%" dominantBaseline="middle" textAnchor="middle" fontSize="20" fill="#FFF">
+        New
+      </text>
+      <text x="50%" y="60%" dominantBaseline="middle" textAnchor="middle" fontSize="20" fill="#FFF">
+        Chat
+      </text>
+    </svg>
+  )
+}
+
 function IconArrowElbow({ className, ...props }: React.ComponentProps<'svg'>) {
   return (
     <svg
@@ -487,6 +507,7 @@ export {
   IconArrowRight,
   IconUser,
   IconPlus,
+  IconNewChat,
   IconArrowElbow,
   IconSpinner,
   IconMessage,

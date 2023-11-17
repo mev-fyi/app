@@ -107,7 +107,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 
           } catch (error) {
             console.error('Error reading response data:', error);
-            // Handle error scenario
+            toast.error('Error reading response data');
           }
         }
       }

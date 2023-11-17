@@ -64,7 +64,7 @@ export const questions = [
     "Give me videos links with Robert Miller",
     "Give me videos links with Jon Charbonneau",
     "Give me videos links with Barnabe Monnot",
-    "Give me videos links with Tarun Chitra",
+    "Give me content from Tarun Chitra",
     "Give me videos links with Dan Robinson",
     "Give me videos about Trusted Execution Environment (TEE)",
     "Give me videos about Order Flow Auctions (OFAs)",
