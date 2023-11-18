@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { signIn } from 'next-auth/react';
 
 import { cn } from '@/lib/utils';
 import { clearChats } from '@/app/actions';
@@ -13,44 +12,8 @@ import { ThemeToggle } from '@/components/theme-toggle';
 import { ClearHistory } from '@/components/clear-history';
 import { UserMenu } from '@/components/user-menu';
 import { auth } from '@/auth'
+import { LoginButton } from '@/components/login-button'
 
-
-interface LoginButtonProps {
-  loginType: 'github' | 'google';
-  text: string;
-  showIcon?: boolean;
-  className?: string;
-}
-
-export function LoginButton({ loginType, text, showIcon = true, className, ...props }: LoginButtonProps) {
-  const [isLoading, setIsLoading] = React.useState(false);
-
-  const handleLogin = () => {
-    setIsLoading(true);
-    signIn(loginType, { callbackUrl: '/' });
-  };
-
-  const renderIcon = () => {
-    if (loginType === 'github') {
-      return <IconGitHub className="mr-2" />;
-    } else if (loginType === 'google') {
-      return <IconGoogle className="mr-2" />;
-    }
-  };
-
-  return (
-    <Button
-      variant="outline"
-      onClick={handleLogin}
-      disabled={isLoading}
-      className={cn(className)}
-      {...props}
-    >
-      {isLoading ? <span className="mr-2">Loading...</span> : showIcon && renderIcon()}
-      {text}
-    </Button>
-  );
-}
 export async function Header() {
   const session = await auth();
   return (
