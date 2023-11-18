@@ -1,21 +1,19 @@
-'use client';
+import React from 'react';
+import Link from 'next/link';
+import { signIn } from 'next-auth/react';
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link'
-import { signIn } from 'next-auth/react'
-
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/utils';
+import { clearChats } from '@/app/actions';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { Sidebar } from '@/components/sidebar';
+import { SidebarList } from '@/components/sidebar-list';
+import { IconNextChat, IconSeparator, IconVercel, IconGitHub, IconGoogle } from '@/components/ui/icons';
+import { SidebarFooter } from '@/components/sidebar-footer';
+import { ThemeToggle } from '@/components/theme-toggle';
+import { ClearHistory } from '@/components/clear-history';
+import { UserMenu } from '@/components/user-menu';
 import { auth } from '@/auth'
-import { clearChats } from '@/app/actions'
-import { Button, buttonVariants } from '@/components/ui/button'
-import { Sidebar } from '@/components/sidebar'
-import { SidebarList } from '@/components/sidebar-list'
-import { IconNextChat, IconSeparator, IconVercel, IconGitHub, IconGoogle } from '@/components/ui/icons'
-import { SidebarFooter } from '@/components/sidebar-footer'
-import { ThemeToggle } from '@/components/theme-toggle'
-import { ClearHistory } from '@/components/clear-history'
-import { UserMenu } from '@/components/user-menu'
-import { Session } from 'next-auth';
+
 
 interface LoginButtonProps {
   loginType: 'github' | 'google';
@@ -25,20 +23,20 @@ interface LoginButtonProps {
 }
 
 export function LoginButton({ loginType, text, showIcon = true, className, ...props }: LoginButtonProps) {
-  const [isLoading, setIsLoading] = React.useState(false)
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const handleLogin = () => {
-    setIsLoading(true)
-    signIn(loginType, { callbackUrl: '/' })
-  }
+    setIsLoading(true);
+    signIn(loginType, { callbackUrl: '/' });
+  };
 
   const renderIcon = () => {
     if (loginType === 'github') {
-      return <IconGitHub className="mr-2" />
+      return <IconGitHub className="mr-2" />;
     } else if (loginType === 'google') {
-      return <IconGoogle className="mr-2" />
+      return <IconGoogle className="mr-2" />;
     }
-  }
+  };
 
   return (
     <Button
@@ -51,20 +49,10 @@ export function LoginButton({ loginType, text, showIcon = true, className, ...pr
       {isLoading ? <span className="mr-2">Loading...</span> : showIcon && renderIcon()}
       {text}
     </Button>
-  )
+  );
 }
-
-export function Header() {
-  const [session, setSession] = useState<Session | null>(null);
-
-  useEffect(() => {
-    const fetchSession = async () => {
-      const sessionData = await auth();
-      setSession(sessionData);
-    };
-
-    fetchSession();
-  }, []);
+export async function Header() {
+  const session = await auth();
   return (
     <header className="sticky top-0 z-50 flex items-center justify-between w-full h-16 px-4 border-b shrink-0 bg-gradient-to-b from-background/10 via-background/50 to-background/80 backdrop-blur-xl">
       <div className="flex items-center">
