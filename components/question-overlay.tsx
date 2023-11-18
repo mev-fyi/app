@@ -6,10 +6,13 @@ interface QuestionsOverlayProps {
   setInput: (input: string) => void; // Function to set the chat input
 }
 
+// Inside QuestionsOverlay component
 export const QuestionsOverlay: React.FC<QuestionsOverlayProps> = ({ setInput }) => {
-  return (
-    <div className={styles.questionsOverlay}>
-      <QuestionList setInput={setInput} />
-    </div>
-  );
-};
+    return (
+      <div className={styles.questionsOverlay}>
+        <QuestionList setInput={setInput} />
+      </div>
+    );
+  };
+
+  

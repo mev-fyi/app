@@ -27,7 +27,6 @@
     color: black; /* Text color on hover */
   }
   
-
   .resampleButtonContainer {
     position: absolute;
     top: -30px; /* Adjust as necessary to position the button above the boxes */
@@ -47,3 +46,4 @@
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
+  

@@ -182,3 +182,37 @@
 .customMarkdownFont {
   font-size: 0.90rem; /* Adjust the font size as needed */
 }
+
+
+.chatPanelWrapper {
+  position: relative; /* Required for absolute positioning of children */
+  /* Add any other styles needed for layout or appearance */
+}
+
+.shuffleButtonContainer {
+  position: absolute;
+  top: -40px; /* Adjust as necessary to position the button above the question boxes */
+  right: 10px; /* Position to the right within the parent container */
+  z-index: 11; /* Ensure it's above the question boxes */
+}
+
+.shuffleButton {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px; /* Slightly larger button for better clickability */
+  height: 40px;
+  border-radius: 50%; /* Circular button */
+  background-color: #ffffff; /* White background */
+  color: #333; /* Text/icon color */
+  border: 2px solid #333; /* Matching border */
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
+  font-size: 24px; /* Larger font size for the icon/text */
+  text-align: center; /* Center the text/icon */
+}
+
+.shuffleButton:hover {
+  background-color: #f8f8f8; /* Light grey background on hover */
+  border-color: #555; /* Darker border on hover */
+}

@@ -148,9 +148,9 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             )}
           </div>
         </div>
-        
-        <QuestionsOverlay setInput={setInput} />
 
+        <div className={styles.chatPanelWrapper}>
+        <QuestionsOverlay setInput={setInput} />
         <div>  {/* ChatPanel component */}
           <ChatPanel
             id={id}
@@ -163,6 +163,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             setInput={setInput}
             onSubmit={handleUserInputSubmit} // Pass the function to ChatPanel
           />
+        </div>
         </div>
 
         {/* Right panel for metadata list */}
