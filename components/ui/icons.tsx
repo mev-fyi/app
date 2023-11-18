@@ -137,6 +137,20 @@ function IconGitHub({ className, ...props }: React.ComponentProps<'svg'>) {
   )
 }
 
+function IconGoogle({ className, ...props }: React.ComponentProps<'svg'>) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      className={cn('h-4 w-4', className)}
+      {...props}
+    >
+      <path d="M21.35 11.1h-8.9v2.7h5.25c-.45 2.35-2.62 4.05-5.25 4.05-3.15 0-5.7-2.55-5.7-5.7s2.55-5.7 5.7-5.7c1.5 0 2.85.6 3.8 1.55l2-2c-1.7-1.6-3.9-2.6-6.5-2.6-5.3 0-9.6 4.3-9.6 9.6s4.3 9.6 9.6 9.6c5.1 0 9.15-3.45 9.55-8.1z"/>
+    </svg>
+  )
+}
+
 function IconSeparator({ className, ...props }: React.ComponentProps<'svg'>) {
   return (
     <svg
@@ -502,6 +516,7 @@ export {
   IconOpenAI,
   IconVercel,
   IconGitHub,
+  IconGoogle,
   IconSeparator,
   IconArrowDown,
   IconArrowRight,
