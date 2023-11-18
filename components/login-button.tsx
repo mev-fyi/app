@@ -1,6 +1,6 @@
 'use client'; // Mark as client component
 
-import React, { useState } from 'react';
+import React from 'react';
 import { signIn } from 'next-auth/react';
 import { Button, type ButtonProps } from '@/components/ui/button';
 import { IconGitHub, IconSpinner, IconGoogle } from '@/components/ui/icons';
@@ -18,13 +18,11 @@ export function LoginButton({
   className,
   ...props
 }: LoginButtonProps) {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const handleLogin = () => {
-    if (typeof window !== 'undefined') { // Client-side only
-      setIsLoading(true);
-      signIn(loginType, { callbackUrl: `/` });
-    }
+    setIsLoading(true);
+    signIn(loginType, { callbackUrl: `/` });
   };
 
   return (
