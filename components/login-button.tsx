@@ -1,11 +1,7 @@
-'use client'
-
-import * as React from 'react'
-import { signIn } from 'next-auth/react'
-
-import { cn } from '@/lib/utils'
-import { Button, type ButtonProps } from '@/components/ui/button'
-import { IconGitHub, IconSpinner, IconGoogle } from '@/components/ui/icons'
+import React, { useState } from 'react';
+import { signIn } from 'next-auth/react';
+import { Button, type ButtonProps } from '@/components/ui/button';
+import { IconGitHub, IconSpinner, IconGoogle } from '@/components/ui/icons';
 
 interface LoginButtonProps extends ButtonProps {
   loginType: 'github' | 'google';
@@ -20,19 +16,21 @@ export function LoginButton({
   className,
   ...props
 }: LoginButtonProps) {
-  const [isLoading, setIsLoading] = React.useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = () => {
-    setIsLoading(true)
-    signIn(loginType, { callbackUrl: `/` })
-  }
+    if (typeof window !== 'undefined') { // Client-side only
+      setIsLoading(true);
+      signIn(loginType, { callbackUrl: `/` });
+    }
+  };
 
   return (
     <Button
       variant="outline"
       onClick={handleLogin}
       disabled={isLoading}
-      className={cn(className)}
+      className={className}
       {...props}
     >
       {isLoading ? (
@@ -40,5 +38,5 @@ export function LoginButton({
       ) : showIcon && (loginType === 'github' ? <IconGitHub className="mr-2" /> : <IconGoogle className="mr-2" />)}
       {text}
     </Button>
-  )
+  );
 }
