@@ -1,3 +1,5 @@
+'use client'; // Mark as client component
+
 import React, { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { Button, type ButtonProps } from '@/components/ui/button';
