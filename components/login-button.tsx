@@ -5,7 +5,7 @@ import { signIn } from 'next-auth/react'
 
 import { cn } from '@/lib/utils'
 import { Button, type ButtonProps } from '@/components/ui/button'
-import { IconGitHub, IconSpinner } from '@/components/ui/icons'
+import { IconGitHub, IconSpinner, IconGoogle } from '@/components/ui/icons'
 
 interface LoginButtonProps extends ButtonProps {
   loginType: 'github' | 'google';

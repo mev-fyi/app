@@ -21,7 +21,7 @@ interface LoginButtonProps {
   className?: string;
 }
 
-export function LoginButton({ loginType, text, showIcon = true, className, ...props }: LoginButtonProps) {ZZ
+export function LoginButton({ loginType, text, showIcon = true, className, ...props }: LoginButtonProps) {
   const [isLoading, setIsLoading] = React.useState(false)
 
   const handleLogin = () => {
