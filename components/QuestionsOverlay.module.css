@@ -1,10 +1,11 @@
 .questionsOverlay {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Creates a 2x2 grid */
-  gap: 8px;
-  padding: 8px;
-  padding-top: 120px; /* Adjust as necessary for spacing from top */
+  gap: 8px; /* Space between boxes */
+  padding: 8px; /* Padding inside the overlay */
+  padding-top: 120px; /* Space from top of the container */
   width: 100%; /* Fill the width of the left panel */
+  align-items: center; /* Center content vertically in each grid cell */
 }
 
 .questionBox {
