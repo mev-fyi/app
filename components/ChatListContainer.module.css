@@ -15,8 +15,8 @@
   flex-direction: column;
   justify-content: center; /* Vertically center */
   align-items: center; /* Horizontally center */
-  overflow: hidden;
 }
+/* overflow: hidden;*/
 
 /* Middle panel for chatlist and prompt form */
 .middlePanel {
@@ -61,10 +61,11 @@
   overflow-x: hidden;
   padding-bottom: 20px;
   padding-top: 60px;
-  display: flex;
-  flex-direction: column; /* Stack children vertically */
-  justify-content: flex-end; /* This will push your QuestionsOverlay to the bottom */
 }
+/*display: flex;
+/*flex-direction: column; /* Stack children vertically */
+/*justify-content: flex-end; /* This will push your QuestionsOverlay to the bottom */
+
 
 /* Style scrollbar for chat list container */
 .chat-list-container::-webkit-scrollbar {
