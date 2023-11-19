@@ -1,33 +1,30 @@
 .questionsOverlay {
   position: absolute;
-  bottom: 0; /* Position it at the bottom of the chat panel */
+  bottom: 0; /* Adjust to position it above the chat panel as needed */
   left: 50%;
   transform: translateX(-50%);
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 8px; /* Space between boxes */
-  justify-content: center;
-  align-items: center;
-  z-index: 10; /* Above other elements */
-  width: 100%; /* Span the full width */
-  padding: 8px 0; /* Padding at top and bottom inside the overlay */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Creates a 2x2 grid */
+  gap: 8px;
+  width: 100%;
+  padding: 8px;
+  z-index: 10;
 }
 
 .questionBox {
-  flex: 0 0 calc(50% - 8px); /* Do not grow or shrink, set basis considering the gap */
-  max-width: calc(50% - 8px); /* Ensure box does not exceed half of container width minus gap */
   border: 2px solid white;
   border-radius: 8px;
-  padding: 16px; /* Padding inside the box for content */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100px; /* Fixed height for each question box */
-  box-sizing: border-box; /* Include padding and border in the box's width and height */
-  word-wrap: break-word; /* Wrap long words onto the next line */
-  overflow: hidden; /* Hide overflow */
-  font-size: 3vw; /* Font size adapts to the width of the viewport */
+  padding: 16px;
+  height: 100px; /* Fixed height */
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow: hidden;
+  font-size: 2vw; /* Adjust font size based on viewport width */
+}
+
+.question {
+  font-size: 0.9rem; /* Starting font size */
+  overflow: hidden;
 }
 
 .questionBox:hover {
@@ -35,39 +32,20 @@
   color: black;
 }
 
-.question {
-  text-align: center;
-}
-
-/* Style for the shuffle button */
 .shuffleButton {
   background-color: white;
   color: black;
   border: 2px solid black;
   padding: 8px 16px;
   cursor: pointer;
-  margin-top: 8px; /* Space above the shuffle button */
-  width: auto; /* Auto width based on content */
-  box-shadow: none; /* Remove shadow for a flat design */
-  font-weight: bold; /* Make the text bold */
-}
-  
-.resampleButtonContainer {
-  position: absolute;
-  top: -30px; /* Adjust as necessary to position the button above the boxes */
-  left: 50%;
-  transform: translateX(-50%);
+  font-weight: bold;
+  text-align: center;
+  margin-top: 8px;
 }
 
-.resampleButton {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 30px; /* Adjust size as necessary */
-  height: 30px;
-  border-radius: 50%;
-  background-color: #ffffff;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+/* Media query for very long texts to reduce font size */
+@media screen and (max-width: 600px) {
+  .question {
+    font-size: 0.75rem; /* Smaller font size for smaller screens or longer texts */
+  }
 }
