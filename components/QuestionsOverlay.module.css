@@ -10,21 +10,22 @@
 .questionBox {
   border: 2px solid white;
   border-radius: 8px;
-  padding: 16px;
-  min-height: 100px; /* Minimum height to maintain uniform size */
+  padding: 8px; /* Reduced padding */
+  height: 80px; /* Reduced height */
   box-sizing: border-box;
-  word-wrap: break-word;
-  font-size: 1rem; /* Adjust font size based on content */
-  display: flex; /* To use justify-content and align-items */
-  justify-content: left; /* Align text to the left */
-  align-items: center; /* Vertically center content */
+  display: flex;
+  align-items: flex-start; /* Align content to the top */
+  justify-content: flex-start; /* Align content to the left */
 }
 
 .question {
-  font-size: 0.9rem; /* Adjust font size based on content */
-  text-align: left; /* Align text to the left */
-  white-space: normal; /* Allow text wrapping */
+  font-size: 0.8rem; /* Reduced font size */
+  text-align: left;
+  white-space: normal;
+  overflow: hidden;
+  margin-right: 4px; /* Right margin for some breathing room */
 }
+
 
 .shuffleButton {
   background-color: white;
