@@ -146,13 +146,13 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             ) : (
               <EmptyScreen/>
             )}
+          {(lastMessageRole === 'assistant' || messages.length === 0) && (
+            <QuestionsOverlay setInput={setInput} />
+          )}
           </div>
         </div>
 
-        <div className={styles.chatPanelWrapper}> {/* This container must have position: relative; in CSS */}
-        {(lastMessageRole === 'assistant' || messages.length === 0) && (
-          <QuestionsOverlay setInput={setInput} />
-        )}
+
         <div>  {/* ChatPanel component */}
           <ChatPanel
             id={id}
@@ -165,7 +165,6 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             setInput={setInput}
             onSubmit={handleUserInputSubmit} // Pass the function to ChatPanel
           />
-        </div>
         </div>
 
         {/* Right panel for metadata list */}

@@ -10,6 +10,7 @@
   align-items: center;
   z-index: 10; /* Above other elements */
   width: 100%; /* Adjust if necessary for proper alignment */
+  margin-top: auto; /* This will push it to the bottom of the container */
 }
 
 .questionBox {
