@@ -1,28 +1,27 @@
 .questionsOverlay {
   display: flex;
-  flex-direction: column; /* Stack boxes vertically */
-  gap: 8px; /* Space between boxes */
-  padding: 8px; /* Padding inside the overlay */
-  padding-top: 120px; /* Space from top of the container */
-  width: 100%; /* Fill the width of the left panel */
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  width: 100%; /* Match the width of the leftPanel */
   align-items: center; /* Center content vertically */
 }
 
 .questionBox {
   border: 2px solid white;
   border-radius: 8px;
-  padding: 10px; /* Increased padding for space between text and box outline */
+  padding: 10px;
   height: 100px; /* Fixed height */
-  width: 90%; /* Fixed width */
+  width: 300px; /* Fixed width, adjust as needed */
   box-sizing: border-box;
   display: flex;
-  align-items: start; /* Align content to the top */
-  justify-content: start; /* Align content to the left */
+  align-items: flex-start;
+  justify-content: flex-start;
   margin: auto; /* Center the box within the container */
 }
 
 .question {
-  font-size: 0.8rem; /* Fixed font size */
+  font-size: 0.8rem;
   text-align: left;
   white-space: normal;
   overflow: hidden;
@@ -36,12 +35,12 @@
   cursor: pointer;
   font-weight: bold;
   text-align: center;
-  margin-top: 8px; /* Space above the shuffle button */
-  align-self: center; /* Center the button in the layout */
+  margin-top: 8px; /* Space above the button */
+  align-self: center; /* Center the button */
 }
 
 @media screen and (max-width: 600px) {
   .question {
-    font-size: 0.75rem; /* Adjusted font size for smaller screens */
+    font-size: 0.75rem;
   }
 }

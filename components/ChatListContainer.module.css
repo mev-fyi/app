@@ -6,17 +6,16 @@
   align-items: flex-start; /* Aligns items to the top */
 }
 
-/* Left panel for question list */
 .leftPanel {
-  flex: 1; /* Allows rightPanel to grow */
-  min-width: 250px; /* Minimum width */
-  max-width: 550px; /* Maximum width */
-  width: 100%; /* Takes as much width as it can */
+  flex: 1;
+  min-width: 250px;
+  max-width: 550px;
+  width: 100%;
   display: flex;
-  overflow: hidden;
   flex-direction: column;
-  justify-content: center; /* This will vertically center the children */
-  align-items: center; /* This will horizontally center the children */
+  justify-content: center; /* Vertically center */
+  align-items: center; /* Horizontally center */
+  overflow: hidden;
 }
 
 /* Middle panel for chatlist and prompt form */
