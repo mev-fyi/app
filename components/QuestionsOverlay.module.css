@@ -1,6 +1,6 @@
 .questionsOverlay {
   position: absolute;
-  bottom: 100%; /* Position it above the chat panel */
+  bottom: 100%; /* This positions the overlay right above the chat panel */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -9,7 +9,7 @@
   justify-content: center;
   align-items: center;
   z-index: 10; /* Above other elements */
-  width: calc(100% - 16px); /* Adjust the width to fit within the parent container */
+  width: 100%; /* Adjust if necessary for proper alignment */
 }
 
 .questionBox {
