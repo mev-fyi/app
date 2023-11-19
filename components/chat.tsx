@@ -134,6 +134,9 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   
         {/* Left empty panel */}
         <div className={styles.leftPanel}>{/* This panel is intentionally left empty */}
+          {(lastMessageRole === 'assistant' || messages.length === 0) && (
+            <QuestionsOverlay setInput={setInput} />
+          )}
         </div>
   
         <div className={styles.middlePanel}>  {/* Middle panel for chatlist and prompt form */}
@@ -146,9 +149,6 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             ) : (
               <EmptyScreen/>
             )}
-          {(lastMessageRole === 'assistant' || messages.length === 0) && (
-            <QuestionsOverlay setInput={setInput} />
-          )}
           </div>
         </div>
 

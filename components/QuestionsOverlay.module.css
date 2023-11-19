@@ -8,6 +8,7 @@
   gap: 8px;
   width: 100%;
   padding: 8px;
+  padding-top: 120px;
   z-index: 10;
 }
 
@@ -18,13 +19,13 @@
   height: 100px; /* Fixed height */
   box-sizing: border-box;
   word-wrap: break-word;
-  overflow: hidden;
   font-size: 2vw; /* Adjust font size based on viewport width */
 }
 
 .question {
   font-size: 0.9rem; /* Starting font size */
-  overflow: hidden;
+  text-align: left; /* Align text to the left */
+  white-space: normal; /* Allow text wrapping */
 }
 
 .questionBox:hover {
