@@ -235,10 +235,10 @@ function IconNewChat({ className, ...props }: React.ComponentProps<'svg'>) {
       className={cn('h-12 w-12', className)} // Adjust the size as needed
       {...props}
     >
-      <text x="50%" y="40%" dominantBaseline="middle" textAnchor="middle" fontSize="85" fill="#FFF">
+      <text x="50%" y="40%" dominantBaseline="middle" textAnchor="middle" fontSize="75" fill="#FFF">
         New
       </text>
-      <text x="50%" y="60%" dominantBaseline="middle" textAnchor="middle" fontSize="85" fill="#FFF">
+      <text x="50%" y="60%" dominantBaseline="middle" textAnchor="middle" fontSize="75" fill="#FFF">
         Chat
       </text>
     </svg>
