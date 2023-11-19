@@ -1,22 +1,24 @@
 .questionsOverlay {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Creates a 2x2 grid */
+  display: flex;
+  flex-direction: column; /* Stack boxes vertically */
   gap: 8px; /* Space between boxes */
   padding: 8px; /* Padding inside the overlay */
   padding-top: 120px; /* Space from top of the container */
   width: 100%; /* Fill the width of the left panel */
-  align-items: center; /* Center content vertically in each grid cell */
+  align-items: center; /* Center content vertically */
 }
 
 .questionBox {
   border: 2px solid white;
   border-radius: 8px;
-  padding: 8px; /* Reduced padding */
-  height: 80px; /* Reduced height */
+  padding: 2px; /* Reduced padding */
+  height: 80px; /* Fixed height */
+  width: 90%; /* Increase the width, for example, to 90% of the parent container */
   box-sizing: border-box;
   display: flex;
   align-items: flex-start; /* Align content to the top */
   justify-content: flex-start; /* Align content to the left */
+  margin: auto; /* Center the box within the container */
 }
 
 .question {
@@ -27,7 +29,6 @@
   margin-right: 4px; /* Right margin for some breathing room */
 }
 
-
 .shuffleButton {
   background-color: white;
   color: black;
@@ -37,7 +38,7 @@
   font-weight: bold;
   text-align: center;
   margin-top: 8px; /* Add space above the shuffle button */
-  align-self: center; /* Center the button in the grid */
+  align-self: center; /* Center the button in the layout */
 }
 
 @media screen and (max-width: 600px) {
