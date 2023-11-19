@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { IconArrowRight } from '@/components/ui/icons';
 import { questions } from '@/lib/constants'; // Ensure the path is correct
 import styles from './ChatListContainer.module.css'; // Adjust the path if necessary
+import styles_questions_overlay from './QuestionsOverlay.module.css'; // Import the CSS module
 
 interface QuestionListProps {
     setInput: (input: string) => void;
@@ -24,15 +25,13 @@ export const QuestionList: React.FC<QuestionListProps> = ({ setInput }) => {
 
   return (
     <div>
-      <div className={styles.shuffleButtonContainer}>
         <Button
           variant="outline"
-          className={styles.shuffleButton}
+          className={styles_questions_overlay.shuffleButton}
           onClick={shuffleQuestions}
         >
           Shuffle Questions
         </Button>
-      </div>
       
       {selectedQuestions.map((question, index) => (
         <div key={index} className={styles.questionBox}>
