@@ -34,10 +34,10 @@ export const QuestionList: React.FC<QuestionListProps> = ({ setInput }) => {
         </Button>
       
       {selectedQuestions.map((question, index) => (
-        <div key={index} className={styles.questionBox}>
+        <div key={index} className={styles_questions_overlay.questionBox}>
           <Button
             variant="link"
-            className={styles.question}
+            className={styles_questions_overlay.question}
             onClick={() => setInput(question)}
           >
             <IconArrowRight className="flex-shrink-0 mr-2" />
