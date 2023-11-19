@@ -1,12 +1,13 @@
 /* questions-overlay.css */
 .questionsOverlay {
     position: absolute;
-    bottom: 100%; /* Position it above the prompt container */
-    left: 50%;
+    bottom: 0; /* Adjust as necessary to position above the chat panel */
+    left: 0;
     transform: translateX(-50%);
     display: flex;
     flex-wrap: wrap;
     gap: 8px; /* Space between boxes */
+    width: 100%; /* Ensure it spans the full width of the parent */
     justify-content: center;
     align-items: center;
     z-index: 10; /* Above other elements */

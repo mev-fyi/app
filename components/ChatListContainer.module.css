@@ -185,8 +185,11 @@
 
 
 .chatPanelWrapper {
-  position: relative; /* Required for absolute positioning of children */
-  /* Add any other styles needed for layout or appearance */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Aligns children at the bottom */
+  align-items: center; /* Centers children horizontally */
+  height: 100%; /* Ensures it takes the full height of its parent */
 }
 
 .shuffleButtonContainer {
