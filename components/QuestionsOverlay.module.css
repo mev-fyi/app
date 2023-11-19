@@ -11,22 +11,21 @@
 .questionBox {
   border: 2px solid white;
   border-radius: 8px;
-  padding: 2px; /* Reduced padding */
-  height: 80px; /* Fixed height */
-  width: 90%; /* Increase the width, for example, to 90% of the parent container */
+  padding: 10px; /* Increased padding for space between text and box outline */
+  height: 100px; /* Fixed height */
+  width: 90%; /* Fixed width */
   box-sizing: border-box;
   display: flex;
-  align-items: flex-start; /* Align content to the top */
-  justify-content: flex-start; /* Align content to the left */
+  align-items: start; /* Align content to the top */
+  justify-content: start; /* Align content to the left */
   margin: auto; /* Center the box within the container */
 }
 
 .question {
-  font-size: 0.8rem; /* Reduced font size */
+  font-size: 0.8rem; /* Fixed font size */
   text-align: left;
   white-space: normal;
   overflow: hidden;
-  margin-right: 4px; /* Right margin for some breathing room */
 }
 
 .shuffleButton {
@@ -37,12 +36,12 @@
   cursor: pointer;
   font-weight: bold;
   text-align: center;
-  margin-top: 8px; /* Add space above the shuffle button */
+  margin-top: 8px; /* Space above the shuffle button */
   align-self: center; /* Center the button in the layout */
 }
 
 @media screen and (max-width: 600px) {
   .question {
-    font-size: 0.75rem; /* Smaller font size for smaller screens or longer texts */
+    font-size: 0.75rem; /* Adjusted font size for smaller screens */
   }
 }
