@@ -1,36 +1,29 @@
 .questionsOverlay {
-  position: absolute;
-  bottom: 0; /* Adjust to position it above the chat panel as needed */
-  left: 50%;
-  transform: translateX(-50%);
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Creates a 2x2 grid */
   gap: 8px;
-  width: 100%;
   padding: 8px;
-  padding-top: 120px;
-  z-index: 10;
+  padding-top: 120px; /* Adjust as necessary for spacing from top */
+  width: 100%; /* Fill the width of the left panel */
 }
 
 .questionBox {
   border: 2px solid white;
   border-radius: 8px;
   padding: 16px;
-  height: 100px; /* Fixed height */
+  min-height: 100px; /* Minimum height to maintain uniform size */
   box-sizing: border-box;
   word-wrap: break-word;
-  font-size: 2vw; /* Adjust font size based on viewport width */
+  font-size: 1rem; /* Adjust font size based on content */
+  display: flex; /* To use justify-content and align-items */
+  justify-content: left; /* Align text to the left */
+  align-items: center; /* Vertically center content */
 }
 
 .question {
-  font-size: 0.9rem; /* Starting font size */
+  font-size: 0.9rem; /* Adjust font size based on content */
   text-align: left; /* Align text to the left */
   white-space: normal; /* Allow text wrapping */
-}
-
-.questionBox:hover {
-  background-color: white;
-  color: black;
 }
 
 .shuffleButton {
@@ -41,10 +34,10 @@
   cursor: pointer;
   font-weight: bold;
   text-align: center;
-  margin-top: 8px;
+  margin-top: 8px; /* Add space above the shuffle button */
+  align-self: center; /* Center the button in the grid */
 }
 
-/* Media query for very long texts to reduce font size */
 @media screen and (max-width: 600px) {
   .question {
     font-size: 0.75rem; /* Smaller font size for smaller screens or longer texts */

@@ -8,7 +8,14 @@
 
 /* Left panel for question list */
 .leftPanel {
-  flex: 1; /* Fixed width for the left panel */
+  flex: 1; /* Allows rightPanel to grow */
+  min-width: 250px; /* Minimum width */
+  max-width: 550px; /* Maximum width */
+  width: 100%; /* Takes as much width as it can */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  overflow: hidden;
 }
 
 /* Middle panel for chatlist and prompt form */
