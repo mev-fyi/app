@@ -10,7 +10,7 @@ interface QuestionListProps {
 export const QuestionList: React.FC<QuestionListProps> = ({ setInput }) => {
   const [selectedQuestions, setSelectedQuestions] = useState<string[]>([]);
 
-  const questionRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const questionRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   useEffect(() => {
     if (questionRefs.current.length === selectedQuestions.length) {
@@ -60,12 +60,12 @@ export const QuestionList: React.FC<QuestionListProps> = ({ setInput }) => {
         <div 
           key={index} 
           className={styles_questions_overlay.questionBox}
-          ref={el => questionRefs.current[index] = el}
         >
           <Button
             variant="link"
             className={styles_questions_overlay.question}
             onClick={() => setInput(question)}
+            ref={el => questionRefs.current[index] = el} // Assign ref to the button
           >
             {question}
           </Button>
