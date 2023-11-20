@@ -1,54 +1,54 @@
 .metadataList {
-    list-style: none;
-    padding: 0;
-    font-size: 0.875rem; /* Smaller font size for metadata */
-  }
-  
-  .metadataListItem {
-    border-bottom: 1px solid #ffffff; /* Thin white line for separator */
-    padding-bottom: 1rem; /* Increased space */
-    margin-bottom: 1rem; /* Increased space */
-    color: #bbb; /* Slightly faded white color */
-  }
-  
-  .metadataListItem:last-child {
-    border-bottom: none; /* No border for the last item */
-  }
-  
-  .metadataListLink {
-    color: #ffffff; /* Bold white color for links */
-    text-decoration: none; /* Remove underline */
-    font-weight: bold; /* Make title bold */
-    display: block; /* Title on its own line */
-    white-space: normal; /* Allow wrapping if needed */
-    margin-right: 1rem; /* Space to the right */
-  }
-  
-  .metadataListSpan {
-    display: block; /* Info on its own line */
-    margin-top: 0.5rem; /* Space between title and info */
-  }
-  
-  .metadataListDetails {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .metadataListExtraInfo {
-    margin-right: 0.5rem; /* Space before the dot */
-  }
-  
-  .metadataListDot {
-    font-size: 1.5rem; /* Larger size for the dot */
-    line-height: 0; /* Adjust line height to align the dot vertically */
-  }
+  list-style: none;
+  padding: 0;
+  font-size: 0.875rem;
+}
 
-  .metadataInfo {
-    display: block; /* Makes sure the author and date are on a new line */
-    white-space: nowrap; /* Prevents wrapping */
-    overflow: hidden; /* Prevents overflow */
-    text-overflow: ellipsis; /* Adds an ellipsis for overflowed text */
-  }
+.metadataListItem {
+  border-bottom: 1px solid #ffffff;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  color: #bbb;
+}
 
-  
+.metadataListItem:last-child {
+  border-bottom: none;
+}
+
+.metadataListLink {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  display: block;
+  white-space: normal;
+  margin-right: 1rem;
+  word-break: break-word; /* Allows long URLs to wrap */
+}
+
+.metadataListSpan {
+  display: block;
+  margin-top: 0.5rem;
+  word-wrap: break-word; /* Wrap text */
+}
+
+.metadataListDetails {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.metadataListExtraInfo {
+  margin-right: 0.5rem;
+}
+
+.metadataListDot {
+  font-size: 1.5rem;
+  line-height: 0;
+}
+
+.metadataInfo {
+  display: block;
+  white-space: normal; /* Change to allow wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
