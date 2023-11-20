@@ -6,8 +6,6 @@ import styles_questions_overlay from './QuestionsOverlay.module.css'; // Import 
 interface QuestionListProps {
     setInput: (input: string) => void;
   }
-
-
   
 export const QuestionList: React.FC<QuestionListProps> = ({ setInput }) => {
   const [selectedQuestions, setSelectedQuestions] = useState<string[]>([]);
@@ -16,11 +14,12 @@ export const QuestionList: React.FC<QuestionListProps> = ({ setInput }) => {
 
   useEffect(() => {
     if (questionRefs.current.length === selectedQuestions.length) {
+      console.log("Adjusting font sizes for questions");
       questionRefs.current.forEach(box => {
         if (box) {
           const questionText = box.innerText;
           let fontSize;
-
+  
           if (questionText.length <= 50) {
             fontSize = '1rem';
           } else if (questionText.length <= 100) {
@@ -28,10 +27,13 @@ export const QuestionList: React.FC<QuestionListProps> = ({ setInput }) => {
           } else {
             fontSize = '0.65rem';
           }
-
+  
+          console.log(`Question text: ${questionText}, Font size: ${fontSize}`);
           box.style.fontSize = fontSize;
         }
       });
+    } else {
+      console.log("Ref length and questions length do not match");
     }
   }, [selectedQuestions]);
 
