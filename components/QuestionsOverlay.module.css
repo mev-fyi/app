@@ -10,7 +10,7 @@
 .questionBox {
   border: 2px solid white;
   border-radius: 8px;
-  padding: 10px;
+  padding: 2px;
   height: 100px; /* Fixed height */
   width: 300px; /* Fixed width, adjust as needed */
   box-sizing: border-box;
@@ -23,8 +23,10 @@
 .question {
   text-align: left;
   white-space: normal;
-  overflow: hidden;
+  line-height: 1.2; /* Adjust as needed */
 }
+/*overflow: hidden;*/
+
 
 .shuffleButton {
   background-color: white;

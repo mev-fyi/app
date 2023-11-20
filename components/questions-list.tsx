@@ -14,7 +14,6 @@ export const QuestionList: React.FC<QuestionListProps> = ({ setInput }) => {
 
   useEffect(() => {
     if (questionRefs.current.length === selectedQuestions.length) {
-      console.log("Adjusting font sizes for questions");
       questionRefs.current.forEach(box => {
         if (box) {
           const questionText = box.innerText;
@@ -23,17 +22,14 @@ export const QuestionList: React.FC<QuestionListProps> = ({ setInput }) => {
           if (questionText.length <= 50) {
             fontSize = '1rem';
           } else if (questionText.length <= 100) {
-            fontSize = '0.75rem';
+            fontSize = '0.95rem';
           } else {
-            fontSize = '0.65rem';
+            fontSize = '0.9rem';
           }
   
-          console.log(`Question text: ${questionText}, Font size: ${fontSize}`);
           box.style.fontSize = fontSize;
         }
       });
-    } else {
-      console.log("Ref length and questions length do not match");
     }
   }, [selectedQuestions]);
 
