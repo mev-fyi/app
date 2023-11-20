@@ -83,10 +83,13 @@
 .metadataContainer {
   width: 100%; /* Use 100% of the rightPanel width */
   max-width: 700px; /* Example max-width */
-  margin-left: 10; /* Align to the left by setting left margin to 0 */
+  margin-left: 10px; /* Align to the left by setting left margin */
   margin-right: auto; /* Keeps right margin automatic */
   padding: 1rem;
-  overflow-y: auto;
+  overflow-y: auto; /* Allows vertical scrolling if content overflows */
+  overflow-x: hidden; /* Hides horizontal scrollbar and wraps text */
+  word-wrap: break-word; /* Allows long words to be broken and wrapped to the next line */
+  white-space: normal; /* Normal text wrapping */
   transition: transform 0.3s; /* Smooth transition for sliding in/out */
   z-index: 10; /* Ensure it's above other content */
   padding-right: 10%;
