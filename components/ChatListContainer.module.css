@@ -47,7 +47,6 @@
   flex-direction: column;
   align-items: flex-start;
   overflow: hidden;
-  padding-left: 20px; /* Add padding to the left */
 }
 
 /* Chatlist container with scrollable content */
@@ -90,7 +89,8 @@
   overflow-y: auto;
   transition: transform 0.3s; /* Smooth transition for sliding in/out */
   z-index: 10; /* Ensure it's above other content */
-  padding-right: 10%
+  padding-right: 10%;
+  padding-left: 5%;
 }
 
 /* Style for the button to toggle the metadata view */
@@ -139,6 +139,7 @@
   font-weight: bold;
   font-size: 1.25rem;
   margin-bottom: 2rem;
+  padding-left: 5%;
 }
 
 /* Chat input container */
