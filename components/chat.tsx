@@ -124,10 +124,6 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
       }
     })
 
-
-    // { (lastMessageRole === 'assistant' || messages.length === 0) && (
-    //   <QuestionsOverlay setInput={setInput} />
-    // )}
   return (
     <>
         <div className={styles.layoutContainer}>
@@ -151,7 +147,6 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             )}
           </div>
         </div>
-
 
         <div>  {/* ChatPanel component */}
           <ChatPanel

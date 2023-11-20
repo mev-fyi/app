@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { questions } from '@/lib/constants'; // Ensure the path is correct
-import styles_questions_overlay from './QuestionsOverlay.module.css'; // Import the CSS module
+import styles from './QuestionsOverlay.module.css'; // Import the CSS module
 
 interface QuestionListProps {
     setInput: (input: string) => void;
@@ -46,7 +46,7 @@ export const QuestionList: React.FC<QuestionListProps> = ({ setInput }) => {
     <div>
       <Button
         variant="outline"
-        className={styles_questions_overlay.shuffleButton}
+        className={styles.shuffleButton}
         onClick={shuffleQuestions}
       >
         Shuffle Questions
@@ -55,11 +55,11 @@ export const QuestionList: React.FC<QuestionListProps> = ({ setInput }) => {
       {selectedQuestions.map((question, index) => (
         <div 
           key={index} 
-          className={styles_questions_overlay.questionBox}
+          className={styles.questionBox}
         >
           <Button
             variant="link"
-            className={styles_questions_overlay.question}
+            className={styles.question}
             onClick={() => setInput(question)}
             ref={el => questionRefs.current[index] = el} // Assign ref to the button
           >
