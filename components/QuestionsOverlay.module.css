@@ -21,7 +21,6 @@
 }
 
 .question {
-  font-size: clamp(0.6rem, 2.5vw, 0.8rem); /* Adjusts between 0.6rem and 0.8rem based on viewport width */
   text-align: left;
   white-space: normal;
   overflow: hidden;
