@@ -3,35 +3,34 @@
   flex-direction: column;
   gap: 8px;
   padding: 60px;
-  width: 100%; /* Match the width of the leftPanel */
-  align-items: center; /* Center content vertically */
-  flex-wrap: wrap;  /* to allow the boxes to wrap onto multiple lines when the space becomes too narrow */
+  width: 100%;
+  align-items: flex-start; /* Align items to the start of the cross axis */
+  flex-wrap: wrap;
 }
 
 .questionBox {
-  width: 100%; /* or use vw for viewport width */
-  max-width: 300px; /* to ensure it doesn't get too large on bigger screens */
+  width: 100%; 
+  max-width: 300px; 
   border: 2px solid white;
   border-radius: 8px;
   padding: 5px;
-  height: 100px; /* Fixed height */
-  width: 300px; /* Fixed width, adjust as needed */
+  height: 100px; 
   box-sizing: border-box;
   display: flex;
-  align-items: center; /* Vertical alignment */
+  align-items: center;
   justify-content: flex-start;
-  margin: auto; /* Center the box within the container */
+  margin: auto;
 }
 
 .question {
-  padding-top: 10px; /* Add padding to the top of each question */
+  padding-top: 10px;
   text-align: left;
-  word-wrap: break-word; /* Allows long words to be broken and wrapped to the next line */
-  white-space: normal; /* Normal text wrapping */
-  line-height: 1.2; /* Adjust as needed */
-  width: 100%; /* occupies the full width of its container. This will help the text to wrap effectively within the box. */
-
+  word-wrap: break-word;
+  white-space: normal;
+  line-height: 1.2;
+  width: 100%;
 }
+
 /*overflow: hidden;*/
 
 
