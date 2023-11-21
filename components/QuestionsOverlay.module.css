@@ -24,6 +24,7 @@
 
 .question {
   padding-top: 10px;
+  padding-left: 10px; /* Ensure there's some space on the left */
   text-align: left;
   word-wrap: break-word;
   white-space: normal;

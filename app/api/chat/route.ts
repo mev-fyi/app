@@ -50,7 +50,7 @@ export async function POST(req: Request) {
     chatResponse = await fetch(backendChatUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: mostRecentMessageContent })
+      body: JSON.stringify({ message: mostRecentMessageContent, chat_history: messages })
     });
     console.log('Chat response received', chatResponse);
   } catch (error) {
