@@ -6,14 +6,12 @@
   align-items: flex-start; /* Aligns items to the top */
 }
 
-.leftPanel {
-  flex: 1;
-  min-width: 250px;
-  max-width: 550px;
-  width: 100%;
+.leftPanel, .rightPanel {
+  flex: 1; /* Allows panels to grow */
+  min-width: 250px; /* Minimum width */
+  max-width: 30%; /* Adjusted maximum width */
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Vertically center */
   align-items: center; /* Horizontally center */
 }
 
@@ -37,18 +35,6 @@
   font-size: 0.95rem; /* Adjust the font size as needed */
 }
 
-/* Right panel for metadata list */
-.rightPanel {
-  flex: 1; /* Allows rightPanel to grow */
-  min-width: 250px; /* Minimum width */
-  max-width: 550px; /* Maximum width */
-  width: 100%; /* Takes as much width as it can */
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  overflow: hidden;
-}
-
 /* Chatlist container with scrollable content */
 .chatListContainer {
   max-height: calc(100vh - 120px - 150px);
@@ -56,7 +42,7 @@
   margin: auto;
   padding: 0px 50px;
   box-sizing: border-box;
-  overflow-y: auto; /* Ensure this is not overridden somewhere else */
+  overflow-y: auto; /* Ensures vertical scroll */
   overflow-x: hidden;
   padding-bottom: 20px;
   padding-top: 60px;
@@ -82,7 +68,7 @@
 /* Metadata container */
 .metadataContainer {
   width: 100%; /* Use 100% of the rightPanel width */
-  max-width: 700px; /* Example max-width */
+  max-width: 300px; /* Example max-width */
   margin-left: 10px; /* Align to the left by setting left margin */
   margin-right: auto; /* Keeps right margin automatic */
   padding: 1rem;
