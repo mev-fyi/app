@@ -29,5 +29,5 @@ export interface ParsedMetadataEntry {
 
 // Extend the Message type to include structured_metadata
 export interface ExtendedMessage extends Message {
-  structured_metadata?: any[]; // Use the correct metadata type here
+  structured_metadata?: ParsedMetadataEntry[]; // Use the correct metadata type here
 }

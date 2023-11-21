@@ -12,18 +12,26 @@ import {
 import { useEnterSubmit } from '@/lib/hooks/use-enter-submit'
 import { cn } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
+import { MetadataMessage } from './chat'
 
 export interface PromptProps
   extends Pick<UseChatHelpers, 'input' | 'setInput'> {
   onSubmit: (value: string) => Promise<void>
   isLoading: boolean
+  // Add new properties for the state-setting functions
+  setMessages: (messages: MetadataMessage[]) => void;
+  setStructuredMetadataEntries: (entries: any[]) => void; // Replace 'any[]' with a more specific type if available
+  setLastMessageRole: (role: string) => void;
 }
 
 export function PromptForm({
   onSubmit,
   input,
   setInput,
-  isLoading
+  isLoading,
+  setMessages,
+  setStructuredMetadataEntries,
+  setLastMessageRole
 }: PromptProps) {
   const { formRef, onKeyDown } = useEnterSubmit()
   const inputRef = React.useRef<HTMLTextAreaElement>(null)
@@ -53,6 +61,13 @@ export function PromptForm({
             <button
               onClick={e => {
                 e.preventDefault()
+                
+                // Reset state variables
+                setMessages([]); // Resets the chat messages
+                setStructuredMetadataEntries([]); // Resets the structured metadata
+                setLastMessageRole(''); // Resets the last message role
+                setInput(''); // Resets the input field
+                
                 router.refresh()
                 router.push('/')
               }}

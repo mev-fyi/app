@@ -22,11 +22,12 @@ import { toast } from 'react-hot-toast'
 import MetadataList from '@/components/metadata-list';
 import styles from './ChatListContainer.module.css'; // Import the CSS module
 import { QuestionsOverlay } from './question-overlay';
+import { ParsedMetadataEntry } from 'lib/types';
 
 
 // Extend the Message type to include structured_metadata
-interface MetadataMessage extends Message {
-  structured_metadata?: any[]; // Ideally, define a more specific type instead of any[]
+export interface MetadataMessage extends Message {
+  structured_metadata?: ParsedMetadataEntry[]; // Ideally, define a more specific type instead of any[]
 }
 
 const IS_PREVIEW = process.env.VERCEL_ENV === 'preview'
@@ -44,7 +45,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   const [previewTokenInput, setPreviewTokenInput] = useState(previewToken ?? '')
 
   // State to hold structured metadata entries
-  const [structuredMetadataEntries, setStructuredMetadataEntries] = useState([]);
+  const [structuredMetadataEntries, setStructuredMetadataEntries] = useState<ParsedMetadataEntry[]>([]);
   const [newMessages, setMessages] = useState(initialMessages || []);
   const [lastMessageRole, setLastMessageRole] = useState('assistant');
 
@@ -158,6 +159,10 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             input={input}
             setInput={setInput}
             onSubmit={handleUserInputSubmit} // Pass the function to ChatPanel
+            setMessages={setMessages}
+            setStructuredMetadataEntries={setStructuredMetadataEntries}
+            setLastMessageRole={setLastMessageRole}
+        
           />
         </div>
 

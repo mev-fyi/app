@@ -5,9 +5,12 @@
   padding: 60px;
   width: 100%; /* Match the width of the leftPanel */
   align-items: center; /* Center content vertically */
+  flex-wrap: wrap;  /* to allow the boxes to wrap onto multiple lines when the space becomes too narrow */
 }
 
 .questionBox {
+  width: 60%; /* or use vw for viewport width */
+  max-width: 200px; /* to ensure it doesn't get too large on bigger screens */
   border: 2px solid white;
   border-radius: 8px;
   padding: 5px;
@@ -26,6 +29,8 @@
   word-wrap: break-word; /* Allows long words to be broken and wrapped to the next line */
   white-space: normal; /* Normal text wrapping */
   line-height: 1.2; /* Adjust as needed */
+  width: 100%; /* occupies the full width of its container. This will help the text to wrap effectively within the box. */
+
 }
 /*overflow: hidden;*/
 

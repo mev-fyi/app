@@ -29,7 +29,7 @@ export const questions = [
     "Are intents real?",
     "What are relays?",
     "How does MEV compare across chains for instance Ethereum, Solana, Arbitrum?",
-    "What are payment for order flows in MEV?",
+    "What are Payment For Order Flow (PFOF) in the context of MEV?",
     "What is Anoma?",
     "What are shared sequencers?",
     "What is Trusted Execution Environment (TEE)?",
