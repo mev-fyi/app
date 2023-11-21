@@ -21,7 +21,6 @@ import { Input } from './ui/input'
 import { toast } from 'react-hot-toast'
 import MetadataList from '@/components/metadata-list';
 import styles from './ChatListContainer.module.css'; // Import the CSS module
-import { QuestionList } from './questions-list'
 import { QuestionsOverlay } from './question-overlay';
 
 

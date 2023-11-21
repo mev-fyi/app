@@ -9,6 +9,8 @@
   padding-bottom: 1rem;
   margin-bottom: 1rem;
   color: #bbb;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .metadataListItem:last-child {
@@ -22,13 +24,15 @@
   display: block;
   white-space: normal;
   margin-right: 1rem;
-  word-break: break-word; /* Allows long URLs to wrap */
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .metadataListSpan {
   display: block;
   margin-top: 0.5rem;
-  word-wrap: break-word; /* Wrap text */
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .metadataListDetails {
