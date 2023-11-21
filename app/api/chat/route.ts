@@ -39,6 +39,7 @@ export async function POST(req: Request) {
   }
 
   const mostRecentMessageContent = messages.length > 0 ? messages[messages.length - 1].content : "No messages yet.";
+  console.log('All messages:', messages);
   console.log('Most recent message content:', mostRecentMessageContent);
 
   const backendChatUrl = `${process.env.REACT_APP_BACKEND_URL}/chat`;
