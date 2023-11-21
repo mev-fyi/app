@@ -9,8 +9,8 @@
 }
 
 .questionBox {
-  width: 60%; /* or use vw for viewport width */
-  max-width: 200px; /* to ensure it doesn't get too large on bigger screens */
+  width: 100%; /* or use vw for viewport width */
+  max-width: 300px; /* to ensure it doesn't get too large on bigger screens */
   border: 2px solid white;
   border-radius: 8px;
   padding: 5px;
