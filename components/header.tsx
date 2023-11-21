@@ -50,15 +50,6 @@ export async function Header() {
       <div className="flex items-center justify-end space-x-2">
         <LoginButton loginType="github" text="Login with GitHub" showIcon />
         <LoginButton loginType="google" text="Login with Google" showIcon />
-        <a
-          href="https://github.com/vercel/nextjs-ai-chatbot/"
-          target="_blank"
-          className={cn(buttonVariants())}
-        >
-          <IconVercel className="mr-2" />
-          <span className="hidden sm:block">Deploy to Vercel</span>
-          <span className="sm:hidden">Deploy</span>
-        </a>
       </div>
     </header>
   )

@@ -23,7 +23,8 @@
 .question {
   padding-top: 10px; /* Add padding to the top of each question */
   text-align: left;
-  white-space: normal;
+  word-wrap: break-word; /* Allows long words to be broken and wrapped to the next line */
+  white-space: normal; /* Normal text wrapping */
   line-height: 1.2; /* Adjust as needed */
 }
 /*overflow: hidden;*/
