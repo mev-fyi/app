@@ -162,7 +162,6 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             setMessages={setMessages}
             setStructuredMetadataEntries={setStructuredMetadataEntries}
             setLastMessageRole={setLastMessageRole}
-        
           />
         </div>
 
