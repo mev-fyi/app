@@ -50,7 +50,6 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   const [lastMessageRole, setLastMessageRole] = useState('assistant');
 
   const [isMetadataVisible, setIsMetadataVisible] = useState(false);
-  
   const toggleMetadataVisibility = () => {
     setIsMetadataVisible(!isMetadataVisible);
   };

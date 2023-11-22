@@ -35,7 +35,7 @@
 
 /* Chatlist container with scrollable content */
 .chatListContainer {
-  max-height: calc(100vh - 120px - 150px);
+  max-height: calc(100vh - 120px - 100px);
   width: 100%;
   margin: auto;
   padding: 0px 50px;
@@ -67,7 +67,7 @@
 .metadataContainer {
   width: 100%; /* Use 100% of the rightPanel width */
   max-width: 700px; /* Example max-width */
-  max-height: calc(100vh - 120px - 150px);
+  max-height: calc(100vh - 120px - 100px);
   margin-left: 10px; /* Align to the left by setting left margin */
   margin-right: auto; /* Keeps right margin automatic */
   padding: 1rem;
@@ -96,6 +96,24 @@
 }
 
 @media (max-width: 767px) {
+  .layoutContainer {
+    justify-content: center; /* Center the middle panel as side panels are hidden */
+  }
+
+  .leftPanel, .rightPanel {
+    display: none; /* Hide left and right panels on mobile */
+  }
+
+  .middlePanel {
+    position: static;
+    left: auto;
+    transform: none;
+    width: 100%; /* Full width of the viewport */
+    max-width: none;
+    min-width: 0;
+    padding-bottom: 100px; /* Reduced padding for mobile */
+  }
+
   /* Styles specific to mobile */
   .chatListContainer {
     max-height: calc(100vh - 60px); /* Adjusted for less padding */
@@ -103,11 +121,23 @@
   }
   
   .metadataContainer {
-    position: fixed; /* Fixed position to place it off-screen */
-    top: 0; /* Align to the top */
-    right: -400px; /* Start off-screen to the right */
-    height: 100%; /* Full height */
-    transform: translateX(400px); /* Off-screen by its own width */
+    position: fixed; /* Fixed position for mobile */
+    top: 0;
+    right: -100%; /* Initially off-screen */
+    height: 100%;
+    width: 80%; /* Adjust width as needed */
+    transform: translateX(100%); /* Positioned off-screen */
+    transition: transform 0.3s; /* Smooth transition */
+    z-index: 30; /* Above other elements */
+    /* ... other styling as needed ... */
+  }
+
+  .metadataTitle {
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    padding-left: 1%;
   }
 
   .metadataContainerActive {
@@ -128,20 +158,12 @@
   }
 }
 
-.metadataTitle {
-  color: #fff;
-  font-weight: bold;
-  font-size: 1.25rem;
-  margin-bottom: 2rem;
-  padding-left: 1%;
-}
-
-.customMarkdownFont {
-  font-size: 0.88rem; /* Adjust the font size as needed */
-}
-
 @media screen and (max-width: 768px) {
   .mobileHide {
     display: none;
   }
+}
+
+.customMarkdownFont {
+  font-size: 0.88rem; /* Adjust the font size as needed */
 }

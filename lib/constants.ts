@@ -129,6 +129,10 @@ export const questions = [
     "What is Vitalik Buterin's stance on MEV?",
     "What is danksharding?",
     "What's Eigenlayer?",
+    "Explain to me what is Eigenlayer's restaking in layman's terms",
+    "What are concrete applications of Eigenlayer's restaking system?",
+    "How does Eigenlayer's restaking system differ from LIDO's value proposition?",
+    "What are credible commitments and middlewares referred to in the context of Eigenlayer's restaking? Please define these terms prior to answering the question",
     "What is Sybil resistance in consensus protocols?",
     "What is deplatforming?",
     "What the foundational design principles in building crypto technology?",
@@ -144,5 +148,17 @@ export const questions = [
     "What happens when 'bidders are DAOs'?",
     "What elements in auction theory can help me understand MEV?",
     "What is auction theory?",
+    "What is the equivalent of MEV in traditional finance?",
+    "What are other forms of MEV beyond transaction ordering?",
+    "How does DeFi lending liquidation relate to MEV?",
+    "Give me an exhaustive definition of the MEV supply chain in numbered bullet points",
+    "What are batch auctions?",
+    "What is CowSwap?",
+    "What is 1Inch Fusion?",
+    "What are the innovations used by 1Inch Fusion and Cowswap?",
+    "What is Balancer?",
+    "How can MPC be used to improve blockchain infrastructure beyond wallets?",
   ]
+  
+
   
