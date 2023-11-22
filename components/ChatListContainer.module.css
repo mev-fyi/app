@@ -15,6 +15,13 @@
   align-items: center; /* Horizontally center */
 }
 
+/* Hide leftPanel on screens narrower than 768px */
+@media screen and (max-width: 768px) {
+  .leftPanel {
+    display: none;
+  }
+}
+
 /* Middle panel for chatlist and prompt form */
 .middlePanel {
   position: absolute; /* Position absolute to place it over the layoutContainer */
@@ -85,7 +92,7 @@
   display: none; /* Hide by default, will be shown in media query for mobile */
   position: fixed;
   right: 1rem;
-  bottom: 1rem;
+  bottom: 100px; /* Increased distance from bottom */
   background-color: #333; /* Example color */
   color: #fff;
   padding: 10px 20px;

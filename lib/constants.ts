@@ -125,5 +125,9 @@ export const questions = [
     "Tell me about different Byzantine Fault Tolerance (BFT) protocols and how do they differ from one another?",
     "What are the consensus-level differences of Ethereum and Solana?",
     "What are consensus-level trade-offs to make to tackle MEV?",
+    "Tell me about MEV in the Cosmos ecosystem",
+    "What is sharding?",
+    "What is Vitalik Buterin's stance on MEV?",
+    "What is danksharding?",
   ]
   

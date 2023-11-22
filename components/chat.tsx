@@ -135,18 +135,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           )}
         </div>
   
-        <div className={styles.middlePanel}>  {/* Middle panel for chatlist and prompt form */}
-          <div className={styles.chatListContainer}> {/* Chatlist container with scrollable content */}
-            {messages.length ? (
-              <>
-                <ChatList messages={newMessages} />
-                <ChatScrollAnchor trackVisibility={isLoading} />
-              </>
-            ) : (
-              <EmptyScreen/>
-            )}
-          </div>
-        </div>
+ 
 
         <div>  {/* ChatPanel component */}
           <ChatPanel
