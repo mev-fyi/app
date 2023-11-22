@@ -118,6 +118,8 @@
   .chatListContainer {
     max-height: calc(100vh - 60px); /* Adjusted for less padding */
     padding-bottom: 10px; /* Reduced bottom padding */
+    margin: 0; /* Adjust margin as needed */
+    padding: 0 0px; /* Adjust padding as needed, for example, 10px on the sides */
   }
   
   .metadataContainer {
