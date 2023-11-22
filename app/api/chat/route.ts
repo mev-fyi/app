@@ -99,9 +99,29 @@ export async function POST(req: Request) {
     await kv.zadd(`user:chat:${session.user.id}`, { score: createdAt, member: `chat:${id}` });
     console.log('route.ts: Chat record stored');
   } catch (error) {
-    console.error('Failed to store chat record:', error);
-    return new Response('Internal Server Error', { status: 500 });
+    const typedError = error as Error; // Type assertion
+    if (typedError.message.includes("max request size exceeded")) {
+      console.error('Payload too large, reducing message count:', error);
+      
+      // Redefine payload with only the last 5 messages
+      const reducedPayload = {
+        ...payload,
+        messages: payload.messages.slice(-5)
+      };
+  
+      try {
+        await kv.set(`chat:${id}`, JSON.stringify(reducedPayload));
+        console.log('route.ts: Chat record stored with reduced message count');
+      } catch (secondError) {
+        console.error('Failed again to store chat record:', secondError);
+        return new Response('Internal Server Error', { status: 500 });
+      }
+    } else {
+      console.error('Failed to store chat record:', error);
+      return new Response('Internal Server Error', { status: 500 });
+    }
   }
+  
 
   return new Response(JSON.stringify(payload), {
     headers: { 'Content-Type': 'application/json' },
