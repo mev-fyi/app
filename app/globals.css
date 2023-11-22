@@ -80,6 +80,6 @@
 
 @media (max-width: 767px) {
   body {
-    overflow-y: hidden; /* Hide vertical scrollbar on mobile */
+    overflow-y: hidden !important; /* Hide vertical scrollbar on mobile */
   }
 }

@@ -1,11 +1,78 @@
+/* Existing Styles */
 .textareaWithButton {
-    padding-left: 3rem; /* Space for the button */
+  padding-left: 3rem; /* Space for the button */
+}
+
+/*.newChatButton {
+  position: absolute;
+  left: 1rem; /* Adjust so the button doesn't overlap the text */
+
+/*  top: 1rem;
+  z-index: 10; /* Ensure the button is above other elements */
+
+/*}*/
+
+
+.newChatButton {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 1rem; /* Adjust as needed */
+  top: 1rem; /* Adjust as needed */
+  height: 12px; /* Adjust as needed */
+  width: 12px; /* Adjust as needed */
+  background-color: var(--background); /* Adjust color as needed */
+  padding: 0;
+  border-radius: 50%; /* Circular shape */
+  /* Additional styles as needed */
+}
+
+.promptFormContainer {
+  position: relative;
+  max-height: 60px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--background);
+  padding: 8px; /* Adjust padding as needed */
+  /* Add responsive styles as needed */
+}
+
+.textArea {
+  min-height: 60px;
+  width: 100%;
+  background: transparent;
+  padding: 1.3rem 4px;
+  /* Add additional styles as needed */
+}
+
+
+
+.sendButton {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  /* Define styles for your send button */
+}
+
+/* New Responsive Styles */
+@media (max-width: 1024px) {
+  .promptFormContainer {
+    padding: 0.5rem; /* Reduced padding */
   }
-  
+
+  .promptTextArea {
+    font-size: 0.9rem; /* Smaller font size for textarea */
+  }
+
   .newChatButton {
-    position: absolute;
-    left: 1rem; /* Adjust so the button doesn't overlap the text */
-    top: 1rem;
-    z-index: 10; /* Ensure the button is above other elements */
+    top: 0.5rem; /* Adjust position of the new chat button */
+    left: 0.5rem;
   }
-  
+
+  .sendButton {
+    /* Adjust size and position of the send button if necessary */
+  }
+}

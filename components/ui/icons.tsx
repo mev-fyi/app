@@ -232,7 +232,7 @@ function IconNewChat({ className, ...props }: React.ComponentProps<'svg'>) {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 256 256"
       fill="none"
-      className={cn('h-12 w-12', className)} // Adjust the size as needed
+      className={cn(className)} // Let size be controlled by container
       {...props}
     >
       <text x="50%" y="40%" dominantBaseline="middle" textAnchor="middle" fontSize="75" fill="#FFF">
