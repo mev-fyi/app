@@ -129,13 +129,12 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         <div className={styles.layoutContainer}>
   
         {/* Left empty panel */}
-        <div className={styles.leftPanel}>{/* This panel is intentionally left empty */}
-          {(lastMessageRole === 'assistant' || messages.length === 0) && (
-            <QuestionsOverlay setInput={setInput} />
-          )}
-        </div>
+        <div className={styles.leftPanel}>
+        {(lastMessageRole === 'assistant' || messages.length === 0) && (
+          <QuestionsOverlay className={styles.mobileHide} setInput={setInput} />
+        )}
+        </div>  
   
- 
 
         <div>  {/* ChatPanel component */}
           <ChatPanel
