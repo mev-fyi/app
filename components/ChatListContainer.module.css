@@ -88,7 +88,8 @@
   bottom: 130px; /* Increased distance from bottom */
   background-color: #333; /* Example color */
   color: #fff;
-  padding: 10px 20px;
+  padding: 6px 12px; /* Reduced padding */
+  font-size: 0.8rem; /* Smaller font size */
   cursor: pointer;
   z-index: 20; /* Above the metadata panel */
 }

@@ -50,9 +50,28 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   const [lastMessageRole, setLastMessageRole] = useState('assistant');
 
   const [isMetadataVisible, setIsMetadataVisible] = useState(false);
+  
   const toggleMetadataVisibility = () => {
     setIsMetadataVisible(!isMetadataVisible);
   };
+
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Set the initial value
+    handleResize();
+
+    // Listen for window resize events
+    window.addEventListener('resize', handleResize);
+
+    // Clean up
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const overlayClass = isMobile ? `${styles.questionsOverlay} ${styles.mobileHide}` : styles.questionsOverlay;
 
   // Function to handle user input submission
   const handleUserInputSubmit = async (value: string) => {
@@ -130,9 +149,11 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   
         {/* Left empty panel */}
         <div className={styles.leftPanel}>
-        {(lastMessageRole === 'assistant' || messages.length === 0) && (
-          <QuestionsOverlay className={styles.mobileHide} setInput={setInput} />
-        )}
+          <div className={overlayClass}>
+            {(lastMessageRole === 'assistant' || messages.length === 0) && (
+              <QuestionsOverlay setInput={setInput} />
+            )}
+          </div>
         </div>  
   
         <div className={styles.middlePanel}>  {/* Middle panel for chatlist and prompt form */}
