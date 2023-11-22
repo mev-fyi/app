@@ -33,21 +33,25 @@ export const QuestionList: React.FC<QuestionListProps> = ({ setInput }) => {
     }
   }, [selectedQuestions]);
 
-  const shuffleQuestions = useCallback(() => {
-    const shuffled = [...questions].sort(() => 0.5 - Math.random());
-    setSelectedQuestions(shuffled.slice(0, 4));
-  }, []);
-
+  const pickRandomQuestions = useCallback(() => {
+    const pickedQuestions = new Set<string>(); // Specify Set type as string
+    while (pickedQuestions.size < 4) {
+      const randomIndex = Math.floor(Math.random() * questions.length);
+      pickedQuestions.add(questions[randomIndex]);
+    }
+    setSelectedQuestions(Array.from(pickedQuestions));
+  }, [questions]);
+  
   useEffect(() => {
-    shuffleQuestions();
-  }, [shuffleQuestions]);
+    pickRandomQuestions();
+  }, [pickRandomQuestions]);
 
   return (
     <div>
       <Button
         variant="outline"
         className={styles.shuffleButton}
-        onClick={shuffleQuestions}
+        onClick={pickRandomQuestions}
       >
         Shuffle Questions
       </Button>
