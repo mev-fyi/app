@@ -114,5 +114,16 @@ export const questions = [
     "What are the liquidity provision mathematics on Uniswap v3?",
     "How can we design smart contracts to shield against MEV?",
     "Tell me more about optimal on-chain auction designs",
+    "How do zero-knowledge proofs impact MEV?",
+    "How does threshold encryption impact MEV?",
+    "What is instant finality and how does it relate with MEV?",
+    "What is Tendermint?",
+    "What is the Inter-Blockchain Communication (IBC) protocol?",
+    "What is Cosmos? How is Cosmos affected by MEV relative to Ethereum?",
+    "What is delegated proof-of-stake (DPoS)?",
+    "How can large staking protocols like LIDO and Rocket Pool influence MEV?",
+    "Tell me about different Byzantine Fault Tolerance (BFT) protocols and how do they differ from one another?",
+    "What are the consensus-level differences of Ethereum and Solana?",
+    "What are consensus-level trade-offs to make to tackle MEV?",
   ]
   
