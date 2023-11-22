@@ -34,12 +34,22 @@ export const QuestionList: React.FC<QuestionListProps> = ({ setInput }) => {
   }, [selectedQuestions]);
 
   const pickRandomQuestions = useCallback(() => {
-    const pickedQuestions = new Set<string>(); // Specify Set type as string
-    while (pickedQuestions.size < 4) {
-      const randomIndex = Math.floor(Math.random() * questions.length);
-      pickedQuestions.add(questions[randomIndex]);
+    // Create an array of indices [0, 1, 2, ..., questions.length - 1]
+    const indices = Array.from({ length: questions.length }, (_, i) => i);
+  
+    // Shuffle the indices array
+    for (let i = indices.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [indices[i], indices[j]] = [indices[j], indices[i]];
     }
-    setSelectedQuestions(Array.from(pickedQuestions));
+  
+    // Pick the first four indices
+    const selectedIndices = indices.slice(0, 4);
+  
+    // Get the questions corresponding to the selected indices
+    const selectedQuestions = selectedIndices.map(index => questions[index]);
+  
+    setSelectedQuestions(selectedQuestions);
   }, [questions]);
   
   useEffect(() => {
