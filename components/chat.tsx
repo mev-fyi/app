@@ -185,6 +185,12 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             <QuestionsOverlay setInput={setInput} />
           )}
           </div>
+
+          {/* This button could be in your middle panel or fixed at the bottom of the viewport */}
+          <button onClick={toggleMetadataVisibility} className={styles.toggleMetadataButton}>
+            {isMetadataVisible ? 'Back to Chat' : 'Show Top Sources'}
+          </button>
+        
         </div>
 
         <div>  {/* ChatPanel component */}
@@ -212,11 +218,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             <MetadataList entries={structuredMetadataEntries} />
         </div>
       
-          {/* This button could be in your middle panel or fixed at the bottom of the viewport */}
-        <button onClick={toggleMetadataVisibility} className={styles.toggleMetadataButton}>
-          {isMetadataVisible ? 'Back to Chat' : 'Show Top Sources'}
-        </button>
-        
+
         </div>
       </div>
       
