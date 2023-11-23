@@ -478,6 +478,37 @@ function IconUsers({ className, ...props }: React.ComponentProps<'svg'>) {
   )
 }
 
+// Down Arrow Icon
+function IconDownArrow({ className, ...props }: React.ComponentProps<'svg'>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      className={cn('h-4 w-4', className)}
+      viewBox="0 0 20 20"
+      {...props}
+    >
+      <path fillRule="evenodd" d="M5.293 7.293a1 1 0 01.707-.293H14a1 1 0 010 2H6a1 1 0 01-.707-1.707z" clipRule="evenodd" />
+    </svg>
+  );
+}
+
+// Up Arrow Icon
+function IconUpArrow({ className, ...props }: React.ComponentProps<'svg'>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      className={cn('h-4 w-4', className)}
+      viewBox="0 0 20 20"
+      {...props}
+    >
+      <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0H6a1 1 0 010-2h7.293a1 1 0 011.414 1.414z" clipRule="evenodd" />
+    </svg>
+  );
+}
+
+
 function IconExternalLink({
   className,
   ...props
@@ -541,5 +572,7 @@ export {
   IconShare,
   IconUsers,
   IconExternalLink,
-  IconChevronUpDown
+  IconChevronUpDown,
+  IconUpArrow,
+  IconDownArrow
 }
