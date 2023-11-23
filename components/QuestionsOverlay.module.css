@@ -10,16 +10,16 @@
 
 .questionBox {
   width: 100%; 
-  max-width: 300px; 
-  border: 2px solid white;
-  border-radius: 8px;
+  max-width: 300px;
+  border: 1px solid white;
+  border-radius: 7px;
   padding: 5px;
-  height: 100px; 
+  height: 100px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin: auto;
+  margin: 10px auto; /* Add margin above and below */
 }
 
 .question {
