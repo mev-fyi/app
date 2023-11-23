@@ -56,7 +56,7 @@ export function PromptForm({
       }}
       ref={formRef}
     >
-      <div className={styles.promptFormContainer}>
+      <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden bg-background px-8 sm:rounded-md sm:border sm:px-12 promptFormContainer">
         <Tooltip>
           <TooltipTrigger asChild>
             <button
@@ -72,7 +72,10 @@ export function PromptForm({
                 router.refresh()
                 router.push('/')
               }}
-              className={styles.newChatButton}
+              className={cn(
+                buttonVariants({ size: 'sm', variant: 'outline' }),
+                'absolute left-0 top-4 h-8 w-8 rounded-full bg-background p-0 sm:left-4 newChatButton'
+              )}
             >
               <IconNewChat />
               <span className="sr-only">New Chat</span>
@@ -89,9 +92,9 @@ export function PromptForm({
           onChange={e => setInput(e.target.value)}
           placeholder="Send a message."
           spellCheck={false}
-          className={styles.textArea}
+          className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm promptTextArea"
         />
-        <div className={styles.sendButton}>
+        <div className="absolute right-0 top-4 sm:right-4 sendButton">
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
