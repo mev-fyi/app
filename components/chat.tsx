@@ -149,7 +149,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         {/* Left empty panel */}
         <div className={styles.leftPanel}>
           <div className={overlayClass}>
-            {(lastMessageRole === 'assistant' || messages.length === 0) && (
+            {lastMessageRole === 'assistant' && messages.length > 0 && (
               <QuestionsOverlay setInput={setInput} />
             )}
           </div>
@@ -163,7 +163,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
                 <ChatScrollAnchor trackVisibility={isLoading} />
               </>
             ) : (
-              <EmptyScreen/>
+              <EmptyScreen setInput={setInput}/>
             )}
           </div>
         </div>

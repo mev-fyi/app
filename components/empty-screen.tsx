@@ -1,9 +1,10 @@
 import { UseChatHelpers } from 'ai/react'
 import { QuestionList } from './questions-list'
+import { QuestionsOverlay, QuestionsOverlayProps } from './question-overlay';
 
 //   <QuestionList setInput={setInput} />
 
-export function EmptyScreen() {
+export function EmptyScreen({setInput}: QuestionsOverlayProps) {
   return (
     <div className="mx-auto max-w-2xl px-4">
       <div className="rounded-lg border bg-background p-8 text-left">
@@ -18,6 +19,7 @@ export function EmptyScreen() {
           across mechanism design, auctions, information privacy, from research papers and YouTube videos.
         </p>
       </div>
+      <QuestionsOverlay setInput={setInput} />
     </div>
   );
 }
