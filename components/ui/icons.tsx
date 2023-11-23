@@ -235,14 +235,16 @@ function IconNewChat({ className, ...props }: React.ComponentProps<'svg'>) {
       className={cn(className)} // Let size be controlled by container
       {...props}
     >
-      <text x="50%" y="40%" dominantBaseline="middle" textAnchor="middle" fontSize="75" fill="#FFF">
+      {/* Adjust the y position of "New" slightly upwards */}
+      <text x="50%" y="35%" dominantBaseline="middle" textAnchor="middle" fontSize="75" fill="#FFF">
         New
       </text>
-      <text x="50%" y="60%" dominantBaseline="middle" textAnchor="middle" fontSize="75" fill="#FFF">
+      {/* Adjust the y position of "Chat" slightly downwards */}
+      <text x="50%" y="65%" dominantBaseline="middle" textAnchor="middle" fontSize="75" fill="#FFF">
         Chat
       </text>
     </svg>
-  )
+  );
 }
 
 

@@ -79,7 +79,7 @@ export const questions = [
     "What are Uniswap v4 hooks and do you have some examples?",
     "What is the mempool?",
     "How do private mempools influence MEV?",
-    "What is the difference between a private mempool and a dark pool?",
+    "How does the design of a private mempool relate to traditional finance dark pools?",
     "What protections can we use against MEV?",
 
     "What is blockchain censorship?",
