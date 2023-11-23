@@ -144,6 +144,7 @@
     max-height: calc(100vh - 40px); /* Adjusted for less padding */
     margin: 0; /* Adjust margin as needed */
     padding-top: 20px; /* Adjust padding as needed */
+    width: 100%; /* Adjust width as needed */
   }
   
   .metadataContainer {

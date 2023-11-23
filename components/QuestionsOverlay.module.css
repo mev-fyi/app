@@ -61,7 +61,7 @@
 
   .questionBox {
     /* Set the width to 100% minus padding to take full width */
-    width: calc(100% - 90px); /* Adjust the calc() formula if the padding is different */
+    width: calc(100% - 150px); /* Adjust the calc() formula if the padding is different */
     max-width: none; /* Remove the max-width restriction */
     margin: 4px 0; /* Add vertical margin */
     padding: 3px; /* Adjust padding if needed */
