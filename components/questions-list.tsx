@@ -58,7 +58,7 @@ export const QuestionList: React.FC<QuestionListProps> = ({ setInput }) => {
 
 
   return (
-    <div>
+    <div className={styles.questionsContainer}>
       <Button
         variant="outline"
         className={styles.shuffleButton}
@@ -69,10 +69,7 @@ export const QuestionList: React.FC<QuestionListProps> = ({ setInput }) => {
 
       <div className={styles.questionsOverlay}>
         {selectedQuestions.map((question, index) => (
-          <div 
-            key={index} 
-            className={styles.questionBox}
-          >
+          <div key={index} className={styles.questionBox}>
             <Button
               variant="link"
               className={styles.question}

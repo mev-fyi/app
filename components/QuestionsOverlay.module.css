@@ -1,10 +1,28 @@
+.questionsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px; /* Space between the button and grid */
+}
+
 .questionsOverlay {
   display: flex;
-  flex-wrap: wrap; /* Wrap items */
-  gap: 16px; /* Space between items */
-  justify-content: center; /* Center items horizontally */
-  padding: 5px;
-  padding-bottom: 200px;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  /* Remove padding if it's no longer needed for the grid */
+}
+
+.shuffleButton {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  /* margin-top is no longer needed as the button is now at the top */
+  /* align-self is no longer needed as the container takes care of alignment */
 }
 
 .questionBox {
@@ -33,19 +51,6 @@
 }
 
 /*overflow: hidden;*/
-
-
-.shuffleButton {
-  background-color: white;
-  color: black;
-  border: 2px solid black;
-  padding: 8px 16px;
-  cursor: pointer;
-  font-weight: bold;
-  text-align: center;
-  margin-top: 8px; /* Space above the button */
-  align-self: center; /* Center the button */
-}
 
 @media screen and (max-width: 600px) {
   .questionBox {
