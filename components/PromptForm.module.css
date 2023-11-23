@@ -3,56 +3,61 @@
   padding-left: 3rem; /* Space for the button */
 }
 
-/*.newChatButton {
-  position: absolute;
-  left: 1rem; /* Adjust so the button doesn't overlap the text */
-
-/*  top: 1rem;
-  z-index: 10; /* Ensure the button is above other elements */
-
-/*}*/
-
 
 .newChatButton {
   position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  left: 1rem; /* Adjust as needed */
-  top: 1rem; /* Adjust as needed */
-  height: 12px; /* Adjust as needed */
-  width: 12px; /* Adjust as needed */
-  background-color: var(--background); /* Adjust color as needed */
+  left: 0;
+  top: 1rem; /* Assuming 1rem = 16px, so 4 = 1rem */
+  height: 2rem; /* 8 units in Tailwind's default scale, assuming 1rem = 16px */
+  width: 2rem; /* Similarly, 8 units = 2rem */
+  border-radius: 9999px; /* A very large value for fully rounded corners */
+  background-color: var(--background); /* Replace var(--background) with actual color value */
   padding: 0;
-  border-radius: 50%; /* Circular shape */
-  /* Additional styles as needed */
+
+}
+
+/* Responsive styles for small screens, typically 640px */
+@media (min-width: 640px) {
+  .newChatButton {
+    left: 1rem; /* 4 units = 1rem */
+  }
+  .promptFormContainer {
+    padding-left: 3rem; /* .sm:px-12 for screens >= 640px (assuming 1rem = 4px; so 3rem = 12px) */
+    padding-right: 3rem; /* .sm:px-12 */
+  }
 }
 
 .promptFormContainer {
-  position: relative;
-  max-height: 60px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  background-color: var(--background);
-  padding: 8px; /* Adjust padding as needed */
-  /* Add responsive styles as needed */
+  position: 'relative';          /* .relative */
+  display: 'flex';               /* .flex */
+  max-height: '15rem';            /* .max-h-60 (assuming 1rem = 4px) */
+  width: '100%';                 /* .w-full */
+  flex-grow: 1;                   /* .grow */
+  flex-direction: 'column';       /* .flex-col */
+  overflow: 'hidden';            /* .overflow-hidden */
+  background-color: 'var(--background)'; /* .bg-background (custom property; replace with actual value) */
+  padding-left: '2rem';           /* .px-8 (1rem = 4px; so 2rem = 8px) */
+  padding-right: '2rem';          /* .px-8 */
+  border-radius: '0.375rem';      /* .rounded-md (0.375rem is Tailwind's default for 'md') */
+  border: '1px solid';           /* .border (default border width and style; color needs to be defined) */
 }
 
 .textArea {
   min-height: 60px;
   width: 100%;
-  background: transparent;
-  padding: 1.3rem 4px;
-  /* Add additional styles as needed */
+  resize: none;
+  background-color: transparent;
+  padding-left: 1rem; /* Assuming 1rem = 16px, so 4 units = 1rem */
+  padding-right: 1rem;
+  padding-top: 1.3rem;
+  padding-bottom: 1.3rem;
+  outline: none;
 }
-
 
 
 .sendButton {
   position: absolute;
-  right: 1rem;
+  right: 0;
   top: 1rem;
   /* Define styles for your send button */
 }
@@ -73,6 +78,6 @@
   }
 
   .sendButton {
-    /* Adjust size and position of the send button if necessary */
+    right: 1rem;
   }
 }
