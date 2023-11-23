@@ -61,17 +61,17 @@
 
   .questionBox {
     /* Set the width to 100% minus padding to take full width */
-    width: calc(100% - 20px); /* Adjust the calc() formula if the padding is different */
+    width: calc(100% - 40px); /* Adjust the calc() formula if the padding is different */
     max-width: none; /* Remove the max-width restriction */
-    margin: 8px 0; /* Add vertical margin */
-    padding: 10px; /* Adjust padding if needed */
+    margin: 4px 0; /* Add vertical margin */
+    padding: 4px; /* Adjust padding if needed */
     height: auto; /* Flexible height to accommodate content */
     min-height: 100px; /* Minimum height to maintain a consistent size */
   }
 
   .question {
     /* Adjust font size and line height if needed */
-    font-size: 0.85rem; /* Keep font size readable on mobile */
+    font-size: 0.65rem; /* Keep font size readable on mobile */
     line-height: 1.4; /* Increase line height for better readability */
   }
 
