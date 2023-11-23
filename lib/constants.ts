@@ -158,6 +158,7 @@ export const questions = [
     "What are the innovations used by 1Inch Fusion and Cowswap?",
     "What is Balancer?",
     "How can MPC be used to improve blockchain infrastructure beyond wallets?",
+    "What is ERC-7265?",
   ]
   
 
