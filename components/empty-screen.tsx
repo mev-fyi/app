@@ -19,7 +19,6 @@ export function EmptyScreen({setInput}: QuestionsOverlayProps) {
           across mechanism design, auctions, information privacy, from research papers and YouTube videos.
         </p>
       </div>
-      <QuestionsOverlay setInput={setInput} />
     </div>
   );
 }

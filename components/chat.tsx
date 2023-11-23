@@ -142,17 +142,23 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
       }
     })
 
+  // {(lastMessageRole === 'assistant' || messages.length === 0) && (
+  //   <QuestionsOverlay setInput={setInput} />
+  // )}
+
+  // <div className={overlayClass}>
+  //   {lastMessageRole === 'assistant' && messages.length > 0 && (
+  //     <QuestionsOverlay setInput={setInput} />
+  //   )}
+  // </div>
+
   return (
     <>
         <div className={styles.layoutContainer}>
   
         {/* Left empty panel */}
         <div className={styles.leftPanel}>
-          <div className={overlayClass}>
-            {lastMessageRole === 'assistant' && messages.length > 0 && (
-              <QuestionsOverlay setInput={setInput} />
-            )}
-          </div>
+
         </div>  
   
         <div className={styles.middlePanel}>  {/* Middle panel for chatlist and prompt form */}
@@ -166,7 +172,13 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
               <EmptyScreen setInput={setInput}/>
             )}
           </div>
+          
+          {(lastMessageRole === 'assistant' || messages.length === 0) && (
+            <QuestionsOverlay setInput={setInput} />
+          )}
         </div>
+
+  
 
         <div>  {/* ChatPanel component */}
           <ChatPanel
