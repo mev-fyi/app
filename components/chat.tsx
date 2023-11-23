@@ -177,7 +177,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           </div>
           
           <div className={overlayClass}>
-          {(lastMessageRole === 'assistant' || newMessages.length === 0) && (
+          {(newMessages.length === 0) && (
             <QuestionsOverlay setInput={setInput} />
           )}
           </div>
