@@ -48,9 +48,27 @@
 }
 
 @media screen and (max-width: 600px) {
+  .questionBox {
+    width: 100%; /* Full width on mobile */
+    max-width: none; /* Remove max-width restriction */
+    margin: 5px auto; /* Smaller margin */
+    padding: 10px; /* Adjust padding */
+    height: auto; /* Flexible height */
+    min-height: 100px; /* Minimum height */
+  }
+
   .question {
-    font-size: 0.75rem;
+    font-size: 0.85rem; /* Slightly larger font size for readability */
     align-self: center; /* Center the button */
+    line-height: 1.4; /* Increase line height for better readability */
+  }
+
+  .shuffleButton {
+    padding: 6px 12px; /* Smaller button padding */
   }
 }
 
+.questionsOverlay {
+  padding: 10px;
+  gap: 8px; /* Smaller gap for mobile */
+}
