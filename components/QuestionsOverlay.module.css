@@ -7,7 +7,7 @@
 .questionsOverlay {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 5px;
   justify-content: center;
   /* Remove padding if it's no longer needed for the grid */
 }
@@ -54,17 +54,17 @@
   .questionsOverlay {
     /* Ensure that the parent container takes the full width and centers its children */
     width: 100%;
-    padding: 10px;
+    padding: 4px;
     gap: 8px; /* Smaller gap for mobile */
     justify-content: center;
   }
 
   .questionBox {
     /* Set the width to 100% minus padding to take full width */
-    width: calc(100% - 40px); /* Adjust the calc() formula if the padding is different */
+    width: calc(100% - 90px); /* Adjust the calc() formula if the padding is different */
     max-width: none; /* Remove the max-width restriction */
     margin: 4px 0; /* Add vertical margin */
-    padding: 4px; /* Adjust padding if needed */
+    padding: 3px; /* Adjust padding if needed */
     height: auto; /* Flexible height to accommodate content */
     min-height: 100px; /* Minimum height to maintain a consistent size */
   }
