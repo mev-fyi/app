@@ -1,16 +1,14 @@
 .questionsOverlay {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  flex-wrap: wrap; /* Wrap items */
+  gap: 16px; /* Space between items */
+  justify-content: center; /* Center items horizontally */
   padding: 60px;
-  width: 100%;
-  align-items: flex-start; /* Align items to the start of the cross axis */
-  flex-wrap: wrap;
 }
 
 .questionBox {
-  width: 100%; 
-  max-width: 300px;
+  width: calc(50% - 8px); /* Adjust width for 2 boxes per row, minus half the gap */
+  max-width: 200px; /* Keep the max-width to control size */
   border: 1px solid white;
   border-radius: 7px;
   padding: 5px;
@@ -30,6 +28,7 @@
   white-space: normal;
   line-height: 1.2;
   width: 100%;
+  font-size: 0.85rem;
 }
 
 /*overflow: hidden;*/

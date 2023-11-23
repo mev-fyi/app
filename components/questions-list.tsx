@@ -56,6 +56,7 @@ export const QuestionList: React.FC<QuestionListProps> = ({ setInput }) => {
     pickRandomQuestions();
   }, [pickRandomQuestions]);
 
+
   return (
     <div>
       <Button
@@ -66,21 +67,23 @@ export const QuestionList: React.FC<QuestionListProps> = ({ setInput }) => {
         Shuffle Questions
       </Button>
 
-      {selectedQuestions.map((question, index) => (
-        <div 
-          key={index} 
-          className={styles.questionBox}
-        >
-          <Button
-            variant="link"
-            className={styles.question}
-            onClick={() => setInput(question)}
-            ref={el => questionRefs.current[index] = el} // Assign ref to the button
+      <div className={styles.questionsOverlay}>
+        {selectedQuestions.map((question, index) => (
+          <div 
+            key={index} 
+            className={styles.questionBox}
           >
-            {question}
-          </Button>
-        </div>
-      ))}
+            <Button
+              variant="link"
+              className={styles.question}
+              onClick={() => setInput(question)}
+              ref={el => questionRefs.current[index] = el}
+            >
+              {question}
+            </Button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
