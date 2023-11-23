@@ -121,15 +121,13 @@
     width: 100%; /* Full width of the viewport */
     max-width: none;
     min-width: 0;
-    padding-bottom: 100px; /* Reduced padding for mobile */
+    padding-bottom: 0px; /* Consider removing or reducing this padding if it's causing layout issues */
   }
 
   /* Styles specific to mobile */
   .chatListContainer {
-    max-height: calc(100vh - 60px); /* Adjusted for less padding */
-    padding-bottom: 10px; /* Reduced bottom padding */
+    max-height: calc(100vh - 40px); /* Adjusted for less padding */
     margin: 0; /* Adjust margin as needed */
-    padding: 0 0px; /* Adjust padding as needed, for example, 10px on the sides */
     padding-top: 20px; /* Adjust padding as needed */
   }
   
