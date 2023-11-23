@@ -35,7 +35,7 @@
 
 /* Chatlist container with scrollable content */
 .chatListContainer {
-  max-height: calc(100vh - 120px - 100px);
+  max-height: calc(100vh - 120px - 150px);
   width: 100%;
   margin: auto;
   padding: 0px 50px;

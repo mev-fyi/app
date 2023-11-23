@@ -3,7 +3,8 @@
   flex-wrap: wrap; /* Wrap items */
   gap: 16px; /* Space between items */
   justify-content: center; /* Center items horizontally */
-  padding: 60px;
+  padding: 5px;
+  padding-bottom: 200px;
 }
 
 .questionBox {
