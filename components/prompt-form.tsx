@@ -13,7 +13,6 @@ import { useEnterSubmit } from '@/lib/hooks/use-enter-submit'
 import { cn } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
 import { MetadataMessage } from './chat'
-import styles from './PromptForm.module.css'; // Import the CSS module
 
 export interface PromptProps
   extends Pick<UseChatHelpers, 'input' | 'setInput'> {
@@ -56,7 +55,7 @@ export function PromptForm({
       }}
       ref={formRef}
     >
-      <div className={cn(styles.promptFormContainer, "relative flex w-full flex-col overflow-hidden px-4 sm:px-6")}>
+      <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden px-8 sm:rounded-md sm:border sm:px-12">
         <Tooltip>
           <TooltipTrigger asChild>
             <button
@@ -74,7 +73,7 @@ export function PromptForm({
               }}
               className={cn(
                 buttonVariants({ size: 'sm', variant: 'outline' }),
-                'absolute left-0 top-4 h-8 w-8 rounded-full bg-background p-0 sm:left-4 newChatButton'
+                'absolute left-0 top-4 h-8 w-8 rounded-full bg-background p-0 sm:left-4'
               )}
             >
               <IconNewChat />
@@ -92,9 +91,9 @@ export function PromptForm({
           onChange={e => setInput(e.target.value)}
           placeholder="Send a message."
           spellCheck={false}
-          className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm promptTextArea"
+          className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm"
         />
-        <div className={cn(styles.sendButton, "absolute right-0 top-2 sm:right-2 reducedSizeButton")}>
+        <div className="absolute right-0 top-4 sm:right-4">
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
