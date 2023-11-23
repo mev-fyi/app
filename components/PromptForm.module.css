@@ -9,6 +9,10 @@
   z-index: 10; /* Ensure the button is above other elements */
 }
 
+.reducedSizeButton {
+  transform: scale(0.7); /* Reduces the size by 30% */
+}
+
 /* New Responsive Styles */
 @media (max-width: 1024px) {
   .promptFormContainer {

@@ -92,9 +92,9 @@ export function PromptForm({
           onChange={e => setInput(e.target.value)}
           placeholder="Send a message."
           spellCheck={false}
-          className={cn(styles.promptTextArea, "w-full resize-none bg-transparent py-2 focus-within:outline-none sm:text-sm")}
+          className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm promptTextArea"
         />
-        <div className={cn(styles.sendButton, "absolute right-0 top-2 sm:right-2")}>
+        <div className={cn(styles.sendButton, "absolute right-0 top-2 sm:right-2 reducedSizeButton")}>
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
