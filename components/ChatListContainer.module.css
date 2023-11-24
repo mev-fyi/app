@@ -112,12 +112,20 @@
   }
 
   .middlePanel {
+    position: static;
+    left: auto;
+    transform: none;
+    width: 100%; /* Full width of the viewport */
+    max-width: none;
+    min-width: 0; /* Remove minimum width for mobile */
     padding-bottom: 20px; /* Adjust padding for mobile */
   }
 
   .chatListContainer {
     padding: 20px; /* Adjusted padding for mobile */
-    width: 100%; /* Adjust width as needed */
+    width: 100%; /* Ensure it takes full width */
+    max-height: calc(100vh - 40px); /* Adjust max-height for mobile */
+    margin: 0; /* Reset margin */
   }
   
   .metadataContainer {
