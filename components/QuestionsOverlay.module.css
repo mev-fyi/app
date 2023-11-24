@@ -94,7 +94,7 @@
 
   .questionBoxLeftPanel{
     max-width: none;
-    width: 50%;
+    width: 100%;
     height: 80 px;
   }
 
@@ -107,7 +107,7 @@
   .shuffleButton {
     /* Adjust button styling as needed */
     padding: 6px 12px; /* Smaller button padding for mobile */
-    margin-bottom: 16px; /* Add some space below the button */
+    margin-bottom: 5px; /* Add some space below the button */
   }
 
 }

@@ -34,7 +34,7 @@ export function EmptyScreen({setInput}: QuestionsOverlayProps) {
           mev.fyi is the Maximal Extractable Value (MEV) research chatbot.
         </p>
         <p className="mb-4 leading-normal text-muted-foreground">
-          mev.fyi onboards you to the latest MEV-related research, 
+          Find the latest MEV-related research, 
           across mechanism design, auctions, information privacy, from research papers and YouTube videos.
         </p>
       </div>
