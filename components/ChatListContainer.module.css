@@ -107,26 +107,16 @@
 }
 
 @media (max-width: 767px) {
-  .leftPanel .rightPanel {
+  .leftPanel, .rightPanel {
     display: none; /* Hide left and right panels on mobile */
   }
 
   .middlePanel {
-    position: static;
-    left: auto;
-    transform: none;
-    width: 100%; /* Full width of the viewport */
-    max-width: none;
-    min-width: 0;
-    padding-bottom: 0px; /* Consider removing or reducing this padding if it's causing layout issues */
+    padding-bottom: 20px; /* Adjust padding for mobile */
   }
 
-  /* Styles specific to mobile */
   .chatListContainer {
-    max-height: calc(100vh - 40px); /* Adjusted for less padding */
-    margin: 0; /* Adjust margin as needed */
-    padding-top: 20px; /* Adjust padding as needed */
-    width: 100%; /* Adjust width as needed */
+    padding: 20px; /* Adjusted padding for mobile */
   }
   
   .metadataContainer {
@@ -138,15 +128,6 @@
     transform: translateX(100%); /* Positioned off-screen */
     transition: transform 0.3s; /* Smooth transition */
     z-index: 30; /* Above other elements */
-    /* ... other styling as needed ... */
-  }
-
-  .metadataTitle {
-    color: #fff;
-    font-weight: bold;
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-    padding-left: 1%;
   }
 
   .metadataContainerActive {
@@ -157,6 +138,7 @@
     display: block; /* Show the toggle button on mobile */
   }
 }
+
 
 @media (min-width: 768px) {
   /* Adjustments for larger screens where the metadata can be shown inline */
