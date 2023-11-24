@@ -14,7 +14,7 @@
   flex-direction: column;
   align-items: center; /* Horizontally center */
   padding-top: 100px;
-  margin-left: 40px;
+  margin-left: 10px;
 }
 
 .rightPanel {
@@ -31,7 +31,7 @@
   position: absolute; /* Position absolute to place it over the layoutContainer */
   left: 50%; /* Position to the center of the layoutContainer */
   transform: translateX(-50%); /* Translate to the left by half its width to center */
-  width: calc(100% - 800px); /* Subtracting total width of left and right panels */
+  width: calc(100% - 600px); /* Subtracting total width of left and right panels */
   max-width: 900px; /* Maximum width */
   min-width: 650px; /* Minimum width to ensure it doesn't get too small */
   display: flex;
