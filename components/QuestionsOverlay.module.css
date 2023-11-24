@@ -49,36 +49,31 @@
   font-size: 0.85rem;
 }
 
-/*overflow: hidden;*/
 @media screen and (max-width: 600px) {
   .questionsOverlay {
-    /* Ensure that the parent container takes the full width and centers its children */
     width: 100%;
     padding: 4px;
-    gap: 4px; /* Smaller gap for mobile */
+    gap: 8px;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap; /* Changed to nowrap for a single row layout */
   }
 
   .questionBox {
-    /* Set the width to 100% minus padding to take full width */
-    width: 100%;
+    width: 100%; /* Each question box takes full width of the parent */
     max-width: none; /* Remove the max-width restriction */
-    margin: 4px 0; /* Add vertical margin */
-    padding: 3px; /* Adjust padding if needed */
-    height: auto; /* Flexible height to accommodate content */
-    min-height: 100px; /* Minimum height to maintain a consistent size */
+    margin: 4px auto; /* Center the boxes with auto margins */
+    padding: 3px;
+    height: auto;
+    min-height: 100px;
   }
 
   .question {
-    /* Adjust font size and line height if needed */
-    font-size: 0.65rem; /* Keep font size readable on mobile */
-    line-height: 1.4; /* Increase line height for better readability */
+    font-size: 0.65rem; /* Smaller font size for mobile */
+    line-height: 1.4;
   }
 
   .shuffleButton {
-    /* Adjust button styling as needed */
-    padding: 6px 12px; /* Smaller button padding for mobile */
-    margin-bottom: 16px; /* Add some space below the button */
+    padding: 6px 12px;
+    margin-bottom: 16px;
   }
 }
