@@ -49,7 +49,7 @@
   max-height: calc(100vh - 120px - 100px);
   width: 100%;
   margin: auto;
-  padding: 0px 50px;
+  padding: 0px 150px;
   box-sizing: border-box;
   overflow-y: auto; /* Ensures vertical scroll */
   overflow-x: hidden;
