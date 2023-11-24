@@ -41,7 +41,7 @@ export function ChatPanel({
   setLastMessageRole
 }: ChatPanelProps) {
   return (
-    <div className="fixed inset-x-0 bottom-0 ">
+    <div className="fixed inset-x-0 bottom-0 sm:mt-4 sm:mr-4 sm:ml-4">
       <ButtonScrollToBottom />
       <div className="mx-auto sm:max-w-2xl sm:px-4">
         <div className="flex h-4 items-center justify-center">
