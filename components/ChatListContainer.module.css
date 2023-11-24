@@ -107,27 +107,9 @@
 }
 
 @media (max-width: 767px) {
-  .layoutContainer {
-    justify-content: center; /* Center the middle panel as side panels are hidden */
-  }
-
   .leftPanel .rightPanel {
     display: none; /* Hide left and right panels on mobile */
   }
-
-  /*.rightPanel {
-    display: block; /* Show the right panel when it should be visible */
-    /*position: fixed;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 80%; /* Or whatever width you want */
-    /*transform: translateX(100%); /* Off-screen to the right */
-    /*transition: transform 0.3s ease-in-out;
-    z-index: 30; /* Ensures it is above other content */
-    /*background: #fff; /* Or any background color */
-    /* Add any additional styling for the panel here */
-  /*}*/
 
   .middlePanel {
     position: static;
