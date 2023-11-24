@@ -10,6 +10,7 @@
   gap: 5px;
   justify-content: center;
   width: 90%;
+  margin-left:30px;
   /* Remove padding if it's no longer needed for the grid */
 }
 
