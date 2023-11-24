@@ -34,8 +34,8 @@
   left: 50%; /* Position to the center of the layoutContainer */
   transform: translateX(-50%); /* Translate to the left by half its width to center */
   width: calc(100% - 600px); /* Subtracting total width of left and right panels */
-  max-width: 750px; /* Maximum width */
-  min-width: 650px; /* Minimum width to ensure it doesn't get too small */
+  max-width: 650px; /* Maximum width */
+  min-width: 500px; /* Minimum width to ensure it doesn't get too small */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -79,7 +79,7 @@
 /* Metadata container */
 .metadataContainer {
   width: 100%; /* Use 100% of the rightPanel width */
-  max-width: 400px; /* Example max-width */
+  max-width: 500px; /* Example max-width */
   max-height: calc(100vh - 120px - 100px);
   margin-left: 10px; /* Align to the left by setting left margin */
   margin-right: auto; /* Keeps right margin automatic */
