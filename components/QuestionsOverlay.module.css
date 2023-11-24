@@ -9,6 +9,7 @@
   flex-wrap: wrap;
   gap: 5px;
   justify-content: center;
+  width: 80%;
   /* Remove padding if it's no longer needed for the grid */
 }
 

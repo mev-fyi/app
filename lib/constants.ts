@@ -160,6 +160,7 @@ export const questions = [
     "How can MPC be used to improve blockchain infrastructure beyond wallets?",
     "What is ERC-7265?",
     "What are Verkle trees?",
+    "What are the trade-offs for DeFi protocols to build on an L2 versus their on own app-chain on Cosmos?"
   ]
   
 
