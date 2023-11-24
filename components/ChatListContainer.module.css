@@ -32,7 +32,7 @@
   left: 50%; /* Position to the center of the layoutContainer */
   transform: translateX(-50%); /* Translate to the left by half its width to center */
   width: calc(100% - 600px); /* Subtracting total width of left and right panels */
-  max-width: 900px; /* Maximum width */
+  max-width: 750px; /* Maximum width */
   min-width: 650px; /* Minimum width to ensure it doesn't get too small */
   display: flex;
   flex-direction: column;
@@ -164,5 +164,5 @@
 }
 
 .customMarkdownFont {
-  font-size: 0.88rem; /* Adjust the font size as needed */
+  font-size: 0.93rem; /* Adjust the font size as needed */
 }
