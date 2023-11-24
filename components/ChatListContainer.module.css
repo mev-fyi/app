@@ -14,7 +14,6 @@
   flex-direction: column;
   align-items: center; /* Horizontally center */
   padding-top: 100px;
-  margin-left: 10px;
 }
 
 .rightPanel {
@@ -24,6 +23,8 @@
   display: flex;
   flex-direction: column;
   align-items: center; /* Horizontally center */
+  position: relative; /* Change to relative to make the left property effective */
+  left: 30px;
 }
 
 /* Middle panel for chatlist and prompt form */
