@@ -84,12 +84,12 @@
 
   .questionBox {
     /* Set the width to 100% minus padding to take full width */
-    width: calc(100% - 150px); /* Adjust the calc() formula if the padding is different */
+    width: calc(100% - 120px); /* Adjust the calc() formula if the padding is different */
     max-width: none; /* Remove the max-width restriction */
     margin: 4px 0; /* Add vertical margin */
     padding: 3px; /* Adjust padding if needed */
     height: auto; /* Flexible height to accommodate content */
-    min-height: 50px; /* Minimum height to maintain a consistent size */
+    min-height: 40px; /* Minimum height to maintain a consistent size */
   }
 
   .questionBoxLeftPanel{
@@ -107,7 +107,7 @@
   .shuffleButton {
     /* Adjust button styling as needed */
     padding: 6px 12px; /* Smaller button padding for mobile */
-    margin-bottom: 5px; /* Add some space below the button */
+    margin-bottom: 2px; /* Add some space below the button */
   }
 
 }

@@ -155,6 +155,11 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   // {lastMessageRole === 'assistant' && messages.length > 0 && (
   //   <QuestionsOverlay setInput={setInput} />
   // )}
+
+  {/* To be placed right on top of ChatPanel */}
+  <button onClick={toggleMetadataVisibility} className={styles.toggleMetadataButton}>
+  {isMetadataVisible ? 'Back to Chat' : 'Show Top Sources'}
+  </button>
   return (
     <>
         <div className={styles.layoutContainer}>
@@ -187,10 +192,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           </div>
         </div>
 
-        {/* This button could be in your middle panel or fixed at the bottom of the viewport */}
-        <button onClick={toggleMetadataVisibility} className={styles.toggleMetadataButton}>
-          {isMetadataVisible ? 'Back to Chat' : 'Show Top Sources'}
-        </button>
+        
 
         <div>  {/* ChatPanel component */}
           <ChatPanel
