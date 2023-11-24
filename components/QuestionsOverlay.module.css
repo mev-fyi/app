@@ -109,9 +109,4 @@
     margin-bottom: 16px; /* Add some space below the button */
   }
 
-  .questionBoxLeftPanel {
-    height: 100px; /* Fixed height */
-    width: 150px; /* Fixed width, adjust as needed */
-  }
-
 }
