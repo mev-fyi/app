@@ -21,7 +21,7 @@ import { Input } from './ui/input'
 import { toast } from 'react-hot-toast'
 import MetadataList from '@/components/metadata-list';
 import styles from './ChatListContainer.module.css'; // Import the CSS module
-import { QuestionsOverlay } from './question-overlay';
+import { QuestionsOverlay, QuestionsOverlayLeftPanel } from './question-overlay';
 import { ParsedMetadataEntry } from 'lib/types';
 
 
@@ -163,7 +163,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         <div className={styles.leftPanel}>
           <div className={overlayClass}>
             {lastMessageRole === 'assistant' && newMessages.length > 0 && (
-              <QuestionsOverlay setInput={setInput} />
+              <QuestionsOverlayLeftPanel setInput={setInput} />
             )}
           </div>
         </div>  
@@ -183,6 +183,11 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           <div className={overlayClass}>
           {(newMessages.length === 0) && (
             <QuestionsOverlay setInput={setInput} />
+          )}
+          </div>
+          <div className={overlayClass}>
+          {(newMessages.length === 0 && isMobile) && (
+            <QuestionsOverlayLeftPanel setInput={setInput} />
           )}
           </div>
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { QuestionList } from '@/components/questions-list';
+import { QuestionListLeftPanel } from '@/components/questions-list-left-panel-and-mobile';
 import styles from './QuestionsOverlay.module.css'; // Import the CSS module
 
 export interface QuestionsOverlayProps {
@@ -15,4 +16,12 @@ export const QuestionsOverlay: React.FC<QuestionsOverlayProps> = ({ setInput }) 
     );
   };
 
-  
+  // Inside QuestionsOverlay component
+export const QuestionsOverlayLeftPanel: React.FC<QuestionsOverlayProps> = ({ setInput }) => {
+  return (
+    <div className={styles.questionsOverlayLeftPanel}>
+      <QuestionListLeftPanel setInput={setInput} />
+    </div>
+  );
+};
+
