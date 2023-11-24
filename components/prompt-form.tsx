@@ -91,7 +91,7 @@ export function PromptForm({
           onChange={e => setInput(e.target.value)}
           placeholder="Send a message."
           spellCheck={false}
-          className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm mt-4 mr-4 ml-4 sm:mt-6 sm:mr-6 sm:ml-6"
+          className="min-h-[60px] w-full resize-none bg-transparent px-4 py-[1.3rem] focus-within:outline-none sm:text-sm sm:mt-4 sm:mr-4 sm:ml-4"
         />
         <div className="absolute right-0 top-4 sm:right-4">
           <Tooltip>
