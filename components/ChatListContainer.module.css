@@ -117,6 +117,7 @@
 
   .chatListContainer {
     padding: 20px; /* Adjusted padding for mobile */
+    width: 100%; /* Adjust width as needed */
   }
   
   .metadataContainer {

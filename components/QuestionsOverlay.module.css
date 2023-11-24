@@ -35,7 +35,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin: 10px auto; /* Add margin above and below */
+  margin: 5px auto; /* Add margin above and below */
 }
 
 .question {
