@@ -4,14 +4,6 @@
   align-items: center;
 }
 
-.questionsOverlay {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  justify-content: center;
-  /* Remove padding if it's no longer needed for the grid */
-}
-
 .shuffleButton {
   background-color: white;
   color: black;
@@ -20,13 +12,9 @@
   cursor: pointer;
   font-weight: bold;
   text-align: center;
-  /* margin-top is no longer needed as the button is now at the top */
-  /* align-self is no longer needed as the container takes care of alignment */
 }
 
 .questionBox {
-  width: calc(50% - 8px); /* Adjust width for 2 boxes per row, minus half the gap */
-  max-width: 250px; /* Keep the max-width to control size */
   border: 1px solid white;
   border-radius: 7px;
   padding: 5px;
@@ -35,8 +23,39 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin: 5px auto; /* Add margin above and below */
+  margin: 5px auto;
+  font-size: 0.85rem;
+  word-wrap: break-word;
+  white-space: normal;
+  line-height: 1.2;
 }
+
+/* Middle Panel: 2x2 grid */
+.middlePanel .questionsOverlay {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+}
+
+.middlePanel .questionBox {
+  width: calc(50% - 8px);
+  max-width: 250px;
+}
+
+/* Left Panel: 4x1 row on mobile */
+.leftPanel .questionsOverlay {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 5px;
+}
+
+.leftPanel .questionBox {
+  flex: 0 0 auto;
+  width: calc(25% - 8px);
+}
+
 
 .question {
   padding-top: 10px;
@@ -48,6 +67,10 @@
   width: 100%;
   font-size: 0.85rem;
 }
+
+
+
+
 
 @media screen and (max-width: 600px) {
   .questionsOverlay {
