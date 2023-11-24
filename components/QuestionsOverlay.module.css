@@ -4,6 +4,14 @@
   align-items: center;
 }
 
+.questionsOverlay {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  /* Remove padding if it's no longer needed for the grid */
+}
+
 .shuffleButton {
   background-color: white;
   color: black;
@@ -12,75 +20,64 @@
   cursor: pointer;
   font-weight: bold;
   text-align: center;
+  /* margin-top is no longer needed as the button is now at the top */
+  /* align-self is no longer needed as the container takes care of alignment */
 }
 
 .questionBox {
+  width: calc(50% - 8px); /* Adjust width for 2 boxes per row, minus half the gap */
+  max-width: 300px; /* Keep the max-width to control size */
   border: 1px solid white;
   border-radius: 7px;
   padding: 5px;
-  height: 100px; /* Fixed height */
-  width: calc(50% - 8px); /* Fixed width for 2x2 grid */
+  height: 100px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin: 5px auto;
+  margin: 10px auto; /* Add margin above and below */
 }
 
 .question {
-  padding: 10px;
+  padding-top: 10px;
+  padding-left: 10px; /* Ensure there's some space on the left */
   text-align: left;
-  width: 100%;
-  font-size: 0.85rem;
   word-wrap: break-word;
   white-space: normal;
   line-height: 1.2;
+  width: 100%;
+  font-size: 0.85rem;
 }
 
-/* Middle Panel: 2x2 grid */
-.middlePanel .questionsOverlay {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  justify-content: center;
-}
-
-.middlePanel .questionBox {
-  width: calc(50% - 8px);
-  max-width: 250px;
-}
-
-/* Left Panel: 4x1 row on mobile */
-.leftPanel .questionsOverlay {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  gap: 5px;
-}
-
-.leftPanel .questionBox {
-  flex: 0 0 auto;
-  width: calc(25% - 8px); /* Adjust width for 4x1 layout */
-}
-
+/*overflow: hidden;*/
 @media screen and (max-width: 600px) {
-  .middlePanel .questionsOverlay {
-    flex-wrap: nowrap; /* Single row layout for mobile */
-  }
-
-  .middlePanel .questionBox,
-  .leftPanel .questionBox {
-    width: 100%; /* Full width for mobile */
-    flex: 0 0 auto;
+  .questionsOverlay {
+    /* Ensure that the parent container takes the full width and centers its children */
+    width: 100%;
+    padding: 4px;
+    gap: 8px; /* Smaller gap for mobile */
+    justify-content: center;
   }
 
   .questionBox {
-    height: auto; /* Flexible height on mobile */
-    min-height: 100px; /* Minimum height */
+    /* Set the width to 100% minus padding to take full width */
+    width: calc(100% - 150px); /* Adjust the calc() formula if the padding is different */
+    max-width: none; /* Remove the max-width restriction */
+    margin: 4px 0; /* Add vertical margin */
+    padding: 3px; /* Adjust padding if needed */
+    height: auto; /* Flexible height to accommodate content */
+    min-height: 100px; /* Minimum height to maintain a consistent size */
+  }
+
+  .question {
+    /* Adjust font size and line height if needed */
+    font-size: 0.65rem; /* Keep font size readable on mobile */
+    line-height: 1.4; /* Increase line height for better readability */
   }
 
   .shuffleButton {
-    padding: 6px 12px;
-    margin-bottom: 16px;
+    /* Adjust button styling as needed */
+    padding: 6px 12px; /* Smaller button padding for mobile */
+    margin-bottom: 16px; /* Add some space below the button */
   }
 }
