@@ -20,7 +20,7 @@
 .rightPanel {
   flex: 1; /* Allows panels to grow */
   min-width: 150px; /* Minimum width */
-  max-width: 30%; /* Adjusted maximum width */
+  max-width: 20%; /* Adjusted maximum width */
   display: flex;
   flex-direction: column;
   align-items: center; /* Horizontally center */
@@ -79,7 +79,7 @@
 /* Metadata container */
 .metadataContainer {
   width: 100%; /* Use 100% of the rightPanel width */
-  max-width: 500px; /* Example max-width */
+  max-width: 400px; /* Example max-width */
   max-height: calc(100vh - 120px - 100px);
   margin-left: 10px; /* Align to the left by setting left margin */
   margin-right: auto; /* Keeps right margin automatic */
