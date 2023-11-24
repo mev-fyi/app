@@ -66,7 +66,7 @@
     margin: 4px 0; /* Add vertical margin */
     padding: 3px; /* Adjust padding if needed */
     height: auto; /* Flexible height to accommodate content */
-    min-height: 100px; /* Minimum height to maintain a consistent size */
+    min-height: 50px; /* Minimum height to maintain a consistent size */
   }
 
   .question {
