@@ -181,7 +181,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           </div>
           
           <div className={overlayClass}>
-          {(newMessages.length === 0) && (
+          {(newMessages.length === 0 && !isMobile) && (
             <QuestionsOverlay setInput={setInput} />
           )}
           </div>
