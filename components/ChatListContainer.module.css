@@ -33,7 +33,7 @@
   transform: translateX(-50%); /* Translate to the left by half its width to center */
   width: calc(100% - 800px); /* Subtracting total width of left and right panels */
   max-width: 650px; /* Maximum width */
-  min-width: 550px; /* Minimum width to ensure it doesn't get too small */
+  min-width: 650px; /* Minimum width to ensure it doesn't get too small */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
