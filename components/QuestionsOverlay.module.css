@@ -26,7 +26,7 @@
 
 .questionBox {
   width: calc(50% - 8px); /* Adjust width for 2 boxes per row, minus half the gap */
-  max-width: 300px; /* Keep the max-width to control size */
+  max-width: 200px; /* Keep the max-width to control size */
   border: 1px solid white;
   border-radius: 7px;
   padding: 5px;
@@ -55,7 +55,7 @@
     /* Ensure that the parent container takes the full width and centers its children */
     width: 100%;
     padding: 4px;
-    gap: 8px; /* Smaller gap for mobile */
+    gap: 4px; /* Smaller gap for mobile */
     justify-content: center;
     flex-wrap: wrap;
   }
