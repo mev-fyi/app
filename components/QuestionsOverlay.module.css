@@ -54,7 +54,7 @@
   border: 2px solid white;
   border-radius: 8px;
   padding: 5px;
-  height: 100px; /* Fixed height */
+  height: 110px; /* Fixed height */
   width: 300px; /* Fixed width, adjust as needed */
   box-sizing: border-box;
   display: flex;

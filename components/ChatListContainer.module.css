@@ -44,7 +44,7 @@
   overflow-y: auto; /* Ensure this is not overridden somewhere else */
   overflow-x: hidden;
   padding-bottom: 200px;
-  font-size: 0.95rem; /* Adjust the font size as needed */
+  font-size: 1.1rem; /* Adjust the font size as needed */
 }
 
 /* Chatlist container with scrollable content */
@@ -167,5 +167,5 @@
 }
 
 .customMarkdownFont {
-  font-size: 1.2rem; /* Adjust the font size as needed */
+  font-size: 1.1rem; /* Adjust the font size as needed */
 }
