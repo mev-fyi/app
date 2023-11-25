@@ -12,7 +12,8 @@ export default async function SignInPage() {
   return (
     <div className="flex flex-col h-screen items-center justify-center py-10">
       {/* Welcome message */}
-      <h1 className="mb-4 text-3xl font-bold text-center">mev.fyi is the Maximal Extractable Value (MEV) research chatbot.</h1>
+      <h1 className="mb-4 text-3xl font-bold text-center">mev.fyi</h1>
+      <h1 className="mb-4 text-3xl font-bold text-center">The Maximal Extractable Value (MEV) research chatbot</h1>
       <p className="mb-4 leading-normal text-muted-foreground">
           Find the latest MEV-related research, 
           across mechanism design, auctions, information privacy, from research papers and YouTube videos.
@@ -21,7 +22,7 @@ export default async function SignInPage() {
       {/* Welcome image */}
       <div className="mb-8">
         {/* Since the image is in the public folder, you can refer to it directly by its path */}
-        <Image src="/android-chrome-512x512.png" alt="Welcome" width={256} height={256} />
+        <Image src="/android-chrome-512x512.png" alt="Welcome" width={512} height={512} />
       </div>
       
       {/* Login buttons */}
