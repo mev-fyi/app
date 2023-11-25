@@ -22,7 +22,7 @@ export default async function SignInPage() {
       {/* Welcome image */}
       <div className="mb-8">
         {/* Since the image is in the public folder, you can refer to it directly by its path */}
-        <Image src="@/public/android-chrome-512x512.png" alt="Welcome" width={512} height={512} />
+        <Image src="/android-chrome-512x512.png" alt="Welcome" width={512} height={512} />
       </div>
       
       {/* Login buttons */}
