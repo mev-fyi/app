@@ -9,7 +9,7 @@
 .leftPanel {
   flex: 1; /* Allows panels to grow */
   min-width: 200px; /* Minimum width */
-  max-width: 20%; /* Adjusted maximum width */
+  max-width: 30%; /* Adjusted maximum width */
   display: flex;
   flex-direction: column;
   align-items: center; /* Horizontally center */
@@ -20,7 +20,7 @@
 .rightPanel {
   flex: 1; /* Allows panels to grow */
   min-width: 400px; /* Minimum width */
-  max-width: 20%; /* Adjusted maximum width */
+  max-width: 30%; /* Adjusted maximum width */
   display: flex;
   flex-direction: column;
   align-items: center; /* Horizontally center */
