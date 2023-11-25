@@ -37,11 +37,11 @@
 
 .questionBox {
   width: calc(50% - 8px); /* Adjust width for 2 boxes per row, minus half the gap */
-  max-width: 300px; /* Keep the max-width to control size */
+  max-width: 400px; /* Keep the max-width to control size */
   border: 1px solid white;
   border-radius: 7px;
   padding: 5px;
-  height: 100px;
+  height: 140px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -54,8 +54,8 @@
   border: 2px solid white;
   border-radius: 8px;
   padding: 5px;
-  height: 110px; /* Fixed height */
-  width: 300px; /* Fixed width, adjust as needed */
+  height: 140px; /* Fixed height */
+  width: 400px; /* Fixed width, adjust as needed */
   box-sizing: border-box;
   display: flex;
   align-items: center; /* Vertical alignment */
