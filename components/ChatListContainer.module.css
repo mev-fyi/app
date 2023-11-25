@@ -26,6 +26,7 @@
   align-items: center; /* Horizontally center */
   position: relative; /* Change to relative to make the left property effective */
   left: 30px;
+  left: 50px;
 }
 
 /* Middle panel for chatlist and prompt form */
@@ -33,7 +34,7 @@
   position: absolute; /* Position absolute to place it over the layoutContainer */
   left: 50%; /* Position to the center of the layoutContainer */
   transform: translateX(-50%); /* Translate to the left by half its width to center */
-  width: calc(100% - 950px); /* Subtracting total width of left and right panels */
+  width: calc(100% - 700px); /* Subtracting total width of left and right panels */
   max-width: 650px; /* Maximum width */
   min-width: 500px; /* Minimum width to ensure it doesn't get too small */
   display: flex;
