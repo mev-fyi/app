@@ -20,13 +20,13 @@ export const QuestionList: React.FC<QuestionListProps> = ({ setInput }) => {
           let fontSize;
   
           if (questionText.length <= 50) {
-            fontSize = '1.2rem';
+            fontSize = '1.4rem';
           } else if (questionText.length <= 100) {
-            fontSize = '1.1rem';
+            fontSize = '1.3rem';
           } else if (questionText.length <= 150) {
-            fontSize = '1.05rem';
+            fontSize = '1.15rem';
           } else {
-            fontSize = '1rem';
+            fontSize = '1.1rem';
           }
   
           box.style.fontSize = fontSize;
