@@ -132,7 +132,7 @@ export const questions = [
     "Explain to me what is Eigenlayer's restaking in layman's terms",
     "What are concrete applications of Eigenlayer's restaking system?",
     "How does Eigenlayer's restaking system differ from LIDO's value proposition?",
-    "What are credible commitments and middlewares referred to in the context of Eigenlayer's restaking? Please define these terms prior to answering the question",
+    "What are credible commitments and middlewares referred to in the context of Eigenlayer's restaking?",
     "What is Sybil resistance in consensus protocols?",
     "What is deplatforming?",
     "What the foundational design principles in building crypto technology?",
