@@ -72,7 +72,6 @@
   white-space: normal;
   line-height: 1.2;
   width: 100%;
-  font-size: 1.2rem;
 }
 
 /*overflow: hidden;*/
@@ -81,7 +80,7 @@
     padding: 0px;
     width: 100%; /* Match the width of the leftPanel */
     padding-top: 5px;
-    padding-bottom: 70px;
+    padding-bottom: 150px;
   }
   
 
@@ -93,7 +92,6 @@
 
   .question {
     /* Adjust font size and line height if needed */
-    font-size: 0.55rem; /* Keep font size readable on mobile */
     line-height: 1.4; /* Increase line height for better readability */
   }
 
@@ -103,8 +101,5 @@
     margin-bottom: 2px; /* Add some space below the button */
   }
 
-  .questionsOverlayLeftPanel{
-    padding-bottom: 50px;
-  }
 
 }

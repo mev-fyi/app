@@ -24,8 +24,8 @@
   }
 
   .newChatButton {
-    top: 0.5rem; /* Adjust position of the new chat button */
-    left: 0.5rem;
+    top: 0.75rem; /* Adjust position of the new chat button */
+    left: 0.75rem;
   }
 
   .sendButton {

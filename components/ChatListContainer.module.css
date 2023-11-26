@@ -44,7 +44,6 @@
   overflow-y: auto; /* Ensure this is not overridden somewhere else */
   overflow-x: hidden;
   padding-bottom: 200px;
-  font-size: 1.1rem; /* Adjust the font size as needed */
 }
 
 /* Chatlist container with scrollable content */
