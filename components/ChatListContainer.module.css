@@ -148,6 +148,7 @@
     width: 100%; /* Ensure it takes full width */
     max-height: calc(100vh - 20px); /* Adjust max-height for mobile */
     margin: 0; /* Reset margin */
+    padding-top: 50px;
     padding-bottom: 200px;
   }
   
