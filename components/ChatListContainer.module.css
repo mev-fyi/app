@@ -133,7 +133,6 @@
     max-width: none;
     min-width: 0; /* Remove minimum width for mobile */
     padding-bottom: 20px; /* Adjust padding for mobile */
-    font-size: 0.7rem; /* Adjust the font size as needed */
   }
 
   .chatListContainer {
@@ -141,6 +140,7 @@
     width: 100%; /* Ensure it takes full width */
     max-height: calc(100vh - 20px); /* Adjust max-height for mobile */
     margin: 0; /* Reset margin */
+    font-size: 0.6rem; /* Adjust font size for mobile */
   }
   
   .metadataContainer {
