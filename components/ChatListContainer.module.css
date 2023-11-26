@@ -121,7 +121,7 @@
 }
 
 .customMarkdownFontMobile {
-  font-size: 0.65rem; /* Set your desired font size for mobile */
+  font-size: 0.75rem; /* Set your desired font size for mobile */
 }
 
 @media (max-width: 767px) {
@@ -148,6 +148,7 @@
     width: 100%; /* Ensure it takes full width */
     max-height: calc(100vh - 20px); /* Adjust max-height for mobile */
     margin: 0; /* Reset margin */
+    padding-bottom: 200px;
   }
   
   .metadataContainer {
