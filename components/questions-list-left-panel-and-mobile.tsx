@@ -20,13 +20,13 @@ export const QuestionListLeftPanel: React.FC<QuestionListProps> = ({ setInput })
           let fontSize;
   
           if (questionText.length <= 50) {
-            fontSize = '1.4rem';
+            fontSize = '1.35rem';
           } else if (questionText.length <= 100) {
-            fontSize = '1.3rem';
+            fontSize = '1.25rem';
           } else if (questionText.length <= 150) {
-            fontSize = '1.15rem';
-          } else {
             fontSize = '1.1rem';
+          } else {
+            fontSize = '1rem';
           }
   
           box.style.fontSize = fontSize;
