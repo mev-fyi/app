@@ -1,6 +1,7 @@
 // Inspired by Chatbot-UI and modified to fit the needs of this project
 // @see https://github.com/mckaywrigley/chatbot-ui/blob/main/components/Chat/ChatMessage.tsx
 
+import { useState, useEffect } from 'react';
 import { Message } from 'ai'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
@@ -17,9 +18,22 @@ export interface ChatMessageProps {
 }
 
 export function ChatMessage({ message, ...props }: ChatMessageProps) {
-  // console.log("Received message in ChatMessage!");
-  // console.log(message); // Add this to inspect the messages
-  // {message.role === 'user' ? <IconUser /> : <IconOpenAI />}
+  
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Set the initial value
+    handleResize();
+
+    // Listen for window resize events
+    window.addEventListener('resize', handleResize);
+
+    // Clean up
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   return (
     <div
       className={cn('group relative mb-4 flex items-start md:-ml-12')}
@@ -38,7 +52,8 @@ export function ChatMessage({ message, ...props }: ChatMessageProps) {
       </div>
       <div className="flex-1 px-1 ml-4 space-y-2 overflow-hidden">
         <MemoizedReactMarkdown
-          className={`prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 ${styles.customMarkdownFont}`}
+          className={`prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 
+          ${isMobile ? styles.customMarkdownFontMobile : styles.customMarkdownFont}`}
           remarkPlugins={[remarkGfm, remarkMath]}
           components={{
             p({ children }) {

@@ -116,9 +116,17 @@
   margin-top: 1rem;
 }
 
+.customMarkdownFont {
+  font-size: 1.1rem; /* Adjust the font size as needed */
+}
+
+.customMarkdownFontMobile {
+  font-size: 0.65rem; /* Set your desired font size for mobile */
+}
+
 @media (max-width: 767px) {
   .customMarkdownFont {
-    font-size: 0.35rem; /* Adjust the font size as needed */
+    font-size: 0.6rem !important; /* Adjust the font size as needed */
   }
 
   .leftPanel, .rightPanel {
@@ -140,7 +148,6 @@
     width: 100%; /* Ensure it takes full width */
     max-height: calc(100vh - 20px); /* Adjust max-height for mobile */
     margin: 0; /* Reset margin */
-    font-size: 0.6rem; /* Adjust font size for mobile */
   }
   
   .metadataContainer {
@@ -164,6 +171,14 @@
 
 }
 
+
+@media screen and (max-width: 768px) {
+  .mobileHide {
+    display: none;
+  }
+}
+
+
 @media (min-width: 768px) {
   /* Adjustments for larger screens where the metadata can be shown inline */
   .metadataContainer {
@@ -173,12 +188,3 @@
   }
 }
 
-@media screen and (max-width: 768px) {
-  .mobileHide {
-    display: none;
-  }
-}
-
-.customMarkdownFont {
-  font-size: 1.1rem; /* Adjust the font size as needed */
-}
