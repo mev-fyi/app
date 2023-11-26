@@ -9,31 +9,61 @@ interface QuestionListProps {
   
 export const QuestionListLeftPanel: React.FC<QuestionListProps> = ({ setInput }) => {
   const [selectedQuestions, setSelectedQuestions] = useState<string[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Set the initial value
+    handleResize();
+
+    // Listen for window resize events
+    window.addEventListener('resize', handleResize);
+
+    // Clean up
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const questionRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
+  // Your existing useEffect with added mobile logic
   useEffect(() => {
     if (questionRefs.current.length === selectedQuestions.length) {
       questionRefs.current.forEach(box => {
         if (box) {
           const questionText = box.innerText;
           let fontSize;
-  
-          if (questionText.length <= 50) {
-            fontSize = '1.35rem';
-          } else if (questionText.length <= 100) {
-            fontSize = '1.25rem';
-          } else if (questionText.length <= 150) {
-            fontSize = '1.1rem';
+          
+          // Adjust font sizes based on isMobile state
+          if (isMobile) {
+            if (questionText.length <= 50) {
+              fontSize = '1rem'; // Smaller font size for mobile
+            } else if (questionText.length <= 100) {
+              fontSize = '0.9rem';
+            } else if (questionText.length <= 150) {
+              fontSize = '0.8rem';
+            } else {
+              fontSize = '0.7rem';
+            }
           } else {
-            fontSize = '1rem';
+            // Desktop sizes
+            if (questionText.length <= 50) {
+              fontSize = '1.35rem';
+            } else if (questionText.length <= 100) {
+              fontSize = '1.25rem';
+            } else if (questionText.length <= 150) {
+              fontSize = '1.1rem';
+            } else {
+              fontSize = '1rem';
+            }
           }
-  
+
           box.style.fontSize = fontSize;
         }
       });
     }
-  }, [selectedQuestions]);
+  }, [selectedQuestions, isMobile]); // Include isMobile in dependency array
 
   const pickRandomQuestions = useCallback(() => {
     // Create an array of indices [0, 1, 2, ..., questions.length - 1]
