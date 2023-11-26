@@ -78,11 +78,9 @@
 /*overflow: hidden;*/
 @media screen and (max-width: 600px) {
   .questionsOverlayLeftPanel {
-    gap: 8px;
     padding: 0px;
     width: 100%; /* Match the width of the leftPanel */
     padding-top: 5px;
-    align-items: center; /* Center content vertically */
   }
   
 

@@ -119,7 +119,7 @@
 
 @media (max-width: 767px) {
   .customMarkdownFont {
-    font-size: 0.8rem; /* Adjust the font size as needed */
+    font-size: 0.75rem; /* Adjust the font size as needed */
   }
   .leftPanel, .rightPanel {
     display: none; /* Hide left and right panels on mobile */
@@ -161,9 +161,6 @@
     display: block; /* Show the toggle button on mobile */
   }
 
-  .customMarkdownFont {
-    font-size: 0.9rem; /* Adjust the font size as needed */
-  }
 }
 
 @media (min-width: 768px) {

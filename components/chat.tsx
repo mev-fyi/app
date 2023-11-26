@@ -192,8 +192,6 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           </div>
         </div>
 
-        
-
         <div>  {/* ChatPanel component */}
           <ChatPanel
             id={id}
