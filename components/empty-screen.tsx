@@ -32,7 +32,7 @@ export function EmptyScreen({setInput}: QuestionsOverlayProps) {
         </h1>
         {isMobile ? (
           <p className="mb-4 leading-normal text-muted-foreground">
-            Discover MEV research on-the-go. Explore topics in mechanism design, auctions, and more.
+            Explore topics in mechanism design, auctions, and more.
           </p>
         ) : (
           <p className="mb-4 leading-normal text-muted-foreground">
