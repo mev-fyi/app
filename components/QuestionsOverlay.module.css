@@ -102,7 +102,7 @@
 
   .question {
     /* Adjust font size and line height if needed */
-    font-size: 0.65rem; /* Keep font size readable on mobile */
+    font-size: 0.55rem; /* Keep font size readable on mobile */
     line-height: 1.4; /* Increase line height for better readability */
   }
 

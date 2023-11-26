@@ -157,6 +157,10 @@
   .toggleMetadataButton {
     display: block; /* Show the toggle button on mobile */
   }
+
+  .customMarkdownFont {
+    font-size: 0.9rem; /* Adjust the font size as needed */
+  }
 }
 
 @media (min-width: 768px) {
