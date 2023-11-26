@@ -19,7 +19,7 @@
   flex-direction: column;
   gap: 8px;
   padding: 5px;
-  width: 95%; /* Match the width of the leftPanel */
+  width: 100%; /* Match the width of the leftPanel */
   align-items: center; /* Center content vertically */
 }
 
@@ -76,23 +76,14 @@
 
 /*overflow: hidden;*/
 @media screen and (max-width: 600px) {
-  .questionsOverlay {
-    /* Ensure that the parent container takes the full width and centers its children */
-    width: 100%;
-    padding: 4px;
-    gap: 8px; /* Smaller gap for mobile */
-    justify-content: center;
+  .questionsOverlayLeftPanel {
+    gap: 8px;
+    padding: 0px;
+    width: 100%; /* Match the width of the leftPanel */
+    padding-top: 5px;
+    align-items: center; /* Center content vertically */
   }
-
-  .questionBox {
-    /* Set the width to 100% minus padding to take full width */
-    width: calc(100% - 120px); /* Adjust the calc() formula if the padding is different */
-    max-width: none; /* Remove the max-width restriction */
-    margin: 4px 0; /* Add vertical margin */
-    padding: 3px; /* Adjust padding if needed */
-    height: auto; /* Flexible height to accommodate content */
-    min-height: 40px; /* Minimum height to maintain a consistent size */
-  }
+  
 
   .questionBoxLeftPanel{
     max-width: none;
