@@ -112,4 +112,8 @@
     margin-bottom: 2px; /* Add some space below the button */
   }
 
+  .questionsOverlayLeftPanel{
+    padding-bottom: 50px;
+  }
+
 }
