@@ -135,7 +135,7 @@
   .chatListContainer {
     padding: 20px; /* Adjusted padding for mobile */
     width: 100%; /* Ensure it takes full width */
-    max-height: calc(100vh - 90px); /* Adjust max-height for mobile */
+    max-height: calc(100vh - 20px); /* Adjust max-height for mobile */
     margin: 0; /* Reset margin */
   }
   
