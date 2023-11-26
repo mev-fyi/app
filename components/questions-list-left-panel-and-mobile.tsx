@@ -38,13 +38,13 @@ export const QuestionListLeftPanel: React.FC<QuestionListProps> = ({ setInput })
           // Adjust font sizes based on isMobile state
           if (isMobile) {
             if (questionText.length <= 50) {
-              fontSize = '1rem'; // Smaller font size for mobile
+              fontSize = '1.2rem'; // Smaller font size for mobile
             } else if (questionText.length <= 100) {
-              fontSize = '0.9rem';
+              fontSize = '1.1rem';
             } else if (questionText.length <= 150) {
-              fontSize = '0.8rem';
+              fontSize = '0.95rem';
             } else {
-              fontSize = '0.7rem';
+              fontSize = '0.85rem';
             }
           } else {
             // Desktop sizes
