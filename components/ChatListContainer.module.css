@@ -119,8 +119,9 @@
 
 @media (max-width: 767px) {
   .customMarkdownFont {
-    font-size: 0.75rem; /* Adjust the font size as needed */
+    font-size: 0.35rem; /* Adjust the font size as needed */
   }
+
   .leftPanel, .rightPanel {
     display: none; /* Hide left and right panels on mobile */
   }
