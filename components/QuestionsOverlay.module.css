@@ -21,6 +21,7 @@
   padding: 5px;
   width: 100%; /* Match the width of the leftPanel */
   align-items: center; /* Center content vertically */
+  overflow-y: auto; /* Ensure vertical scroll */
 }
 
 .shuffleButton {
