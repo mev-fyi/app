@@ -79,11 +79,11 @@
   white-space: normal;
   line-height: 1.2;
   width: 100%;
-  display: flex; /* Use flex to align text */
-  align-items: center; /* Vertically align text in the middle */
-  justify-content: flex-start; /* Align text to the left */
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-decoration: none; /* Add this to remove underline */
 }
-
 
 
 .fullWidthButton {
