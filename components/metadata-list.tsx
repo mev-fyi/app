@@ -35,7 +35,10 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
               {entry.title}
             </a>
             <span className={styles.metadataListSpan}>
-              {entry.extraInfo} &middot; {entry.publishedDateString}
+              {entry.extraInfo}
+            </span>
+            <span className={styles.metadataListSpan}>
+              {entry.publishedDateString}
             </span>
           </div>
         </li>
@@ -43,5 +46,6 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
     </ol>
   );
 };
+
 
 export default MetadataList;
