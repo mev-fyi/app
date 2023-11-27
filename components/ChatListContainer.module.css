@@ -8,7 +8,7 @@
 
 .leftPanel {
   flex: 1; /* Allows panels to grow */
-  min-width: 300px; /* Minimum width */
+  min-width: 400px; /* Minimum width */
   max-width: 30%; /* Adjusted maximum width */
   display: flex;
   flex-direction: column;

@@ -7,12 +7,13 @@
 
 .metadataListItem {
   display: flex;
-  align-items: center;
+  align-items: start; /* Align items to the start */
   color: #bbb;
   word-wrap: break-word;
   margin-bottom: 30px;
-  /* Ensure that the item has enough width */
-  min-width: 300px; /* Adjust this based on your layout */
+  min-width: 400px;
+  max-height: 200px; /* Increase the maximum height */
+  overflow: hidden; /* Hide overflow */
 }
 
 .metadataListItem:hover {
@@ -27,7 +28,6 @@
   color: #ffffff;
   text-decoration: none;
   font-weight: bold;
-  /* Allow text to wrap if needed */
   word-wrap: break-word;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -93,4 +93,7 @@
 
 .metadataTop, .metadataMiddle, .metadataBottom {
   display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* Prevent wrapping */
 }
