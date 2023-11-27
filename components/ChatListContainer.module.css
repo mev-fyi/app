@@ -121,12 +121,12 @@
 }
 
 .customMarkdownFontMobile {
-  font-size: 0.92rem; /* Set your desired font size for mobile */
+  font-size: 0.89rem; /* Set your desired font size for mobile */
 }
 
 @media (max-width: 767px) {
   .customMarkdownFont {
-    font-size: 0.92rem !important; /* Adjust the font size as needed */
+    font-size: 0.89rem !important; /* Adjust the font size as needed */
   }
 
   .leftPanel, .rightPanel {
