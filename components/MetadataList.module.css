@@ -8,8 +8,6 @@
 .metadataListItem {
   display: flex;
   align-items: center;
-  padding-bottom: 1rem;
-  margin-bottom: 1rem;
   color: #bbb;
   word-wrap: break-word;
 }
