@@ -50,13 +50,13 @@ export const QuestionListLeftPanel: React.FC<QuestionListProps> = ({ onSubmit })
           } else {
             // Desktop sizes
             if (questionText.length <= 50) {
-              fontSize = '1.35rem';
-            } else if (questionText.length <= 100) {
-              fontSize = '1.25rem';
-            } else if (questionText.length <= 150) {
               fontSize = '1.1rem';
-            } else {
+            } else if (questionText.length <= 100) {
               fontSize = '1rem';
+            } else if (questionText.length <= 150) {
+              fontSize = '0.90rem';
+            } else {
+              fontSize = '0.80rem';
             }
           }
 

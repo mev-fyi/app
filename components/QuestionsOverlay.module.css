@@ -39,7 +39,7 @@
 .questionBox {
   width: calc(50% - 8px); /* Adjust width for 2 boxes per row, minus half the gap */
   max-width: 400px; /* Keep the max-width to control size */
-  border: 1px solid white;
+  border: 0.5px solid white;
   border-radius: 7px;
   padding: 5px;
   height: 140px;
@@ -55,7 +55,7 @@
 }
 
 .questionBoxLeftPanel {
-  border: 1px solid white; /* Match Tailwind's default border */
+  border: 0.5px solid white; /* Match Tailwind's default border */
   border-radius: 6px; /* Match Tailwind's rounded-md */
   padding: 3px;
   height: 100px;
