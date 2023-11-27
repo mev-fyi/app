@@ -45,8 +45,8 @@
   height: 140px;
   box-sizing: border-box;
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  align-items: center; /* Align items vertically in the center */
+  justify-content: center; /* Horizontally center the content */
   margin: 10px auto; /* Add margin above and below */
 }
 
@@ -58,12 +58,12 @@
   border: 1px solid white; /* Match Tailwind's default border */
   border-radius: 6px; /* Match Tailwind's rounded-md */
   padding: 3px;
-  height: 120px;
-  width: 350px;
+  height: 100px;
+  width: 300px;
   box-sizing: border-box;
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  align-items: center; /* Align items vertically in the center */
+  justify-content: center; /* Horizontally center the content */
   margin: auto;
   transition: background-color 0.3s; /* Smooth transition for background color */
 }
@@ -74,16 +74,23 @@
 
 .question {
   padding-top: 10px;
-  padding-left: 10px; /* Ensure there's some space on the left */
   text-align: left;
   word-wrap: break-word;
   white-space: normal;
   line-height: 1.2;
   width: 100%;
+  display: flex; /* Use flex to align text */
+  align-items: center; /* Vertically align text in the middle */
+  justify-content: flex-start; /* Align text to the left */
 }
+
+
 
 .fullWidthButton {
   width: 100%; /* Make the button take full width of its container */
+  display: flex; /* Enable flex layout */
+  align-items: center; /* Align items vertically in the center */
+  justify-content: flex-start; /* Align items to the start (left) */
 }
 
 /*overflow: hidden;*/
