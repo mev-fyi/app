@@ -101,7 +101,7 @@ export const QuestionListLeftPanel: React.FC<QuestionListProps> = ({ onSubmit })
       className={styles.shuffleButton}
       onClick={pickRandomQuestions}
     >
-      <IconRecycle className="h-5 w-5" /> {/* Adjust size as needed */}
+      <IconRecycle className="h-3 w-3" /> {/* Adjust size as needed */}
       <span className="sr-only">Shuffle Questions</span>
     </Button>
 

@@ -77,7 +77,7 @@ export function PromptForm({
                 'absolute left-0 top-4 h-8 w-8 rounded-full bg-background p-0 sm:left-4'
               )}
             >
-              <IconBroom className="h-5 w-5" /> {/* Adjust size as needed */}
+              <IconBroom className="h-3 w-3" /> {/* Smaller size */}
               <span className="sr-only">New Chat</span>
             </button>
           </TooltipTrigger>
