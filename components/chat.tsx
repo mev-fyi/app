@@ -200,7 +200,11 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         <div className={`${styles.rightPanel} ${isMetadataVisible ? styles.metadataContainerActive : ''}`}>
           {/* Metadata section */}
           <div className={styles.metadataContainer}>
-            <div className={styles.metadataTitle}>Top Sources</div>
+            
+            {newMessages.length > 0 && ( // Only show metadataTitle if there are messages
+              <div className={styles.metadataTitle}>Top Sources</div>
+            )}
+            
             <MetadataList entries={structuredMetadataEntries} />
         </div>
       

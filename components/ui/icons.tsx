@@ -543,31 +543,36 @@ function IconChevronUpDown({
   )
 }
 
-function IconResearchPaper({ className, ...props }: React.ComponentProps<'svg'>) {
+function IconRecycle({
+  className,
+  ...props
+}: React.ComponentProps<'svg'>) {
   return (
     <svg 
       xmlns="http://www.w3.org/2000/svg" 
-      fill="currentColor" 
-      className={cn('h-4 w-4', className)} 
+      fill="none" 
       viewBox="0 0 24 24" 
-      {...props}
-    >
-      <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zm-2-4H7v-2h10v2zm0-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+      stroke="currentColor"
+      {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 2l2 7h2l-2.5-9h-2l.5 2zM2 9h2l3 10 2.5-9.5L9 10H2l1-1zm1.5 13h2L9 13l-3 9z" />
     </svg>
-  )
+  );
 }
 
-function IconYouTube({ className, ...props }: React.ComponentProps<'svg'>) {
+function IconBroom({
+  className,
+  ...props
+}: React.ComponentProps<'svg'>) {
   return (
     <svg 
       xmlns="http://www.w3.org/2000/svg" 
-      className={cn('h-4 w-4', className)} 
+      fill="none" 
       viewBox="0 0 24 24" 
-      {...props}
-    >
-      <path fill="red" d="M21.8 8s-.2-1.6-1-2.3c-.9-.9-1.9-.9-2.3-1C15.6 4.4 12 4.4 12 4.4s-3.6 0-6.5.3c-.5.1-1.4.1-2.3 1-.8.7-1 2.3-1 2.3S2 9.6 2 11v2c0 1.4.2 3 .2 3s.2 1.6 1 2.3c.9.9 2.1.8 2.6.9 1.9.1 8.2.2 8.2.2s3.6 0 6.5-.3c.5-.1 1.4-.1 2.3-1 .8-.7 1-2.3 1-2.3s.2-1.6.2-3v-2c0-1.4-.2-3-.2-3zm-12.8 7V9l6 3.5-6 3.5z"/>
+      stroke="currentColor"
+      {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 21v-4a1 1 0 011-1h4m10 0h4a1 1 0 011 1v4m-9-4h4a1 1 0 011 1v4M3 3l18 18" />
     </svg>
-  )
+  );
 }
 
 
@@ -603,6 +608,6 @@ export {
   IconChevronUpDown,
   IconUpArrow,
   IconDownArrow,
-  IconResearchPaper,
-  IconYouTube
+  IconRecycle,
+  IconBroom
 }
