@@ -47,7 +47,7 @@ export function ChatPanel({
   setLastMessageRole
 }: ChatPanelProps) {
   const router = useRouter()
-  
+
   return (
     <div className="fixed inset-x-0 bottom-0 sm:mt-4 sm:mr-4 sm:ml-4">
       <ButtonScrollToBottom />
@@ -76,52 +76,55 @@ export function ChatPanel({
           )}
         </div>
 
-        {/* Broom button */}
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <button
-              onClick={e => {
-                e.preventDefault();
-                setMessages([]); // Resets the chat messages
-                setStructuredMetadataEntries([]); // Resets the structured metadata
-                setLastMessageRole(''); // Resets the last message role
-                setInput(''); // Resets the input field
-                router.refresh();
-                router.push('/');
+        {/* Broom button and Prompt Form Container */}
+        <div className="flex items-center space-x-4 bg-black sm:bg-transparent sm:rounded-t-xl px-4 py-2 md:py-4">
+          {/* Broom button */}
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button
+                onClick={e => {
+                  e.preventDefault();
+                  setMessages([]); // Resets the chat messages
+                  setStructuredMetadataEntries([]); // Resets the structured metadata
+                  setLastMessageRole(''); // Resets the last message role
+                  setInput(''); // Resets the input field
+                  router.refresh();
+                  router.push('/');
+                }}
+                className="flex items-center justify-center h-8 w-8 rounded-full bg-background p-0"
+              >
+                🧹 {/* Broom emoji */}
+                <span className="sr-only">New Chat</span>
+              </button>
+            </TooltipTrigger>
+            <TooltipContent>New Chat</TooltipContent>
+          </Tooltip>
+
+          {/* Prompt Form */}
+          <div className="flex-grow">
+            <PromptForm
+              onSubmit={async value => {
+                if (onSubmit) {
+                  await onSubmit(value); // Call the onSubmit prop function
+                } else {
+                  await append({
+                    id,
+                    content: value,
+                    role: 'user'
+                  });
+                }
               }}
-              className="broom-button-class" // Add specific class for styling
-            >
-              🧹 {/* Broom emoji */}
-              <span className="sr-only">New Chat</span>
-            </button>
-          </TooltipTrigger>
-          <TooltipContent>New Chat</TooltipContent>
-        </Tooltip>
-
-
-        <div className="space-y-4 px-4 py-2 sm:rounded-t-xl md:py-4 bg-black sm:bg-transparent">
-          <PromptForm
-            onSubmit={async value => {
-              if (onSubmit) {
-                await onSubmit(value); // Call the onSubmit prop function
-              } else {
-                await append({
-                  id,
-                  content: value,
-                  role: 'user'
-                });
-              }
-            }}
-            input={input}
-            setInput={setInput}
-            isLoading={isLoading}
-            setMessages={setMessages}
-            setStructuredMetadataEntries={setStructuredMetadataEntries}
-            setLastMessageRole={setLastMessageRole}
+              input={input}
+              setInput={setInput}
+              isLoading={isLoading}
+              setMessages={setMessages}
+              setStructuredMetadataEntries={setStructuredMetadataEntries}
+              setLastMessageRole={setLastMessageRole}
             />
-            <FooterText className="hidden sm:block" />
+          </div>
         </div>
+        <FooterText className="hidden sm:block" />
       </div>
     </div>
-  )
+  );
 }
