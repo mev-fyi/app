@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState, useRef } from 'react';
+import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button';
 import { questions } from '@/lib/constants'; // Ensure the path is correct
 import styles from './QuestionsOverlay.module.css'; // Import the CSS module
@@ -77,7 +78,7 @@ export const QuestionList: React.FC<QuestionListProps> = ({ onSubmit }) => {
           <div key={index} className={styles.questionBox}>
             <Button
               variant="link"
-              className={styles.question}
+              className={cn(styles.question, styles.fullWidthButton)} // Add a new class for full width
               onClick={() => handleQuestionSelect(question)}
               ref={el => questionRefs.current[index] = el}
             >

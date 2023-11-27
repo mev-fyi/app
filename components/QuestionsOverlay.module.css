@@ -50,18 +50,26 @@
   margin: 10px auto; /* Add margin above and below */
 }
 
+.questionBox:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Brighten background on hover */
+}
 
 .questionBoxLeftPanel {
-  border: 2px solid white;
-  border-radius: 8px;
+  border: 1px solid white; /* Match Tailwind's default border */
+  border-radius: 6px; /* Match Tailwind's rounded-md */
   padding: 3px;
-  height: 140px; /* Fixed height */
-  width: 400px; /* Fixed width, adjust as needed */
+  height: 120px;
+  width: 350px;
   box-sizing: border-box;
   display: flex;
-  align-items: center; /* Vertical alignment */
+  align-items: center;
   justify-content: flex-start;
-  margin: auto; /* Center the box within the container */
+  margin: auto;
+  transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.questionBoxLeftPanel:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Brighten background on hover */
 }
 
 .question {
@@ -72,6 +80,10 @@
   white-space: normal;
   line-height: 1.2;
   width: 100%;
+}
+
+.fullWidthButton {
+  width: 100%; /* Make the button take full width of its container */
 }
 
 /*overflow: hidden;*/
