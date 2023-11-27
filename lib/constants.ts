@@ -148,7 +148,7 @@ export const questions = [
     // "What happens when 'bidders are DAOs'?",
     // "What elements in auction theory can help me understand MEV?",
     "What is auction theory?",
-    "What is the equivalent of MEV in traditional finance?",
+    // "What is the equivalent of MEV in traditional finance?",
     // "What are other forms of MEV beyond transaction ordering?",
     // "How does DeFi lending liquidation relate to MEV?",
     // "Give me an exhaustive definition of the MEV supply chain in numbered bullet points",
