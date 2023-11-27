@@ -6,6 +6,12 @@ import { ButtonScrollToBottom } from '@/components/button-scroll-to-bottom'
 import { IconRefresh, IconStop } from '@/components/ui/icons'
 import { FooterText } from '@/components/footer'
 import { MetadataMessage } from '@/components/chat'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger
+} from '@/components/ui/tooltip'
+import { useRouter } from 'next/navigation'
 
 export interface ChatPanelProps
   extends Pick<
@@ -40,6 +46,8 @@ export function ChatPanel({
   setStructuredMetadataEntries,
   setLastMessageRole
 }: ChatPanelProps) {
+  const router = useRouter()
+  
   return (
     <div className="fixed inset-x-0 bottom-0 sm:mt-4 sm:mr-4 sm:ml-4">
       <ButtonScrollToBottom />
@@ -67,6 +75,30 @@ export function ChatPanel({
             )
           )}
         </div>
+
+        {/* Broom button */}
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <button
+              onClick={e => {
+                e.preventDefault();
+                setMessages([]); // Resets the chat messages
+                setStructuredMetadataEntries([]); // Resets the structured metadata
+                setLastMessageRole(''); // Resets the last message role
+                setInput(''); // Resets the input field
+                router.refresh();
+                router.push('/');
+              }}
+              className="broom-button-class" // Add specific class for styling
+            >
+              🧹 {/* Broom emoji */}
+              <span className="sr-only">New Chat</span>
+            </button>
+          </TooltipTrigger>
+          <TooltipContent>New Chat</TooltipContent>
+        </Tooltip>
+
+
         <div className="space-y-4 px-4 py-2 sm:rounded-t-xl md:py-4 bg-black sm:bg-transparent">
           <PromptForm
             onSubmit={async value => {
