@@ -11,6 +11,8 @@
   color: #bbb;
   word-wrap: break-word;
   margin-bottom: 30px;
+  /* Ensure that the item has enough width */
+  min-width: 300px; /* Adjust this based on your layout */
 }
 
 .metadataListItem:hover {
@@ -21,20 +23,14 @@
   border-bottom: none;
 }
 
-.metadataListLink {
+.metadataListLink, .metadataListSpan {
   color: #ffffff;
   text-decoration: none;
   font-weight: bold;
-  display: block;
-  margin-right: 1rem;
+  /* Allow text to wrap if needed */
   word-wrap: break-word;
-}
-
-
-.metadataListSpan {
-  display: block;
-  margin-top: 0.5rem;
-  color: #666;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .metadataListDetails {
