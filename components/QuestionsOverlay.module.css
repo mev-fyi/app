@@ -81,6 +81,7 @@
   align-items: center;
   justify-content: flex-start;
   text-decoration: none; /* Add this to remove underline */
+  padding-left: 5px;  /* Make text start a bit further than questionBox's edge*/
 }
 
 
