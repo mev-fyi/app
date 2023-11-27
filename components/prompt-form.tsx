@@ -56,7 +56,7 @@ export function PromptForm({
       }}
       ref={formRef}
     >
-      <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden px-4 sm:rounded-md sm:border sm:px-12 bg-black sm:bg-transparent">
+      <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden px-2 sm:rounded-md sm:border sm:px-4 bg-black sm:bg-transparent">
       <Textarea
           ref={inputRef}
           tabIndex={0}
