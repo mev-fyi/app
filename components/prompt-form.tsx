@@ -56,31 +56,7 @@ export function PromptForm({
       }}
       ref={formRef}
     >
-      <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden px-8 sm:rounded-md sm:border sm:px-12 bg-black sm:bg-transparent">
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <button
-              onClick={e => {
-                e.preventDefault()
-                
-                // Reset state variables
-                setMessages([]); // Resets the chat messages
-                setStructuredMetadataEntries([]); // Resets the structured metadata
-                setLastMessageRole(''); // Resets the last message role
-                setInput(''); // Resets the input field
-                
-                router.refresh()
-                router.push('/')
-              }}
-              className="absolute top-4 left-0 h-8 w-8 rounded-full bg-background p-0 sm:hidden" // 'sm:hidden' hides on screens wider than 640px
-            >
-              🧹 {/* Broom emoji */}
-              <span className="sr-only">New Chat</span>
-            </button>
-          </TooltipTrigger>
-          <TooltipContent>New Chat</TooltipContent>
-        </Tooltip>
-        <Textarea
+      <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden px-8 sm:rounded-md sm:border sm:px-12 bg-black sm:bg-transparent">                                                                                                                                                                 <Textarea
           ref={inputRef}
           tabIndex={0}
           onKeyDown={onKeyDown}
