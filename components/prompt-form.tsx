@@ -44,45 +44,41 @@ export function PromptForm({
     }
   }, [])
 
-  return (
-    <form
-      onSubmit={async e => {
-        e.preventDefault()
-        if (!input?.trim()) {
-          return
-        }
-        setInput('')
-        await onSubmit(input)
-      }}
-      ref={formRef}
-    >
-      <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden px-8 sm:rounded-md sm:border sm:px-12 bg-black sm:bg-transparent">
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <button
-              onClick={e => {
-                e.preventDefault()
-                
-                // Reset state variables
-                setMessages([]); // Resets the chat messages
-                setStructuredMetadataEntries([]); // Resets the structured metadata
-                setLastMessageRole(''); // Resets the last message role
-                setInput(''); // Resets the input field
-                
-                router.refresh()
-                router.push('/')
-              }}
-              className={cn(
-                buttonVariants({ size: 'sm', variant: 'outline' }),
-                'absolute left-0 top-4 h-8 w-8 rounded-full bg-background p-0 sm:left-4'
-              )}
-            >
-              🧹 {/* Broom emoji */}
-              <span className="sr-only">New Chat</span>
-            </button>
-          </TooltipTrigger>
-          <TooltipContent>New Chat</TooltipContent>
-        </Tooltip>
+    return (
+    <div className="relative flex w-full">
+      {/* Broom button */}
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <button
+            onClick={e => {
+              e.preventDefault()
+              setMessages([]); // Resets the chat messages
+              setStructuredMetadataEntries([]); // Resets the structured metadata
+              setLastMessageRole(''); // Resets the last message role
+              setInput(''); // Resets the input field
+              router.refresh()
+              router.push('/')
+            }}
+            className="absolute left-0 top-4 h-8 w-8 rounded-full bg-background p-0 sm:left-4"
+          >
+            🧹 {/* Broom emoji */}
+            <span className="sr-only">New Chat</span>
+          </button>
+        </TooltipTrigger>
+        <TooltipContent>New Chat</TooltipContent>
+      </Tooltip>
+
+      {/* Form */}
+      <form
+        onSubmit={async e => {
+          e.preventDefault()
+          if (!input?.trim()) return
+          setInput('')
+          await onSubmit(input)
+        }}
+        ref={formRef}
+        className="flex max-h-60 w-full grow flex-col overflow-hidden px-8 sm:rounded-md sm:border sm:px-12 bg-black sm:bg-transparent"
+      >
         <Textarea
           ref={inputRef}
           tabIndex={0}
@@ -109,7 +105,7 @@ export function PromptForm({
             <TooltipContent>Send message</TooltipContent>
           </Tooltip>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   )
 }
