@@ -2,15 +2,18 @@ import { UseChatHelpers } from 'ai/react'
 import * as React from 'react'
 import Textarea from 'react-textarea-autosize'
 
-import { Button } from '@/components/ui/button'
-import { IconArrowElbow } from '@/components/ui/icons'
+import { Button, buttonVariants } from '@/components/ui/button'
+import { IconArrowElbow, IconPlus, IconNewChat } from '@/components/ui/icons'
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger
 } from '@/components/ui/tooltip'
 import { useEnterSubmit } from '@/lib/hooks/use-enter-submit'
+import { cn } from '@/lib/utils'
+import { useRouter } from 'next/navigation'
 import { MetadataMessage } from './chat'
+import { IconBroom } from '@/components/ui/icons'
 
 export interface PromptProps
   extends Pick<UseChatHelpers, 'input' | 'setInput'> {
@@ -27,9 +30,13 @@ export function PromptForm({
   input,
   setInput,
   isLoading,
+  setMessages,
+  setStructuredMetadataEntries,
+  setLastMessageRole
 }: PromptProps) {
   const { formRef, onKeyDown } = useEnterSubmit()
   const inputRef = React.useRef<HTMLTextAreaElement>(null)
+  const router = useRouter()
 
   React.useEffect(() => {
     if (inputRef.current) {
@@ -37,20 +44,42 @@ export function PromptForm({
     }
   }, [])
 
-    return (
-    <div className="relative flex w-full">
-
-      {/* Form */}
-      <form
-        onSubmit={async e => {
-          e.preventDefault()
-          if (!input?.trim()) return
-          setInput('')
-          await onSubmit(input)
-        }}
-        ref={formRef}
-        className="flex max-h-60 w-full grow flex-col overflow-hidden px-8 sm:rounded-md sm:border sm:px-12 bg-black sm:bg-transparent"
-      >
+  return (
+    <form
+      onSubmit={async e => {
+        e.preventDefault()
+        if (!input?.trim()) {
+          return
+        }
+        setInput('')
+        await onSubmit(input)
+      }}
+      ref={formRef}
+    >
+      <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden px-8 sm:rounded-md sm:border sm:px-12 bg-black sm:bg-transparent">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <button
+              onClick={e => {
+                e.preventDefault()
+                
+                // Reset state variables
+                setMessages([]); // Resets the chat messages
+                setStructuredMetadataEntries([]); // Resets the structured metadata
+                setLastMessageRole(''); // Resets the last message role
+                setInput(''); // Resets the input field
+                
+                router.refresh()
+                router.push('/')
+              }}
+              className="absolute top-4 left-0 h-8 w-8 rounded-full bg-background p-0 sm:hidden" // 'sm:hidden' hides on screens wider than 640px
+            >
+              🧹 {/* Broom emoji */}
+              <span className="sr-only">New Chat</span>
+            </button>
+          </TooltipTrigger>
+          <TooltipContent>New Chat</TooltipContent>
+        </Tooltip>
         <Textarea
           ref={inputRef}
           tabIndex={0}
@@ -77,7 +106,7 @@ export function PromptForm({
             <TooltipContent>Send message</TooltipContent>
           </Tooltip>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   )
 }
