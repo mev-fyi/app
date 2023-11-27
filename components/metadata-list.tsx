@@ -4,9 +4,9 @@ import styles from './MetadataList.module.css';
 
 const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries }) => {
   // Function to sanitize the title to match filename conventions
-  const sanitizeTitle = (title: string) => {
-    return title.replace(/[^a-zA-Z0-9]/g, '_'); // Replace special characters with underscores
-  };
+  // const sanitizeTitle = (title: string) => {
+  //   return title.replace(/[^a-zA-Z0-9]/g, '_'); // Replace special characters with underscores
+  // };
 
   // Function to get thumbnail URL
   const getThumbnailUrl = (entry: ParsedMetadataEntry) => {
@@ -14,7 +14,7 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
       const videoId = new URL(entry.link).searchParams.get('v');
       return videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : '/default-youtube-thumbnail.jpg'; // Fallback thumbnail
     } else if (entry.type === 'researchPaper') {
-      const sanitizedTitle = sanitizeTitle(entry.title);
+      const sanitizedTitle = entry.title;
       return `/assets/research_paper_thumbnails/${sanitizedTitle}.png`; // Path to the thumbnail in the assets directory
     }
     return '/default-thumbnail.jpg'; // General fallback thumbnail

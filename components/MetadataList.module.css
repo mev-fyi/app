@@ -1,15 +1,15 @@
 .metadataList {
   list-style: none;
   padding: 0;
-  font-size: 2rem; /* Doubled from 1rem */
+  font-size: 1rem;
 }
 
 .metadataListItem {
   display: flex;
   align-items: center;
-  border-bottom: 2px solid #ffffff; /* Thicker border */
-  padding-bottom: 2rem; /* Increased padding */
-  margin-bottom: 2rem; /* Increased margin */
+  border-bottom: 1px solid #ffffff;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
   color: #bbb;
   word-wrap: break-word;
 }
@@ -23,14 +23,14 @@
   text-decoration: none;
   font-weight: bold;
   display: block;
-  margin-right: 2rem; /* Increased margin */
+  margin-right: 1rem;
   word-wrap: break-word;
 }
 
 
 .metadataListSpan {
   display: block;
-  margin-top: 1rem; /* Increased margin */
+  margin-top: 0.5rem;
   color: #666;
 }
 
@@ -64,6 +64,7 @@
   margin-right: 20px; /* Increased margin */
   overflow: hidden;
 }
+
 
 .metadataThumbnail img {
   width: 100%;
