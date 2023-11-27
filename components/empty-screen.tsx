@@ -4,9 +4,9 @@ import { QuestionsOverlay, QuestionsOverlayProps, QuestionsOverlayLeftPanel } fr
 import { useState, useEffect } from 'react';
 import styles from './QuestionsOverlay.module.css'; // Import the CSS module
 
-//   <QuestionList setInput={setInput} />
+//   <QuestionList onSubmit={onSubmit} />
 
-export function EmptyScreen({setInput}: QuestionsOverlayProps) {
+export function EmptyScreen({onSubmit}: QuestionsOverlayProps) {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     const handleResize = () => {
@@ -44,7 +44,7 @@ export function EmptyScreen({setInput}: QuestionsOverlayProps) {
       
       <div className={overlayClass}>
           {(isMobile) && (
-            <QuestionsOverlayLeftPanel setInput={setInput} />
+            <QuestionsOverlayLeftPanel onSubmit={onSubmit} />
           )}
       </div>
     </div>

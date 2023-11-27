@@ -4,10 +4,10 @@ import { questions } from '@/lib/constants'; // Ensure the path is correct
 import styles from './QuestionsOverlay.module.css'; // Import the CSS module
 
 interface QuestionListProps {
-    setInput: (input: string) => void;
-  }
+  onSubmit: (value: string) => void; // Function to submit the chat input
+}
   
-export const QuestionListLeftPanel: React.FC<QuestionListProps> = ({ setInput }) => {
+export const QuestionListLeftPanel: React.FC<QuestionListProps> = ({ onSubmit }) => {
   const [selectedQuestions, setSelectedQuestions] = useState<string[]>([]);
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -88,6 +88,9 @@ export const QuestionListLeftPanel: React.FC<QuestionListProps> = ({ setInput })
     pickRandomQuestions();
   }, [pickRandomQuestions]);
 
+  const handleQuestionSelect = (question: string) => {
+    onSubmit(question); // Call the onSubmit function with the selected question
+  };
 
   return (
     <div className={styles.questionsContainer}>
@@ -105,7 +108,7 @@ export const QuestionListLeftPanel: React.FC<QuestionListProps> = ({ setInput })
             <Button
               variant="link"
               className={styles.question}
-              onClick={() => setInput(question)}
+              onClick={() => handleQuestionSelect(question)}
               ref={el => questionRefs.current[index] = el}
             >
               {question}

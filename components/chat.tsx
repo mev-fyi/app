@@ -142,24 +142,11 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
       }
     })
 
-  // {(lastMessageRole === 'assistant' || messages.length === 0) && (
-  //   <QuestionsOverlay setInput={setInput} />
-  // )}
-
-  // <div className={overlayClass}>
-  //   {lastMessageRole === 'assistant' && messages.length > 0 && (
-  //     <QuestionsOverlay setInput={setInput} />
-  //   )}
-  // </div>
-
-  // {lastMessageRole === 'assistant' && messages.length > 0 && (
-  //   <QuestionsOverlay setInput={setInput} />
-  // )}
 
   {/* To be placed right on top of ChatPanel */}
-  <button onClick={toggleMetadataVisibility} className={styles.toggleMetadataButton}>
-  {isMetadataVisible ? 'Back to Chat' : 'Show Top Sources'}
-  </button>
+  // <button onClick={toggleMetadataVisibility} className={styles.toggleMetadataButton}>
+  // {isMetadataVisible ? 'Back to Chat' : 'Show Top Sources'}
+  // </button>
   return (
     <>
         <div className={styles.layoutContainer}>
@@ -168,7 +155,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         <div className={styles.leftPanel}>
           <div className={overlayClass}>
             {lastMessageRole === 'assistant' && newMessages.length > 0 && (
-              <QuestionsOverlayLeftPanel setInput={setInput} />
+              <QuestionsOverlayLeftPanel onSubmit={handleUserInputSubmit} />
             )}
           </div>
         </div>  
@@ -181,13 +168,13 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
                 <ChatScrollAnchor trackVisibility={isLoading} />
               </>
             ) : (
-              <EmptyScreen setInput={setInput}/>
+              <EmptyScreen onSubmit={handleUserInputSubmit}/>
             )}
           </div>
           
           <div className={overlayClass}>
           {(newMessages.length === 0 && !isMobile) && (
-            <QuestionsOverlay setInput={setInput} />
+            <QuestionsOverlay onSubmit={handleUserInputSubmit} />
           )}
           </div>
         </div>

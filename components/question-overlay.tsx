@@ -4,23 +4,23 @@ import { QuestionListLeftPanel } from '@/components/questions-list-left-panel-an
 import styles from './QuestionsOverlay.module.css'; // Import the CSS module
 
 export interface QuestionsOverlayProps {
-  setInput: (input: string) => void; // Function to set the chat input
+  onSubmit: (value: string) => void; // Function to submit the chat input
 }
 
 // Inside QuestionsOverlay component
-export const QuestionsOverlay: React.FC<QuestionsOverlayProps> = ({ setInput }) => {
+export const QuestionsOverlay: React.FC<QuestionsOverlayProps> = ({ onSubmit }) => {
     return (
       <div className={styles.questionsOverlay}>
-        <QuestionList setInput={setInput} />
+        <QuestionList onSubmit={onSubmit} />
       </div>
     );
   };
 
   // Inside QuestionsOverlay component
-export const QuestionsOverlayLeftPanel: React.FC<QuestionsOverlayProps> = ({ setInput }) => {
+export const QuestionsOverlayLeftPanel: React.FC<QuestionsOverlayProps> = ({ onSubmit }) => {
   return (
     <div className={styles.questionsOverlayLeftPanel}>
-      <QuestionListLeftPanel setInput={setInput} />
+      <QuestionListLeftPanel onSubmit={onSubmit} />
     </div>
   );
 };
