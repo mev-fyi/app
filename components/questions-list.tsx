@@ -66,15 +66,15 @@ export const QuestionList: React.FC<QuestionListProps> = ({ onSubmit }) => {
 
   return (
     <div className={styles.questionsContainer}>
-    <Button
-      variant="outline"
-      className={styles.shuffleButton}
-      onClick={pickRandomQuestions}
-    >
-      <IconRecycle className="h-5 w-5" /> {/* Adjust size as needed */}
-      <span className="sr-only">Shuffle Questions</span>
-    </Button>
-
+      <Button
+        variant="outline"
+        className={styles.shuffleButton}
+        onClick={pickRandomQuestions}
+      >
+        ♻️ {/* Recycle emoji */}
+        <span className="sr-only">Shuffle Questions</span>
+      </Button>
+      
       <div className={styles.questionsOverlay}>
         {selectedQuestions.map((question, index) => (
           <div 
