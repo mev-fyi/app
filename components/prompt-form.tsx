@@ -56,7 +56,8 @@ export function PromptForm({
       }}
       ref={formRef}
     >
-      <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden px-8 sm:rounded-md sm:border sm:px-12 bg-black sm:bg-transparent">                                                                                                                                                                 <Textarea
+      <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden px-8 sm:rounded-md sm:border sm:px-12 bg-black sm:bg-transparent">
+      <Textarea
           ref={inputRef}
           tabIndex={0}
           onKeyDown={onKeyDown}
@@ -65,7 +66,7 @@ export function PromptForm({
           onChange={e => setInput(e.target.value)}
           placeholder="Send a message."
           spellCheck={false}
-          className="min-h-[60px] w-full resize-none px-4 py-[1.3rem] focus-within:outline-none text-base bg-black sm:bg-transparent"
+          className="min-h-[60px] w-full resize-none px-2 py-[1.3rem] focus-within:outline-none text-base bg-black sm:bg-transparent"
         />
         <div className="absolute right-0 top-4 sm:right-4">
           <Tooltip>
