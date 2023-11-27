@@ -103,11 +103,11 @@ export const QuestionListLeftPanel: React.FC<QuestionListProps> = ({ onSubmit })
         Shuffle Questions
       </Button>
 
-      <div className={styles.questionsOverlay}>
+      <div className={styles.questionsOverlayLeftPanel}>
         {selectedQuestions.map((question, index) => (
           <div 
             key={index} 
-            className={styles.questionBox}
+            className={styles.questionBoxLeftPanel}
             onClick={() => handleQuestionSelect(question)} // Move the onClick to the questionBox div
           >
             {/* Remove the Button wrapping around the question */}
