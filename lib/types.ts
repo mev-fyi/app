@@ -19,10 +19,10 @@ export type ServerActionResult<Result> = Promise<
 
 export interface ParsedMetadataEntry {
   index: number;
+  type: string;
   title: string;
   link: string;
   extraInfo: string;
-  extraInfoType: string;
   publishedDate: Date;
   publishedDateString: string;
 }

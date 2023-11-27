@@ -51,7 +51,7 @@ export const questions = [
     "How can auction theory be used to design a better MEV auction?",
     "What are all the subjects that are needed to understand MEV?",
     // "What are all the subjects you are an expert in?",
-    "What is MEV-Share?",
+    // "What is MEV-Share?",
     "What is MEV-Boost?",
     "What is a builder?",
     "What is a searcher?",

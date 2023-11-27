@@ -55,24 +55,32 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
     // Try to match both video and paper details
     const videoDetails = entry.match(/\[Title\]: (.*?), \[Channel name\]: (.*?), \[Video Link\]: (.*?), \[Published date\]: ([\d-]+)/);
     const paperDetails = entry.match(/\[Title\]: (.*?), \[Authors\]: (.*?), \[Link\]: (.*?), \[Release date\]: ([\d-]+)/);
-    
-    // Determine if it's a video or paper detail and extract accordingly
-    let details = videoDetails || paperDetails;
-    let extraInfoType = videoDetails ? 'Channel name' : 'Authors';
 
-    // If details are found, construct the ParsedMetadataEntry object
-    return details ? {
-      index: index + 1,
-      title: details[1],
-      extraInfoType: extraInfoType,
-      link: details[3],
-      extraInfo: details[2],
-      // Correct the index for the published date based on whether it's video or paper
-      publishedDate: new Date(details[4]),
-      publishedDateString: details[4] // This should be the same index as the publishedDate
-    } : null;
+    if (videoDetails) {
+      return {
+        index: index + 1,
+        type: 'youtubeVideo',
+        title: videoDetails[1],
+        extraInfo: videoDetails[2],
+        link: videoDetails[3],
+        publishedDate: new Date(videoDetails[4]),
+        publishedDateString: videoDetails[4]
+      };
+    } else if (paperDetails) {
+      return {
+        index: index + 1,
+        type: 'researchPaper',
+        title: paperDetails[1],
+        extraInfo: paperDetails[2],
+        link: paperDetails[3],
+        publishedDate: new Date(paperDetails[4]),
+        publishedDateString: paperDetails[4]
+      };
+    }
+
+    return null;
   });
-
+  
   // Remove null values and ensure the array is of ParsedMetadataEntry[]
   const filteredEntries = parsedEntries.filter(Boolean) as ParsedMetadataEntry[];
 

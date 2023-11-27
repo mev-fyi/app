@@ -56,3 +56,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.metadataListItemIcon svg {
+  width: 1em; /* Icon size relative to the font size */
+  height: 1em;
+}
