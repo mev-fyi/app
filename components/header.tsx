@@ -34,9 +34,8 @@ export async function Header() {
   //   </Link>
   // )}
   return (
-    <header className="sticky top-0 z-50 flex items-center justify-between w-full h-16 px-4 border-b shrink-0">
+    <header className="sticky top-0 z-50 flex items-center justify-between w-full h-16 px-4 border-b shrink-0 bg-transparent">
       <div className="flex items-center">
-        
 
         <div className="flex items-center">
           <IconSeparator className="w-6 h-6 text-muted-foreground/50" />

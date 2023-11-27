@@ -543,34 +543,32 @@ function IconChevronUpDown({
   )
 }
 
-function IconRecycle({
-  className,
-  ...props
-}: React.ComponentProps<'svg'>) {
+function IconRecycle({ className, ...props }: React.ComponentProps<'svg'>) {
   return (
-    <svg 
-      xmlns="http://www.w3.org/2000/svg" 
-      fill="none" 
-      viewBox="0 0 24 24" 
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
       stroke="currentColor"
-      {...props}>
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 2l2 7h2l-2.5-9h-2l.5 2zM2 9h2l3 10 2.5-9.5L9 10H2l1-1zm1.5 13h2L9 13l-3 9z" />
+      className={className}
+      {...props}
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2 12h4l3-9 9 9-3 9h-4M12 2l-6 6m0 0l6 6m0-6H2m18 6l-6 6" />
     </svg>
   );
 }
 
-function IconBroom({
-  className,
-  ...props
-}: React.ComponentProps<'svg'>) {
+function IconBroom({ className, ...props }: React.ComponentProps<'svg'>) {
   return (
-    <svg 
-      xmlns="http://www.w3.org/2000/svg" 
-      fill="none" 
-      viewBox="0 0 24 24" 
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
       stroke="currentColor"
-      {...props}>
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 21v-4a1 1 0 011-1h4m10 0h4a1 1 0 011 1v4m-9-4h4a1 1 0 011 1v4M3 3l18 18" />
+      className={className}
+      {...props}
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 3l4 4m-4-4v11a1 1 0 001 1h3m-4-4l-9 9" />
     </svg>
   );
 }
