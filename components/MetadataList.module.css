@@ -74,6 +74,7 @@
 
 .metadataContent {
   flex-grow: 1;
+  font-size: 1.2rem;
 }
 
 .metadataListLink {
