@@ -25,15 +25,11 @@
 }
 
 .shuffleButton {
-  background-color: white;
   color: black;
   border: 2px solid black;
   padding: 8px 16px;
-  cursor: pointer;
   font-weight: bold;
   text-align: center;
-  /* margin-top is no longer needed as the button is now at the top */
-  /* align-self is no longer needed as the container takes care of alignment */
 }
 
 .questionBox {
