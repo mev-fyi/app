@@ -29,11 +29,13 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
             <img src={getThumbnailUrl(entry)} alt={entry.title} />
           </div>
           <div className={styles.metadataContent}>
-            <a href={entry.link} target="_blank" rel="noopener noreferrer" className={styles.metadataListLink}>
-              {entry.title}
-            </a>
-            <span className={styles.metadataListSpan}>{entry.extraInfo}</span>
-            <span className={styles.metadataListSpan}>{entry.publishedDateString}</span>
+            <div className={styles.metadataTop}>
+              <a href={entry.link} target="_blank" rel="noopener noreferrer" className={styles.metadataListLink}>
+                {entry.title}
+              </a>
+            </div>
+            <div className={styles.metadataMiddle}>{entry.extraInfo}</div>
+            <div className={styles.metadataBottom}>{entry.publishedDateString}</div>
           </div>
         </li>
       ))}
