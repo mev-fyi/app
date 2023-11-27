@@ -32,12 +32,8 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
             <a href={entry.link} target="_blank" rel="noopener noreferrer" className={styles.metadataListLink}>
               {entry.title}
             </a>
-            <span className={styles.metadataListSpan}>
-              {entry.extraInfo}
-            </span>
-            <span className={styles.metadataListSpan}>
-              {entry.publishedDateString}
-            </span>
+            <span className={styles.metadataListSpan}>{entry.extraInfo}</span>
+            <span className={styles.metadataListSpan}>{entry.publishedDateString}</span>
           </div>
         </li>
       ))}
