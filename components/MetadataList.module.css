@@ -10,6 +10,7 @@
   align-items: stretch; /* Change to stretch to fill the height */
   color: #bbb;
   word-wrap: break-word;
+  margin-bottom: 15px;
 }
 
 .metadataListItem:hover {
@@ -61,8 +62,8 @@
 
 .metadataThumbnail {
   flex-shrink: 0;
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   margin-right: 20px;
   display: flex; /* Add flex display */
   align-items: stretch; /* Stretch the image container */
