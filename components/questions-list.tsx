@@ -70,11 +70,11 @@ export const QuestionList: React.FC<QuestionListProps> = ({ onSubmit }) => {
         variant="outline"
         className={styles.shuffleButton}
         onClick={pickRandomQuestions}
+        backgroundImage= '19-_Loading-512-2320706499.png'
       >
-        ♻️ {/* Recycle emoji */}
         <span className="sr-only">Shuffle Questions</span>
       </Button>
-      
+
       <div className={styles.questionsOverlay}>
         {selectedQuestions.map((question, index) => (
           <div 
