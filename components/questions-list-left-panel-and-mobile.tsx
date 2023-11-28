@@ -99,7 +99,7 @@ export const QuestionListLeftPanel: React.FC<QuestionListProps> = ({ onSubmit })
     <div className={styles.questionsContainer}>
       <Button
         variant="outline"
-        className={`${styles.shuffleButton} rounded-full w-4 h-4`}
+        className={`${styles.shuffleButton} rounded-full w-12 h-12`}
         onClick={pickRandomQuestions}
         backgroundImage='/19-_Loading-512-2320706499.png'
       >
