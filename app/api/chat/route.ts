@@ -114,7 +114,7 @@ export async function POST(req: Request) {
         console.log('route.ts: Chat record stored with reduced message count');
       } catch (secondError) {
         console.error('Failed again to store chat record:', secondError);
-        return new Response('Internal Server Error', { status: 500 });
+        // return new Response('Internal Server Error', { status: 500 });
       }
     } else {
       console.error('Failed to store chat record:', error);
