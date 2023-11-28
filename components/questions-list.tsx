@@ -68,9 +68,9 @@ export const QuestionList: React.FC<QuestionListProps> = ({ onSubmit }) => {
     <div className={styles.questionsContainer}>
       <Button
         variant="outline"
-        className={styles.shuffleButton}
+        className={`${styles.shuffleButton} rounded-full w-4 h-4`}
         onClick={pickRandomQuestions}
-        backgroundImage= '19-_Loading-512-2320706499.png'
+        backgroundImage='/19-_Loading-512-2320706499.png'
       >
         <span className="sr-only">Shuffle Questions</span>
       </Button>
