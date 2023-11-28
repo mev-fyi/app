@@ -60,7 +60,7 @@
 .metadataThumbnail {
   flex-shrink: 0;
   width: 200px;
-  height: 140px;
+  height: 160px;
   margin-right: 20px;
   overflow: hidden;
 }
