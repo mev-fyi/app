@@ -94,6 +94,7 @@ export const QuestionListLeftPanel: React.FC<QuestionListProps> = ({ onSubmit })
     onSubmit(question); // Call the onSubmit function with the selected question
   };
 
+  // ♻️ {/* Recycle emoji */}
   return (
     <div className={styles.questionsContainer}>
       <Button
@@ -101,7 +102,7 @@ export const QuestionListLeftPanel: React.FC<QuestionListProps> = ({ onSubmit })
         className={styles.shuffleButton}
         onClick={pickRandomQuestions}
       >
-        ♻️ {/* Recycle emoji */}
+        <img src='19-_Loading-512-2320706499.png' />
         <span className="sr-only">Shuffle Questions</span>
       </Button>
 
