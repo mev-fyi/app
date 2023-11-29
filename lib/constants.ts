@@ -97,7 +97,7 @@ export const questions = [
     // "How does MEV relate to oracles?",
     // "What is FLAIR?",
     // "How can rebate mechanisms help alleviate MEV?",
-    "What are denial-of-service attacks on Ethereum?",
+    //"What are denial-of-service attacks on Ethereum?",
     "What is multi-block MEV?",
     "What is cross-domain MEV?",
     "What are integrated builders?",
