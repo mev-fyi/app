@@ -36,6 +36,7 @@ export function ChatMessage({ message, ...props }: ChatMessageProps) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
   // <IconOpenAI />
+  // {message.role === 'user' ? <IconUser /> : '🤖'}
   return (
     <div
       className={cn('group relative mb-4 flex items-start md:-ml-12')}
@@ -50,7 +51,9 @@ export function ChatMessage({ message, ...props }: ChatMessageProps) {
         )}
       >
         
-        {message.role === 'user' ? <IconUser /> : '🤖'}
+        {message.role === 'user' ? 
+          <img src="/explorer.png" alt="User Icon" className="h-full w-full object-cover" /> 
+          : '🤖'}
       </div>
       <div className="flex-1 px-1 ml-4 space-y-2 overflow-hidden">
         <MemoizedReactMarkdown
