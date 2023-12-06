@@ -88,12 +88,14 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   // Create a ref for the end of the chat list
   const chatListEndRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to bottom whenever messages update
   useEffect(() => {
     if (chatListEndRef.current) {
-      chatListEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      const isAtBottom = chatListEndRef.current.scrollHeight - chatListEndRef.current.scrollTop === chatListEndRef.current.clientHeight;
+      if (isAtBottom) {
+        chatListEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
     }
-  }, [newMessages]); // Ensure that messages is declared in the component scope
+  }, [newMessages]);
 
   const { messages, append, reload, stop, isLoading, input, setInput } =
   useChat({
