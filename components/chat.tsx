@@ -85,18 +85,8 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     setLastMessageRole('user');
   };
   
-  // Create a ref for the end of the chat list
   const chatListEndRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (chatListEndRef.current) {
-      const isNearBottom = chatListEndRef.current.scrollHeight - chatListEndRef.current.scrollTop - chatListEndRef.current.clientHeight < 50; // 50px threshold
-      if (isNearBottom) {
-        chatListEndRef.current.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  }, [newMessages]);
-  
   const { messages, append, reload, stop, isLoading, input, setInput } =
   useChat({
       initialMessages,
@@ -135,6 +125,13 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             });
             setMessages(responseData.messages);
             setLastMessageRole('assistant');
+             // Trigger scroll after setting messages
+            if (chatListEndRef.current) {
+              const isNearBottom = chatListEndRef.current.scrollHeight - chatListEndRef.current.scrollTop - chatListEndRef.current.clientHeight < 50; // 50px threshold
+              if (isNearBottom) {
+                chatListEndRef.current.scrollIntoView({ behavior: 'smooth' });
+              }
+            }
 
           } catch (error) {
             console.error('Error reading response data:', error);
