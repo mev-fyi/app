@@ -90,13 +90,13 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 
   useEffect(() => {
     if (chatListEndRef.current) {
-      const isAtBottom = chatListEndRef.current.scrollHeight - chatListEndRef.current.scrollTop === chatListEndRef.current.clientHeight;
-      if (isAtBottom) {
+      const isNearBottom = chatListEndRef.current.scrollHeight - chatListEndRef.current.scrollTop - chatListEndRef.current.clientHeight < 50; // 50px threshold
+      if (isNearBottom) {
         chatListEndRef.current.scrollIntoView({ behavior: 'smooth' });
       }
     }
   }, [newMessages]);
-
+  
   const { messages, append, reload, stop, isLoading, input, setInput } =
   useChat({
       initialMessages,
