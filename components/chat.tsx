@@ -5,7 +5,6 @@ import { cn } from '@/lib/utils'
 import { ChatList } from '@/components/chat-list'
 import { ChatPanel } from '@/components/chat-panel'
 import { EmptyScreen } from '@/components/empty-screen'
-import { ChatScrollAnchor } from '@/components/chat-scroll-anchor'
 import { useLocalStorage } from '@/lib/hooks/use-local-storage'
 import {
   Dialog,
@@ -85,7 +84,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     setLastMessageRole('user');
   };
   
-  // const chatListEndRef = useRef<HTMLDivElement>(null);
+  const chatListEndRef = useRef<HTMLDivElement>(null);
 
   const { messages, append, reload, stop, isLoading, input, setInput } =
   useChat({
@@ -125,13 +124,13 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             });
             setMessages(responseData.messages);
             setLastMessageRole('assistant');
-             // Trigger scroll after setting messages
-            // if (chatListEndRef.current) {
-            //   const isNearBottom = chatListEndRef.current.scrollHeight - chatListEndRef.current.scrollTop - chatListEndRef.current.clientHeight < 50; // 50px threshold
-            //   if (isNearBottom) {
-            //     chatListEndRef.current.scrollIntoView({ behavior: 'smooth' });
-            //   }
-            // }
+            // Trigger scroll after setting messages
+            if (chatListEndRef.current) {
+              const isNearBottom = chatListEndRef.current.scrollHeight - chatListEndRef.current.scrollTop - chatListEndRef.current.clientHeight < 50; // 50px threshold
+              if (isNearBottom) {
+                chatListEndRef.current.scrollIntoView({ behavior: 'smooth' });
+              }
+            }
 
           } catch (error) {
             console.error('Error reading response data:', error);
@@ -164,7 +163,6 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             {messages.length ? (
               <>
                 <ChatList messages={newMessages} />
-                <ChatScrollAnchor trackVisibility={isLoading} />
               </>
             ) : (
               <EmptyScreen onSubmit={handleUserInputSubmit}/>
