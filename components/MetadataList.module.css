@@ -95,3 +95,13 @@
 .metadataTop, .metadataMiddle, .metadataBottom {
   display: block;
 }
+
+.authorLink {
+  color: #007bff; /* Light blue color */
+  text-decoration: underline; /* Underline to indicate it's clickable */
+}
+
+.authorLink:hover {
+  color: #0056b3; /* Darker blue on hover */
+  text-decoration: none; /* Remove underline on hover */
+}

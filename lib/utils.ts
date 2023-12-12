@@ -71,7 +71,7 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
         const urlMatch = author.match(/https?:\/\/(.+)/);
         if (urlMatch) {
           const lastSegment = urlMatch[1].split('/').filter(Boolean).pop(); // Extract the last segment of the URL
-          return `<a href="${author}" target="_blank">${lastSegment}</a>`;
+          return `<a href="${author}" target="_blank" class="authorLink">${lastSegment}</a>`;
         }
         return author;
       }).join(', ');
