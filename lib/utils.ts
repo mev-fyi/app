@@ -67,14 +67,13 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
         publishedDateString: videoDetails[4]
       };
     } else if (paperDetails) {
-      // Process authors to make URLs clickable
       const authors = paperDetails[2].split(', ').map(author => {
-        const urlMatch = author.match(/https?:\/\/(.+?)(?:\/|$)/);
+        const urlMatch = author.match(/https?:\/\/(.+)/);
         if (urlMatch) {
-          // Use last part of the URL as clickable text
-          return `<a href="${author}" target="_blank">${urlMatch[1].split('/').pop()}</a>`;
+          const lastSegment = urlMatch[1].split('/').filter(Boolean).pop(); // Extract the last segment of the URL
+          return `<a href="${author}" target="_blank">${lastSegment}</a>`;
         }
-        return author; // Non-URL authors remain unchanged
+        return author;
       }).join(', ');
 
       return {
@@ -90,7 +89,7 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
 
     return null;
   });
-  
+
   // Remove null values and ensure the array is of ParsedMetadataEntry[]
   const filteredEntries = parsedEntries.filter(Boolean) as ParsedMetadataEntry[];
 

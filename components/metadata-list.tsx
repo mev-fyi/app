@@ -35,7 +35,11 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
               </a>
             </div>
             <div className={styles.metadataMiddle}>
-              <span className={styles.metadataListSpan}>{entry.extraInfo}</span>
+              {/* Render extraInfo as HTML */}
+              <span 
+                className={styles.metadataListSpan} 
+                dangerouslySetInnerHTML={{ __html: entry.extraInfo }} 
+              />
             </div>
             <div className={styles.metadataBottom}>
               <span className={styles.metadataListSpan}>{entry.publishedDateString}</span>
