@@ -100,7 +100,7 @@ export const questions = [
     //"What are denial-of-service attacks on Ethereum?",
     "What is multi-block MEV?",
     "What is cross-domain MEV?",
-    "What are integrated builders?",
+    // "What are integrated builders?",
     "How does ETH staking relate to MEV?",
     // "How does ETH staking relate to blockchain centralization?",
     // "How can I mathematically compute MEV?",

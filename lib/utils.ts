@@ -67,11 +67,21 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
         publishedDateString: videoDetails[4]
       };
     } else if (paperDetails) {
+      // Process authors to make URLs clickable
+      const authors = paperDetails[2].split(', ').map(author => {
+        const urlMatch = author.match(/https?:\/\/(.+?)(?:\/|$)/);
+        if (urlMatch) {
+          // Use last part of the URL as clickable text
+          return `<a href="${author}" target="_blank">${urlMatch[1].split('/').pop()}</a>`;
+        }
+        return author; // Non-URL authors remain unchanged
+      }).join(', ');
+
       return {
         index: index + 1,
         type: 'researchPaper',
         title: paperDetails[1],
-        extraInfo: paperDetails[2],
+        extraInfo: authors,
         link: paperDetails[3],
         publishedDate: new Date(paperDetails[4]),
         publishedDateString: paperDetails[4]
