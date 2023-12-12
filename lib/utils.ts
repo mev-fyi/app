@@ -67,14 +67,20 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
         publishedDateString: videoDetails[4]
       };
     } else if (paperDetails) {
-      const authors = paperDetails[2].split(', ').map(author => {
-        const urlMatch = author.match(/https?:\/\/(.+)/);
-        if (urlMatch) {
-          const lastSegment = urlMatch[1].split('/').filter(Boolean).pop(); // Extract the last segment of the URL
-          return `<a href="${author}" target="_blank" style="text-decoration: underline;">${lastSegment}</a>`;
-        }
-        return author;
-      }).join(', ');
+      let authors = paperDetails[2];
+      if (authors.length > 44) {
+        const firstAuthorLastName = authors.split(', ')[0].split(' ').pop();
+        authors = `${firstAuthorLastName} et al.`;
+      } else {
+        authors = authors.split(', ').map(author => {
+          const urlMatch = author.match(/https?:\/\/(.+)/);
+          if (urlMatch) {
+            const lastSegment = urlMatch[1].split('/').filter(Boolean).pop(); // Extract the last segment of the URL
+            return `<a href="${author}" target="_blank" style="text-decoration: underline;">${lastSegment}</a>`;
+          }
+          return author;
+        }).join(', ');
+      }
 
       return {
         index: index + 1,
@@ -93,6 +99,5 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
   // Remove null values and ensure the array is of ParsedMetadataEntry[]
   const filteredEntries = parsedEntries.filter(Boolean) as ParsedMetadataEntry[];
 
-  // Sort the entries based on the published date
-  return filteredEntries
+  return filteredEntries.sort((a, b) => b.publishedDate.getTime() - a.publishedDate.getTime());
 }
