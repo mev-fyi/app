@@ -94,5 +94,5 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
   const filteredEntries = parsedEntries.filter(Boolean) as ParsedMetadataEntry[];
 
   // Sort the entries based on the published date
-  return filteredEntries.sort((a, b) => b.publishedDate.getTime() - a.publishedDate.getTime());
+  return filteredEntries
 }
