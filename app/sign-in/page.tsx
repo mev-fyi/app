@@ -10,7 +10,7 @@ export default async function SignInPage() {
     redirect('/')
   }
   return (
-    <div className="flex flex-col h-screen items-center justify-center py-10">
+    <div className="flex flex-col h-screen items-center justify-center py-10 sm:pb-50">
       {/* Welcome message */}
       <h1 className="mb-4 text-3xl font-bold text-center">mev.fyi</h1>
       <h1 className="mb-4 text-3xl font-bold text-center">The Maximal Extractable Value (MEV) research chatbot</h1>
@@ -21,7 +21,6 @@ export default async function SignInPage() {
       
       {/* Welcome image */}
       <div className="mb-8">
-        {/* Since the image is in the public folder, you can refer to it directly by its path */}
         <img src="/android-chrome-512x512.png" alt="Welcome" width="512" height="512" />
       </div>
       
