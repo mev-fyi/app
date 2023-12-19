@@ -64,7 +64,7 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
     return null;
   });
 
-  return parsedEntries.filter(Boolean) as ParsedMetadataEntry[]
+  return parsedEntries.filter(Boolean) as ParsedMetadataEntry[];
 }
 
 function createVideoEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
@@ -82,11 +82,6 @@ function createVideoEntry(details: RegExpMatchArray, index: number): ParsedMetad
 function createPaperEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
   let authors = processAuthors(details[2]);
 
-  if (authors.length > 44) {
-    const firstAuthorLastName = authors.split(', ')[0].split(' ').pop();
-    authors = `${firstAuthorLastName} et al.`;
-  }
-
   return {
     index: index + 1,
     type: 'researchPaper',
@@ -99,12 +94,21 @@ function createPaperEntry(details: RegExpMatchArray, index: number): ParsedMetad
 }
 
 function processAuthors(authors: string): string {
-  return authors.split(', ').map(author => {
-    const urlMatch = author.match(/https?:\/\/(.+)/);
-    if (urlMatch) {
-      const lastSegment = urlMatch[1].split('/').filter(Boolean).pop(); // Extract the last segment of the URL
+  const authorsArray = authors.split(', ');
+
+  if (authorsArray.every(author => author.match(/^https?:\/\//))) {
+    // If all authors are URLs, convert them to clickable names
+    return authorsArray.map(author => {
+      const lastSegment = author.split('/').filter(Boolean).pop(); // Extract the last segment of the URL
       return `<a href="${author}" target="_blank" style="text-decoration: underline;">${lastSegment}</a>`;
+    }).join(', ');
+  } else {
+    // Apply 'et al.' if the combined length of authors is too long
+    let combinedAuthors = authorsArray.join(', ');
+    if (combinedAuthors.length > 44) {
+      const firstAuthorLastName = authorsArray[0].split(' ').pop();
+      combinedAuthors = `${firstAuthorLastName} et al.`;
     }
-    return author;
-  }).join(', ');
+    return combinedAuthors;
+  }
 }
