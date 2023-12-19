@@ -49,55 +49,62 @@ export function formatDate(input: string | number | Date): string {
 }
 
 export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] {
-  // Split the metadata entries by the newline character
   const formattedEntries = formattedMetadata.split('\n');
+
   const parsedEntries: (ParsedMetadataEntry | null)[] = formattedEntries.map((entry, index) => {
-    // Try to match both video and paper details
     const videoDetails = entry.match(/\[Title\]: (.*?), \[Channel name\]: (.*?), \[Video Link\]: (.*?), \[Published date\]: ([\d-]+)/);
     const paperDetails = entry.match(/\[Title\]: (.*?), \[Authors\]: (.*?), \[Link\]: (.*?), \[Release date\]: ([\d-]+)/);
 
     if (videoDetails) {
-      return {
-        index: index + 1,
-        type: 'youtubeVideo',
-        title: videoDetails[1],
-        extraInfo: videoDetails[2],
-        link: videoDetails[3],
-        publishedDate: new Date(videoDetails[4]),
-        publishedDateString: videoDetails[4]
-      };
+      return createVideoEntry(videoDetails, index);
     } else if (paperDetails) {
-      let authors = paperDetails[2];
-      if (authors.length > 44) {
-        const firstAuthorLastName = authors.split(', ')[0].split(' ').pop();
-        authors = `${firstAuthorLastName} et al.`;
-      } else {
-        authors = authors.split(', ').map(author => {
-          const urlMatch = author.match(/https?:\/\/(.+)/);
-          if (urlMatch) {
-            const lastSegment = urlMatch[1].split('/').filter(Boolean).pop(); // Extract the last segment of the URL
-            return `<a href="${author}" target="_blank" style="text-decoration: underline;">${lastSegment}</a>`;
-          }
-          return author;
-        }).join(', ');
-      }
-
-      return {
-        index: index + 1,
-        type: 'researchPaper',
-        title: paperDetails[1],
-        extraInfo: authors,
-        link: paperDetails[3],
-        publishedDate: new Date(paperDetails[4]),
-        publishedDateString: paperDetails[4]
-      };
+      return createPaperEntry(paperDetails, index);
     }
 
     return null;
   });
 
-  // Remove null values and ensure the array is of ParsedMetadataEntry[]
-  const filteredEntries = parsedEntries.filter(Boolean) as ParsedMetadataEntry[];
+  return parsedEntries.filter(Boolean) as ParsedMetadataEntry[]
+}
 
-  return filteredEntries.sort((a, b) => b.publishedDate.getTime() - a.publishedDate.getTime());
+function createVideoEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
+  return {
+    index: index + 1,
+    type: 'youtubeVideo',
+    title: details[1],
+    extraInfo: details[2],
+    link: details[3],
+    publishedDate: new Date(details[4]),
+    publishedDateString: details[4]
+  };
+}
+
+function createPaperEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
+  let authors = processAuthors(details[2]);
+
+  if (authors.length > 44) {
+    const firstAuthorLastName = authors.split(', ')[0].split(' ').pop();
+    authors = `${firstAuthorLastName} et al.`;
+  }
+
+  return {
+    index: index + 1,
+    type: 'researchPaper',
+    title: details[1],
+    extraInfo: authors,
+    link: details[3],
+    publishedDate: new Date(details[4]),
+    publishedDateString: details[4]
+  };
+}
+
+function processAuthors(authors: string): string {
+  return authors.split(', ').map(author => {
+    const urlMatch = author.match(/https?:\/\/(.+)/);
+    if (urlMatch) {
+      const lastSegment = urlMatch[1].split('/').filter(Boolean).pop(); // Extract the last segment of the URL
+      return `<a href="${author}" target="_blank" style="text-decoration: underline;">${lastSegment}</a>`;
+    }
+    return author;
+  }).join(', ');
 }
