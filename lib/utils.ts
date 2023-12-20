@@ -55,9 +55,10 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
     const videoDetails = entry.match(/\[Title\]: (.*?), \[Channel name\]: (.*?), \[Video Link\]: (.*?), \[Published date\]: ([\d-]+)/);
     const paperDetails = entry.match(/\[Title\]: (.*?), \[Authors\]: (.*?), \[Link\]: (.*?), \[Release date\]: ([\d-]+)/);
 
-    if (videoDetails) {
+    // Ensure that videoDetails and paperDetails are mutually exclusive
+    if (videoDetails && !paperDetails) {
       return createVideoEntry(videoDetails, index);
-    } else if (paperDetails) {
+    } else if (paperDetails && !videoDetails) {
       return createPaperEntry(paperDetails, index);
     }
 
@@ -72,7 +73,7 @@ function createVideoEntry(details: RegExpMatchArray, index: number): ParsedMetad
     index: index + 1,
     type: 'youtubeVideo',
     title: details[1],
-    extraInfo: details[2],
+    extraInfo: details[2], // Channel name as extraInfo
     link: details[3],
     publishedDate: new Date(details[4]),
     publishedDateString: details[4]
@@ -86,7 +87,7 @@ function createPaperEntry(details: RegExpMatchArray, index: number): ParsedMetad
     index: index + 1,
     type: 'researchPaper',
     title: details[1],
-    extraInfo: authors,
+    extraInfo: authors, // Authors as extraInfo
     link: details[3],
     publishedDate: new Date(details[4]),
     publishedDateString: details[4]
