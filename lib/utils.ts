@@ -113,10 +113,15 @@ function processAuthors(authors: string): string {
   }
 }
 
-function sanitizeField(field) {
+function sanitizeField(field: string): string {
   return isValidField(field) ? field : 'unspecified';
 }
 
-function isValidField(field) {
-  return field && field.trim() !== '' && field.toLowerCase() !== 'nan';
+function isValidField(field: string): boolean {
+  if (!field) return false; // checks if field is undefined or null
+  if (field.trim() === '') return false; // checks if field is empty or whitespace
+  if (field.toLowerCase() === 'nan') return false; // checks if field is 'nan'
+
+  return true; // return true if all checks pass
 }
+
