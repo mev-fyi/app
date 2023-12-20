@@ -55,10 +55,9 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
     const videoDetails = entry.match(/\[Title\]: (.*?), \[Channel name\]: (.*?), \[Video Link\]: (.*?), \[Published date\]: ([\d-]+)/);
     const paperDetails = entry.match(/\[Title\]: (.*?), \[Authors\]: (.*?), \[Link\]: (.*?), \[Release date\]: ([\d-]+)/);
 
-    // Ensure that videoDetails and paperDetails are mutually exclusive
-    if (videoDetails && !paperDetails) {
+    if (videoDetails) {
       return createVideoEntry(videoDetails, index);
-    } else if (paperDetails && !videoDetails) {
+    } else if (paperDetails) {
       return createPaperEntry(paperDetails, index);
     }
 
@@ -72,39 +71,39 @@ function createVideoEntry(details: RegExpMatchArray, index: number): ParsedMetad
   return {
     index: index + 1,
     type: 'youtubeVideo',
-    title: details[1],
-    extraInfo: details[2], // Channel name as extraInfo
-    link: details[3],
-    publishedDate: new Date(details[4]),
-    publishedDateString: details[4]
+    title: sanitizeField(details[1]),
+    extraInfo: sanitizeField(details[2]),
+    link: sanitizeField(details[3]),
+    publishedDate: new Date(sanitizeField(details[4])),
+    publishedDateString: sanitizeField(details[4])
   };
 }
 
 function createPaperEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
-  let authors = processAuthors(details[2]);
-
   return {
     index: index + 1,
     type: 'researchPaper',
-    title: details[1],
-    extraInfo: authors, // Authors as extraInfo
-    link: details[3],
-    publishedDate: new Date(details[4]),
-    publishedDateString: details[4]
+    title: sanitizeField(details[1]),
+    extraInfo: processAuthors(sanitizeField(details[2])),
+    link: sanitizeField(details[3]),
+    publishedDate: new Date(sanitizeField(details[4])),
+    publishedDateString: sanitizeField(details[4])
   };
 }
 
 function processAuthors(authors: string): string {
+  if (!isValidField(authors)) {
+    return 'unspecified';
+  }
+
   const authorsArray = authors.split(', ');
 
-  if (authorsArray.every(author => author.match(/^https?:\/\//))) {
-    // If all authors are URLs, convert them to clickable names
+  if (authorsArray.every(author => isValidField(author) && author.match(/^https?:\/\//))) {
     return authorsArray.map(author => {
-      const lastSegment = author.split('/').filter(Boolean).pop(); // Extract the last segment of the URL
+      const lastSegment = author.split('/').filter(Boolean).pop();
       return `<a href="${author}" target="_blank" style="text-decoration: underline;">${lastSegment}</a>`;
     }).join(', ');
   } else {
-    // Apply 'et al.' if the combined length of authors is too long
     let combinedAuthors = authorsArray.join(', ');
     if (combinedAuthors.length > 44) {
       const firstAuthorLastName = authorsArray[0].split(' ').pop();
@@ -112,4 +111,12 @@ function processAuthors(authors: string): string {
     }
     return combinedAuthors;
   }
+}
+
+function sanitizeField(field) {
+  return isValidField(field) ? field : 'unspecified';
+}
+
+function isValidField(field) {
+  return field && field.trim() !== '' && field.toLowerCase() !== 'nan';
 }
