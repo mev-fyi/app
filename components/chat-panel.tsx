@@ -49,7 +49,7 @@ export function ChatPanel({
   const router = useRouter()
 
   return (
-    <div className="fixed inset-x-0 bottom-0 sm:mt-4 sm:mr-4 sm:ml-4">
+    <div className="mx-auto sm:max-w-2xl sm:px-4"> {/* Adjust max-width to align with chatListContainer */}
       <ButtonScrollToBottom />
       <div className="mx-auto sm:max-w-2xl sm:px-4">
         <div className="flex h-4 items-center justify-center">
@@ -77,7 +77,7 @@ export function ChatPanel({
         </div>
 
         {/* Broom button and Prompt Form Container */}
-        <div className="flex items-center space-x-4 bg-black sm:bg-transparent sm:rounded-t-xl px-4 py-2 md:py-4">
+        <div className="flex items-center space-x-4 bg-black sm:bg-transparent sm:rounded-t-xl px-2 py-1 md:py-2"> {/* Adjusted padding */}
           {/* Broom button */}
           <Tooltip>
             <TooltipTrigger asChild>
