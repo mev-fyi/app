@@ -43,7 +43,7 @@
   box-sizing: border-box;
   overflow-y: auto; /* Ensure this is not overridden somewhere else */
   overflow-x: hidden;
-  padding-bottom: 200px;
+  padding-bottom: 120px;
 }
 
 /* Chatlist container with scrollable content */
