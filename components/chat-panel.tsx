@@ -101,7 +101,7 @@ export function ChatPanel({
           </Tooltip>
 
           {/* Prompt Form */}
-          <div className="flex-grow">
+          <div className="flex-grow mx-auto" style={{ maxWidth: '850px' }}> {/* Apply max-width directly */}
             <PromptForm
               onSubmit={async value => {
                 if (onSubmit) {
