@@ -51,20 +51,35 @@ export function formatDate(input: string | number | Date): string {
 export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] {
   const formattedEntries = formattedMetadata.split('\n');
 
-  const parsedEntries: (ParsedMetadataEntry | null)[] = formattedEntries.map((entry, index) => {
+  const parsedEntries: ParsedMetadataEntry[] = formattedEntries.map((entry, index) => {
     const videoDetails = entry.match(/\[Title\]: (.*?), \[Channel name\]: (.*?), \[Video Link\]: (.*?), \[Published date\]: ([\d-]+)/);
     const paperDetails = entry.match(/\[Title\]: (.*?), \[Authors\]: (.*?), \[Link\]: (.*?), \[Release date\]: ([\d-]+)/);
+    const titleOnly = entry.match(/\[Title\]: (.+)/);
 
     if (videoDetails) {
       return createVideoEntry(videoDetails, index);
     } else if (paperDetails) {
       return createPaperEntry(paperDetails, index);
+    } else if (titleOnly) {
+      return createTitleOnlyEntry(titleOnly[1], index);
     }
 
     return null;
   });
 
-  return parsedEntries.filter(Boolean) as ParsedMetadataEntry[];
+  return parsedEntries.filter(entry => entry !== null) as ParsedMetadataEntry[];
+}
+
+function createTitleOnlyEntry(title: string, index: number): ParsedMetadataEntry {
+  return {
+    index: index + 1,
+    type: 'researchPaper',
+    title: sanitizeField(title),
+    extraInfo: '',
+    link: '',
+    publishedDate: new Date(''),
+    publishedDateString: ''
+  };
 }
 
 function createVideoEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
