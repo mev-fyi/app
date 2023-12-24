@@ -52,33 +52,31 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
   const formattedEntries = formattedMetadata.split('\n');
 
   const parsedEntries = formattedEntries.map((entry, index) => {
-    const details = entry.match(/\[Title\]: (.*?), \[Authors\]: (.*?), \[Link\]: (.*?), \[Release date\]: ([\d-]+)/);
-
+    // Attempt to match all possible details
+    const details = entry.match(/\[Title\]: (.*?)(, \[Authors\]: (.*?))?(, \[Link\]: (.*?))?(, \[Release date\]: ([\d-]+))?/);
     if (details) {
-      return createPaperEntry(details, index);
+      // If some details are not available, provide default empty strings
+      const title = sanitizeField(details[1]);
+      const authors = details[3] ? processAuthors(sanitizeField(details[3])) : '';
+      const link = details[5] ? sanitizeField(details[5]) : '';
+      const releaseDate = details[7] ? sanitizeField(details[7]) : '';
+      return createPaperEntry(title, authors, link, releaseDate, index);
     }
-
-    // If details are not fully available, parse what is there
-    const partialDetails = entry.match(/\[Title\]: (.*?)(, \[Authors\]: (.*?))?(, \[Link\]: (.*?))?(, \[Release date\]: ([\d-]+))?/);
-    if (partialDetails) {
-      return createPartialPaperEntry(partialDetails, index);
-    }
-
     return null;
   });
 
   return parsedEntries.filter(entry => entry !== null) as ParsedMetadataEntry[];
 }
 
-function createPaperEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
+function createPaperEntry(title: string, authors: string, link: string, releaseDate: string, index: number): ParsedMetadataEntry {
   return {
     index: index + 1,
     type: 'researchPaper',
-    title: sanitizeField(details[1]),
-    extraInfo: processAuthors(sanitizeField(details[2])),
-    link: sanitizeField(details[3]),
-    publishedDate: sanitizeField(details[4]) !== 'unspecified' ? new Date(sanitizeField(details[4])) : new Date(''),
-    publishedDateString: sanitizeField(details[4])
+    title: title,
+    extraInfo: authors,
+    link: link,
+    publishedDate: releaseDate ? new Date(releaseDate) : new Date(''),
+    publishedDateString: releaseDate
   };
 }
 
