@@ -51,7 +51,7 @@ export function formatDate(input: string | number | Date): string {
 export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] {
   const formattedEntries = formattedMetadata.split('\n');
 
-  const parsedEntries: ParsedMetadataEntry[] = formattedEntries.map((entry, index) => {
+  const parsedEntries = formattedEntries.map((entry, index) => {
     const videoDetails = entry.match(/\[Title\]: (.*?), \[Channel name\]: (.*?), \[Video Link\]: (.*?), \[Published date\]: ([\d-]+)/);
     const paperDetails = entry.match(/\[Title\]: (.*?), \[Authors\]: (.*?), \[Link\]: (.*?), \[Release date\]: ([\d-]+)/);
     const titleOnly = entry.match(/\[Title\]: (.+)/);
