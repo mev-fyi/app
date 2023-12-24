@@ -52,16 +52,29 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
   const formattedEntries = formattedMetadata.split('\n');
 
   const parsedEntries = formattedEntries.map((entry, index) => {
-    const videoDetails = entry.match(/\[Title\]: (.*?), \[Channel name\]: (.*?), \[Video Link\]: (.*?), \[Published date\]: ([\d-]+)/);
-    const paperDetails = entry.match(/\[Title\]: (.*?), \[Authors\]: (.*?), \[Link\]: (.*?), \[Release date\]: ([\d-]+)/);
+    const details = entry.match(/\[Title\]: (.*?), \[Authors\]: (.*?), \[Link\]: (.*?), \[Release date\]: ([\d-]+)/);
     const titleOnly = entry.match(/\[Title\]: (.+)/);
 
-    if (videoDetails) {
-      return createVideoEntry(videoDetails, index);
-    } else if (paperDetails) {
-      return createPaperEntry(paperDetails, index);
+    if (details) {
+      return {
+        index: index + 1,
+        type: 'researchPaper',
+        title: sanitizeField(details[1]),
+        extraInfo: processAuthors(sanitizeField(details[2])),
+        link: sanitizeField(details[3]),
+        publishedDate: sanitizeField(details[4]) !== 'unspecified' ? new Date(sanitizeField(details[4])) : new Date(''),
+        publishedDateString: sanitizeField(details[4])
+      };
     } else if (titleOnly) {
-      return createTitleOnlyEntry(titleOnly[1], index);
+      return {
+        index: index + 1,
+        type: 'researchPaper',
+        title: sanitizeField(titleOnly[1]),
+        extraInfo: '',
+        link: '',
+        publishedDate: new Date(''),
+        publishedDateString: ''
+      };
     }
 
     return null;
@@ -108,7 +121,7 @@ function createPaperEntry(details: RegExpMatchArray, index: number): ParsedMetad
 
 function processAuthors(authors: string): string {
   if (!isValidField(authors)) {
-    return 'unspecified';
+    return '';
   }
 
   const authorsArray = authors.split(', ');
@@ -119,17 +132,12 @@ function processAuthors(authors: string): string {
       return `<a href="${author}" target="_blank" style="text-decoration: underline;">${lastSegment}</a>`;
     }).join(', ');
   } else {
-    let combinedAuthors = authorsArray.join(', ');
-    if (combinedAuthors.length > 44) {
-      const firstAuthorLastName = authorsArray[0].split(' ').pop();
-      combinedAuthors = `${firstAuthorLastName} et al.`;
-    }
-    return combinedAuthors;
+    return authorsArray.join(', ');
   }
 }
 
 function sanitizeField(field: string): string {
-  return isValidField(field) ? field : 'unspecified';
+  return isValidField(field) ? field : '';
 }
 
 function isValidField(field: string): boolean {
@@ -139,4 +147,3 @@ function isValidField(field: string): boolean {
 
   return true; // return true if all checks pass
 }
-
