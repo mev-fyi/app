@@ -53,58 +53,21 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
 
   const parsedEntries = formattedEntries.map((entry, index) => {
     const details = entry.match(/\[Title\]: (.*?), \[Authors\]: (.*?), \[Link\]: (.*?), \[Release date\]: ([\d-]+)/);
-    const titleOnly = entry.match(/\[Title\]: (.+)/);
 
     if (details) {
-      return {
-        index: index + 1,
-        type: 'researchPaper',
-        title: sanitizeField(details[1]),
-        extraInfo: processAuthors(sanitizeField(details[2])),
-        link: sanitizeField(details[3]),
-        publishedDate: sanitizeField(details[4]) !== 'unspecified' ? new Date(sanitizeField(details[4])) : new Date(''),
-        publishedDateString: sanitizeField(details[4])
-      };
-    } else if (titleOnly) {
-      return {
-        index: index + 1,
-        type: 'researchPaper',
-        title: sanitizeField(titleOnly[1]),
-        extraInfo: '',
-        link: '',
-        publishedDate: new Date(''),
-        publishedDateString: ''
-      };
+      return createPaperEntry(details, index);
+    }
+
+    // If details are not fully available, parse what is there
+    const partialDetails = entry.match(/\[Title\]: (.*?)(, \[Authors\]: (.*?))?(, \[Link\]: (.*?))?(, \[Release date\]: ([\d-]+))?/);
+    if (partialDetails) {
+      return createPartialPaperEntry(partialDetails, index);
     }
 
     return null;
   });
 
   return parsedEntries.filter(entry => entry !== null) as ParsedMetadataEntry[];
-}
-
-function createTitleOnlyEntry(title: string, index: number): ParsedMetadataEntry {
-  return {
-    index: index + 1,
-    type: 'researchPaper',
-    title: sanitizeField(title),
-    extraInfo: '',
-    link: '',
-    publishedDate: new Date(''),
-    publishedDateString: ''
-  };
-}
-
-function createVideoEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
-  return {
-    index: index + 1,
-    type: 'youtubeVideo',
-    title: sanitizeField(details[1]),
-    extraInfo: sanitizeField(details[2]),
-    link: sanitizeField(details[3]),
-    publishedDate: new Date(sanitizeField(details[4])),
-    publishedDateString: sanitizeField(details[4])
-  };
 }
 
 function createPaperEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
@@ -114,14 +77,27 @@ function createPaperEntry(details: RegExpMatchArray, index: number): ParsedMetad
     title: sanitizeField(details[1]),
     extraInfo: processAuthors(sanitizeField(details[2])),
     link: sanitizeField(details[3]),
-    publishedDate: new Date(sanitizeField(details[4])),
+    publishedDate: sanitizeField(details[4]) !== 'unspecified' ? new Date(sanitizeField(details[4])) : new Date(''),
     publishedDateString: sanitizeField(details[4])
   };
 }
 
+function createPartialPaperEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
+  return {
+    index: index + 1,
+    type: 'researchPaper',
+    title: sanitizeField(details[1]),
+    extraInfo: details[3] ? processAuthors(sanitizeField(details[3])) : '',
+    link: details[5] ? sanitizeField(details[5]) : '',
+    publishedDate: details[7] ? new Date(sanitizeField(details[7])) : new Date(''),
+    publishedDateString: details[7] ? sanitizeField(details[7]) : ''
+  };
+}
+
+
 function processAuthors(authors: string): string {
   if (!isValidField(authors)) {
-    return '';
+    return 'unspecified';
   }
 
   const authorsArray = authors.split(', ');
@@ -132,7 +108,12 @@ function processAuthors(authors: string): string {
       return `<a href="${author}" target="_blank" style="text-decoration: underline;">${lastSegment}</a>`;
     }).join(', ');
   } else {
-    return authorsArray.join(', ');
+    let combinedAuthors = authorsArray.join(', ');
+    if (combinedAuthors.length > 44) {
+      const firstAuthorLastName = authorsArray[0].split(' ').pop();
+      combinedAuthors = `${firstAuthorLastName} et al.`;
+    }
+    return combinedAuthors;
   }
 }
 
@@ -141,9 +122,8 @@ function sanitizeField(field: string): string {
 }
 
 function isValidField(field: string): boolean {
-  if (!field) return false; // checks if field is undefined or null
-  if (field.trim() === '') return false; // checks if field is empty or whitespace
-  if (field.toLowerCase() === 'nan') return false; // checks if field is 'nan'
-
-  return true; // return true if all checks pass
+  if (!field) return false;
+  if (field.trim() === '') return false;
+  if (field.toLowerCase() === 'nan') return false;
+  return true;
 }
