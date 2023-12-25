@@ -51,47 +51,57 @@ export function formatDate(input: string | number | Date): string {
 export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] {
   const formattedEntries = formattedMetadata.split('\n');
 
-  const parsedEntries = formattedEntries.map((entry, index) => {
-    // Attempt to match all possible details
-    const details = entry.match(/\[Title\]: (.*?)(, \[Authors\]: (.*?))?(, \[Link\]: (.*?))?(, \[Release date\]: ([\d-]+))?/);
-    if (details) {
-      // If some details are not available, provide default empty strings
-      const title = sanitizeField(details[1]);
-      const authors = details[3] ? processAuthors(sanitizeField(details[3])) : '';
-      const link = details[5] ? sanitizeField(details[5]) : '';
-      const releaseDate = details[7] ? sanitizeField(details[7]) : '';
-      return createPaperEntry(title, authors, link, releaseDate, index);
-    }
-    return null;
+  const parsedEntries = formattedEntries.map((entry, index): ParsedMetadataEntry => {
+    // Extract all possible details with optional capturing groups
+    const details = entry.match(/\[Title\]: (.*?)(, \[Authors\]: (.*?))?(, \[Link\]: (.*?))?(, \[Published date\]: ([\d-]+))?/);
+
+    // Default to empty string if a group is not captured
+    const title = details && details[1] ? sanitizeField(details[1]) : '';
+    const authors = details && details[3] ? processAuthors(sanitizeField(details[3])) : '';
+    const link = details && details[5] ? sanitizeField(details[5]) : '';
+    const publishedDateString = details && details[7] ? sanitizeField(details[7]) : '';
+
+    // Convert published date to a Date object, default to new Date('') for empty string
+    const publishedDate = publishedDateString ? new Date(publishedDateString) : new Date('');
+
+    return {
+      index: index + 1,
+      type: 'researchPaper', // Assume 'researchPaper' type for simplicity, adjust as needed
+      title: title,
+      extraInfo: authors,
+      link: link,
+      publishedDate: publishedDate,
+      publishedDateString: publishedDateString
+    };
   });
 
-  return parsedEntries.filter(entry => entry !== null) as ParsedMetadataEntry[];
+  // Filter out entries that have no title, assuming title is a minimum requirement
+  return parsedEntries.filter(entry => entry.title !== '') as ParsedMetadataEntry[];
 }
 
-function createPaperEntry(title: string, authors: string, link: string, releaseDate: string, index: number): ParsedMetadataEntry {
+function createVideoEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
   return {
     index: index + 1,
-    type: 'researchPaper',
-    title: title,
-    extraInfo: authors,
-    link: link,
-    publishedDate: releaseDate ? new Date(releaseDate) : new Date(''),
-    publishedDateString: releaseDate
+    type: 'youtubeVideo',
+    title: sanitizeField(details[1]),
+    extraInfo: sanitizeField(details[2]),
+    link: sanitizeField(details[3]),
+    publishedDate: new Date(sanitizeField(details[4])),
+    publishedDateString: sanitizeField(details[4])
   };
 }
 
-function createPartialPaperEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
+function createPaperEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
   return {
     index: index + 1,
     type: 'researchPaper',
     title: sanitizeField(details[1]),
-    extraInfo: details[3] ? processAuthors(sanitizeField(details[3])) : '',
-    link: details[5] ? sanitizeField(details[5]) : '',
-    publishedDate: details[7] ? new Date(sanitizeField(details[7])) : new Date(''),
-    publishedDateString: details[7] ? sanitizeField(details[7]) : ''
+    extraInfo: processAuthors(sanitizeField(details[2])),
+    link: sanitizeField(details[3]),
+    publishedDate: new Date(sanitizeField(details[4])),
+    publishedDateString: sanitizeField(details[4])
   };
 }
-
 
 function processAuthors(authors: string): string {
   if (!isValidField(authors)) {
@@ -116,12 +126,13 @@ function processAuthors(authors: string): string {
 }
 
 function sanitizeField(field: string): string {
-  return isValidField(field) ? field : '';
+  return isValidField(field) ? field : 'unspecified';
 }
 
 function isValidField(field: string): boolean {
-  if (!field) return false;
-  if (field.trim() === '') return false;
-  if (field.toLowerCase() === 'nan') return false;
-  return true;
+  if (!field) return false; // checks if field is undefined or null
+  if (field.trim() === '') return false; // checks if field is empty or whitespace
+  if (field.toLowerCase() === 'nan') return false; // checks if field is 'nan'
+
+  return true; // return true if all checks pass
 }
