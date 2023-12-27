@@ -81,29 +81,32 @@ export function ChatPanel({
   const [responseReceived, setResponseReceived] = useState(false);
 
 
- return (
+  return (
     <div className="fixed inset-x-0 bottom-0 sm:mt-4 sm:mr-4 sm:ml-4">
       <ButtonScrollToBottom />
       <div className="mx-auto sm:max-w-2xl sm:px-4">
+        {/* Loader positioned above the button */}
+        {isLoading && (
+          <div className="text-center my-4">
+            <StyledClipLoader
+              size={35}
+              color="#007bff"
+              loading={true}
+            />
+          </div>
+        )}
+
         <div className="flex h-4 items-center justify-center">
+          {/* Show 'Stop generating' button when loading, otherwise show 'Regenerate response' */}
           {isLoading ? (
-            <React.Fragment>
-              <div className="text-center my-4">
-                <StyledClipLoader
-                  size={35}
-                  color="#007bff"
-                  loading={true}
-                />
-              </div>
-              <Button
-                variant="outline"
-                className="bg-background"
-                disabled={true}
-              >
-                <IconStop className="mr-2" />
-                Generating...
-              </Button>
-            </React.Fragment>
+            <Button
+              variant="outline"
+              onClick={() => stop()}
+              className="bg-background"
+            >
+              <IconStop className="mr-2" />
+              Stop generating
+            </Button>
           ) : (
             messages?.length > 0 && (
               <Button
