@@ -1,4 +1,7 @@
 import { type UseChatHelpers } from 'ai/react'
+import React, { useState } from 'react';
+import { css } from 'react-emotion';
+import { ClipLoader } from 'react-spinners'; // Import the desired spinner
 
 import { Button } from '@/components/ui/button'
 import { PromptForm } from '@/components/prompt-form'
@@ -12,6 +15,25 @@ import {
   TooltipTrigger
 } from '@/components/ui/tooltip'
 import { useRouter } from 'next/navigation'
+
+export interface ChatPanelProps
+  extends Pick<
+    UseChatHelpers,
+    | 'append'
+    | 'isLoading'
+    | 'reload'
+    | 'messages'
+    | 'stop'
+    | 'input'
+    | 'setInput'
+  > {
+  id?: string;
+  onSubmit?: (value: string) => void | Promise<void>; // Add this line
+  // Add new properties for the state-setting functions
+  setMessages: (messages: MetadataMessage[]) => void;
+  setStructuredMetadataEntries: (entries: any[]) => void; // Replace 'any[]' with a more specific type if available
+  setLastMessageRole: (role: string) => void;
+}
 
 export interface ChatPanelProps
   extends Pick<
@@ -46,7 +68,10 @@ export function ChatPanel({
   setStructuredMetadataEntries,
   setLastMessageRole
 }: ChatPanelProps) {
-  const router = useRouter()
+  const router = useRouter();
+
+  // Step 1: Create a state variable to track whether the backend response has been received
+  const [responseReceived, setResponseReceived] = useState(false);
 
   return (
     <div className="fixed inset-x-0 bottom-0 sm:mt-4 sm:mr-4 sm:ml-4">
@@ -101,28 +126,48 @@ export function ChatPanel({
           </Tooltip>
 
           {/* Prompt Form */}
-          <div className="flex-grow mx-auto" style={{ maxWidth: '850px' }}> {/* Apply max-width directly */}
-            <PromptForm
-              onSubmit={async value => {
-                if (onSubmit) {
-                  await onSubmit(value); // Call the onSubmit prop function
-                } else {
-                  await append({
-                    id,
-                    content: value,
-                    role: 'user'
-                  });
-                }
-              }}
-              input={input}
-              setInput={setInput}
-              isLoading={isLoading}
-              setMessages={setMessages}
-              setStructuredMetadataEntries={setStructuredMetadataEntries}
-              setLastMessageRole={setLastMessageRole}
-            />
+          <div className="flex-grow mx-auto" style={{ maxWidth: '850px' }}>
+            {/* Step 2: Conditionally render loading animation or backend response */}
+            {responseReceived ? (
+              <PromptForm
+                onSubmit={async value => {
+                  // Step 3: When submitting, show the loading animation
+                  setResponseReceived(false);
+                  if (onSubmit) {
+                    await onSubmit(value); // Call the onSubmit prop function
+                  } else {
+                    await append({
+                      id,
+                      content: value,
+                      role: 'user'
+                    });
+                  }
+                  // After submitting, set the responseReceived to true
+                  setResponseReceived(true);
+                }}
+                input={input}
+                setInput={setInput}
+                isLoading={isLoading}
+                setMessages={setMessages}
+                setStructuredMetadataEntries={setStructuredMetadataEntries}
+                setLastMessageRole={setLastMessageRole}
+              />
+            ) : (
+              <div className="text-center my-4">
+                <ClipLoader
+                  css={css`
+                    display: block;
+                    margin: 0 auto;
+                  `}
+                  size={35} // Adjust the size as needed
+                  color="#007bff" // Change the color as needed
+                  loading={true}
+                />
+              </div>
+            )}
           </div>
         </div>
+
         <FooterText className="hidden sm:block" />
       </div>
     </div>
