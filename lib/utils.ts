@@ -51,32 +51,20 @@ export function formatDate(input: string | number | Date): string {
 export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] {
   const formattedEntries = formattedMetadata.split('\n');
 
-  const parsedEntries = formattedEntries.map((entry, index): ParsedMetadataEntry => {
-    // Extract all possible details with optional capturing groups
-    const details = entry.match(/\[Title\]: (.*?)(, \[Authors\]: (.*?))?(, \[Link\]: (.*?))?(, \[Published date\]: ([\d-]+))?/);
+  const parsedEntries: (ParsedMetadataEntry | null)[] = formattedEntries.map((entry, index) => {
+    const videoDetails = entry.match(/\[Title\]: (.*?), \[Channel name\]: (.*?), \[Video Link\]: (.*?), \[Published date\]: ([\d-]+)/);
+    const paperDetails = entry.match(/\[Title\]: (.*?), \[Authors\]: (.*?), \[Link\]: (.*?), \[Release date\]: ([\d-]+)/);
 
-    // Default to empty string if a group is not captured
-    const title = details && details[1] ? sanitizeField(details[1]) : '';
-    const authors = details && details[3] ? processAuthors(sanitizeField(details[3])) : '';
-    const link = details && details[5] ? sanitizeField(details[5]) : '';
-    const publishedDateString = details && details[7] ? sanitizeField(details[7]) : '';
+    if (videoDetails) {
+      return createVideoEntry(videoDetails, index);
+    } else if (paperDetails) {
+      return createPaperEntry(paperDetails, index);
+    }
 
-    // Convert published date to a Date object, default to new Date('') for empty string
-    const publishedDate = publishedDateString ? new Date(publishedDateString) : new Date('');
-
-    return {
-      index: index + 1,
-      type: 'researchPaper', // Assume 'researchPaper' type for simplicity, adjust as needed
-      title: title,
-      extraInfo: authors,
-      link: link,
-      publishedDate: publishedDate,
-      publishedDateString: publishedDateString
-    };
+    return null;
   });
 
-  // Filter out entries that have no title, assuming title is a minimum requirement
-  return parsedEntries.filter(entry => entry.title !== '') as ParsedMetadataEntry[];
+  return parsedEntries.filter(Boolean) as ParsedMetadataEntry[];
 }
 
 function createVideoEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
