@@ -79,7 +79,8 @@ export function ChatPanel({
 
   // Step 1: Create a state variable to track whether the backend response has been received
   const [responseReceived, setResponseReceived] = useState(false);
-
+  // Temporarily set isLoading to true for testing
+  isLoading = true;
 
   return (
     <div className="fixed inset-x-0 bottom-0 sm:mt-4 sm:mr-4 sm:ml-4">
