@@ -21,7 +21,8 @@ export const questions = [
     // "What is the difference between account abstraction and intents?",
     // "Is it bad that MEV is a centralizing force?",
     // "Tell me about MEV on Solana",
-    "Explain to me the differences between Uniswap v2, v3 and v4",
+    // "Explain to me the differences between Uniswap v2, v3 and v4",  # NOTE 2023-12-27: somehow refuses to answer this one despite the context
+    "What is Uniswap V4 and what are the differences with V3?",
     "What are commit/reveal schemes?",
     "What is the impact of latency in MEV?",
     "What is Protocol Enforced Proposer Commitments (PEPC)?",
@@ -161,6 +162,8 @@ export const questions = [
     // "What is ERC-7265?",
     // "What are Verkle trees?",
     // "What are the trade-offs for DeFi protocols to build on an L2 versus their on own app-chain on Cosmos?"
+    "Give me an exhaustive understanding of execution tickets and block proposal right market",
+    "Tell me everything you know about timing games in Ethereum",
   ]
   
 
