@@ -80,33 +80,30 @@ export function ChatPanel({
   // Step 1: Create a state variable to track whether the backend response has been received
   const [responseReceived, setResponseReceived] = useState(false);
 
+
   return (
     <div className="fixed inset-x-0 bottom-0 sm:mt-4 sm:mr-4 sm:ml-4">
       <ButtonScrollToBottom />
       <div className="mx-auto sm:max-w-2xl sm:px-4">
-
-        {/* Loader above the Stop generating button */}
-        {isLoading && (
-          <div>
-            <div className="text-center my-4">Loading...</div> {/* Temporary */}
-            <StyledClipLoader
-              size={35}
-              color="#007bff"
-              loading={true}
-            />
-          </div>
-        )}
-
         <div className="flex h-4 items-center justify-center">
           {isLoading ? (
-            <Button
-              variant="outline"
-              onClick={() => stop()}
-              className="bg-background"
-            >
-              <IconStop className="mr-2" />
-              Stop generating
-            </Button>
+            <React.Fragment>
+              <div className="text-center my-4">
+                <StyledClipLoader
+                  size={35}
+                  color="#007bff"
+                  loading={true}
+                />
+              </div>
+              <Button
+                variant="outline"
+                className="bg-background"
+                disabled={true}
+              >
+                <IconStop className="mr-2" />
+                Generating...
+              </Button>
+            </React.Fragment>
           ) : (
             messages?.length > 0 && (
               <Button
