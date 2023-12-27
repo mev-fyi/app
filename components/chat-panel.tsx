@@ -2,7 +2,7 @@ import { type UseChatHelpers } from 'ai/react'
 import React, { useState } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { ClipLoader } from 'react-spinners'; // Import the desired spinner
+import { BeatLoader } from 'react-spinners'; // Importing BeatLoader
 
 import { Button } from '@/components/ui/button'
 import { PromptForm } from '@/components/prompt-form'
@@ -17,9 +17,11 @@ import {
 } from '@/components/ui/tooltip'
 import { useRouter } from 'next/navigation'
 
-const StyledClipLoader = styled(ClipLoader)`
+// StyledBeatLoader with increased size
+const StyledBeatLoader = styled(BeatLoader)`
   display: block;
   margin: 0 auto;
+  font-size: 20px; // Increases the size of the spinner
 `;
 
 
@@ -90,8 +92,8 @@ export function ChatPanel({
           {isLoading ? (
             <React.Fragment>
               <div className="text-center my-4">
-                <StyledClipLoader
-                  size={35}
+                <StyledBeatLoader
+                  size={20} // Size of the spinner
                   color="#007bff"
                   loading={true}
                 />
