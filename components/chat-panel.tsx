@@ -84,6 +84,18 @@ export function ChatPanel({
     <div className="fixed inset-x-0 bottom-0 sm:mt-4 sm:mr-4 sm:ml-4">
       <ButtonScrollToBottom />
       <div className="mx-auto sm:max-w-2xl sm:px-4">
+
+        {/* Loader above the Stop generating button */}
+        {isLoading && (
+          <div className="text-center my-4">
+            <StyledClipLoader
+              size={35}
+              color="#007bff"
+              loading={true}
+            />
+          </div>
+        )}
+
         <div className="flex h-4 items-center justify-center">
           {isLoading ? (
             <Button
@@ -107,7 +119,6 @@ export function ChatPanel({
             )
           )}
         </div>
-
         {/* Broom button and Prompt Form Container */}
         <div className="flex items-center space-x-4 bg-black sm:bg-transparent sm:rounded-t-xl px-4 py-2 md:py-4">
           {/* Broom button */}
@@ -134,40 +145,29 @@ export function ChatPanel({
 
           {/* Prompt Form */}
           <div className="flex-grow mx-auto" style={{ maxWidth: '850px' }}>
-            {/* Step 2: Conditionally render loading animation or backend response */}
-            {responseReceived ? (
-              <PromptForm
-                onSubmit={async value => {
-                  // Step 3: When submitting, show the loading animation
-                  setResponseReceived(false);
-                  if (onSubmit) {
-                    await onSubmit(value); // Call the onSubmit prop function
-                  } else {
-                    await append({
-                      id,
-                      content: value,
-                      role: 'user'
-                    });
-                  }
-                  // After submitting, set the responseReceived to true
-                  setResponseReceived(true);
-                }}
-                input={input}
-                setInput={setInput}
-                isLoading={isLoading}
-                setMessages={setMessages}
-                setStructuredMetadataEntries={setStructuredMetadataEntries}
-                setLastMessageRole={setLastMessageRole}
-              />
-            ) : (
-              <div className="text-center my-4">
-                <StyledClipLoader
-                  size={35}
-                  color="#007bff"
-                  loading={true}
-                />
-              </div>
-            )}
+            <PromptForm
+              onSubmit={async value => {
+                // Step 3: When submitting, show the loading animation
+                setResponseReceived(false);
+                if (onSubmit) {
+                  await onSubmit(value); // Call the onSubmit prop function
+                } else {
+                  await append({
+                    id,
+                    content: value,
+                    role: 'user'
+                  });
+                }
+                // After submitting, set the responseReceived to true
+                setResponseReceived(true);
+              }}
+              input={input}
+              setInput={setInput}
+              isLoading={isLoading}
+              setMessages={setMessages}
+              setStructuredMetadataEntries={setStructuredMetadataEntries}
+              setLastMessageRole={setLastMessageRole}
+            />
           </div>
         </div>
 
