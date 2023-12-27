@@ -2,7 +2,7 @@ import { type UseChatHelpers } from 'ai/react'
 import React, { useState } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import { BeatLoader } from 'react-spinners'; // Importing BeatLoader
+import { ClipLoader } from 'react-spinners'; // Import the desired spinner
 
 import { Button } from '@/components/ui/button'
 import { PromptForm } from '@/components/prompt-form'
@@ -17,11 +17,9 @@ import {
 } from '@/components/ui/tooltip'
 import { useRouter } from 'next/navigation'
 
-// StyledBeatLoader with increased size
-const StyledBeatLoader = styled(BeatLoader)`
+const StyledClipLoader = styled(ClipLoader)`
   display: block;
   margin: 0 auto;
-  font-size: 20px; // Increases the size of the spinner
 `;
 
 
@@ -81,10 +79,9 @@ export function ChatPanel({
 
   // Step 1: Create a state variable to track whether the backend response has been received
   const [responseReceived, setResponseReceived] = useState(false);
-  // Temporarily set isLoading to true for testing
-  isLoading = true;
 
-  return (
+
+ return (
     <div className="fixed inset-x-0 bottom-0 sm:mt-4 sm:mr-4 sm:ml-4">
       <ButtonScrollToBottom />
       <div className="mx-auto sm:max-w-2xl sm:px-4">
@@ -92,8 +89,8 @@ export function ChatPanel({
           {isLoading ? (
             <React.Fragment>
               <div className="text-center my-4">
-                <StyledBeatLoader
-                  size={20} // Size of the spinner
+                <StyledClipLoader
+                  size={35}
                   color="#007bff"
                   loading={true}
                 />
