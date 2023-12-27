@@ -87,7 +87,8 @@ export function ChatPanel({
 
         {/* Loader above the Stop generating button */}
         {isLoading && (
-          <div className="text-center my-4">
+          <div>
+            <div className="text-center my-4">Loading...</div> {/* Temporary */}
             <StyledClipLoader
               size={35}
               color="#007bff"
