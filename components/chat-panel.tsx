@@ -1,6 +1,7 @@
 import { type UseChatHelpers } from 'ai/react'
 import React, { useState } from 'react';
-import { css } from 'react-emotion';
+import { css } from '@emotion/react';
+import styled from '@emotion/styled';
 import { ClipLoader } from 'react-spinners'; // Import the desired spinner
 
 import { Button } from '@/components/ui/button'
@@ -15,6 +16,12 @@ import {
   TooltipTrigger
 } from '@/components/ui/tooltip'
 import { useRouter } from 'next/navigation'
+
+const StyledClipLoader = styled(ClipLoader)`
+  display: block;
+  margin: 0 auto;
+`;
+
 
 export interface ChatPanelProps
   extends Pick<
@@ -154,13 +161,9 @@ export function ChatPanel({
               />
             ) : (
               <div className="text-center my-4">
-                <ClipLoader
-                  css={css`
-                    display: block;
-                    margin: 0 auto;
-                  `}
-                  size={35} // Adjust the size as needed
-                  color="#007bff" // Change the color as needed
+                <StyledClipLoader
+                  size={35}
+                  color="#007bff"
                   loading={true}
                 />
               </div>
