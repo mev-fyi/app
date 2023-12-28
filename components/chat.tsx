@@ -244,25 +244,24 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         </div>
 
         <div className={styles.middlePanel}>  {/* Middle panel for chatlist and prompt form */}
-        <div className={styles.chatListContainer}>
-          {showChatList ? (
-            <div className={QuestionsOverlayStyles.fadeIn}>
-              <ChatList messages={newMessages} />
-            </div>
-          ) : (
-            <div className={showEmptyScreen ? '' : QuestionsOverlayStyles.hidden}>
-              <EmptyScreen onSubmit={handleUserInputSubmit} showOverlay={showMiddlePanelOverlay} isVisible={showEmptyScreen} />
-            </div>
-          )}
-        </div>
-          
-            {/* Apply overlayClass only when there are no messages and not on mobile */}
-            {newMessages.length === 0 && !isMobile && (
-              <div className={`${overlayClass} ${showMiddlePanelOverlay ? QuestionsOverlayStyles.fadeIn : QuestionsOverlayStyles.fadeOut}`}>
-                <QuestionsOverlay onSubmit={handleUserInputSubmit} showOverlay={showMiddlePanelOverlay} />
+          <div className={styles.chatListContainer}>
+            {showChatList ? (
+              <div className={QuestionsOverlayStyles.fadeIn}>
+                <ChatList messages={newMessages} />
+              </div>
+            ) : (
+              <div className={showEmptyScreen ? '' : QuestionsOverlayStyles.hidden}>
+                <EmptyScreen onSubmit={handleUserInputSubmit} showOverlay={showMiddlePanelOverlay} isVisible={showEmptyScreen} />
               </div>
             )}
           </div>
+          
+          {/* Apply overlayClass only when there are no messages and not on mobile */}
+          {newMessages.length === 0 && !isMobile && (
+            <div className={`${overlayClass} ${showMiddlePanelOverlay ? QuestionsOverlayStyles.fadeIn : QuestionsOverlayStyles.fadeOut}`}>
+              <QuestionsOverlay onSubmit={handleUserInputSubmit} showOverlay={showMiddlePanelOverlay} />
+            </div>
+          )}
         </div>
 
         <div>  {/* ChatPanel component */}
@@ -293,7 +292,8 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 
             <MetadataList entries={structuredMetadataEntries} />
           </div>
-        </div>
+      </div>
+    </div>
     </>
   )
 }
