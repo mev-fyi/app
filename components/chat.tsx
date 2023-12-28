@@ -50,7 +50,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   // Additional state to track if the fade-out animation has completed
   const [fadeOutCompleted, setFadeOutCompleted] = useState(true);
 
-  const [metadataContainerVisible, setMetadataContainerVisible] = useState(false);
+  const [metadataContainerVisible, setMetadataContainerVisible] = useState(true);
 
  // Effect to toggle visibility of metadataContainer based on structuredMetadataEntries
  useEffect(() => {
