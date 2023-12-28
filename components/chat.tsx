@@ -181,12 +181,20 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   // Adjust the logic to include initial load state
 
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setInitialLoad(false);
+    }, 50); // Adjust this delay as needed
+  
+    return () => clearTimeout(timer); // Cleanup the timer
+  }, []);
+
   // Determine the overlay class for QuestionsOverlay
   const overlayClass = isMobile 
-    ? `${styles.questionsOverlay} ${styles.mobileHide}` 
-    : initialLoad || (newMessages.length === 0 && !isMobile)
-      ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}`
-      : (!initialLoad && newMessages.length > 0) ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}` : '';
+  ? `${styles.questionsOverlay} ${styles.mobileHide}` 
+  : initialLoad || newMessages.length === 0
+    ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}`
+    : `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}`;
 
   // Determine the overlay class for QuestionsOverlayLeftPanel
   const leftPanelOverlayClass = showLeftPanelOverlay 
