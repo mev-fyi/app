@@ -70,8 +70,6 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     }, 300); // Adjust this duration to match your CSS transition
 
     return () => clearTimeout(timer);
-  } else {
-    setMetadataContainerVisible(false); // Fade out otherwise
   }
 }, [structuredMetadataEntries]);
 
@@ -104,7 +102,6 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   // Function to handle user input submission
   const handleUserInputSubmit = async (value: string) => {
     // Fade out EmptyScreen and QuestionsOverlay
-    setShowEmptyScreen(false);
     setShowMiddlePanelOverlay(false);
 
     // Set a timeout to hide the EmptyScreen after the fade-out animation
@@ -252,17 +249,17 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         </div>
 
         <div className={styles.middlePanel}>  {/* Middle panel for chatlist and prompt form */}
-          <div className={styles.chatListContainer}>
-            {showChatList ? (
-              <div className={QuestionsOverlayStyles.fadeIn}>
-                <ChatList messages={newMessages} />
-              </div>
-            ) : (
-              <div className={`${QuestionsOverlayStyles.fadeOut} ${showEmptyScreen ? '' : QuestionsOverlayStyles.hidden}`}>
-                <EmptyScreen onSubmit={handleUserInputSubmit} showOverlay={showMiddlePanelOverlay} isVisible={showEmptyScreen} />
-              </div>
-            )}
-          </div>
+        <div className={styles.chatListContainer}>
+          {showChatList ? (
+            <div className={QuestionsOverlayStyles.fadeIn}>
+              <ChatList messages={newMessages} />
+            </div>
+          ) : (
+            <div className={`${QuestionsOverlayStyles.fadeOut} ${showEmptyScreen ? '' : QuestionsOverlayStyles.hidden}`}>
+              <EmptyScreen onSubmit={handleUserInputSubmit} showOverlay={showMiddlePanelOverlay} isVisible={showEmptyScreen} />
+            </div>
+          )}
+        </div>
           
             {/* Apply overlayClass only when there are no messages and not on mobile */}
             {newMessages.length === 0 && !isMobile && (
@@ -292,13 +289,14 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 
         {/* Right panel for metadata list */}
         <div className={`${styles.rightPanel} ${isMetadataVisible ? styles.metadataContainerActive : ''}`}>
-          {/* "Top Sources" title */}
-          {showTopSources && (
-            <div className={styles.metadataTitle}>Top Sources</div>
-          )}
-
-          {/* Metadata list section */}
+          {/* Metadata section */}
           <div className={metadataContainerClass}>
+            {/* Show "Top Sources" if showTopSources is true */}
+            {showTopSources && (
+              <div className={styles.metadataTitle}>Top Sources</div>
+            )}
+
+            {/* MetadataList component */}
             <MetadataList entries={structuredMetadataEntries} />
           </div>
         </div>
