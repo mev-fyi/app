@@ -73,7 +73,8 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  
+  // State to control the visibility of QuestionsOverlayLeftPanel
+  const [showLeftPanelOverlay, setShowLeftPanelOverlay] = useState(true);  
 
   // Function to handle user input submission
   const handleUserInputSubmit = async (value: string) => {
@@ -86,6 +87,8 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     setMessages(prevMessages => [...prevMessages, newUserMessage]);
     append(newUserMessage);
     setLastMessageRole('user');
+    // Hide the QuestionsOverlayLeftPanel on user input
+    setShowLeftPanelOverlay(false);
   };
   
   // Create a ref for the end of the chat list
@@ -154,30 +157,39 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   // </button>
   // Determine the overlay class based on the condition
   // Adjust the logic to include initial load state
-  const overlayClass = isMobile 
-    ? `${styles.questionsOverlay} ${styles.mobileHide}` 
-    : initialLoad || (lastMessageRole === 'assistant' && newMessages.length > 0)
-      ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}`
-      : `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}`;
-
+  
+  // Update the display of QuestionsOverlayLeftPanel based on new assistant messages
   useEffect(() => {
-    // Change initialLoad to false after the component mounts
-    setInitialLoad(false);
-  }, []);
+    if (lastMessageRole === 'assistant' && newMessages.length > 0) {
+      setShowLeftPanelOverlay(true);
+    }
+  }, [lastMessageRole, newMessages]);
+
+   // Determine the overlay class for QuestionsOverlay
+   const overlayClass = isMobile 
+   ? `${styles.questionsOverlay} ${styles.mobileHide}` 
+   : initialLoad || (newMessages.length === 0 && !isMobile)
+     ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}`
+     : `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}`;
+
+  // Determine the overlay class for QuestionsOverlayLeftPanel
+  const leftPanelOverlayClass = showLeftPanelOverlay 
+    ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}` 
+    : `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}`;
 
 
   return (
     <>
         <div className={styles.layoutContainer}>
   
-        {/* Left empty panel */}
+        
         <div className={styles.leftPanel}>
-          {/* Apply a different logic or class for QuestionsOverlayLeftPanel if needed */}
-          {lastMessageRole === 'assistant' && newMessages.length > 0 && (
-            <div className={isMobile ? overlayClass : ''}> {/* Apply class conditionally */}
-              <QuestionsOverlayLeftPanel onSubmit={handleUserInputSubmit} />
-            </div>
+          {/* Apply leftPanelOverlayClass for QuestionsOverlayLeftPanel */}
+          <div className={leftPanelOverlayClass}>
+          {showLeftPanelOverlay && (
+            <QuestionsOverlayLeftPanel onSubmit={handleUserInputSubmit} />
           )}
+          </div>
         </div>
 
         <div className={styles.middlePanel}>  {/* Middle panel for chatlist and prompt form */}
