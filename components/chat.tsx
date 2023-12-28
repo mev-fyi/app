@@ -110,9 +110,21 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   // New state for controlling the visibility of QuestionsOverlay
   const [showMiddlePanelOverlay, setShowMiddlePanelOverlay] = useState(true);
 
+  const [showEmptyScreen, setShowEmptyScreen] = useState(true);
+  const [showChatList, setShowChatList] = useState(false); // New state for ChatList visibility
+
   // Function to handle user input submission
   const handleUserInputSubmit = async (value: string) => {
-    const newUserMessage: MetadataMessage = {
+    // Fade out EmptyScreen and QuestionsOverlay
+    setShowEmptyScreen(false);
+    setShowMiddlePanelOverlay(false);
+
+    // Delay the fade-in of ChatList
+    setTimeout(() => {
+      setShowChatList(true); // Show ChatList with fade-in
+    }, 300); // Delay should match the fade-out duration
+  
+      const newUserMessage: MetadataMessage = {
       id: id || '',  // Provide a fallback value for 'id' to ensure it's not undefined
       content: value,
       role: 'user',  // Assuming 'user' is an acceptable value for 'role'
@@ -247,22 +259,25 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         </div>
 
         <div className={styles.middlePanel}>  {/* Middle panel for chatlist and prompt form */}
-          <div className={styles.chatListContainer}> {/* Chatlist container with scrollable content */}
-            {messages.length ? (
-              <>
+          <div className={styles.chatListContainer}>
+            {showChatList ? (
+              <div className={QuestionsOverlayStyles.fadeIn}>
                 <ChatList messages={newMessages} />
-              </>
+              </div>
             ) : (
-              <EmptyScreen onSubmit={handleUserInputSubmit} showOverlay={showMiddlePanelOverlay} />
+              <div className={`${QuestionsOverlayStyles.fadeOut} ${showEmptyScreen ? '' : QuestionsOverlayStyles.hidden}`}>
+                <EmptyScreen onSubmit={handleUserInputSubmit} showOverlay={showMiddlePanelOverlay}/>
+              </div>
             )}
           </div>
           
             {/* Apply overlayClass only when there are no messages and not on mobile */}
             {newMessages.length === 0 && !isMobile && (
-            <div className={overlayClass}>
-              <QuestionsOverlay onSubmit={handleUserInputSubmit} showOverlay={showMiddlePanelOverlay} />
-            </div>
-          )}
+              <div className={`${overlayClass} ${showMiddlePanelOverlay ? QuestionsOverlayStyles.fadeIn : QuestionsOverlayStyles.fadeOut}`}>
+                <QuestionsOverlay onSubmit={handleUserInputSubmit} showOverlay={showMiddlePanelOverlay} />
+              </div>
+            )}
+          </div>
         </div>
 
         <div>  {/* ChatPanel component */}
@@ -293,10 +308,8 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           <div className={metadataContainerClass}>
             <MetadataList entries={structuredMetadataEntries} />
           </div>
-
         </div>
-      </div>
-      
+            
       <Dialog open={previewTokenDialog} onOpenChange={setPreviewTokenDialog}>
         <DialogContent>
           <DialogHeader>

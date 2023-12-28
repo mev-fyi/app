@@ -1,10 +1,9 @@
-import { QuestionsOverlay, QuestionsOverlayLeftPanel, QuestionsOverlayPropsLeftPanel } from './question-overlay';
+import { QuestionsOverlayLeftPanel, QuestionsOverlayPropsLeftPanel } from './question-overlay';
 import { useState, useEffect } from 'react';
 import styles from './QuestionsOverlay.module.css';
 
 export function EmptyScreen({ onSubmit }: QuestionsOverlayPropsLeftPanel) {
   const [isMobile, setIsMobile] = useState(false);
-  const [showOverlay, setShowOverlay] = useState(true); // Reintroduced state
 
   useEffect(() => {
     const handleResize = () => {
@@ -17,8 +16,7 @@ export function EmptyScreen({ onSubmit }: QuestionsOverlayPropsLeftPanel) {
   }, []);
 
   const overlayClass = isMobile ? `${styles.questionsOverlay} ${styles.mobileHide}` : styles.questionsOverlay;
-  const fadeInOutClass = showOverlay ? styles.fadeIn : styles.fadeOut;
-
+  
   return (
     <div className="mx-auto max-w-2xl px-4">
       <div className="rounded-lg border bg-background p-8 text-left">
@@ -37,9 +35,11 @@ export function EmptyScreen({ onSubmit }: QuestionsOverlayPropsLeftPanel) {
         )}
       </div>
       
-      <div className={`${overlayClass} ${fadeInOutClass}`}>
-        {(isMobile) && (<QuestionsOverlayLeftPanel onSubmit={onSubmit} showOverlay={showOverlay} />)}
-      </div>
+      {isMobile && (
+        <div className={overlayClass}>
+          <QuestionsOverlayLeftPanel onSubmit={onSubmit} showOverlay={true} />
+        </div>
+      )}
     </div>
   );
 }
