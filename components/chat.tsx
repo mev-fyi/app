@@ -255,7 +255,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
               <ChatList messages={newMessages} />
             </div>
           ) : (
-            <div className={`${QuestionsOverlayStyles.fadeOut} ${showEmptyScreen ? '' : QuestionsOverlayStyles.hidden}`}>
+            <div className={showEmptyScreen ? '' : QuestionsOverlayStyles.hidden}>
               <EmptyScreen onSubmit={handleUserInputSubmit} showOverlay={showMiddlePanelOverlay} isVisible={showEmptyScreen} />
             </div>
           )}
