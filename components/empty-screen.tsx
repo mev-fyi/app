@@ -2,7 +2,7 @@ import { QuestionsOverlayLeftPanel, QuestionsOverlayPropsLeftPanel } from './que
 import { useState, useEffect } from 'react';
 import styles from './QuestionsOverlay.module.css';
 
-export function EmptyScreen({ onSubmit }: QuestionsOverlayPropsLeftPanel) {
+export function EmptyScreen({ onSubmit, isVisible }: QuestionsOverlayPropsLeftPanel & { isVisible: boolean }) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -16,9 +16,10 @@ export function EmptyScreen({ onSubmit }: QuestionsOverlayPropsLeftPanel) {
   }, []);
 
   const overlayClass = isMobile ? `${styles.questionsOverlay} ${styles.mobileHide}` : styles.questionsOverlay;
+  const fadeInOutClass = isVisible ? styles.fadeIn : styles.fadeOut;
   
   return (
-    <div className="mx-auto max-w-2xl px-4">
+    <div className={`mx-auto max-w-2xl px-4 ${fadeInOutClass}`}>
       <div className="rounded-lg border bg-background p-8 text-left">
         <h1 className="mb-2 text-lg font-semibold text-white">
           mev.fyi is the Maximal Extractable Value (MEV) research chatbot.
