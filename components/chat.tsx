@@ -285,7 +285,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         {/* Right panel for metadata list */}
         <div className={styles.rightPanel}>
           {/* Metadata section */}
-          <div className={styles.metadataContainer}>
+          <div className={metadataContainerClass}>
             {showTopSources && (
               <div className={styles.metadataTitle}>Top Sources</div>
             )}
