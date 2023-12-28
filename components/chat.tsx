@@ -75,7 +75,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     // Set a timeout to fade back in
     const timer = setTimeout(() => {
       setMetadataContainerVisible(true);
-    }, 1000); // Adjust this duration to match your CSS transition
+    }, 300); // Adjust this duration to match your CSS transition
 
     return () => clearTimeout(timer);
   } else {
