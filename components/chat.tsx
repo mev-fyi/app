@@ -91,12 +91,11 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     setShowLeftPanelOverlay(false);
   };
   
-  // Update the visibility of QuestionsOverlayLeftPanel based on new assistant messages
+  // Update visibility of QuestionsOverlayLeftPanel based on message count and lastMessageRole
   useEffect(() => {
-    if (lastMessageRole === 'assistant' && newMessages.length > 0) {
-      setShowLeftPanelOverlay(true);
-    }
-  }, [lastMessageRole, newMessages]);
+    // Show the overlay only if there are messages and the last message is from the assistant
+    setShowLeftPanelOverlay(newMessages.length > 0 && lastMessageRole === 'assistant');
+  }, [newMessages, lastMessageRole]);
 
   // Create a ref for the end of the chat list
   const chatListEndRef = useRef<HTMLDivElement>(null);
@@ -177,16 +176,13 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 
   // Determine the overlay class for QuestionsOverlayLeftPanel
   const leftPanelOverlayClass = showLeftPanelOverlay 
-    ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}` 
-    : `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}`;
+  ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}` 
+  : `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}`;
 
   return (
     <>
-        <div className={styles.layoutContainer}>
-  
-        
+     <div className={styles.layoutContainer}>
         <div className={styles.leftPanel}>
-          {/* Apply leftPanelOverlayClass for QuestionsOverlayLeftPanel */}
           <div className={leftPanelOverlayClass}>
             {showLeftPanelOverlay && (
               <QuestionsOverlayLeftPanel onSubmit={handleUserInputSubmit} />
