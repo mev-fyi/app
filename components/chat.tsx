@@ -52,6 +52,11 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   // Initialize a state to control the initial render of QuestionsOverlay
   const [initialLoad, setInitialLoad] = useState(true);
 
+  useEffect(() => {
+    // Set initialLoad to false after the component has mounted
+    setInitialLoad(false);
+  }, []);
+
   // Additional state to track if the fade-out animation has completed
   const [fadeOutCompleted, setFadeOutCompleted] = useState(true);
 
@@ -178,10 +183,10 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 
   // Determine the overlay class for QuestionsOverlay
   const overlayClass = isMobile 
-  ? `${styles.questionsOverlay} ${styles.mobileHide}` 
-  : initialLoad || (newMessages.length === 0 && !isMobile)
-    ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}`
-    : `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}`;
+    ? `${styles.questionsOverlay} ${styles.mobileHide}` 
+    : initialLoad || (newMessages.length === 0 && !isMobile)
+      ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}`
+      : (!initialLoad && newMessages.length > 0) ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}` : '';
 
   // Determine the overlay class for QuestionsOverlayLeftPanel
   const leftPanelOverlayClass = showLeftPanelOverlay 
@@ -213,10 +218,10 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           
             {/* Apply overlayClass only when there are no messages and not on mobile */}
             {newMessages.length === 0 && !isMobile && (
-              <div className={overlayClass}>
-                <QuestionsOverlay onSubmit={handleUserInputSubmit}  showOverlay={showLeftPanelOverlay} />
-              </div>
-            )}
+            <div className={overlayClass}>
+              <QuestionsOverlay onSubmit={handleUserInputSubmit} showOverlay={showLeftPanelOverlay} />
+            </div>
+          )}
         </div>
 
         <div>  {/* ChatPanel component */}
