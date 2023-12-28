@@ -152,9 +152,9 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   // Determine the overlay class based on the condition
   const overlayClass = isMobile 
   ? `${styles.questionsOverlay} ${styles.mobileHide}` 
-  : lastMessageRole === 'assistant' && newMessages.length > 0
-    ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}`
-    : `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}`;
+  : (!newMessages.length || lastMessageRole !== 'assistant') 
+    ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}`
+    : `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}`;
 
   return (
     <>

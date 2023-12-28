@@ -16,7 +16,7 @@ export function EmptyScreen({ onSubmit }: QuestionsOverlayProps) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const overlayClass = `${styles.questionsOverlay} ${isMobile ? styles.mobileHide : ''}`;
+  const overlayClass = isMobile ? `${styles.questionsOverlay} ${styles.mobileHide}` : styles.questionsOverlay;
   const fadeInOutClass = showOverlay ? styles.fadeIn : styles.fadeOut;
 
   return (
@@ -38,11 +38,7 @@ export function EmptyScreen({ onSubmit }: QuestionsOverlayProps) {
       </div>
       
       <div className={`${overlayClass} ${fadeInOutClass}`}>
-        {isMobile ? (
-          <QuestionsOverlayLeftPanel onSubmit={onSubmit} />
-        ) : (
-          <QuestionsOverlay onSubmit={onSubmit} />
-        )}
+        {(isMobile) && (<QuestionsOverlayLeftPanel onSubmit={onSubmit} />)}
       </div>
     </div>
   );
