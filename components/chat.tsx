@@ -195,7 +195,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
                 <ChatList messages={newMessages} />
               </>
             ) : (
-              <EmptyScreen onSubmit={handleUserInputSubmit}/>
+              <EmptyScreen onSubmit={handleUserInputSubmit} showOverlay={showLeftPanelOverlay} />
             )}
           </div>
           

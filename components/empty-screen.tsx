@@ -1,8 +1,8 @@
-import { QuestionsOverlay, QuestionsOverlayLeftPanel, QuestionsOverlayProps } from './question-overlay';
+import { QuestionsOverlay, QuestionsOverlayLeftPanel, QuestionsOverlayPropsLeftPanel } from './question-overlay';
 import { useState, useEffect } from 'react';
 import styles from './QuestionsOverlay.module.css';
 
-export function EmptyScreen({ onSubmit }: QuestionsOverlayProps) {
+export function EmptyScreen({ onSubmit }: QuestionsOverlayPropsLeftPanel) {
   const [isMobile, setIsMobile] = useState(false);
   const [showOverlay, setShowOverlay] = useState(true); // Reintroduced state
 
@@ -38,7 +38,7 @@ export function EmptyScreen({ onSubmit }: QuestionsOverlayProps) {
       </div>
       
       <div className={`${overlayClass} ${fadeInOutClass}`}>
-        {(isMobile) && (<QuestionsOverlayLeftPanel onSubmit={onSubmit} />)}
+        {(isMobile) && (<QuestionsOverlayLeftPanel onSubmit={onSubmit} showOverlay={showOverlay} />)}
       </div>
     </div>
   );
