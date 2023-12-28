@@ -119,6 +119,11 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     setShowEmptyScreen(false);
     setShowMiddlePanelOverlay(false);
 
+    // Set a timeout to hide the EmptyScreen after the fade-out animation
+    setTimeout(() => {
+      setShowEmptyScreen(false);
+    }, 300); // This should match the duration of the fade-out animation
+
     // Delay the fade-in of ChatList
     setTimeout(() => {
       setShowChatList(true); // Show ChatList with fade-in
