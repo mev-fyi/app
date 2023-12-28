@@ -1,16 +1,13 @@
 import { QuestionsOverlay, QuestionsOverlayLeftPanel, QuestionsOverlayProps } from './question-overlay';
 import { useState, useEffect } from 'react';
-import styles from './QuestionsOverlay.module.css'; // Import the CSS module
+import styles from './QuestionsOverlay.module.css';
 
 export function EmptyScreen({ onSubmit }: QuestionsOverlayProps) {
   const [isMobile, setIsMobile] = useState(false);
-  const [showOverlay, setShowOverlay] = useState(true);
 
   useEffect(() => {
     const handleResize = () => {
-      const mobile = window.innerWidth <= 768;
-      setIsMobile(mobile);
-      setShowOverlay(!mobile); // Automatically show the overlay on desktop
+      setIsMobile(window.innerWidth <= 768);
     };
 
     handleResize();
@@ -18,8 +15,10 @@ export function EmptyScreen({ onSubmit }: QuestionsOverlayProps) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const overlayClass = `${styles.questionsOverlay} ${showOverlay ? styles.fadeIn : styles.fadeOut}`;
-  
+  // Use separate classes for mobile and desktop to maintain the layout
+  const overlayClass = isMobile ? `${styles.questionsOverlay} ${styles.mobileHide}` : styles.questionsOverlay;
+  const fadeInOutClass = isMobile ? styles.fadeIn : styles.fadeOut; // Apply fade in/out based on mobile view
+
   return (
     <div className="mx-auto max-w-2xl px-4">
       <div className="rounded-lg border bg-background p-8 text-left">
@@ -38,7 +37,7 @@ export function EmptyScreen({ onSubmit }: QuestionsOverlayProps) {
         )}
       </div>
       
-      <div className={overlayClass}>
+      <div className={`${overlayClass} ${fadeInOutClass}`}>
         {isMobile ? (
           <QuestionsOverlayLeftPanel onSubmit={onSubmit} />
         ) : (
