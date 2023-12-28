@@ -68,12 +68,21 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 
  // Effect to toggle visibility of metadataContainer based on structuredMetadataEntries
  useEffect(() => {
-    if (structuredMetadataEntries.length > 0) {
-      setMetadataContainerVisible(true); // Fade in when there's new content
-    } else {
-      setMetadataContainerVisible(false); // Fade out otherwise
-    }
-  }, [structuredMetadataEntries]);
+  if (structuredMetadataEntries.length > 0) {
+    // Fade out first
+    setMetadataContainerVisible(false);
+
+    // Set a timeout to fade back in
+    const timer = setTimeout(() => {
+      setMetadataContainerVisible(true);
+    }, 1000); // Adjust this duration to match your CSS transition
+
+    return () => clearTimeout(timer);
+  } else {
+    setMetadataContainerVisible(false); // Fade out otherwise
+  }
+}, [structuredMetadataEntries]);
+
 
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
