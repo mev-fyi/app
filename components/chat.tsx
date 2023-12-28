@@ -49,6 +49,9 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   const [newMessages, setMessages] = useState(initialMessages || []);
   const [lastMessageRole, setLastMessageRole] = useState('assistant');
 
+  // Initialize a state to control the initial render of QuestionsOverlay
+  const [initialLoad, setInitialLoad] = useState(true);
+
   const [isMetadataVisible, setIsMetadataVisible] = useState(false);
   const toggleMetadataVisibility = () => {
     setIsMetadataVisible(!isMetadataVisible);
@@ -150,11 +153,18 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   // {isMetadataVisible ? 'Back to Chat' : 'Show Top Sources'}
   // </button>
   // Determine the overlay class based on the condition
+  // Adjust the logic to include initial load state
   const overlayClass = isMobile 
-  ? `${styles.questionsOverlay} ${styles.mobileHide}` 
-  : (!newMessages.length || lastMessageRole !== 'assistant') 
-    ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}`
-    : `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}`;
+    ? `${styles.questionsOverlay} ${styles.mobileHide}` 
+    : initialLoad || (lastMessageRole === 'assistant' && newMessages.length > 0)
+      ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}`
+      : `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}`;
+
+  useEffect(() => {
+    // Change initialLoad to false after the component mounts
+    setInitialLoad(false);
+  }, []);
+
 
   return (
     <>
@@ -162,14 +172,14 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   
         {/* Left empty panel */}
         <div className={styles.leftPanel}>
-        <div className={overlayClass}>
+          {/* Apply a different logic or class for QuestionsOverlayLeftPanel if needed */}
           {lastMessageRole === 'assistant' && newMessages.length > 0 && (
-            <QuestionsOverlayLeftPanel onSubmit={handleUserInputSubmit} />
+            <div className={isMobile ? overlayClass : ''}> {/* Apply class conditionally */}
+              <QuestionsOverlayLeftPanel onSubmit={handleUserInputSubmit} />
+            </div>
           )}
         </div>
-      </div>
 
-  
         <div className={styles.middlePanel}>  {/* Middle panel for chatlist and prompt form */}
           <div className={styles.chatListContainer}> {/* Chatlist container with scrollable content */}
             {messages.length ? (
@@ -181,11 +191,12 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             )}
           </div>
           
-          <div className={overlayClass}>
-            {(newMessages.length === 0 && !isMobile) && (
-              <QuestionsOverlay onSubmit={handleUserInputSubmit} />
+            {/* Apply overlayClass only when there are no messages and not on mobile */}
+            {newMessages.length === 0 && !isMobile && (
+              <div className={overlayClass}>
+                <QuestionsOverlay onSubmit={handleUserInputSubmit} />
+              </div>
             )}
-          </div>
         </div>
 
         <div>  {/* ChatPanel component */}
