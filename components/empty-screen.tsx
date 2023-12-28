@@ -1,27 +1,24 @@
-import { UseChatHelpers } from 'ai/react'
-import { QuestionList } from './questions-list'
-import { QuestionsOverlay, QuestionsOverlayProps, QuestionsOverlayLeftPanel } from './question-overlay';
+import { QuestionsOverlay, QuestionsOverlayLeftPanel, QuestionsOverlayProps } from './question-overlay';
 import { useState, useEffect } from 'react';
 import styles from './QuestionsOverlay.module.css'; // Import the CSS module
 
-//   <QuestionList onSubmit={onSubmit} />
-
-export function EmptyScreen({onSubmit}: QuestionsOverlayProps) {
+export function EmptyScreen({ onSubmit }: QuestionsOverlayProps) {
   const [isMobile, setIsMobile] = useState(false);
-  const [showOverlay, setShowOverlay] = useState(true); // New state to control overlay visibility
+  const [showOverlay, setShowOverlay] = useState(true);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-      setShowOverlay(true); // Show overlay when screen size changes
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+      setShowOverlay(!mobile); // Automatically show the overlay on desktop
     };
 
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  
-  const overlayClass = `${styles.questionsOverlay} ${isMobile ? styles.mobileHide : showOverlay ? styles.fadeIn : styles.fadeOut}`;
+
+  const overlayClass = `${styles.questionsOverlay} ${showOverlay ? styles.fadeIn : styles.fadeOut}`;
   
   return (
     <div className="mx-auto max-w-2xl px-4">
@@ -42,8 +39,10 @@ export function EmptyScreen({onSubmit}: QuestionsOverlayProps) {
       </div>
       
       <div className={overlayClass}>
-        {(isMobile || showOverlay) && (
+        {isMobile ? (
           <QuestionsOverlayLeftPanel onSubmit={onSubmit} />
+        ) : (
+          <QuestionsOverlay onSubmit={onSubmit} />
         )}
       </div>
     </div>
