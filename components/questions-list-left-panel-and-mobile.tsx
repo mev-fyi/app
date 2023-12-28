@@ -7,9 +7,10 @@ import { IconRecycle } from '@/components/ui/icons'
 
 interface QuestionListProps {
   onSubmit: (value: string) => void; // Function to submit the chat input
+  showOverlay: boolean; // Add this prop to control the visibility
 }
   
-export const QuestionListLeftPanel: React.FC<QuestionListProps> = ({ onSubmit }) => {
+export const QuestionListLeftPanel: React.FC<QuestionListProps> = ({ onSubmit, showOverlay }) => {
   const [selectedQuestions, setSelectedQuestions] = useState<string[]>([]);
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -97,14 +98,17 @@ export const QuestionListLeftPanel: React.FC<QuestionListProps> = ({ onSubmit })
   // ♻️ {/* Recycle emoji */}
   return (
     <div className={styles.questionsContainer}>
-      <Button
-        variant="outline"
-        className={`${styles.shuffleButton} rounded-full w-9 h-9`}
-        onClick={pickRandomQuestions}
-        backgroundImage='/19-_Loading-512-2320706499.png'
-      >
-        <span className="sr-only">Shuffle Questions</span>
-      </Button>
+      {/* Conditionally render the shuffle button based on showOverlay */}
+      {showOverlay && (
+        <Button
+          variant="outline"
+          className={`${styles.shuffleButton} rounded-full w-9 h-9`}
+          onClick={pickRandomQuestions}
+          backgroundImage='/19-_Loading-512-2320706499.png'
+        >
+          <span className="sr-only">Shuffle Questions</span>
+        </Button>
+      )}
 
       <div className={styles.questionsOverlayLeftPanel}>
         {selectedQuestions.map((question, index) => (
@@ -113,7 +117,6 @@ export const QuestionListLeftPanel: React.FC<QuestionListProps> = ({ onSubmit })
             className={styles.questionBoxLeftPanel}
             onClick={() => handleQuestionSelect(question)} // Move the onClick to the questionBox div
           >
-            {/* Remove the Button wrapping around the question */}
             <div className={cn(styles.question, styles.fullWidthButton)}>
               {question}
             </div>

@@ -163,16 +163,14 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   // </button>
   // Determine the overlay class based on the condition
   // Adjust the logic to include initial load state
-  
 
 
-
-   // Determine the overlay class for QuestionsOverlay
-   const overlayClass = isMobile 
-   ? `${styles.questionsOverlay} ${styles.mobileHide}` 
-   : initialLoad || (newMessages.length === 0 && !isMobile)
-     ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}`
-     : `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}`;
+  // Determine the overlay class for QuestionsOverlay
+  const overlayClass = isMobile 
+  ? `${styles.questionsOverlay} ${styles.mobileHide}` 
+  : initialLoad || (newMessages.length === 0 && !isMobile)
+    ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}`
+    : `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}`;
 
   // Determine the overlay class for QuestionsOverlayLeftPanel
   const leftPanelOverlayClass = showLeftPanelOverlay 
@@ -185,7 +183,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         <div className={styles.leftPanel}>
           <div className={leftPanelOverlayClass}>
             {showLeftPanelOverlay && (
-              <QuestionsOverlayLeftPanel onSubmit={handleUserInputSubmit} />
+              <QuestionsOverlayLeftPanel onSubmit={handleUserInputSubmit} showOverlay={showLeftPanelOverlay} />
             )}
           </div>
         </div>

@@ -7,6 +7,12 @@ export interface QuestionsOverlayProps {
   onSubmit: (value: string) => void; // Function to submit the chat input
 }
 
+export interface QuestionsOverlayPropsLeftPanel {
+  onSubmit: (value: string) => void; // Function to submit the chat input
+  showOverlay: boolean; // Add this prop to control the visibility
+}
+
+
 // Inside QuestionsOverlay component
 export const QuestionsOverlay: React.FC<QuestionsOverlayProps> = ({ onSubmit }) => {
     return (
@@ -17,10 +23,10 @@ export const QuestionsOverlay: React.FC<QuestionsOverlayProps> = ({ onSubmit }) 
   };
 
   // Inside QuestionsOverlay component
-export const QuestionsOverlayLeftPanel: React.FC<QuestionsOverlayProps> = ({ onSubmit }) => {
+export const QuestionsOverlayLeftPanel: React.FC<QuestionsOverlayPropsLeftPanel> = ({ onSubmit, showOverlay }) => {
   return (
     <div className={styles.questionsOverlayLeftPanel}>
-      <QuestionListLeftPanel onSubmit={onSubmit} />
+      <QuestionListLeftPanel onSubmit={onSubmit} showOverlay={showOverlay} />
     </div>
   );
 };
