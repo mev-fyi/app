@@ -11,6 +11,8 @@ interface QuestionListProps {
   
 export const QuestionList: React.FC<QuestionListProps> = ({ onSubmit }) => {
   const [selectedQuestions, setSelectedQuestions] = useState<string[]>([]);
+  // Add state for fade-out completion
+  const [fadeOutCompleted, setFadeOutCompleted] = useState(true);
 
   const questionRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -54,8 +56,14 @@ export const QuestionList: React.FC<QuestionListProps> = ({ onSubmit }) => {
     const selectedQuestions = selectedIndices.map(index => questions[index]);
   
     setSelectedQuestions(selectedQuestions);
+    setFadeOutCompleted(false); // Start fade-out when new questions are picked
   }, [questions]);
   
+  // Add onAnimationEnd handler
+  const onAnimationEnd = () => {
+    setFadeOutCompleted(true); // Set to true when fade-out completes
+  };
+
   useEffect(() => {
     pickRandomQuestions();
   }, [pickRandomQuestions]);
@@ -66,14 +74,17 @@ export const QuestionList: React.FC<QuestionListProps> = ({ onSubmit }) => {
 
   return (
     <div className={styles.questionsContainer}>
-      <Button
-        variant="outline"
-        className={`${styles.shuffleButton} rounded-full w-9 h-9`}
-        onClick={pickRandomQuestions}
-        backgroundImage='/19-_Loading-512-2320706499.png'
-      >
-        <span className="sr-only">Shuffle Questions</span>
-      </Button>
+      {fadeOutCompleted ? (
+        <Button
+          variant="outline"
+          className={`${styles.shuffleButton} rounded-full w-9 h-9`}
+          onClick={pickRandomQuestions}
+          backgroundImage='/19-_Loading-512-2320706499.png'
+          onAnimationEnd={onAnimationEnd}
+        >
+          <span className="sr-only">Shuffle Questions</span>
+        </Button>
+      ) : null}
 
       <div className={styles.questionsOverlay}>
         {selectedQuestions.map((question, index) => (

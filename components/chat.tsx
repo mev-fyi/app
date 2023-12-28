@@ -54,6 +54,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 
   // Additional state to track if the fade-out animation has completed
   const [fadeOutCompleted, setFadeOutCompleted] = useState(true);
+  const [fadeOutOverlayCompleted, setFadeOutOverlayCompleted] = useState(true);
 
   const [isMetadataVisible, setIsMetadataVisible] = useState(false);
   const toggleMetadataVisibility = () => {
@@ -99,6 +100,20 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   const onAnimationEnd = () => {
     if (!showLeftPanelOverlay) {
       setFadeOutCompleted(true); // Animation completed
+    }
+  };
+
+  // Update this useEffect to handle animation completion
+  useEffect(() => {
+    if (newMessages.length === 0 && !isMobile) {
+      setFadeOutOverlayCompleted(false); // Start the fade-out animation
+    }
+  }, [newMessages, isMobile]);
+
+  // Handler for animation end of QuestionsOverlay
+  const onOverlayAnimationEnd = () => {
+    if (newMessages.length === 0 && !isMobile) {
+      setFadeOutOverlayCompleted(true); // Set to true when fade-out completes
     }
   };
 
@@ -212,11 +227,11 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           </div>
           
             {/* Apply overlayClass only when there are no messages and not on mobile */}
-            {newMessages.length === 0 && !isMobile && (
-              <div className={overlayClass}>
+            {(!isMobile && fadeOutOverlayCompleted) || (newMessages.length === 0 && !isMobile) ? (
+              <div className={overlayClass} onAnimationEnd={onOverlayAnimationEnd}>
                 <QuestionsOverlay onSubmit={handleUserInputSubmit} />
               </div>
-            )}
+            ) : null}
         </div>
 
         <div>  {/* ChatPanel component */}

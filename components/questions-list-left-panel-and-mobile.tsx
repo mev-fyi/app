@@ -13,6 +13,9 @@ interface QuestionListProps {
 export const QuestionListLeftPanel: React.FC<QuestionListProps> = ({ onSubmit, showOverlay }) => {
   const [selectedQuestions, setSelectedQuestions] = useState<string[]>([]);
   const [isMobile, setIsMobile] = useState(false);
+  // State to track if the fade-out animation has completed for the shuffle button
+  const [fadeOutCompleted, setFadeOutCompleted] = useState(true);
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -95,20 +98,28 @@ export const QuestionListLeftPanel: React.FC<QuestionListProps> = ({ onSubmit, s
     onSubmit(question); // Call the onSubmit function with the selected question
   };
 
+  // Handler for animation end
+  const onAnimationEnd = () => {
+    if (!showOverlay) {
+      setFadeOutCompleted(true); // Set to true when fade-out completes
+    }
+  };
+
   // ♻️ {/* Recycle emoji */}
   return (
     <div className={styles.questionsContainer}>
-      {/* Conditionally render the shuffle button based on showOverlay */}
-      {showOverlay && (
-        <Button
-          variant="outline"
-          className={`${styles.shuffleButton} rounded-full w-9 h-9`}
-          onClick={pickRandomQuestions}
-          backgroundImage='/19-_Loading-512-2320706499.png'
-        >
-          <span className="sr-only">Shuffle Questions</span>
-        </Button>
-      )}
+    {/* Render the shuffle button conditionally based on fadeOutCompleted */}
+    {showOverlay || !fadeOutCompleted ? (
+      <Button
+        variant="outline"
+        className={`${styles.shuffleButton} rounded-full w-9 h-9`}
+        onClick={pickRandomQuestions}
+        backgroundImage='/19-_Loading-512-2320706499.png'
+        onAnimationEnd={onAnimationEnd} // Add animation end handler
+      >
+        <span className="sr-only">Shuffle Questions</span>
+      </Button>
+    ) : null}
 
       <div className={styles.questionsOverlayLeftPanel}>
         {selectedQuestions.map((question, index) => (
