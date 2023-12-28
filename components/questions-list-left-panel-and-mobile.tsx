@@ -96,27 +96,22 @@ export const QuestionListLeftPanel: React.FC<QuestionListProps> = ({ onSubmit, s
   };
 
   // ♻️ {/* Recycle emoji */}
-  return (
-    <div className={styles.questionsContainer}>
-      {/* Conditionally render the shuffle button based on showOverlay */}
-      {showOverlay && (
-        <Button
-          variant="outline"
-          className={`${styles.shuffleButton} rounded-full w-9 h-9`}
-          onClick={pickRandomQuestions}
-          backgroundImage='/19-_Loading-512-2320706499.png'
-        >
-          <span className="sr-only">Shuffle Questions</span>
-        </Button>
-      )}
+ // Apply fade effect to the questionsContainer based on showOverlay
+  const containerClass = showOverlay ? `${styles.questionsContainer} ${styles.fadeIn}` : `${styles.questionsContainer} ${styles.fadeOut}`;
 
+  return (
+    <div className={containerClass}>
+      <Button
+        variant="outline"
+        className={`${styles.shuffleButton} rounded-full w-9 h-9`}
+        onClick={pickRandomQuestions}
+        backgroundImage='/19-_Loading-512-2320706499.png'
+      >
+        <span className="sr-only">Shuffle Questions</span>
+      </Button>
       <div className={styles.questionsOverlayLeftPanel}>
         {selectedQuestions.map((question, index) => (
-          <div 
-            key={index} 
-            className={styles.questionBoxLeftPanel}
-            onClick={() => handleQuestionSelect(question)} // Move the onClick to the questionBox div
-          >
+          <div key={index} className={styles.questionBoxLeftPanel} onClick={() => handleQuestionSelect(question)}>
             <div className={cn(styles.question, styles.fullWidthButton)}>
               {question}
             </div>

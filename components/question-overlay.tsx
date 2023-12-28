@@ -5,6 +5,7 @@ import styles from './QuestionsOverlay.module.css'; // Import the CSS module
 
 export interface QuestionsOverlayProps {
   onSubmit: (value: string) => void; // Function to submit the chat input
+  showOverlay: boolean; // Add this prop to control the visibility
 }
 
 export interface QuestionsOverlayPropsLeftPanel {
@@ -14,10 +15,10 @@ export interface QuestionsOverlayPropsLeftPanel {
 
 
 // Inside QuestionsOverlay component
-export const QuestionsOverlay: React.FC<QuestionsOverlayProps> = ({ onSubmit }) => {
+export const QuestionsOverlay: React.FC<QuestionsOverlayProps> = ({ onSubmit, showOverlay }) => {
     return (
       <div className={styles.questionsOverlay}>
-        <QuestionList onSubmit={onSubmit} />
+        <QuestionList onSubmit={onSubmit} showOverlay={showOverlay} />
       </div>
     );
   };

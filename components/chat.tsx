@@ -214,7 +214,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             {/* Apply overlayClass only when there are no messages and not on mobile */}
             {newMessages.length === 0 && !isMobile && (
               <div className={overlayClass}>
-                <QuestionsOverlay onSubmit={handleUserInputSubmit} />
+                <QuestionsOverlay onSubmit={handleUserInputSubmit}  showOverlay={showLeftPanelOverlay} />
               </div>
             )}
         </div>

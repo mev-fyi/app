@@ -7,9 +7,10 @@ import { IconRecycle } from '@/components/ui/icons'
 
 interface QuestionListProps {
     onSubmit: (value: string) => void; // Function to submit the chat input
+    showOverlay: boolean; // Add this prop to control the visibility
 }
   
-export const QuestionList: React.FC<QuestionListProps> = ({ onSubmit }) => {
+export const QuestionList: React.FC<QuestionListProps> = ({ onSubmit, showOverlay }) => {
   const [selectedQuestions, setSelectedQuestions] = useState<string[]>([]);
 
   const questionRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -64,8 +65,11 @@ export const QuestionList: React.FC<QuestionListProps> = ({ onSubmit }) => {
     onSubmit(question); // Call the onSubmit function with the selected question
   };
 
+  // Apply fade effect to the questionsContainer based on showOverlay
+  const containerClass = showOverlay ? `${styles.questionsContainer} ${styles.fadeIn}` : `${styles.questionsContainer} ${styles.fadeOut}`;
+
   return (
-    <div className={styles.questionsContainer}>
+    <div className={containerClass}>
       <Button
         variant="outline"
         className={`${styles.shuffleButton} rounded-full w-9 h-9`}
@@ -77,12 +81,7 @@ export const QuestionList: React.FC<QuestionListProps> = ({ onSubmit }) => {
 
       <div className={styles.questionsOverlay}>
         {selectedQuestions.map((question, index) => (
-          <div 
-            key={index} 
-            className={styles.questionBox}
-            onClick={() => handleQuestionSelect(question)} // Move the onClick to the questionBox div
-          >
-            {/* Remove the Button wrapping around the question */}
+          <div key={index} className={styles.questionBox} onClick={() => handleQuestionSelect(question)}>
             <div className={cn(styles.question, styles.fullWidthButton)}>
               {question}
             </div>
