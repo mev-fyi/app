@@ -95,6 +95,13 @@
   z-index: 10; /* Ensure it's above other content */
   padding-right: 10%;
   padding-left: 5%;
+  opacity: 0; /* Start with invisible */
+  transition: opacity 0.5s ease-in-out; /* Smooth transition for opacity */
+}
+
+/* Class to make metadataContainer visible */
+.metadataContainerVisible {
+  opacity: 1; /* Fully visible */
 }
 
 /* Style for the button to toggle the metadata view */

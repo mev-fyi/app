@@ -61,9 +61,19 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   const [fadeOutCompleted, setFadeOutCompleted] = useState(true);
 
   const [isMetadataVisible, setIsMetadataVisible] = useState(false);
+  const [metadataContainerVisible, setMetadataContainerVisible] = useState(false);
   const toggleMetadataVisibility = () => {
     setIsMetadataVisible(!isMetadataVisible);
   };
+
+ // Effect to toggle visibility of metadataContainer based on structuredMetadataEntries
+ useEffect(() => {
+    if (structuredMetadataEntries.length > 0) {
+      setMetadataContainerVisible(true); // Fade in when there's new content
+    } else {
+      setMetadataContainerVisible(false); // Fade out otherwise
+    }
+  }, [structuredMetadataEntries]);
 
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
@@ -207,6 +217,10 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}` 
   : `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}`;
 
+  const metadataContainerClass = cn(styles.metadataContainer, {
+    [styles.metadataContainerVisible]: metadataContainerVisible,
+  });
+
   return (
     <>
       <div className={styles.layoutContainer}>
@@ -258,7 +272,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         {/* Right panel for metadata list */}
         <div className={`${styles.rightPanel} ${isMetadataVisible ? styles.metadataContainerActive : ''}`}>
           {/* Metadata section */}
-          <div className={styles.metadataContainer}>
+          <div className={metadataContainerClass}>
             
             {newMessages.length > 0 && ( // Only show metadataTitle if there are messages
               <div className={styles.metadataTitle}>Top Sources</div>
