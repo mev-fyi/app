@@ -84,6 +84,9 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   // State to control the visibility of QuestionsOverlayLeftPanel
   const [showLeftPanelOverlay, setShowLeftPanelOverlay] = useState(false);  
 
+  // New state for controlling the visibility of QuestionsOverlay
+  const [showMiddlePanelOverlay, setShowMiddlePanelOverlay] = useState(true);
+
   // Function to handle user input submission
   const handleUserInputSubmit = async (value: string) => {
     const newUserMessage: MetadataMessage = {
@@ -97,6 +100,9 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     setLastMessageRole('user');
     // Hide the QuestionsOverlayLeftPanel on user input
     setShowLeftPanelOverlay(false);
+    
+    // Hide the middle panel overlay on user input
+    setShowMiddlePanelOverlay(false);
     setFadeOutCompleted(false); // Animation starts, not yet completed
   };
   
@@ -191,10 +197,10 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 
   // Determine the overlay class for QuestionsOverlay
   const overlayClass = isMobile 
-  ? `${styles.questionsOverlay} ${styles.mobileHide}` 
-  : initialLoad || newMessages.length === 0
-    ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}`
-    : `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}`;
+    ? `${styles.questionsOverlay} ${styles.mobileHide}` 
+    : initialLoad || (newMessages.length === 0 && showMiddlePanelOverlay)
+      ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}`
+      : `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}`;
 
   // Determine the overlay class for QuestionsOverlayLeftPanel
   const leftPanelOverlayClass = showLeftPanelOverlay 
@@ -227,7 +233,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             {/* Apply overlayClass only when there are no messages and not on mobile */}
             {newMessages.length === 0 && !isMobile && (
             <div className={overlayClass}>
-              <QuestionsOverlay onSubmit={handleUserInputSubmit} showOverlay={showLeftPanelOverlay} />
+              <QuestionsOverlay onSubmit={handleUserInputSubmit} showOverlay={showMiddlePanelOverlay} />
             </div>
           )}
         </div>
