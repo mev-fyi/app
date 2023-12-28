@@ -52,6 +52,9 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   // Initialize a state to control the initial render of QuestionsOverlay
   const [initialLoad, setInitialLoad] = useState(true);
 
+  // Additional state to track if the fade-out animation has completed
+  const [fadeOutCompleted, setFadeOutCompleted] = useState(true);
+
   const [isMetadataVisible, setIsMetadataVisible] = useState(false);
   const toggleMetadataVisibility = () => {
     setIsMetadataVisible(!isMetadataVisible);
@@ -89,8 +92,16 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     setLastMessageRole('user');
     // Hide the QuestionsOverlayLeftPanel on user input
     setShowLeftPanelOverlay(false);
+    setFadeOutCompleted(false); // Animation starts, not yet completed
   };
   
+  // Add an animation end handler
+  const onAnimationEnd = () => {
+    if (!showLeftPanelOverlay) {
+      setFadeOutCompleted(true); // Animation completed
+    }
+  };
+
   // Update visibility of QuestionsOverlayLeftPanel based on message count and lastMessageRole
   useEffect(() => {
     // Show the overlay only if there are messages and the last message is from the assistant
@@ -179,12 +190,13 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 
   return (
     <>
-     <div className={styles.layoutContainer}>
+      <div className={styles.layoutContainer}>
         <div className={styles.leftPanel}>
-          <div className={leftPanelOverlayClass}>
-            {showLeftPanelOverlay && (
+          <div className={leftPanelOverlayClass} onAnimationEnd={onAnimationEnd}>
+            {/* Render conditionally based on fadeOutCompleted */}
+            {showLeftPanelOverlay || !fadeOutCompleted ? (
               <QuestionsOverlayLeftPanel onSubmit={handleUserInputSubmit} showOverlay={showLeftPanelOverlay} />
-            )}
+            ) : null}
           </div>
         </div>
 
