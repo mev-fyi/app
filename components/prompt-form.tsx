@@ -23,6 +23,13 @@ export interface PromptProps
   setMessages: (messages: MetadataMessage[]) => void;
   setStructuredMetadataEntries: (entries: any[]) => void; // Replace 'any[]' with a more specific type if available
   setLastMessageRole: (role: string) => void;
+  setShowTopSources: (value: boolean) => void;
+  setFadeOutCompleted: (value: boolean) => void;
+  setMetadataContainerVisible: (value: boolean) => void;
+  setShowLeftPanelOverlay: (value: boolean) => void;
+  setShowMiddlePanelOverlay: (value: boolean) => void;
+  setShowEmptyScreen: (value: boolean) => void;
+  setShowChatList: (value: boolean) => void;
 }
 
 export function PromptForm({
@@ -32,7 +39,14 @@ export function PromptForm({
   isLoading,
   setMessages,
   setStructuredMetadataEntries,
-  setLastMessageRole
+  setLastMessageRole,
+  setShowTopSources,
+  setFadeOutCompleted,
+  setMetadataContainerVisible,
+  setShowLeftPanelOverlay,
+  setShowMiddlePanelOverlay,
+  setShowEmptyScreen,
+  setShowChatList,
 }: PromptProps) {
   const { formRef, onKeyDown } = useEnterSubmit()
   const inputRef = React.useRef<HTMLTextAreaElement>(null)

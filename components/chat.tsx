@@ -42,15 +42,28 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   // Initialize a state to control the initial render of QuestionsOverlay
   const [initialLoad, setInitialLoad] = useState(true);
 
+  // Additional state to track if the fade-out animation has completed
+  const [fadeOutCompleted, setFadeOutCompleted] = useState(true);
+
+  const [metadataContainerVisible, setMetadataContainerVisible] = useState(false);
+
+  // State to control the visibility of QuestionsOverlayLeftPanel
+  const [showLeftPanelOverlay, setShowLeftPanelOverlay] = useState(false);  
+
+  // New state for controlling the visibility of QuestionsOverlay
+  const [showMiddlePanelOverlay, setShowMiddlePanelOverlay] = useState(true);
+
+  const [showEmptyScreen, setShowEmptyScreen] = useState(true);
+  const [showChatList, setShowChatList] = useState(false); // New state for ChatList visibility
+  const [isMobile, setIsMobile] = useState(false);
+
+
   useEffect(() => {
     // Set initialLoad to false after the component has mounted
     setInitialLoad(false);
   }, []);
 
-  // Additional state to track if the fade-out animation has completed
-  const [fadeOutCompleted, setFadeOutCompleted] = useState(true);
 
-  const [metadataContainerVisible, setMetadataContainerVisible] = useState(true);
 
  // Effect to toggle visibility of metadataContainer based on structuredMetadataEntries
  useEffect(() => {
@@ -63,12 +76,12 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
       // Set a timeout to fade out first
       timer1 = window.setTimeout(() => {
         setMetadataContainerVisible(false);
-      }, 300); // Adjust this duration to match your CSS transition
+      }, 500); // Adjust this duration to match your CSS transition
 
       // Set another timeout to fade back in
       timer2 = window.setTimeout(() => {
         setMetadataContainerVisible(true);
-      }, 600); // This starts after the first timer completes
+      }, 500); // This starts after the first timer completes
     }
 
     return () => {
@@ -78,7 +91,6 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   }, [structuredMetadataEntries]);
 
 
-  const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -94,14 +106,6 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // State to control the visibility of QuestionsOverlayLeftPanel
-  const [showLeftPanelOverlay, setShowLeftPanelOverlay] = useState(false);  
-
-  // New state for controlling the visibility of QuestionsOverlay
-  const [showMiddlePanelOverlay, setShowMiddlePanelOverlay] = useState(true);
-
-  const [showEmptyScreen, setShowEmptyScreen] = useState(true);
-  const [showChatList, setShowChatList] = useState(false); // New state for ChatList visibility
 
   // Function to handle user input submission
   const handleUserInputSubmit = async (value: string) => {

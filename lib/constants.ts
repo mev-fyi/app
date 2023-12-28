@@ -129,7 +129,7 @@ export const questions = [
     // "What is sharding?",
     // "What is Vitalik Buterin's stance on MEV?",
     // "What is danksharding?",
-    // "What's Eigenlayer?",
+    "What's Eigenlayer?",
     "Explain what is Eigenlayer's restaking in layman's terms",
     // "What are concrete applications of Eigenlayer's restaking system?",
     "How does Eigenlayer's restaking system differ from LIDO's value proposition?",
@@ -139,7 +139,7 @@ export const questions = [
     // "What the foundational design principles in building crypto technology?",
     "What is fair ordering?",
     // "What is WASM?",
-    // "What are 'ZK circuits'?",
+    "What are 'ZK circuits'?",
     // "What is Celestia?",
     "What do we refer to as: consensus, data availability layer, and execution layer respectively?",
     "What are merkle trees?",
@@ -164,6 +164,7 @@ export const questions = [
     // "What are the trade-offs for DeFi protocols to build on an L2 versus their on own app-chain on Cosmos?"
     "Give me an exhaustive understanding of execution tickets and block proposal right market",
     "Tell me everything you know about timing games in Ethereum",
+    "How does L3 and data availability layers like Celestia relate to one another and with respect to L2s?",
   ]
   
 

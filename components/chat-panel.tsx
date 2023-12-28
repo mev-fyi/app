@@ -40,6 +40,13 @@ export interface ChatPanelProps
   setMessages: (messages: MetadataMessage[]) => void;
   setStructuredMetadataEntries: (entries: any[]) => void; // Replace 'any[]' with a more specific type if available
   setLastMessageRole: (role: string) => void;
+  setShowTopSources: (value: boolean) => void;
+  setFadeOutCompleted: (value: boolean) => void;
+  setMetadataContainerVisible: (value: boolean) => void;
+  setShowLeftPanelOverlay: (value: boolean) => void;
+  setShowMiddlePanelOverlay: (value: boolean) => void;
+  setShowEmptyScreen: (value: boolean) => void;
+  setShowChatList: (value: boolean) => void;
 }
 
 export interface ChatPanelProps
@@ -59,6 +66,13 @@ export interface ChatPanelProps
   setMessages: (messages: MetadataMessage[]) => void;
   setStructuredMetadataEntries: (entries: any[]) => void; // Replace 'any[]' with a more specific type if available
   setLastMessageRole: (role: string) => void;
+  setShowTopSources: (value: boolean) => void;
+  setFadeOutCompleted: (value: boolean) => void;
+  setMetadataContainerVisible: (value: boolean) => void;
+  setShowLeftPanelOverlay: (value: boolean) => void;
+  setShowMiddlePanelOverlay: (value: boolean) => void;
+  setShowEmptyScreen: (value: boolean) => void;
+  setShowChatList: (value: boolean) => void;
 }
 
 export function ChatPanel({
@@ -73,7 +87,14 @@ export function ChatPanel({
   onSubmit,
   setMessages,
   setStructuredMetadataEntries,
-  setLastMessageRole
+  setLastMessageRole,
+  setShowTopSources,
+  setFadeOutCompleted,
+  setMetadataContainerVisible,
+  setShowLeftPanelOverlay,
+  setShowMiddlePanelOverlay,
+  setShowEmptyScreen,
+  setShowChatList
 }: ChatPanelProps) {
   const router = useRouter();
 
@@ -132,6 +153,13 @@ export function ChatPanel({
                   setStructuredMetadataEntries([]); // Resets the structured metadata
                   setLastMessageRole(''); // Resets the last message role
                   setInput(''); // Resets the input field
+                  setShowTopSources(false);
+                  setFadeOutCompleted(true);
+                  setMetadataContainerVisible(false);
+                  setShowLeftPanelOverlay(false);
+                  setShowMiddlePanelOverlay(true);
+                  setShowEmptyScreen(true);
+                  setShowChatList(false);
                   router.refresh();
                   router.push('/');
                 }}
@@ -168,6 +196,13 @@ export function ChatPanel({
               setMessages={setMessages}
               setStructuredMetadataEntries={setStructuredMetadataEntries}
               setLastMessageRole={setLastMessageRole}
+              setShowTopSources={setShowTopSources}
+              setFadeOutCompleted={setFadeOutCompleted}
+              setMetadataContainerVisible={setMetadataContainerVisible}
+              setShowLeftPanelOverlay={setShowLeftPanelOverlay}
+              setShowMiddlePanelOverlay={setShowMiddlePanelOverlay}
+              setShowEmptyScreen={setShowEmptyScreen}
+              setShowChatList={setShowChatList}
             />
           </div>
         </div>
