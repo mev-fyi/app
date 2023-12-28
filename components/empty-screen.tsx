@@ -8,21 +8,20 @@ import styles from './QuestionsOverlay.module.css'; // Import the CSS module
 
 export function EmptyScreen({onSubmit}: QuestionsOverlayProps) {
   const [isMobile, setIsMobile] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(true); // New state to control overlay visibility
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
+      setShowOverlay(true); // Show overlay when screen size changes
     };
 
-    // Set the initial value
     handleResize();
-
-    // Listen for window resize events
     window.addEventListener('resize', handleResize);
-
-    // Clean up
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-  const overlayClass = isMobile ? `${styles.questionsOverlay} ${styles.mobileHide}` : styles.questionsOverlay;
+  
+  const overlayClass = `${styles.questionsOverlay} ${isMobile ? styles.mobileHide : showOverlay ? styles.fadeIn : styles.fadeOut}`;
   
   return (
     <div className="mx-auto max-w-2xl px-4">
@@ -43,9 +42,9 @@ export function EmptyScreen({onSubmit}: QuestionsOverlayProps) {
       </div>
       
       <div className={overlayClass}>
-          {(isMobile) && (
-            <QuestionsOverlayLeftPanel onSubmit={onSubmit} />
-          )}
+        {(isMobile || showOverlay) && (
+          <QuestionsOverlayLeftPanel onSubmit={onSubmit} />
+        )}
       </div>
     </div>
   );
