@@ -288,7 +288,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         </div>
 
         {/* Right panel for metadata list */}
-        <div className={`${styles.rightPanel} ${isMetadataVisible ? styles.metadataContainerActive : ''}`}>
+        <div className={styles.rightPanel}>
           {/* Metadata section */}
           <div className={metadataContainerClass}>
             {/* Show "Top Sources" if showTopSources is true */}
