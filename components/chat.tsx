@@ -91,6 +91,13 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     setShowLeftPanelOverlay(false);
   };
   
+  // Update the visibility of QuestionsOverlayLeftPanel based on new assistant messages
+  useEffect(() => {
+    if (lastMessageRole === 'assistant' && newMessages.length > 0) {
+      setShowLeftPanelOverlay(true);
+    }
+  }, [lastMessageRole, newMessages]);
+
   // Create a ref for the end of the chat list
   const chatListEndRef = useRef<HTMLDivElement>(null);
 
@@ -158,12 +165,8 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   // Determine the overlay class based on the condition
   // Adjust the logic to include initial load state
   
-  // Update the display of QuestionsOverlayLeftPanel based on new assistant messages
-  useEffect(() => {
-    if (lastMessageRole === 'assistant' && newMessages.length > 0) {
-      setShowLeftPanelOverlay(true);
-    }
-  }, [lastMessageRole, newMessages]);
+
+
 
    // Determine the overlay class for QuestionsOverlay
    const overlayClass = isMobile 
@@ -177,7 +180,6 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}` 
     : `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}`;
 
-
   return (
     <>
         <div className={styles.layoutContainer}>
@@ -186,9 +188,9 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         <div className={styles.leftPanel}>
           {/* Apply leftPanelOverlayClass for QuestionsOverlayLeftPanel */}
           <div className={leftPanelOverlayClass}>
-          {showLeftPanelOverlay && (
-            <QuestionsOverlayLeftPanel onSubmit={handleUserInputSubmit} />
-          )}
+            {showLeftPanelOverlay && (
+              <QuestionsOverlayLeftPanel onSubmit={handleUserInputSubmit} />
+            )}
           </div>
         </div>
 
