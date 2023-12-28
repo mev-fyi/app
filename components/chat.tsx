@@ -282,6 +282,13 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             setMessages={setMessages}
             setStructuredMetadataEntries={setStructuredMetadataEntries}
             setLastMessageRole={setLastMessageRole}
+            setShowTopSources={setShowTopSources}
+            setFadeOutCompleted={setFadeOutCompleted}
+            setMetadataContainerVisible={setMetadataContainerVisible}
+            setShowLeftPanelOverlay={setShowLeftPanelOverlay}
+            setShowMiddlePanelOverlay={setShowMiddlePanelOverlay}
+            setShowEmptyScreen={setShowEmptyScreen}
+            setShowChatList={setShowChatList}
           />
         </div>
 
