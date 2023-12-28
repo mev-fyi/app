@@ -15,7 +15,7 @@ export const questions = [
     // "Can you tell me how the definition of MEV evolved over the years?",
     "What is MEV burn?",
     "What is account abstraction?",
-    "What is ERC-4337?",
+    "What is account abstraction (ERC-4337)?",
     "What is EIP-1559?",
     "How will account abstraction affect the MEV supply chain?",
     // "What is the difference between account abstraction and intents?",

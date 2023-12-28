@@ -14,6 +14,7 @@ import { cn } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
 import { MetadataMessage } from './chat'
 import { IconBroom } from '@/components/ui/icons'
+import './PromptFormStyles.css'; // Import the custom CSS file
 
 export interface PromptProps
   extends Pick<UseChatHelpers, 'input' | 'setInput'> {
@@ -58,38 +59,31 @@ export function PromptForm({
     }
   }, [])
 
-  return (
+    return (
     <form
       onSubmit={async e => {
         e.preventDefault()
-        if (!input?.trim()) {
-          return
-        }
+        if (!input?.trim()) return
         setInput('')
         await onSubmit(input)
       }}
       ref={formRef}
+      className="promptFormContainer" // Apply the custom CSS class
     >
-      <div className="relative flex max-h-60 w-full grow flex-col overflow-hidden px-2 sm:rounded-md sm:border sm:px-4 bg-black sm:bg-transparent">
-      <Textarea
+      <div className="relative flex w-full flex-col overflow-hidden px-2 sm:rounded-md sm:border bg-black sm:bg-transparent">
+        <Textarea
           ref={inputRef}
-          tabIndex={0}
           onKeyDown={onKeyDown}
-          rows={1}
           value={input}
           onChange={e => setInput(e.target.value)}
           placeholder="Send a message."
           spellCheck={false}
-          className="min-h-[60px] w-full resize-none py-[1.3rem] focus-within:outline-none text-base bg-black sm:bg-transparent"
+          className="w-full resize-none py-[1.3rem] focus-within:outline-none text-base"
         />
-        <div className="absolute right-0 top-4 sm:right-4">
+        <div className="absolute top-4 right-0 sm:right-4">
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button
-                type="submit"
-                size="icon"
-                disabled={isLoading || input === ''}
-              >
+              <Button type="submit" size="icon" disabled={isLoading || input === ''}>
                 <IconArrowElbow />
                 <span className="sr-only">Send message</span>
               </Button>

@@ -1,0 +1,10 @@
+.promptFormContainer {
+    max-height: calc(100vh - 120px - 100px);
+    width: 100%;
+    margin: auto;
+    padding: 50px 60px; /* This padding affects the width */
+    box-sizing: border-box;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  

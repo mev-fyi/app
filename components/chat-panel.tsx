@@ -173,7 +173,7 @@ export function ChatPanel({
           </Tooltip>
 
           {/* Prompt Form */}
-          <div className="flex-grow mx-auto" style={{ maxWidth: '850px' }}>
+          <div className="flex-grow mx-auto px-4 sm:px-15 lg:px-24">
             <PromptForm
               onSubmit={async value => {
                 // Step 3: When submitting, show the loading animation
