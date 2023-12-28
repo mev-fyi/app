@@ -4,6 +4,7 @@ import styles from './QuestionsOverlay.module.css';
 
 export function EmptyScreen({ onSubmit }: QuestionsOverlayProps) {
   const [isMobile, setIsMobile] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(true); // Reintroduced state
 
   useEffect(() => {
     const handleResize = () => {
@@ -15,9 +16,8 @@ export function EmptyScreen({ onSubmit }: QuestionsOverlayProps) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Use separate classes for mobile and desktop to maintain the layout
-  const overlayClass = isMobile ? `${styles.questionsOverlay} ${styles.mobileHide}` : styles.questionsOverlay;
-  const fadeInOutClass = isMobile ? styles.fadeIn : styles.fadeOut; // Apply fade in/out based on mobile view
+  const overlayClass = `${styles.questionsOverlay} ${isMobile ? styles.mobileHide : ''}`;
+  const fadeInOutClass = showOverlay ? styles.fadeIn : styles.fadeOut;
 
   return (
     <div className="mx-auto max-w-2xl px-4">

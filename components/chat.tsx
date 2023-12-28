@@ -153,8 +153,8 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   const overlayClass = isMobile 
   ? `${styles.questionsOverlay} ${styles.mobileHide}` 
   : lastMessageRole === 'assistant' && newMessages.length > 0
-    ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}` // Apply fade-in when conditions are met
-    : `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}`; // Apply fade-out otherwise
+    ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}`
+    : `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}`;
 
   return (
     <>
@@ -162,12 +162,13 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   
         {/* Left empty panel */}
         <div className={styles.leftPanel}>
-          <div className={overlayClass}>
+        <div className={overlayClass}>
           {lastMessageRole === 'assistant' && newMessages.length > 0 && (
             <QuestionsOverlayLeftPanel onSubmit={handleUserInputSubmit} />
           )}
         </div>
       </div>
+
   
         <div className={styles.middlePanel}>  {/* Middle panel for chatlist and prompt form */}
           <div className={styles.chatListContainer}> {/* Chatlist container with scrollable content */}
@@ -181,9 +182,9 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           </div>
           
           <div className={overlayClass}>
-          {(newMessages.length === 0 && !isMobile) && (
-            <QuestionsOverlay onSubmit={handleUserInputSubmit} />
-          )}
+            {(newMessages.length === 0 && !isMobile) && (
+              <QuestionsOverlay onSubmit={handleUserInputSubmit} />
+            )}
           </div>
         </div>
 
