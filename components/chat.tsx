@@ -46,6 +46,8 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 
   // State to hold structured metadata entries
   const [structuredMetadataEntries, setStructuredMetadataEntries] = useState<ParsedMetadataEntry[]>([]);
+  // State to control the visibility of "Top Sources" title
+  const [showTopSources, setShowTopSources] = useState(false);
   const [newMessages, setMessages] = useState(initialMessages || []);
   const [lastMessageRole, setLastMessageRole] = useState('assistant');
 
@@ -69,6 +71,8 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
  // Effect to toggle visibility of metadataContainer based on structuredMetadataEntries
  useEffect(() => {
   if (structuredMetadataEntries.length > 0) {
+    setShowTopSources(true); // Show "Top Sources" once there are entries
+
     // Fade out first
     setMetadataContainerVisible(false);
 
@@ -280,16 +284,15 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 
         {/* Right panel for metadata list */}
         <div className={`${styles.rightPanel} ${isMetadataVisible ? styles.metadataContainerActive : ''}`}>
-          {/* Metadata section */}
+          {/* "Top Sources" title */}
+          {showTopSources && (
+            <div className={styles.metadataTitle}>Top Sources</div>
+          )}
+
+          {/* Metadata list section */}
           <div className={metadataContainerClass}>
-            
-            {newMessages.length > 0 && ( // Only show metadataTitle if there are messages
-              <div className={styles.metadataTitle}>Top Sources</div>
-            )}
-            
             <MetadataList entries={structuredMetadataEntries} />
-        </div>
-      
+          </div>
 
         </div>
       </div>
