@@ -89,7 +89,7 @@ export function ChatPanel({
         {isLoading && (
           <div className="text-center my-4">
             <StyledClipLoader
-              size={35}
+              size={25}
               color="#007bff"
               loading={true}
             />

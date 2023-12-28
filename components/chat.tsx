@@ -20,6 +20,7 @@ import { Input } from './ui/input'
 import { toast } from 'react-hot-toast'
 import MetadataList from '@/components/metadata-list';
 import styles from './ChatListContainer.module.css'; // Import the CSS module
+import QuestionsOverlayStyles from './QuestionsOverlay.module.css'; // Import the CSS module
 import { QuestionsOverlay, QuestionsOverlayLeftPanel } from './question-overlay';
 import { ParsedMetadataEntry } from 'lib/types';
 
@@ -69,7 +70,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const overlayClass = isMobile ? `${styles.questionsOverlay} ${styles.mobileHide}` : styles.questionsOverlay;
+  
 
   // Function to handle user input submission
   const handleUserInputSubmit = async (value: string) => {
@@ -148,6 +149,13 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   // <button onClick={toggleMetadataVisibility} className={styles.toggleMetadataButton}>
   // {isMetadataVisible ? 'Back to Chat' : 'Show Top Sources'}
   // </button>
+  // Determine the overlay class based on the condition
+  const overlayClass = isMobile 
+  ? `${styles.questionsOverlay} ${styles.mobileHide}` 
+  : lastMessageRole === 'assistant' && newMessages.length > 0
+    ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}` // Apply fade-in when conditions are met
+    : `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}`; // Apply fade-out otherwise
+
   return (
     <>
         <div className={styles.layoutContainer}>
@@ -155,11 +163,11 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         {/* Left empty panel */}
         <div className={styles.leftPanel}>
           <div className={overlayClass}>
-            {lastMessageRole === 'assistant' && newMessages.length > 0 && (
-              <QuestionsOverlayLeftPanel onSubmit={handleUserInputSubmit} />
-            )}
-          </div>
-        </div>  
+          {lastMessageRole === 'assistant' && newMessages.length > 0 && (
+            <QuestionsOverlayLeftPanel onSubmit={handleUserInputSubmit} />
+          )}
+        </div>
+      </div>
   
         <div className={styles.middlePanel}>  {/* Middle panel for chatlist and prompt form */}
           <div className={styles.chatListContainer}> {/* Chatlist container with scrollable content */}
