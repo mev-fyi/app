@@ -74,7 +74,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   }, []);
 
   // State to control the visibility of QuestionsOverlayLeftPanel
-  const [showLeftPanelOverlay, setShowLeftPanelOverlay] = useState(true);  
+  const [showLeftPanelOverlay, setShowLeftPanelOverlay] = useState(false);  
 
   // Function to handle user input submission
   const handleUserInputSubmit = async (value: string) => {
