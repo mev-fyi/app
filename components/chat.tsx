@@ -50,28 +50,32 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   // Additional state to track if the fade-out animation has completed
   const [fadeOutCompleted, setFadeOutCompleted] = useState(true);
 
-  const [isMetadataVisible, setIsMetadataVisible] = useState(false);
   const [metadataContainerVisible, setMetadataContainerVisible] = useState(false);
-  const toggleMetadataVisibility = () => {
-    setIsMetadataVisible(!isMetadataVisible);
-  };
 
  // Effect to toggle visibility of metadataContainer based on structuredMetadataEntries
  useEffect(() => {
-  if (structuredMetadataEntries.length > 0) {
-    setShowTopSources(true); // Show "Top Sources" once there are entries
+    let timer1: number | null = null;
+    let timer2: number | null = null;
 
-    // Fade out first
-    setMetadataContainerVisible(false);
+    if (structuredMetadataEntries.length > 0) {
+      setShowTopSources(true); // Show "Top Sources" once there are entries
 
-    // Set a timeout to fade back in
-    const timer = setTimeout(() => {
-      setMetadataContainerVisible(true);
-    }, 300); // Adjust this duration to match your CSS transition
+      // Set a timeout to fade out first
+      timer1 = window.setTimeout(() => {
+        setMetadataContainerVisible(false);
+      }, 300); // Adjust this duration to match your CSS transition
 
-    return () => clearTimeout(timer);
-  }
-}, [structuredMetadataEntries]);
+      // Set another timeout to fade back in
+      timer2 = window.setTimeout(() => {
+        setMetadataContainerVisible(true);
+      }, 600); // This starts after the first timer completes
+    }
+
+    return () => {
+      if (timer1 !== null) clearTimeout(timer1);
+      if (timer2 !== null) clearTimeout(timer2);
+    };
+  }, [structuredMetadataEntries]);
 
 
   const [isMobile, setIsMobile] = useState(false);
@@ -203,15 +207,6 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
       }
     })
 
-
-  {/* To be placed right on top of ChatPanel */}
-  // <button onClick={toggleMetadataVisibility} className={styles.toggleMetadataButton}>
-  // {isMetadataVisible ? 'Back to Chat' : 'Show Top Sources'}
-  // </button>
-  // Determine the overlay class based on the condition
-  // Adjust the logic to include initial load state
-
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setInitialLoad(false);
@@ -291,16 +286,12 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         <div className={styles.rightPanel}>
           {/* Metadata section */}
           <div className={metadataContainerClass}>
-            {/* Show "Top Sources" if showTopSources is true */}
             {showTopSources && (
               <div className={styles.metadataTitle}>Top Sources</div>
             )}
-
-            {/* MetadataList component */}
             <MetadataList entries={structuredMetadataEntries} />
           </div>
         </div>
-            
     </>
   )
 }
