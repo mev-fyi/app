@@ -266,8 +266,8 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
               <QuestionsOverlay onSubmit={handleUserInputSubmit} showOverlay={showMiddlePanelOverlay} />
             </div>
           )}
-        </div>
-
+        
+        
         <div>  {/* ChatPanel component */}
           <ChatPanel
             id={id}
@@ -291,6 +291,10 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             setShowChatList={setShowChatList}
           />
         </div>
+        
+        </div>
+
+
 
         {/* Right panel for metadata list */}
         <div className={`${styles.rightPanel}`}>
