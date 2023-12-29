@@ -85,11 +85,11 @@
 }
 
 .scrollableContainer {
-  max-height: calc(100vh - 140px);
+  max-height: calc(100vh - 440px);
   overflow-y: auto;
   flex-grow: 1; /* Allows the container to grow and take available space */
   /* ... other styles ... */
-  padding-bottom: 300px;
+  /*padding-bottom: 500px;*/
 }
 
 /* ChatList container with scrollable content */

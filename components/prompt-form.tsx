@@ -68,7 +68,6 @@ export function PromptForm({
         await onSubmit(input)
       }}
       ref={formRef}
-      className="promptFormContainer" // Apply the custom CSS class
     >
       <div className="relative flex w-full flex-col overflow-hidden px-2 sm:rounded-md sm:border bg-black sm:bg-transparent">
         <Textarea
