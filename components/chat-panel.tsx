@@ -118,7 +118,7 @@ export function ChatPanel({
           </div>
         )}
 
-        <div className="flex h-4 items-center justify-center">
+          <div className={styles.stopGeneratingButtonContainer}>
           {/* Show 'Stop generating' button when loading, otherwise show 'Regenerate response' */}
           {isLoading ? (
             <Button

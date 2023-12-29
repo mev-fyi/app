@@ -69,24 +69,23 @@
 }
 
 .chatPanel {
-  margin-top: auto; /* Pushes ChatPanel to the bottom */
-  position: fixed; /* Fixed at the bottom of the viewport */
+  position: absolute; /* Changed from fixed to absolute */
   bottom: 0;
-  width: 900px; /* Set the width of the ChatPanel */
-  box-sizing: border-box; /* Include padding and border in the element's width */
-  left: 0; /* Align the panel to the left side of the viewport */
-  right: 0; /* Align the panel to the right side of the viewport */
-  margin-left: auto; /* Center the panel */
-  margin-right: auto; /* Center the panel */
+  width: 100%; /* Take the full width */
+  max-width: 850px; /* Ensures it matches the width of .middlePanel */
+  left: 0; /* Align with the left edge of .middlePanel */
+  right: 0; /* Align with the right edge of .middlePanel */
+  margin-left: auto; /* Center the panel horizontally */
+  margin-right: auto; /* Center the panel horizontally */
+  background-color: #000; /* Set the desired background color */
 }
 
+/* Content within chatPanel for alignment and spacing */
 .chatPanelContent {
   display: flex;
   align-items: center;
-  max-width: 850px; /* Match the width of the middlePanel */
-  width: 100%; /* Take the full width if less than max-width */
-  padding: 0 20px; /* Padding inside the chatPanel */
-  box-sizing: border-box;
+  justify-content: space-between; /* This will add space between broom button and prompt form */
+  padding: 0 20px; /* Padding inside the chatPanel, adjust as needed */
 }
 
 .broomButton {
@@ -98,17 +97,24 @@
   border-radius: 9999px; /* Fully rounded like Tailwind's 'rounded-full' */
   background-color: #000000; /* Black background color */
   padding: 0; /* No padding like Tailwind's 'p-0' */
-  margin-right: 10px; /* Some space between this button and the next element */
   cursor: pointer; /* To indicate that it's clickable */
+  margin-right: 20px; /* Adjust spacing as needed */
 }
 
 .promptFormContainer {
   flex-grow: 1; /* Allow the prompt form to take up the remaining space */
+  padding-right: 60px; /* Adjust padding to avoid overlap with enter button */
+  background-color: #000; /* Set the desired background color, if it should be black */
+  width: 100%; /* Ensure the form takes the full width */
+  margin-right: 20px; /* Space before the 'Send' button */
+}
+
+.stopGeneratingButtonContainer {
   display: flex;
-  flex-direction: column;
-  width: 100%; /* Use the full width provided by the chatPanelContent */
-  padding-right: 60px; /* Adjust this value to ensure text doesn't go under the "enter" button */
-  background: transparent; /* No background color, showing whatever is behind */
+  height: 1rem; /* Adjust as needed */
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem; /* Space below the button */
 }
 
 /* For WebKit (Chrome, Safari, newer versions of Opera): */
