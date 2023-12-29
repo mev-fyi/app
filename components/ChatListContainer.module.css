@@ -133,7 +133,6 @@
 
 .sendButtonContainer {
   position: absolute;
-  top: 1.0rem;
   right: 0;
   right: -10px; /* Extend the text area by 10px to the right */
 }

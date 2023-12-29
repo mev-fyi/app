@@ -25,9 +25,12 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
     <ol className={styles.metadataList}>
       {entries.map((entry, index) => (
         <li key={index} className={styles.metadataListItem}>
-          <div className={styles.metadataThumbnail}>
-            <img src={getThumbnailUrl(entry)} alt={entry.title} />
-          </div>
+          {/* Make the thumbnail clickable by wrapping it in an anchor tag */}
+          <a href={entry.link} target="_blank" rel="noopener noreferrer" className={styles.metadataThumbnailLink}>
+            <div className={styles.metadataThumbnail}>
+              <img src={getThumbnailUrl(entry)} alt={entry.title} />
+            </div>
+          </a>
           <div className={styles.metadataContent}>
             <div className={styles.metadataTop}>
               <a href={entry.link} target="_blank" rel="noopener noreferrer" className={styles.metadataListLink}>

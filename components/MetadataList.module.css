@@ -72,6 +72,23 @@
   object-fit: contain;
 }
 
+/* Add a new class for the thumbnail link */
+.metadataThumbnailLink {
+  flex-shrink: 0;
+  width: 200px;
+  height: 150px;
+  margin-right: 20px;
+  overflow: hidden;
+  display: block; /* Ensure the link is block-level to contain the thumbnail */
+}
+
+/* Ensure the image remains styled appropriately */
+.metadataThumbnailLink img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 
 .metadataContent {
   flex-grow: 1;
