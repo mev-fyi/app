@@ -97,7 +97,7 @@
   width: 2rem; /* Increase the width for more space */
   height: 2rem; /* Increase the height to match the width */
   cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
-  margin-bottom: 0.5rem; /* Reduced bottom margin */
+  margin-bottom: 0.3rem; /* Reduced bottom margin */
 }
 
 .promptFormContainer {
@@ -132,6 +132,7 @@
 }
 
 .sendButtonContainer {
+  margin-top: 0.3rem;
   position: absolute;
   right: 0;
   right: -10px; /* Extend the text area by 10px to the right */
