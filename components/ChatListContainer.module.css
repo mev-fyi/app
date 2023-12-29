@@ -30,34 +30,85 @@
 }
 
 /* Middle panel for chatlist and prompt form */
-.middlePanel {
-  position: absolute; /* Position absolute to place it over the layoutContainer */
-  left: 50%; /* Position to the center of the layoutContainer */
-  transform: translateX(-50%); /* Translate to the left by half its width to center */
-  width: calc(100% - 600px); /* Subtracting total width of left and right panels */
-  max-width: 850px; /* Maximum width */
-  min-width: 500px; /* Minimum width to ensure it doesn't get too small */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-sizing: border-box;
-  overflow-y: auto; /* Ensure this is not overridden somewhere else */
-  overflow-x: hidden;
-  padding-bottom: 100px;
-  padding-top: 10px;
-}
+/*.middlePanel {
+/*  position: absolute; /* Position absolute to place it over the layoutContainer */
+/*  left: 50%; /* Position to the center of the layoutContainer */
+/*  transform: translateX(-50%); /* Translate to the left by half its width to center */
+/*  width: calc(100% - 600px); /* Subtracting total width of left and right panels */
+/*  max-width: 850px; /* Maximum width */
+/*  min-width: 500px; /* Minimum width to ensure it doesn't get too small */
+/*  display: flex;
+/*  flex-direction: column;
+/*  justify-content: space-between;
+/*  box-sizing: border-box;
+/*  overflow-y: auto; /* Ensure this is not overridden somewhere else */
+/*  overflow-x: hidden;
+/*  padding-bottom: 100px;
+/*  padding-top: 10px;
+/*}
 
 /* Chatlist container with scrollable content */
+/*.chatListContainer {
+  /*max-height: calc(100vh - 120px - 100px);
+  /*width: 100%;
+  /*margin: auto;
+  /*padding: 50px 60px;
+  /*box-sizing: border-box;
+  /*overflow-y: auto; /* Ensures vertical scroll */
+  /*overflow-x: hidden;
+  /*padding-bottom: 20px;
+  /*padding-top: 60px;
+/*}
+
+
+/* Middle panel for chatlist and prompt form */
+.middlePanel {
+  flex: 1; /* Allows the panel to grow */
+  min-width: 500px; /* Minimum width to ensure it doesn't get too small */
+  max-width: 40%; /* Adjusted maximum width */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* This pushes the ChatPanel to the bottom */
+  box-sizing: border-box;
+  padding: 60px; /* Adjust padding as needed */
+  position: relative; /* Needed for absolute positioning within */
+  box-sizing: border-box;
+}
+
+/* Container for the chat list and chat panel to ensure they align properly */
+.chatListAndPanelContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Take the full width of the middle panel */
+  max-width: 850px; /* Maximum width, keep this consistent with .middlePanel */
+  margin: auto; /* Center within the middle panel */
+}
+
+.scrollableContainer {
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+  flex-grow: 1; /* Allows the container to grow and take available space */
+  /* ... other styles ... */
+}
+
+/* ChatList container with scrollable content */
 .chatListContainer {
   max-height: calc(100vh - 120px - 100px);
-  width: 100%;
-  margin: auto;
-  padding: 50px 60px;
-  box-sizing: border-box;
   overflow-y: auto; /* Ensures vertical scroll */
-  overflow-x: hidden;
-  padding-bottom: 20px;
-  padding-top: 60px;
+  /* Remove padding if it causes misalignment with the ChatPanel */
+}
+
+.chatPanel {
+  margin-top: auto; /* Pushes ChatPanel to the bottom */
+  position: fixed; /* Fixed at the bottom of the viewport */
+  bottom: 0;
+  left: 50%; /* Centered in the viewport */
+  transform: translateX(-50%); /* Adjust for the width of the chat panel */
+  max-width: calc(40% - 120px); /* 40% is the width of the middlePanel, minus the total horizontal padding */
+  width: calc(100% - 120px); /* 100% of middlePanel width minus left and right padding */
+  padding-left: 60px; /* Aligns content within ChatPanel */
+  padding-right: 60px;
+  box-sizing: border-box;
 }
 
 /* For WebKit (Chrome, Safari, newer versions of Opera): */

@@ -247,51 +247,56 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           </div>
         </div>
 
-        <div className={styles.middlePanel}>  {/* Middle panel for chatlist and prompt form */}
-          <div className={styles.chatListContainer}>
-            {showChatList ? (
+        <div className={styles.middlePanel}> {/* Middle panel for chatlist and chat panel */}
+
+          {/* Scrollable container for ChatList or EmptyScreen */}
+          <div className={styles.scrollableContainer}>
+            {/* Conditional rendering for ChatList */}
+            {showChatList && (
               <div className={QuestionsOverlayStyles.fadeIn}>
                 <ChatList messages={newMessages} />
               </div>
-            ) : (
-              <div className={showEmptyScreen ? '' : QuestionsOverlayStyles.hidden}>
+            )}
+
+            {/* Conditional rendering for EmptyScreen */}
+            {!showChatList && showEmptyScreen && (
+              <div className={QuestionsOverlayStyles.fadeIn}>
                 <EmptyScreen onSubmit={handleUserInputSubmit} showOverlay={showMiddlePanelOverlay} isVisible={showEmptyScreen} />
+              </div>
+            )}
+
+            {/* Conditional rendering for QuestionsOverlay */}
+            {newMessages.length === 0 && !isMobile && (
+              <div className={`${overlayClass} ${showMiddlePanelOverlay ? QuestionsOverlayStyles.fadeIn : QuestionsOverlayStyles.fadeOut}`}>
+                <QuestionsOverlay onSubmit={handleUserInputSubmit} showOverlay={showMiddlePanelOverlay} />
               </div>
             )}
           </div>
           
-          {/* Apply overlayClass only when there are no messages and not on mobile */}
-          {newMessages.length === 0 && !isMobile && (
-            <div className={`${overlayClass} ${showMiddlePanelOverlay ? QuestionsOverlayStyles.fadeIn : QuestionsOverlayStyles.fadeOut}`}>
-              <QuestionsOverlay onSubmit={handleUserInputSubmit} showOverlay={showMiddlePanelOverlay} />
-            </div>
-          )}
-        
-        
-        <div>  {/* ChatPanel component */}
-          <ChatPanel
-            id={id}
-            isLoading={isLoading}
-            stop={stop}
-            append={append}
-            reload={reload}
-            messages={newMessages}
-            input={input}
-            setInput={setInput}
-            onSubmit={handleUserInputSubmit} // Pass the function to ChatPanel
-            setMessages={setMessages}
-            setStructuredMetadataEntries={setStructuredMetadataEntries}
-            setLastMessageRole={setLastMessageRole}
-            setShowTopSources={setShowTopSources}
-            setFadeOutCompleted={setFadeOutCompleted}
-            setMetadataContainerVisible={setMetadataContainerVisible}
-            setShowLeftPanelOverlay={setShowLeftPanelOverlay}
-            setShowMiddlePanelOverlay={setShowMiddlePanelOverlay}
-            setShowEmptyScreen={setShowEmptyScreen}
-            setShowChatList={setShowChatList}
-          />
-        </div>
-        
+          {/* Fixed ChatPanel at the bottom */}
+          <div className={styles.chatPanel}>
+            <ChatPanel
+              id={id}
+              isLoading={isLoading}
+              stop={stop}
+              append={append}
+              reload={reload}
+              messages={newMessages}
+              input={input}
+              setInput={setInput}
+              onSubmit={handleUserInputSubmit}
+              setMessages={setMessages}
+              setStructuredMetadataEntries={setStructuredMetadataEntries}
+              setLastMessageRole={setLastMessageRole}
+              setShowTopSources={setShowTopSources}
+              setFadeOutCompleted={setFadeOutCompleted}
+              setMetadataContainerVisible={setMetadataContainerVisible}
+              setShowLeftPanelOverlay={setShowLeftPanelOverlay}
+              setShowMiddlePanelOverlay={setShowMiddlePanelOverlay}
+              setShowEmptyScreen={setShowEmptyScreen}
+              setShowChatList={setShowChatList}
+            />
+          </div>
         </div>
 
 

@@ -1,10 +1,10 @@
+/* Update the .promptFormContainer to fit within the ChatPanel properly */
 .promptFormContainer {
-    max-height: calc(100vh - 120px - 100px);
-    width: 100%;
-    margin: auto;
-    padding: 50px 60px; /* This padding affects the width */
-    box-sizing: border-box;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-  
+  max-height: 100%; /* Allow it to take up the remaining space */
+  width: 100%; /* Ensure it matches the parent width */
+  box-sizing: border-box; /* Keep padding inside the width */
+  overflow-y: auto; /* Scroll if necessary */
+  overflow-x: hidden; /* Prevent horizontal overflow */
+  padding: 20px 0; /* Adjust padding to match ChatPanel and ensure form is visible */
+  /* Remove margin:auto; and padding: 50px 60px; if it's still there */
+}
