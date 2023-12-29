@@ -100,6 +100,7 @@
   padding: 0; /* No padding required if the width is already set */
   background: transparent; /* Ensure there's no background */
   position: relative; /* To position the send button absolutely within this container */
+  padding-top: 1.5rem; /* Increase top padding to move away from the button */
   padding-bottom: 1.5rem; /* Increase bottom padding for more space below the text input */
 }
 
@@ -113,7 +114,7 @@
   align-items: center; /* Center items vertically */
   background-color: transparent; /* No background color */
   position: relative; /* To position the send button absolutely within this container */
-  /*margin-top: 1rem; /* Add margin at the top for spacing */
+  margin-top: 1rem; /* Add margin at the top for spacing */
   margin-bottom: 1rem; /* Add margin at the bottom for spacing */
 }
 
