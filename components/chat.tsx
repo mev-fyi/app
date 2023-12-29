@@ -157,8 +157,13 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 
   useEffect(() => {
     if (lastMessageRole === 'assistant' && chatListEndRef.current) {
-      // Always scroll to the latest element (e.g., the last message or a specific 'end' div at the bottom of the chat list)
-      chatListEndRef.current.scrollIntoView({ behavior: 'smooth' });
+      // Scroll to the bottom of the chat list
+      const scrollHeight = chatListEndRef.current.scrollHeight;
+      const height = chatListEndRef.current.clientHeight;
+      // Calculates the maximum scroll top position by subtracting the client height from the scroll height.
+      const maxScrollTop = scrollHeight - height;
+      // Sets the scrollTop property to this maximum value, which scrolls the content to the bottom.
+      chatListEndRef.current.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
     }
   }, [newMessages, lastMessageRole]);
  
