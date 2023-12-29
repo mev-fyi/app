@@ -37,7 +37,7 @@ export function EmptyScreen({ onSubmit, isVisible }: QuestionsOverlayPropsLeftPa
   const fadeInOutClass = isVisible ? styles.fadeIn : styles.fadeOut;
   
   return (
-    <div className={`mx-auto max-w-2xl px-4 ${fadeInOutClass}`}>
+    <div className={`mx-auto max-w-2xl px-4 mb-12 ${fadeInOutClass}`}> {/* Updated margin-bottom class */}
       <div className="rounded-lg border bg-background p-8 text-left">
         <h1 className="mb-2 text-lg font-semibold text-white">
           mev.fyi is the Maximal Extractable Value (MEV) research chatbot.

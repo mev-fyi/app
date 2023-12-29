@@ -67,7 +67,7 @@
   margin-right: auto;
   width: 850px;
   max-width: 850px; /* Match the width of .middlePanel */
-  padding-left: calc(3rem + 40px); /* Increase by 5px for the broom button to fully show */
+  padding-left: calc(3rem + 45px); /* Increased by 5px for the broom button */
   padding-right: calc(1rem - 35px); /* Adjust if necessary for chat list content alignment */
 }
 
@@ -143,15 +143,16 @@
   justify-content: center;
   padding: 0.5rem 1rem;
   z-index: 11;
-  margin-top: 0; /* Remove additional top margin to prevent overlapping */
 }
 
 .stopGeneratingButtonContainer {
-  position: relative;
+  position: absolute;
+  top: 3rem; /* Adjust this value to place the button right below the spinner */
+  width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 0.5rem; /* Reduce space between loading spinner and this container */
-  margin-bottom: 0.5rem; /* Reduce space between this container and the prompt area */
+  z-index: 10;
+  /* Removed the margin-bottom to bring the button closer to the spinner */
 }
 
 
