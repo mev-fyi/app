@@ -156,13 +156,11 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   const chatListEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (lastMessageRole === 'assistant' && chatListEndRef.current) {
-      // We aim to scroll to the bottom of the chat list container
-      const chatListElement = chatListEndRef.current;
-      const scrollPosition = chatListElement.scrollHeight - chatListElement.clientHeight;
-      chatListElement.scrollTop = scrollPosition;
+    if (chatListEndRef.current) {
+      chatListEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [newMessages, lastMessageRole]);
+  }, [newMessages]);
+ 
 
   const { messages, append, reload, stop, isLoading, input, setInput } =
   useChat({
@@ -253,8 +251,8 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           <div className={styles.scrollableContainer}>
             {/* Conditional rendering for ChatList */}
             {showChatList && (
-              <div ref={chatListEndRef} className={QuestionsOverlayStyles.fadeIn}>
-                <ChatList messages={newMessages} />
+              <div className={QuestionsOverlayStyles.fadeIn}>
+                <ChatList ref={chatListEndRef} messages={newMessages} />
               </div>
             )}
 
