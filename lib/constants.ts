@@ -72,7 +72,7 @@ export const questions = [
     
     "Give me videos about Trusted Execution Environment (TEE)",
     "Give me videos about Order Flow Auctions (OFAs)",
-    "Give me videos about intents",
+    // "Give me videos about intents",   // NOTE 2023-12-29: no longer works with reranking since we penalise youtube videos and we do not retrieve enough chunks
     // "Give me videos discussing Uniswap v4",
     
     "What's an automated market maker (AMM)?",
