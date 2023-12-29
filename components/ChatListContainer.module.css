@@ -29,37 +29,6 @@
   left: 50px;
 }
 
-/* Middle panel for chatlist and prompt form */
-/*.middlePanel {
-/*  position: absolute; /* Position absolute to place it over the layoutContainer */
-/*  left: 50%; /* Position to the center of the layoutContainer */
-/*  transform: translateX(-50%); /* Translate to the left by half its width to center */
-/*  width: calc(100% - 600px); /* Subtracting total width of left and right panels */
-/*  max-width: 850px; /* Maximum width */
-/*  min-width: 500px; /* Minimum width to ensure it doesn't get too small */
-/*  display: flex;
-/*  flex-direction: column;
-/*  justify-content: space-between;
-/*  box-sizing: border-box;
-/*  overflow-y: auto; /* Ensure this is not overridden somewhere else */
-/*  overflow-x: hidden;
-/*  padding-bottom: 100px;
-/*  padding-top: 10px;
-/*}
-
-/* Chatlist container with scrollable content */
-/*.chatListContainer {
-  /*max-height: calc(100vh - 120px - 100px);
-  /*width: 100%;
-  /*margin: auto;
-  /*padding: 50px 60px;
-  /*box-sizing: border-box;
-  /*overflow-y: auto; /* Ensures vertical scroll */
-  /*overflow-x: hidden;
-  /*padding-bottom: 20px;
-  /*padding-top: 60px;
-/*}
-
 
 /* Middle panel for chatlist and prompt form */
 .middlePanel {
@@ -103,7 +72,7 @@
   margin-top: auto; /* Pushes ChatPanel to the bottom */
   position: fixed; /* Fixed at the bottom of the viewport */
   bottom: 0;
-  width: 850px; /* Set the width of the ChatPanel */
+  width: 900px; /* Set the width of the ChatPanel */
   box-sizing: border-box; /* Include padding and border in the element's width */
   left: 0; /* Align the panel to the left side of the viewport */
   right: 0; /* Align the panel to the right side of the viewport */
@@ -111,6 +80,36 @@
   margin-right: auto; /* Center the panel */
 }
 
+.chatPanelContent {
+  display: flex;
+  align-items: center;
+  max-width: 850px; /* Match the width of the middlePanel */
+  width: 100%; /* Take the full width if less than max-width */
+  padding: 0 20px; /* Padding inside the chatPanel */
+  box-sizing: border-box;
+}
+
+.broomButton {
+  display: flex; /* Flexbox display like Tailwind's 'flex' */
+  align-items: center; /* Centers items along the cross axis like Tailwind's 'items-center' */
+  justify-content: center; /* Centers items along the main axis like Tailwind's 'justify-center' */
+  height: 2rem; /* Height 8 like Tailwind's 'h-8' */
+  width: 2rem; /* Width 8 like Tailwind's 'w-8' */
+  border-radius: 9999px; /* Fully rounded like Tailwind's 'rounded-full' */
+  background-color: #000000; /* Black background color */
+  padding: 0; /* No padding like Tailwind's 'p-0' */
+  margin-right: 10px; /* Some space between this button and the next element */
+  cursor: pointer; /* To indicate that it's clickable */
+}
+
+.promptFormContainer {
+  flex-grow: 1; /* Allow the prompt form to take up the remaining space */
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Use the full width provided by the chatPanelContent */
+  padding-right: 60px; /* Adjust this value to ensure text doesn't go under the "enter" button */
+  background: transparent; /* No background color, showing whatever is behind */
+}
 
 /* For WebKit (Chrome, Safari, newer versions of Opera): */
 .chat-list-container::-webkit-scrollbar {

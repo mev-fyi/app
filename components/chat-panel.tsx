@@ -16,6 +16,7 @@ import {
   TooltipTrigger
 } from '@/components/ui/tooltip'
 import { useRouter } from 'next/navigation'
+import styles from './ChatListContainer.module.css'; // Import the CSS module
 
 const StyledClipLoader = styled(ClipLoader)`
   display: block;
@@ -103,7 +104,7 @@ export function ChatPanel({
 
 
   return (
-    <div className="fixed inset-x-0 bottom-0 sm:mt-4 sm:mr-4 sm:ml-4">
+    <div className={styles.chatPanel}>
       <ButtonScrollToBottom />
       <div className="mx-auto sm:max-w-2xl sm:px-4">
         {/* Loader positioned above the button */}
@@ -142,7 +143,7 @@ export function ChatPanel({
           )}
         </div>
         {/* Broom button and Prompt Form Container */}
-        <div>
+        <div className={styles.chatPanelContent}>
           {/* Broom button */}
           <Tooltip>
             <TooltipTrigger asChild>
@@ -163,7 +164,7 @@ export function ChatPanel({
                   router.refresh();
                   router.push('/');
                 }}
-                className="flex items-center justify-center h-8 w-8 rounded-full bg-background p-0"
+                className={styles.broomButton}
               >
                 🧹 {/* Broom emoji */}
                 <span className="sr-only">New Chat</span>
@@ -173,7 +174,7 @@ export function ChatPanel({
           </Tooltip>
 
           {/* Prompt Form */}
-          <div>
+          <div className={styles.promptFormContainer}>
             <PromptForm
               onSubmit={async value => {
                 // Step 3: When submitting, show the loading animation
