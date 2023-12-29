@@ -164,7 +164,7 @@ export const questions = [
     // "What are the trade-offs for DeFi protocols to build on an L2 versus their on own app-chain on Cosmos?"
     "Give me an exhaustive understanding of execution tickets and block proposal right market",
     "Tell me everything you know about timing games in Ethereum",
-    "How does L3 and data availability layers like Celestia relate to one another and with respect to L2s?",
+    "How does L2s, L3s and 'data availability layers' like Celestia relate to one another?",
   ]
   
 
