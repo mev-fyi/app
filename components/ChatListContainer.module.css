@@ -114,7 +114,7 @@
   align-items: center;
   background-color: transparent;
   position: relative;
-  margin-top: 3rem; /* Space below the 'Stop Generating' button */
+  margin-top: 7rem; /* Space below the 'Stop Generating' button */
   margin-bottom: 0.5rem; /* Reduced bottom margin */
 }
 
@@ -153,6 +153,7 @@
   display: flex;
   justify-content: center;
   z-index: 10;
+  bottom:4 rem;
 }
 
 
