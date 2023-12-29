@@ -72,60 +72,47 @@
 }
 
 
+/* ChatPanel fixed at the bottom */
 .chatPanel {
   position: fixed;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 850px;
-  max-width: 850px; /* Ensures it matches the width of .middlePanel */
+  width: 850px; /* Set the width to match the chat list width */
   box-sizing: border-box;
   z-index: 10;
 }
 
+/* Inner content of ChatPanel for alignment */
 .chatPanelContent {
   display: flex;
   align-items: center;
-  padding: 0; /* Adjust padding as needed */
-  width: 850px;
-  max-width: 850px; /* Ensures it matches the width of .middlePanel */
-  margin: 0 auto; /* This will center the content if it's narrower than the viewport */
+  justify-content: flex-start; /* Align items to the start */
+  padding: 0 1rem; /* Padding inside the chatPanel */
 }
 
 .broomButton {
-  flex-shrink: 0; /* Ensures the broom button does not shrink */
-  height: 2rem;
-  width: 2rem;
-  border-radius: 9999px;
-  background-color: #000000;
-  padding: 0;
-  margin-right: 15px; /* Adjust space between broom button and prompt form */
+  margin-right: 15px; /* Space between broom button and prompt form */
 }
 
 .promptFormContainer {
   flex-grow: 1; /* Take up remaining space */
-  padding: 0 10px 0 0; /* Adjust padding to avoid overlap with enter button */
-  background: transparent;
+  padding: 0; /* No padding required if the width is already set */
+  background: transparent; /* Ensure there's no background */
 }
 
 .promptForm {
-  display: flex;
-  width: 850px;
-  max-width: 850px; /* Ensures it matches the width of .middlePanel */
+  width: calc(100% - 2rem); /* Full width minus padding and broom button width */
 }
 
 .promptFormInner {
-  position: relative;
   display: flex;
-  width: 850px;
-  max-width: 850px; /* Ensures it matches the width of .middlePanel */
-  background-color: transparent;
+  width: 100%; /* Take up full width of .promptForm */
+  background-color: transparent; /* No background color */
 }
 
 .promptTextarea {
-  width: 850px;
-  max-width: 850px; /* Ensures it matches the width of .middlePanel */
-  resize: none;
+  width: 100%; /* Take up full width */
   padding: 1.3rem 0;
   outline: none;
   font-size: 1rem;
@@ -140,9 +127,6 @@
 }
 
 .stopGeneratingButtonContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin-bottom: 10px; /* Space below the button */
 }
 

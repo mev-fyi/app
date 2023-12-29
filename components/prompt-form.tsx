@@ -14,7 +14,7 @@ import { cn } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
 import { MetadataMessage } from './chat'
 import { IconBroom } from '@/components/ui/icons'
-import './ChatListContainer.module.css'; // Import the custom CSS file
+import styles from './ChatListContainer.module.css'; // Import the CSS module
 
 export interface PromptProps
   extends Pick<UseChatHelpers, 'input' | 'setInput'> {
@@ -68,9 +68,9 @@ export function PromptForm({
         await onSubmit(input);
       }}
       ref={formRef}
-      className="promptForm"
+      className={styles.promptForm}
     >
-      <div className="promptFormInner">
+      <div className={styles.promptFormInner}>
         <Textarea
           ref={inputRef}
           onKeyDown={onKeyDown}
@@ -78,9 +78,9 @@ export function PromptForm({
           onChange={e => setInput(e.target.value)}
           placeholder="Send a message."
           spellCheck={false}
-          className="promptTextarea"
+          className={styles.promptTextarea}
         />
-        <div className="sendButtonContainer">
+        <div className={styles.sendButtonContainer}>
           <Tooltip>
             <TooltipTrigger asChild>
               <Button type="submit" size="icon" disabled={isLoading || input === ''}>
