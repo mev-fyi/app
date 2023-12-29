@@ -66,69 +66,65 @@
   margin-left: auto;
   margin-right: auto;
   width: 850px;
-  max-width: 850px; /* Ensures it matches the width of .middlePanel */
-  padding-left: calc(3rem + 10px); /* Adjust the additional pixels as needed */
-  
-  /* Align the 'Send a message' text with the chat list content */
-  /* If the chat list content has padding, subtract that value from the right padding here */
-  padding-right: calc(1rem - 10px); /* Adjust the padding of chat list content as needed */
+  max-width: 850px; /* Match the width of .middlePanel */
+  padding-left: calc(3rem + 20px); /* Increase right alignment */
+  padding-right: calc(1rem - 10px); /* Adjust if necessary for chat list content alignment */
 }
-
 
 .chatPanel {
   position: fixed;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(850px - 10px); /* Subtract the added left padding from the total width */
+  width: calc(850px - 20px); /* Adjust width for right alignment */
   box-sizing: border-box;
   z-index: 10;
 }
 
-/* Inner content of ChatPanel for alignment */
 .chatPanelContent {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Align items to the start */
-  padding: 0 1rem; /* Padding inside the chatPanel */
+  justify-content: flex-start;
+  padding: 0 1rem; /* Adjust as needed */
 }
 
 .broomButton {
-  background-color: #000000; /* Black background color */
-  margin-right: 15px; /* Space between broom button and prompt form */
+  background-color: #000000;
+  border-radius: 50%;
+  margin-right: 15px;
 }
 
 .promptFormContainer {
-  flex-grow: 1; /* Take up remaining space */
-  padding: 0; /* No padding required if the width is already set */
-  background: transparent; /* Ensure there's no background */
-  position: relative; /* To position the send button absolutely within this container */
-  padding-top: 1.5rem; /* Increase top padding to move away from the button */
-  padding-bottom: 1.5rem; /* Increase bottom padding for more space below the text input */
+  flex-grow: 1;
+  padding: 0;
+  padding-top: 1rem; /* Reduced top padding */
+  padding-bottom: 1rem; /* Reduced bottom padding */
+  background: transparent;
+  position: relative;
 }
 
 .promptForm {
-  width: calc(100% - 4rem); /* Full width minus padding and broom button width */
+  width: calc(100% - 4rem);
 }
 
 .promptFormInner {
   display: flex;
-  flex-grow: 1; /* Allow it to take up all available space */
-  align-items: center; /* Center items vertically */
-  background-color: transparent; /* No background color */
-  position: relative; /* To position the send button absolutely within this container */
-  margin-top: 1rem; /* Add margin at the top for spacing */
-  margin-bottom: 1rem; /* Add margin at the bottom for spacing */
+  flex-grow: 1;
+  align-items: center;
+  background-color: transparent;
+  position: relative;
+  margin-top: 0.5rem; /* Reduced top margin */
+  margin-bottom: 0.5rem; /* Reduced bottom margin */
 }
 
 .promptTextarea {
-  flex-grow: 1; /* Allow textarea to take up all available space */
+  flex-grow: 1;
   padding: 1.3rem 0;
   outline: none;
   font-size: 1rem;
-  background-color: transparent; /* Ensure no background color */
-  color: #ffffff; /* Text color */
-  margin-right: 3rem; /* Make room for the send button */
+  background-color: transparent;
+  color: #ffffff;
+  margin-right: 3rem; /* Ensure room for the send button */
 }
 
 .sendButtonContainer {
@@ -138,30 +134,23 @@
 }
 
 .loadingContainer {
-  position: absolute; /* Position it absolutely to lift it to the top */
-  top: 0; /* Position at the very top */
-  width: 100%; /* Full width */
+  position: absolute;
+  top: 0;
+  width: 100%;
   display: flex;
-  justify-content: center; /* Center the spinner horizontally */
-  padding: 0.5rem 1rem; /* Add some padding on the top */
-  z-index: 11; /* Above the stopGeneratingButtonContainer */
-  margin-top: 2rem; /* Adjust this value as needed to create space */
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  z-index: 11;
+  margin-top: 1rem; /* Reduced top margin */
 }
 
 .stopGeneratingButtonContainer {
-  position: relative; /* Remove absolute positioning */
+  position: relative;
   display: flex;
-  justify-content: center; /* Center the button horizontally */
-  margin-top: 1.5rem; /* Adjust this value as needed */
-  margin-bottom: 1.5rem; /* Increase space above the text input zone */
+  justify-content: center;
+  margin-top: 0.5rem; /* Reduced top margin for closer spacing */
+  margin-bottom: 1rem; /* Increased bottom margin */
 }
-
-.broomButton {
-  background-color: #000000; /* Black background color */
-  border-radius: 50%; /* Make it round */
-  margin-right: 15px; /* Space between broom button and prompt form */
-}
-
 
 
 
