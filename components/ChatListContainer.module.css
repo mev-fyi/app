@@ -89,6 +89,7 @@
   overflow-y: auto;
   flex-grow: 1; /* Allows the container to grow and take available space */
   /* ... other styles ... */
+  padding-bottom: 300px;
 }
 
 /* ChatList container with scrollable content */
@@ -104,8 +105,8 @@
   bottom: 0;
   left: 50%; /* Centered in the viewport */
   transform: translateX(-50%); /* Adjust for the width of the chat panel */
-  max-width: calc(40% - 120px); /* 40% is the width of the middlePanel, minus the total horizontal padding */
-  width: calc(100% - 120px); /* 100% of middlePanel width minus left and right padding */
+  max-width: calc(100%); /* 40% is the width of the middlePanel, minus the total horizontal padding */
+  width: calc(100%); /* 100% of middlePanel width minus left and right padding */
   padding-left: 60px; /* Aligns content within ChatPanel */
   padding-right: 60px;
   box-sizing: border-box;
