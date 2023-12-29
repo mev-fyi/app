@@ -107,7 +107,7 @@ function createPaperEntry(details: RegExpMatchArray, index: number): ParsedMetad
 
 function processAuthors(authors: string): string {
   if (!isValidField(authors)) {
-    return 'unspecified';
+    return 'Authors unspecified';
   }
 
   const authorsArray = authors.split(', ');
@@ -128,7 +128,7 @@ function processAuthors(authors: string): string {
 }
 
 function sanitizeField(field: string): string {
-  return isValidField(field) ? field : 'unspecified';
+  return isValidField(field) ? field : `${field} unspecified`;
 }
 
 function isValidField(field: string): boolean {
