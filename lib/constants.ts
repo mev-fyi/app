@@ -70,16 +70,16 @@ export const questions = [
     // "What are the contributions of Jason Milionis to research?",
     // "What are the contributions of Ciamac Moallemi to LVR and MEV?",
     
-    "Give me videos about Trusted Execution Environment (TEE)",
-    "Give me videos about Order Flow Auctions (OFAs)",
+    // "Give me videos about Trusted Execution Environment (TEE)",    // NOTE 2023-12-29: no longer works with reranking since we penalise youtube videos and we do not retrieve enough chunks
+    // "Give me videos about Order Flow Auctions (OFAs)",    // NOTE 2023-12-29: no longer works with reranking since we penalise youtube videos and we do not retrieve enough chunks
     // "Give me videos about intents",   // NOTE 2023-12-29: no longer works with reranking since we penalise youtube videos and we do not retrieve enough chunks
     // "Give me videos discussing Uniswap v4",
-    
+
     "What's an automated market maker (AMM)?",
     "What are the different types of AMMs?",
-    // "What are Uniswap v4 hooks and do you have some examples?",
+    "What are Uniswap v4 hooks? Illustrate with examples",
     "What is the mempool?",
-    "How do private mempools influence MEV?",
+    "How could private mempools influence MEV?",
     // "How does the design of a private mempool relate to traditional finance dark pools?",
     "What protections can we use against MEV?",
 

@@ -107,15 +107,15 @@ export function ChatPanel({
     <div className={styles.chatPanel}>
       <ButtonScrollToBottom />
       <div className={styles.chatPanelWrapper}>
-        {/* Loader positioned above the button */}
+        {/* Loader positioned at the top of the container */}
         {isLoading && (
-          <div className="text-center my-4">
+          <div className={styles.loadingContainer}>
             <StyledClipLoader size={25} color="#007bff" loading={true} />
           </div>
         )}
   
+        {/* Stop generating/Regenerate response button */}
         <div className={styles.stopGeneratingButtonContainer}>
-          {/* Show 'Stop generating' button when loading, otherwise show 'Regenerate response' */}
           {isLoading ? (
             <Button variant="outline" onClick={() => stop()} className="bg-background">
               <IconStop className="mr-2" />

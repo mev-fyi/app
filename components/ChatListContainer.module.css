@@ -130,14 +130,27 @@
   right: 0;
 }
 
-.stopGeneratingButtonContainer {
+.loadingContainer {
   position: absolute; /* Position it absolutely to lift it to the top */
-  top: -2.5rem; /* Adjust this value to position the button above the input box */
-  left: 0;
-  width: 100%; /* Ensure it spans the entire width of the parent */
+  top: 0; /* Position at the very top */
+  width: 100%; /* Full width */
+  display: flex;
+  justify-content: center; /* Center the spinner horizontally */
+  padding: 0.5rem 1rem; /* Add some padding on the top */
+  z-index: 11; /* Above the stopGeneratingButtonContainer */
+}
+
+.stopGeneratingButtonContainer {
+  position: relative; /* Remove absolute positioning */
   display: flex;
   justify-content: center; /* Center the button horizontally */
-  padding: 0 1rem; /* Add some padding on the sides */
+  margin-top: 2.5rem; /* Space below the spinner */
+}
+
+.broomButton {
+  background-color: #000000; /* Black background color */
+  border-radius: 50%; /* Make it round */
+  margin-right: 15px; /* Space between broom button and prompt form */
 }
 
 
