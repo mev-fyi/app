@@ -67,8 +67,11 @@
   margin-right: auto;
   width: 850px;
   max-width: 850px; /* Ensures it matches the width of .middlePanel */
-  padding-left: 3rem; /* Adjust this value to align the broom with the user and robot icons */
-  padding-right: 1rem; /* This corresponds to Tailwind's 'px-4' */
+  padding-left: calc(3rem + 10px); /* Adjust the additional pixels as needed */
+  
+  /* Align the 'Send a message' text with the chat list content */
+  /* If the chat list content has padding, subtract that value from the right padding here */
+  padding-right: calc(1rem - 10px); /* Adjust the padding of chat list content as needed */
 }
 
 
@@ -77,7 +80,7 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 850px; /* Set the width to match the chat list width */
+  width: calc(850px - 10px); /* Subtract the added left padding from the total width */
   box-sizing: border-box;
   z-index: 10;
 }
@@ -142,6 +145,7 @@
   justify-content: center; /* Center the spinner horizontally */
   padding: 0.5rem 1rem; /* Add some padding on the top */
   z-index: 11; /* Above the stopGeneratingButtonContainer */
+  margin-top: 2rem; /* Adjust this value as needed to create space */
 }
 
 .stopGeneratingButtonContainer {
