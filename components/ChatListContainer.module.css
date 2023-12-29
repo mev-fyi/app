@@ -44,15 +44,6 @@
   box-sizing: border-box;
 }
 
-/* Container for the chat list and chat panel to ensure they align properly */
-.chatListAndPanelContainer {
-  display: flex;
-  flex-direction: column;
-  width: 100%; /* Take the full width of the middle panel */
-  max-width: 850px; /* Maximum width, keep this consistent with .middlePanel */
-  margin: auto; /* Center within the middle panel */
-}
-
 .scrollableContainer {
   max-height: calc(100vh - 270px);
   overflow-y: auto;
@@ -98,15 +89,16 @@
   background-color: #000000; /* Black background color */
   padding: 0; /* No padding like Tailwind's 'p-0' */
   cursor: pointer; /* To indicate that it's clickable */
-  margin-right: 20px; /* Adjust spacing as needed */
+  margin-right: 30px; /* Adjust spacing as needed */
 }
 
 .promptFormContainer {
   flex-grow: 1; /* Allow the prompt form to take up the remaining space */
   padding-right: 60px; /* Adjust padding to avoid overlap with enter button */
-  width: 100%; /* Ensure the form takes the full width */
+  width: 850px; /* Ensure the form takes the full width */
   margin-right: 20px; /* Space before the 'Send' button */
   max-width: 850px; /* Ensures it matches the width of .middlePanel */
+  background: transparent; /* Remove any background styling */
 }
 
 .promptForm {
@@ -118,14 +110,14 @@
   position: relative;
   display: flex;
   width: 100%;
-  background-color: #000; /* Replace with the desired background color */
+  background-color: transparent; /* No background color */
   padding: 0.5rem;
   border-radius: 0.375rem; /* Adjust as needed */
   border: 1px solid; /* Optional, remove if not needed */
 }
 
 .promptTextarea {
-  width: 100%;
+  width: 850px;
   resize: none;
   padding: 1.3rem 0;
   outline: none;
