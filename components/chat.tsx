@@ -156,13 +156,12 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   const chatListEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (chatListEndRef.current) {
-      const isAtBottom = chatListEndRef.current.scrollHeight - chatListEndRef.current.scrollTop === chatListEndRef.current.clientHeight;
-      if (isAtBottom) {
-        chatListEndRef.current.scrollIntoView({ behavior: 'smooth' });
-      }
+    if (lastMessageRole === 'assistant' && chatListEndRef.current) {
+      // Always scroll to the latest element (e.g., the last message or a specific 'end' div at the bottom of the chat list)
+      chatListEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [newMessages]);
+  }, [newMessages, lastMessageRole]);
+ 
 
   const { messages, append, reload, stop, isLoading, input, setInput } =
   useChat({
@@ -253,7 +252,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           <div className={styles.scrollableContainer}>
             {/* Conditional rendering for ChatList */}
             {showChatList && (
-              <div className={QuestionsOverlayStyles.fadeIn}>
+              <div ref={chatListEndRef} className={QuestionsOverlayStyles.fadeIn}>
                 <ChatList messages={newMessages} />
               </div>
             )}
