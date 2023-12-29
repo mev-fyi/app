@@ -165,6 +165,7 @@ export const questions = [
     "Give me an exhaustive understanding of execution tickets and block proposal right market",
     "Tell me everything you know about timing games in Ethereum",
     "How does L2s, L3s and 'data availability layers' like Celestia relate to one another?",
+    "What's an RPC? How does it relate to MEV?",
   ]
   
 

@@ -197,7 +197,7 @@
   transition: transform 0.3s; /* Smooth transition for sliding in/out */
   z-index: 10; /* Ensure it's above other content */
   padding-right: 10%;
-  padding-left: 5%;
+  padding-left: 2%;
   opacity: 1; /* Start with invisible */
   transition: opacity 0.5s ease-in-out; /* Smooth transition for opacity */
 }
