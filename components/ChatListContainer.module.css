@@ -67,7 +67,7 @@
   margin-right: auto;
   width: 850px;
   max-width: 850px; /* Match the width of .middlePanel */
-  padding-left: calc(3rem + 20px); /* Increase right alignment */
+  padding-left: calc(3rem + 35px); /* Increase right alignment */
   padding-right: calc(1rem - 10px); /* Adjust if necessary for chat list content alignment */
 }
 
