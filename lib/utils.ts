@@ -49,22 +49,30 @@ export function formatDate(input: string | number | Date): string {
 }
 
 export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] {
+  console.log('Parsing metadata...');
   const formattedEntries = formattedMetadata.split('\n');
 
   const parsedEntries: (ParsedMetadataEntry | null)[] = formattedEntries.map((entry, index) => {
+    console.log(`Parsing entry ${index + 1}:`, entry);
     const videoDetails = entry.match(/\[Title\]: (.*?), \[Channel name\]: (.*?), \[Video Link\]: (.*?), \[Published date\]: ([\d-]+)/);
     const paperDetails = entry.match(/\[Title\]: (.*?), \[Authors\]: (.*?), \[Link\]: (.*?), \[Release date\]: ([\d-]+)/);
 
     if (videoDetails) {
+      console.log(`Found video details for entry ${index + 1}`);
       return createVideoEntry(videoDetails, index);
     } else if (paperDetails) {
+      console.log(`Found paper details for entry ${index + 1}`);
       return createPaperEntry(paperDetails, index);
+    } else {
+      console.log(`No valid details found for entry ${index + 1}`);
     }
 
     return null;
   });
 
-  return parsedEntries.filter(Boolean) as ParsedMetadataEntry[];
+  const filteredEntries = parsedEntries.filter(Boolean) as ParsedMetadataEntry[];
+  console.log(`Parsed metadata with ${filteredEntries.length} valid entries.`);
+  return filteredEntries;
 }
 
 function createVideoEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
@@ -118,9 +126,9 @@ function sanitizeField(field: string): string {
 }
 
 function isValidField(field: string): boolean {
-  if (!field) return false; // checks if field is undefined or null
-  if (field.trim() === '') return false; // checks if field is empty or whitespace
-  if (field.toLowerCase() === 'nan') return false; // checks if field is 'nan'
-
-  return true; // return true if all checks pass
+  const isFieldValid = !(!field || field.trim() === '' || field.toLowerCase() === 'nan');
+  if (!isFieldValid) {
+    console.error(`Invalid field detected: "${field}"`);
+  }
+  return isFieldValid;
 }
