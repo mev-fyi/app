@@ -85,7 +85,7 @@
 }
 
 .scrollableContainer {
-  max-height: calc(100vh - 350px);
+  max-height: calc(100vh - 300px);
   overflow-y: auto;
   flex-grow: 1; /* Allows the container to grow and take available space */
   /* ... other styles ... */
@@ -100,14 +100,6 @@
 }
 
 .chatPanel {
-  margin-top: auto; /* Pushes ChatPanel to the bottom */
-  position: fixed; /* Fixed at the bottom of the viewport */
-  bottom: 0;
-  width: 850px; /* Set the width of the ChatPanel */
-  box-sizing: border-box; /* Include padding and border in the element's width */
-  left: 0; /* Align the panel to the left side of the viewport */
-  right: 0; /* Align the panel to the right side of the viewport */
-  margin-left: auto; /* Center the panel */
   margin-right: auto; /* Center the panel */
 }
 
