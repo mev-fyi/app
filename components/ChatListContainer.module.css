@@ -65,7 +65,8 @@
 .chatPanelWrapper {
   margin-left: auto;
   margin-right: auto;
-  max-width: 768px; /* This corresponds to Tailwind's 'max-w-2xl' */
+  width: 850px;
+  max-width: 850px; /* Ensures it matches the width of .middlePanel */
   padding-left: 1rem; /* This corresponds to Tailwind's 'px-4' */
   padding-right: 1rem; /* This corresponds to Tailwind's 'px-4' */
 }
@@ -76,8 +77,8 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 100%; /* Full viewport width */
-  max-width: 850px; /* Match the width of .middlePanel */
+  width: 850px;
+  max-width: 850px; /* Ensures it matches the width of .middlePanel */
   box-sizing: border-box;
   z-index: 10;
 }
@@ -86,7 +87,7 @@
   display: flex;
   align-items: center;
   padding: 0; /* Adjust padding as needed */
-  width: 100%;
+  width: 850px;
   max-width: 850px; /* Ensures it matches the width of .middlePanel */
   margin: 0 auto; /* This will center the content if it's narrower than the viewport */
 }
@@ -109,18 +110,21 @@
 
 .promptForm {
   display: flex;
-  width: 100%;
+  width: 850px;
+  max-width: 850px; /* Ensures it matches the width of .middlePanel */
 }
 
 .promptFormInner {
   position: relative;
   display: flex;
-  width: 100%; /* Take up full width of .promptFormContainer */
+  width: 850px;
+  max-width: 850px; /* Ensures it matches the width of .middlePanel */
   background-color: transparent;
 }
 
 .promptTextarea {
-  width: 100%; /* Take up full width */
+  width: 850px;
+  max-width: 850px; /* Ensures it matches the width of .middlePanel */
   resize: none;
   padding: 1.3rem 0;
   outline: none;
