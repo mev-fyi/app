@@ -106,36 +106,24 @@ export function ChatPanel({
   return (
     <div className={styles.chatPanel}>
       <ButtonScrollToBottom />
-      <div className={styles.chatPanelWrapper}> {/* Updated this line */}
+      <div className={styles.chatPanelWrapper}>
         {/* Loader positioned above the button */}
         {isLoading && (
           <div className="text-center my-4">
-            <StyledClipLoader
-              size={25}
-              color="#007bff"
-              loading={true}
-            />
+            <StyledClipLoader size={25} color="#007bff" loading={true} />
           </div>
         )}
-
-          <div className={styles.stopGeneratingButtonContainer}>
+  
+        <div className={styles.stopGeneratingButtonContainer}>
           {/* Show 'Stop generating' button when loading, otherwise show 'Regenerate response' */}
           {isLoading ? (
-            <Button
-              variant="outline"
-              onClick={() => stop()}
-              className="bg-background"
-            >
+            <Button variant="outline" onClick={() => stop()} className="bg-background">
               <IconStop className="mr-2" />
               Stop generating
             </Button>
           ) : (
             messages?.length > 0 && (
-              <Button
-                variant="outline"
-                onClick={() => reload()}
-                className="bg-background"
-              >
+              <Button variant="outline" onClick={() => reload()} className="bg-background">
                 <IconRefresh className="mr-2" />
                 Regenerate response
               </Button>
@@ -150,10 +138,10 @@ export function ChatPanel({
               <button
                 onClick={e => {
                   e.preventDefault();
-                  setMessages([]); // Resets the chat messages
-                  setStructuredMetadataEntries([]); // Resets the structured metadata
-                  setLastMessageRole(''); // Resets the last message role
-                  setInput(''); // Resets the input field
+                  setMessages([]);
+                  setStructuredMetadataEntries([]);
+                  setLastMessageRole('');
+                  setInput('');
                   setShowTopSources(false);
                   setFadeOutCompleted(true);
                   setMetadataContainerVisible(false);
@@ -172,23 +160,21 @@ export function ChatPanel({
             </TooltipTrigger>
             <TooltipContent>New Chat</TooltipContent>
           </Tooltip>
-
+  
           {/* Prompt Form */}
           <div className={styles.promptFormContainer}>
             <PromptForm
               onSubmit={async value => {
-                // Step 3: When submitting, show the loading animation
                 setResponseReceived(false);
                 if (onSubmit) {
-                  await onSubmit(value); // Call the onSubmit prop function
+                  await onSubmit(value);
                 } else {
                   await append({
                     id,
                     content: value,
-                    role: 'user'
+                    role: 'user',
                   });
                 }
-                // After submitting, set the responseReceived to true
                 setResponseReceived(true);
               }}
               input={input}
@@ -207,7 +193,7 @@ export function ChatPanel({
             />
           </div>
         </div>
-
+  
         <FooterText className="hidden sm:block" />
       </div>
     </div>

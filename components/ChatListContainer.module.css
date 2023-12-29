@@ -72,7 +72,6 @@
 }
 
 
-/* ChatPanel fixed at the bottom */
 .chatPanel {
   position: fixed;
   bottom: 0;
@@ -92,6 +91,7 @@
 }
 
 .broomButton {
+  background-color: #000000; /* Black background color */
   margin-right: 15px; /* Space between broom button and prompt form */
 }
 
@@ -99,37 +99,46 @@
   flex-grow: 1; /* Take up remaining space */
   padding: 0; /* No padding required if the width is already set */
   background: transparent; /* Ensure there's no background */
+  position: relative; /* To position the send button absolutely within this container */
 }
 
 .promptForm {
-  width: calc(100% - 2rem); /* Full width minus padding and broom button width */
+  width: calc(100% - 4rem); /* Full width minus padding and broom button width */
 }
 
 .promptFormInner {
   display: flex;
-  width: 100%; /* Take up full width of .promptForm */
+  flex-grow: 1; /* Allow it to take up all available space */
+  align-items: center; /* Center items vertically */
   background-color: transparent; /* No background color */
+  position: relative; /* To position the send button absolutely within this container */
 }
 
 .promptTextarea {
-  width: 100%; /* Take up full width */
+  flex-grow: 1; /* Allow textarea to take up all available space */
   padding: 1.3rem 0;
   outline: none;
   font-size: 1rem;
   background-color: transparent; /* Ensure no background color */
   color: #ffffff; /* Text color */
+  margin-right: 3rem; /* Make room for the send button */
 }
 
 .sendButtonContainer {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 1.3rem;
+  right: 0;
 }
 
 .stopGeneratingButtonContainer {
-  margin-bottom: 10px; /* Space below the button */
+  position: absolute; /* Position it absolutely to lift it to the top */
+  top: -2.5rem; /* Adjust this value to position the button above the input box */
+  left: 0;
+  width: 100%; /* Ensure it spans the entire width of the parent */
+  display: flex;
+  justify-content: center; /* Center the button horizontally */
+  padding: 0 1rem; /* Add some padding on the sides */
 }
-
 
 
 
