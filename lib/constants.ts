@@ -85,7 +85,7 @@ export const questions = [
 
     "What is blockchain censorship?",
     // "What are bribes in the block-building supply chain?",
-    "Tell me more about the block construction market",
+    // "Tell me more about the block construction market",
     "What is censorship resistance?",
     "What has social welfare to do in Ethereum?",
     "What are the links between game theory and the MEV supply chain?",

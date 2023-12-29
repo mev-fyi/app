@@ -74,8 +74,8 @@
 .chatPanel {
   position: fixed;
   bottom: 0;
-  left: 52%; /* Increase the percentage to move to the right */
-  transform: translateX(-42%); /* Decrease the percentage to move to the right */
+  left: 50%; /* Increase the percentage to move to the right */
+  transform: translateX(-48%); /* Decrease the percentage to move to the right */
   width: calc(850px - 35px); /* Adjust width for right alignment */
   box-sizing: border-box;
   z-index: 10;
