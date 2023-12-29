@@ -54,8 +54,8 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
 
   const parsedEntries: (ParsedMetadataEntry | null)[] = formattedEntries.map((entry, index) => {
     console.log(`Parsing entry ${index + 1}:`, entry);
-    const videoDetails = entry.match(/\[Title\]: (.*?), \[Channel name\]: (.*?), \[Video Link\]: (.*?), \[Published date\]: ([\d-]+)/);
-    const paperDetails = entry.match(/\[Title\]: (.*?), \[Authors\]: (.*?), \[Link\]: (.*?), \[Release date\]: ([\d-]+)/);
+    const videoDetails = entry.match(/\[Title\]: (.*?), \[Channel name\]: (.*?), \[Video Link\]: (.*?), \[Published date\]: ([\d-]+|nan)/);
+  const paperDetails = entry.match(/\[Title\]: (.*?), \[Authors\]: (.*?), \[Link\]: (.*?), \[Release date\]: ([\d-]+|nan)/);
 
     if (videoDetails) {
       console.log(`Found video details for entry ${index + 1}`);
@@ -76,26 +76,32 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
 }
 
 function createVideoEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
+  const publishedDateString = sanitizeField(details[4]);
+  const publishedDate = publishedDateString.toLowerCase() === 'nan' ? null : new Date(publishedDateString);
+  
   return {
     index: index + 1,
     type: 'youtubeVideo',
     title: sanitizeField(details[1]),
     extraInfo: sanitizeField(details[2]),
     link: sanitizeField(details[3]),
-    publishedDate: new Date(sanitizeField(details[4])),
-    publishedDateString: sanitizeField(details[4])
+    publishedDate: publishedDate, // This will be null if the date is 'nan'
+    publishedDateString: publishedDate ? publishedDateString : 'Date unspecified' // Provide a fallback text
   };
 }
 
 function createPaperEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
+  const publishedDateString = sanitizeField(details[4]);
+  const publishedDate = publishedDateString.toLowerCase() === 'nan' ? null : new Date(publishedDateString);
+  
   return {
     index: index + 1,
     type: 'researchPaper',
     title: sanitizeField(details[1]),
     extraInfo: processAuthors(sanitizeField(details[2])),
     link: sanitizeField(details[3]),
-    publishedDate: new Date(sanitizeField(details[4])),
-    publishedDateString: sanitizeField(details[4])
+    publishedDate: publishedDate, // This will be null if the date is 'nan'
+    publishedDateString: publishedDate ? publishedDateString : 'Date unspecified' // Provide a fallback text
   };
 }
 
@@ -126,7 +132,7 @@ function sanitizeField(field: string): string {
 }
 
 function isValidField(field: string): boolean {
-  const isFieldValid = !(!field || field.trim() === '' || field.toLowerCase() === 'nan');
+  const isFieldValid = !(!field || field.trim() === '' || field.trim().toLowerCase() === 'nan');
   if (!isFieldValid) {
     console.error(`Invalid field detected: "${field}"`);
   }

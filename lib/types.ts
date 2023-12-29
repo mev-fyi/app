@@ -23,7 +23,7 @@ export interface ParsedMetadataEntry {
   title: string;
   link: string;
   extraInfo: string;
-  publishedDate: Date;
+  publishedDate: Date | null; // Allow this to be null
   publishedDateString: string;
 }
 
