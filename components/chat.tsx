@@ -274,7 +274,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           </div>
           
           {/* Fixed ChatPanel at the bottom */}
-          <div>
+          <div className={styles.chatPanel}>
             <ChatPanel
               id={id}
               isLoading={isLoading}

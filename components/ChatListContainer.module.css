@@ -77,7 +77,6 @@
   right: 0; /* Align with the right edge of .middlePanel */
   margin-left: auto; /* Center the panel horizontally */
   margin-right: auto; /* Center the panel horizontally */
-  background-color: #000; /* Set the desired background color */
 }
 
 /* Content within chatPanel for alignment and spacing */
@@ -104,9 +103,9 @@
 .promptFormContainer {
   flex-grow: 1; /* Allow the prompt form to take up the remaining space */
   padding-right: 60px; /* Adjust padding to avoid overlap with enter button */
-  background-color: #000; /* Set the desired background color, if it should be black */
   width: 100%; /* Ensure the form takes the full width */
   margin-right: 20px; /* Space before the 'Send' button */
+  max-width: 850px; /* Ensures it matches the width of .middlePanel */
 }
 
 .stopGeneratingButtonContainer {
