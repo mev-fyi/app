@@ -106,7 +106,7 @@ export function ChatPanel({
   return (
     <div className={styles.chatPanel}>
       <ButtonScrollToBottom />
-      <div className="mx-auto sm:max-w-2xl sm:px-4">
+      <div className={styles.chatPanelWrapper}> {/* Updated this line */}
         {/* Loader positioned above the button */}
         {isLoading && (
           <div className="text-center my-4">

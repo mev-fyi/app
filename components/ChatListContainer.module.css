@@ -30,6 +30,9 @@
 }
 
 
+
+
+
 /* Middle panel for chatlist and prompt form */
 .middlePanel {
   flex: 1; /* Allows the panel to grow */
@@ -58,6 +61,15 @@
   overflow-y: auto; /* Ensures vertical scroll */
   /* Remove padding if it causes misalignment with the ChatPanel */
 }
+
+.chatPanelWrapper {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 768px; /* This corresponds to Tailwind's 'max-w-2xl' */
+  padding-left: 1rem; /* This corresponds to Tailwind's 'px-4' */
+  padding-right: 1rem; /* This corresponds to Tailwind's 'px-4' */
+}
+
 
 .chatPanel {
   position: fixed;
@@ -275,3 +287,11 @@
   }
 }
 
+
+/* Apply responsive design adjustments */
+@media (min-width: 640px) { /* This corresponds to Tailwind's 'sm:' breakpoint */
+  .chatPanelWrapper {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
