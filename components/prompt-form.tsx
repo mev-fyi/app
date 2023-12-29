@@ -14,7 +14,7 @@ import { cn } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
 import { MetadataMessage } from './chat'
 import { IconBroom } from '@/components/ui/icons'
-import './PromptFormStyles.css'; // Import the custom CSS file
+import './ChatListContainer.module.css'; // Import the custom CSS file
 
 export interface PromptProps
   extends Pick<UseChatHelpers, 'input' | 'setInput'> {
@@ -59,17 +59,18 @@ export function PromptForm({
     }
   }, [])
 
-    return (
+  return (
     <form
       onSubmit={async e => {
-        e.preventDefault()
-        if (!input?.trim()) return
-        setInput('')
-        await onSubmit(input)
+        e.preventDefault();
+        if (!input?.trim()) return;
+        setInput('');
+        await onSubmit(input);
       }}
       ref={formRef}
+      className="promptForm"
     >
-      <div className="relative flex w-full flex-col overflow-hidden px-2 sm:rounded-md sm:border bg-black sm:bg-transparent">
+      <div className="promptFormInner">
         <Textarea
           ref={inputRef}
           onKeyDown={onKeyDown}
@@ -77,9 +78,9 @@ export function PromptForm({
           onChange={e => setInput(e.target.value)}
           placeholder="Send a message."
           spellCheck={false}
-          className="w-full resize-none py-[1.3rem] focus-within:outline-none text-base"
+          className="promptTextarea"
         />
-        <div className="absolute top-4 right-0 sm:right-4">
+        <div className="sendButtonContainer">
           <Tooltip>
             <TooltipTrigger asChild>
               <Button type="submit" size="icon" disabled={isLoading || input === ''}>
@@ -92,5 +93,5 @@ export function PromptForm({
         </div>
       </div>
     </form>
-  )
+  );
 }
