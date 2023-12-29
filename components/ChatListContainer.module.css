@@ -48,7 +48,7 @@
 }
 
 .scrollableContainer {
-  max-height: calc(100vh - 270px);
+  max-height: calc(100vh - 280px);
   overflow-y: auto;
   flex-grow: 1; /* Allows the container to grow and take available space */
   /* ... other styles ... */
@@ -65,9 +65,9 @@
 .chatPanelWrapper {
   margin-left: auto;
   margin-right: auto;
-  width: 830px;
-  max-width: 830px; /* Ensures it matches the width of .middlePanel */
-  padding-left: 1rem; /* This corresponds to Tailwind's 'px-4' */
+  width: 850px;
+  max-width: 850px; /* Ensures it matches the width of .middlePanel */
+  padding-left: 3rem; /* Adjust this value to align the broom with the user and robot icons */
   padding-right: 1rem; /* This corresponds to Tailwind's 'px-4' */
 }
 
@@ -77,7 +77,7 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 830px; /* Set the width to match the chat list width */
+  width: 850px; /* Set the width to match the chat list width */
   box-sizing: border-box;
   z-index: 10;
 }
@@ -100,7 +100,6 @@
   padding: 0; /* No padding required if the width is already set */
   background: transparent; /* Ensure there's no background */
   position: relative; /* To position the send button absolutely within this container */
-  padding-top: 1.5rem; /* Increase top padding to move away from the button */
   padding-bottom: 1.5rem; /* Increase bottom padding for more space below the text input */
 }
 
@@ -114,7 +113,7 @@
   align-items: center; /* Center items vertically */
   background-color: transparent; /* No background color */
   position: relative; /* To position the send button absolutely within this container */
-  margin-top: 1rem; /* Add margin at the top for spacing */
+  /*margin-top: 1rem; /* Add margin at the top for spacing */
   margin-bottom: 1rem; /* Add margin at the bottom for spacing */
 }
 
@@ -148,7 +147,7 @@
   position: relative; /* Remove absolute positioning */
   display: flex;
   justify-content: center; /* Center the button horizontally */
-  margin-top: 3rem; /* Increase space below the spinner */
+  margin-top: 1.5rem; /* Adjust this value as needed */
   margin-bottom: 1.5rem; /* Increase space above the text input zone */
 }
 
