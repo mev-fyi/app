@@ -48,7 +48,7 @@
 }
 
 .scrollableContainer {
-  max-height: calc(100vh - 280px);
+  max-height: calc(100vh - 285px);
   overflow-y: auto;
   flex-grow: 1; /* Allows the container to grow and take available space */
   /* ... other styles ... */
@@ -87,12 +87,16 @@
   align-items: center;
   justify-content: flex-start;
   padding: 0 1rem; /* Adjust as needed */
+  margin-top: 7rem; /* Space below the 'Stop Generating' button */
 }
 
 .broomButton {
   background-color: #000000;
   border-radius: 50%;
   margin-right: 15px;
+  width: 2rem; /* Increase the width for more space */
+  height: 2rem; /* Increase the height to match the width */
+  cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
 }
 
 .promptFormContainer {
@@ -114,7 +118,6 @@
   align-items: center;
   background-color: transparent;
   position: relative;
-  margin-top: 7rem; /* Space below the 'Stop Generating' button */
   margin-bottom: 0.5rem; /* Reduced bottom margin */
 }
 
