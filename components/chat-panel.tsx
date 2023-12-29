@@ -142,7 +142,7 @@ export function ChatPanel({
           )}
         </div>
         {/* Broom button and Prompt Form Container */}
-        <div className="flex items-center space-x-4 bg-black sm:bg-transparent sm:rounded-t-xl px-4 py-2 md:py-4">
+        <div>
           {/* Broom button */}
           <Tooltip>
             <TooltipTrigger asChild>
@@ -173,7 +173,7 @@ export function ChatPanel({
           </Tooltip>
 
           {/* Prompt Form */}
-          <div className="flex-grow mx-auto px-4 sm:px-15 lg:px-24">
+          <div>
             <PromptForm
               onSubmit={async value => {
                 // Step 3: When submitting, show the loading animation
