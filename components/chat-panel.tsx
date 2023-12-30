@@ -102,6 +102,23 @@ export function ChatPanel({
   // Step 1: Create a state variable to track whether the backend response has been received
   const [responseReceived, setResponseReceived] = useState(false);
 
+  // {/* Stop generating/Regenerate response button */}
+  // <div className={styles.stopGeneratingButtonContainer}>
+  // {isLoading ? (
+  //   <Button variant="outline" onClick={() => stop()} className="bg-background">
+  //     <IconStop className="mr-2" />
+  //     Stop generating
+  //   </Button>
+  // ) : (
+  //   messages?.length > 0 && (
+  //     <Button variant="outline" onClick={() => reload()} className="bg-background">
+  //       <IconRefresh className="mr-2" />
+  //       Regenerate response
+  //     </Button>
+  //   )
+  // )}
+  // </div>
+
 
   return (
     <div className={styles.chatPanel}>
@@ -114,22 +131,7 @@ export function ChatPanel({
           </div>
         )}
   
-        {/* Stop generating/Regenerate response button */}
-        <div className={styles.stopGeneratingButtonContainer}>
-          {isLoading ? (
-            <Button variant="outline" onClick={() => stop()} className="bg-background">
-              <IconStop className="mr-2" />
-              Stop generating
-            </Button>
-          ) : (
-            messages?.length > 0 && (
-              <Button variant="outline" onClick={() => reload()} className="bg-background">
-                <IconRefresh className="mr-2" />
-                Regenerate response
-              </Button>
-            )
-          )}
-        </div>
+
         {/* Broom button and Prompt Form Container */}
         <div className={styles.chatPanelContent}>
           {/* Broom button */}

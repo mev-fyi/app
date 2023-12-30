@@ -87,7 +87,7 @@
   align-items: center;
   justify-content: flex-start;
   padding: 0 1rem; /* Adjust as needed */
-  margin-top: 7rem; /* Space below the 'Stop Generating' button */
+  margin-top: 4rem; /* Space below the 'Stop Generating' button */
 }
 
 .broomButton {
@@ -151,15 +151,15 @@
   margin-top: 1rem; /* Space above the spinner */
 }
 
-.stopGeneratingButtonContainer {
-  position: absolute;
-  top: 4rem; /* Position the button below the spinner */
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  z-index: 10;
-  bottom:4 rem;
-}
+/*.stopGeneratingButtonContainer {
+/*  position: absolute;
+/*  top: 4rem; /* Position the button below the spinner */
+/*  width: 100%;
+/*  display: flex;
+/*  justify-content: center;
+/*  z-index: 10;
+/*  bottom:4 rem;
+/*}
 
 
 
