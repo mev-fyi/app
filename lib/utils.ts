@@ -86,7 +86,7 @@ function createVideoEntry(details: RegExpMatchArray, index: number): ParsedMetad
     extraInfo: sanitizeField("Authors", details[2]),
     link: sanitizeField("URL", details[3]),
     publishedDate: publishedDate, // This will be null if the date is 'nan'
-    publishedDateString: publishedDate ? publishedDateString : 'Date unspecified' // Provide a fallback text
+    publishedDateString: publishedDate ? publishedDateString : '' // Provide a fallback text
   };
 }
 
@@ -101,13 +101,13 @@ function createPaperEntry(details: RegExpMatchArray, index: number): ParsedMetad
     extraInfo: processAuthors(sanitizeField("Authors", details[2])),
     link: sanitizeField("URL", details[3]),
     publishedDate: publishedDate, // This will be null if the date is 'nan'
-    publishedDateString: publishedDate ? publishedDateString : 'Date unspecified' // Provide a fallback text
+    publishedDateString: publishedDate ? publishedDateString : '' // Provide a fallback text
   };
 }
 
 function processAuthors(authors: string): string {
   if (!isValidField(authors)) {
-    return 'Authors unspecified';
+    return '';
   }
 
   const authorsArray = authors.split(', ');
@@ -128,7 +128,7 @@ function processAuthors(authors: string): string {
 }
 
 function sanitizeField(field_name: string, field: string): string {
-  return isValidField(field) ? field : `${field_name} unspecified`;
+  return isValidField(field) ? field : ''; // `${field_name} unspecified`;
 }
 
 function isValidField(field: string): boolean {
