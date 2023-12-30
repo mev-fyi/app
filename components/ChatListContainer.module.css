@@ -48,7 +48,7 @@
 }
 
 .scrollableContainer {
-  max-height: calc(100vh - 285px);
+  max-height: calc(100vh - 270px);
   overflow-y: auto;
   flex-grow: 1; /* Allows the container to grow and take available space */
   /* ... other styles ... */
@@ -121,6 +121,7 @@
   position: relative;
   border: 1px solid rgba(255, 255, 255, 0.2); /* Thin, semi-transparent white border */
   border-radius: 8px; /* Rounded corners */
+  padding: 10px; /* Adds padding inside the border */
 }
 
 .promptTextarea {
