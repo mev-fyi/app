@@ -119,9 +119,6 @@
   align-items: center;
   background-color: transparent;
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.2); /* Thin, semi-transparent white border */
-  border-radius: 8px; /* Rounded corners */
-  padding: 10px; /* Adds padding inside the border */
 }
 
 .promptTextarea {
@@ -132,6 +129,9 @@
   background-color: transparent;
   color: #ffffff;
   margin-right: 2.7rem; /* Reduce by 0.3rem to allow for textarea extension */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Thin, semi-transparent white border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 10px; /* Adds padding inside the border */
 }
 
 .sendButtonContainer {
