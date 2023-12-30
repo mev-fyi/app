@@ -140,7 +140,7 @@
   margin-top: 0.3rem;
   position: absolute;
   right: 0;
-  right: -20px; /* Extend the text area by 10px to the right */
+  right: 60px;
 }
 
 .loadingContainer {

@@ -6,6 +6,7 @@ import { ChatList } from '@/components/chat-list'
 import { ChatPanel } from '@/components/chat-panel'
 import { EmptyScreen } from '@/components/empty-screen'
 import ShareButton from '@/components/share-button'
+import { getChat } from '@/app/actions';
 import { useLocalStorage } from '@/lib/hooks/use-local-storage'
 import { useState, useRef, useEffect } from 'react';
 import { toast } from 'react-hot-toast'
@@ -14,7 +15,7 @@ import styles from './ChatListContainer.module.css'; // Import the CSS module
 import QuestionsOverlayStyles from './QuestionsOverlay.module.css'; // Import the CSS module
 import { QuestionsOverlay, QuestionsOverlayLeftPanel } from './question-overlay';
 import { ParsedMetadataEntry } from 'lib/types';
-
+import { Chat as ChatType } from '@/lib/types'; // Alias import to avoid naming conflicts
 
 // Extend the Message type to include structured_metadata
 export interface MetadataMessage extends Message {
@@ -289,6 +290,8 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             )}
           </div>
           
+          <ShareButton id={id} />
+
           {/* Fixed ChatPanel at the bottom */}
           <div className={styles.chatPanel}>
             <ChatPanel
@@ -315,7 +318,6 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           </div>
         </div>
 
-        {id && <ShareButton chatId={id} />}
 
         {/* Right panel for metadata list */}
         <div className={`${styles.rightPanel}`}>
