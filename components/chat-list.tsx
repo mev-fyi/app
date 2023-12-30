@@ -7,7 +7,7 @@ export interface ChatListProps {
   messages: Message[];
 }
 
-export const ChatList = forwardRef<HTMLDivElement, ChatListProps>(({ messages }, ref) => {
+const ChatListComponent = ({ messages }: ChatListProps, ref: React.Ref<HTMLDivElement>) => {
   if (!messages.length) {
     return null;
   }
@@ -22,4 +22,7 @@ export const ChatList = forwardRef<HTMLDivElement, ChatListProps>(({ messages },
       ))}
     </div>
   );
-});
+};
+
+export const ChatList = forwardRef(ChatListComponent);
+ChatList.displayName = 'ChatList';
