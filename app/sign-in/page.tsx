@@ -1,14 +1,31 @@
-import { auth } from '@/auth'
-import { LoginButton } from '@/components/login-button'
-import { redirect } from 'next/navigation'
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { toast } from 'react-hot-toast';
+import { auth } from '@/auth';
+import { LoginButton } from '@/components/login-button';
 import Image from 'next/image';
+import { redirect } from 'next/navigation';
 
-export default async function SignInPage() {
-  const session = await auth()
-  // redirect to home if user is already logged in
-  if (session?.user) {
-    redirect('/')
-  }
+export default function SignInPage() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkSession = async () => {
+      const session = await auth();
+      // Redirect to home if the user is already logged in
+      if (session?.user) {
+        redirect('/');
+      }
+
+      // Display toast if not whitelisted
+      if (router.query.error === 'not_whitelisted') {
+        toast.error("You are not on the whitelist.");
+      }
+    };
+
+    checkSession();
+  }, [router]);
+  
   return (
     <div className="flex flex-col h-screen items-center justify-center py-10 sm:pb-50">
       {/* Welcome message */}

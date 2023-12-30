@@ -1,5 +1,5 @@
 import NextAuth, { type DefaultSession } from 'next-auth'
-import GitHub from 'next-auth/providers/github'
+import GitHubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google';
 
 declare module 'next-auth' {
@@ -11,30 +11,61 @@ declare module 'next-auth' {
   }
 }
 
+const WHITELIST = [
+  'alloweduser@gmail.com',
+  'githubUsername',  // Replace with actual GitHub username
+  'vmeylan',
+  'freddmannen',
+  // ... more allowed emails or GitHub usernames
+];
+
 export const {
   handlers: { GET, POST },
   auth,
   CSRF_experimental // will be removed in future
 } = NextAuth({
-  providers: [GitHub,
+  providers: [
+    GitHubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID || '',
+      clientSecret: process.env.GITHUB_CLIENT_SECRET || '',
+    }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  })],
+      clientId: process.env.GOOGLE_CLIENT_ID || '',
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+    }),
+  ],
   callbacks: {
+    async signIn({ account, profile, email }) {
+      if (!account || !profile) {
+        return false;
+      }
+
+      let identifier = '';
+
+      if (account.provider === 'github' && typeof profile.login === 'string') {
+        identifier = profile.login;
+      } else if (account.provider === 'google' && typeof email === 'string') {
+        identifier = email;
+      }
+
+      if (!WHITELIST.includes(identifier)) {
+        throw new Error('not_whitelisted');
+      }
+
+      return true;
+    },
     jwt({ token, profile }) {
       if (profile) {
-        token.id = profile.id
-        token.image = profile.avatar_url || profile.picture
+        token.id = profile.id?.toString() || '';
+        token.image = profile.avatar_url || profile.picture || '';
       }
-      return token
+      return token;
     },
-    authorized({ auth }) {
-      return !!auth?.user // this ensures there is a logged in user for -every- request
-    }
+    // Reuse any other callbacks from the original configuration
   },
   pages: {
-    signIn: '/sign-in' // overrides the next-auth default signin page https://authjs.dev/guides/basics/pages
-  }
-})
-
+    signIn: '/sign-in',
+    error: '/auth/signin' // Redirect to custom sign-in page on error
+  },
+  // Reuse any other configurations from the original setup
+});
