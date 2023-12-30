@@ -168,6 +168,10 @@ export const questions = [
     "What's an RPC? How does it relate to MEV?",
     "Explain what are relays in Ethereum",
     "How does relays relate to Proposer/Builder Separation (PBS)?",
+    "What is the difference between a validator, a proposer, and an attester?",
+    "Give me the full composition of an Ethereum block and how it relates to the consensus, data availability, and execution layer",
+    "Give me the full composition of an Ethereum proof-of-stake block",
+    "What are inclusion lists?",
   ]
   
 
