@@ -32,6 +32,9 @@ export default async function SharePage({ params }: SharePageProps) {
     notFound()
   }
 
+  // Get the role of the last message
+  const lastMessageRole = chat.messages[chat.messages.length - 1]?.role;
+
   return (
     <>
       <div className="flex-1 space-y-6">
@@ -45,7 +48,8 @@ export default async function SharePage({ params }: SharePageProps) {
             </div>
           </div>
         </div>
-        <ChatList messages={chat.messages} />
+        {/* Pass the lastMessageRole to the ChatList */}
+        <ChatList messages={chat.messages} lastMessageRole={lastMessageRole} />
       </div>
       <FooterText className="py-8" />
     </>
