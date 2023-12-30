@@ -119,6 +119,8 @@
   align-items: center;
   background-color: transparent;
   position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Thin, semi-transparent white border */
+  border-radius: 8px; /* Rounded corners */
 }
 
 .promptTextarea {
