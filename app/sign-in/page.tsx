@@ -1,17 +1,31 @@
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { toast, Toaster } from 'react-hot-toast';
 import { LoginButton } from '@/components/login-button';
 import Image from 'next/image';
-import { getSession, GetSessionParams } from 'next-auth/react';
-import { toast, Toaster } from 'react-hot-toast';
-import { GetServerSidePropsContext } from 'next';
 
-type SignInPageProps = {
-  error?: string;
-};
+export default function SignInPage() {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
 
-export default function SignInPage({ error }: SignInPageProps) {
-  // Display toast if not whitelisted
-  if (error === 'not_whitelisted') {
-    toast.error("You are not on the whitelist.");
+  useEffect(() => {
+    // Fetch session information
+    fetch('/api/check-session')
+      .then(response => response.json())
+      .then(data => {
+        if (data.loggedIn) {
+          router.push('/');
+        } else {
+          setIsLoading(false);
+          if (data.error === 'not_whitelisted') {
+            toast.error("You are not on the whitelist.");
+          }
+        }
+      });
+  }, [router]);
+
+  if (isLoading) {
+    return <div>Loading...</div>; // Or any loading indicator
   }
 
   return (
@@ -37,25 +51,4 @@ export default function SignInPage({ error }: SignInPageProps) {
       </div>
     </div>
   );
-}
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const session = await getSession({ req: context.req } as GetSessionParams);
-
-  // Redirect to home if user is already logged in
-  if (session?.user) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    };
-  }
-
-  // Pass the error query to the component if it exists
-  const error = context.query.error as string | undefined;
-
-  return {
-    props: { error },
-  };
 }
