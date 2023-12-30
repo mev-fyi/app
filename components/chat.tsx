@@ -152,13 +152,15 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     setShowLeftPanelOverlay(newMessages.length > 0 && lastMessageRole === 'assistant');
   }, [newMessages, lastMessageRole]);
 
+
+  
   // Create a ref for the end of the chat list
   const chatListEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const attemptScroll = () => {
       if (lastMessageRole === 'assistant' && chatListEndRef.current) {
-        const chatListElement = chatListEndRef.current.parentElement;
+        const chatListElement = chatListEndRef.current.closest('.scrollableContainer'); // Use closest to find the scrollable container
         if (chatListElement) {
           const messageHeight = chatListEndRef.current.clientHeight;
           const messageTop = chatListEndRef.current.offsetTop;
@@ -169,12 +171,13 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
         }
       }
     };
-  
     // Use setTimeout to allow time for the message to fully render, especially if it contains images
     const timeoutId = setTimeout(attemptScroll, 100);
   
     return () => clearTimeout(timeoutId);
   }, [newMessages, lastMessageRole]);
+
+
 
   const { messages, append, reload, stop, isLoading, input, setInput } =
   useChat({
@@ -266,7 +269,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
             {/* Conditional rendering for ChatList */}
             {showChatList && (
               <div className={QuestionsOverlayStyles.fadeIn}>
-                <ChatList ref={chatListEndRef} messages={newMessages} />
+                <ChatList ref={chatListEndRef} messages={newMessages} lastMessageRole={lastMessageRole} />
               </div>
             )}
 
