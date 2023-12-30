@@ -156,10 +156,19 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
   const chatListEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (chatListEndRef.current) {
-      chatListEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (lastMessageRole === 'assistant' && chatListEndRef.current) {
+      const chatListElement = chatListEndRef.current.parentElement; // Get the parent (chat list container)
+      if (chatListElement) {
+        const messageHeight = chatListEndRef.current.clientHeight;
+        const messageTop = chatListEndRef.current.offsetTop;
+        const containerHeight = chatListElement.clientHeight;
+  
+        // Calculate the position to scroll to, targeting the middle of the message
+        const scrollPosition = messageTop + messageHeight / 2 - containerHeight / 2;
+        chatListElement.scrollTop = scrollPosition;
+      }
     }
-  }, [newMessages]);
+  }, [newMessages, lastMessageRole]);
  
 
   const { messages, append, reload, stop, isLoading, input, setInput } =
