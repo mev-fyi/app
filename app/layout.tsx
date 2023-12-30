@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-
+import Head from 'next/head';
 import { Toaster } from 'react-hot-toast'
 
 import '@/app/globals.css'
@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { Providers } from '@/components/providers'
 import { Header } from '@/components/header'
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
   title: {
@@ -31,10 +32,14 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
-  // <Header />
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
+      <Head>
+        {/* Your metadata tags here */}
+        <title>mev.fyi MEV Research Chatbot</title>
+        <meta name="description" content="An AI-powered chatbot template built with Next.js and Vercel." />
+        {/* Other head elements */}
+      </Head>
       <body
         className={cn(
           'font-sans antialiased',
@@ -45,12 +50,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Toaster />
         <Providers attribute="class" defaultTheme="dark" enableSystem={false}>
           <div className="flex flex-col min-h-screen">
-            {/* @ts-ignore */}
-            
+            {/* Header component if needed */}
+            {/* <Header /> */}
             <main className="flex flex-col flex-1 bg-muted/50">{children}</main>
           </div>
           <TailwindIndicator />
         </Providers>
+        <Analytics />
       </body>
     </html>
   )
