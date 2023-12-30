@@ -65,8 +65,8 @@
 .chatPanelWrapper {
   margin-left: auto;
   margin-right: auto;
-  width: 855px;
-  max-width: 855px; /* Match the width of .middlePanel */
+  width: 858px;
+  max-width: 858px; /* Match the width of .middlePanel */
   padding-left: calc(3rem + 50px); /* Added 5px more for the broom button visibility */
   padding-right: calc(1rem - 35px); /* Adjust if necessary for chat list content alignment */
 }
@@ -129,8 +129,8 @@
   background-color: transparent;
   color: #ffffff;
   margin-right: 2.7rem; /* Reduce by 0.3rem to allow for textarea extension */
-  margin-left: -5px; /* Extend by 5px to the left */
-  margin-right: -5px; /* Extend by 5px to the right */
+  margin-left: -9px; /* Extend by 5px to the left */
+  margin-right: -2px; /* Extend by 5px to the right */
   border: 1px solid rgba(255, 255, 255, 0.2); /* Thin, semi-transparent white border */
   border-radius: 8px; /* Rounded corners */
   padding: 10px; /* Adds padding inside the border */
@@ -140,7 +140,7 @@
   margin-top: 0.3rem;
   position: absolute;
   right: 0;
-  right: -10px; /* Extend the text area by 10px to the right */
+  /*right: -10px; /* Extend the text area by 10px to the right */
 }
 
 .loadingContainer {
