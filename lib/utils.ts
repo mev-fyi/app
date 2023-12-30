@@ -76,30 +76,30 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
 }
 
 function createVideoEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
-  const publishedDateString = sanitizeField(details[4]);
+  const publishedDateString = sanitizeField("Date", details[4]);
   const publishedDate = publishedDateString.toLowerCase() === 'nan' ? null : new Date(publishedDateString);
   
   return {
     index: index + 1,
     type: 'youtubeVideo',
-    title: sanitizeField(details[1]),
-    extraInfo: sanitizeField(details[2]),
-    link: sanitizeField(details[3]),
+    title: sanitizeField("Title", details[1]),
+    extraInfo: sanitizeField("Authors", details[2]),
+    link: sanitizeField("URL", details[3]),
     publishedDate: publishedDate, // This will be null if the date is 'nan'
     publishedDateString: publishedDate ? publishedDateString : 'Date unspecified' // Provide a fallback text
   };
 }
 
 function createPaperEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
-  const publishedDateString = sanitizeField(details[4]);
+  const publishedDateString = sanitizeField("Date", details[4]);
   const publishedDate = publishedDateString.toLowerCase() === 'nan' ? null : new Date(publishedDateString);
   
   return {
     index: index + 1,
     type: 'researchPaper',
-    title: sanitizeField(details[1]),
-    extraInfo: processAuthors(sanitizeField(details[2])),
-    link: sanitizeField(details[3]),
+    title: sanitizeField("Title", details[1]),
+    extraInfo: processAuthors(sanitizeField("Authors", details[2])),
+    link: sanitizeField("URL", details[3]),
     publishedDate: publishedDate, // This will be null if the date is 'nan'
     publishedDateString: publishedDate ? publishedDateString : 'Date unspecified' // Provide a fallback text
   };
@@ -127,8 +127,8 @@ function processAuthors(authors: string): string {
   }
 }
 
-function sanitizeField(field: string): string {
-  return isValidField(field) ? field : `${field} unspecified`;
+function sanitizeField(field_name: string, field: string): string {
+  return isValidField(field) ? field : `${field_name} unspecified`;
 }
 
 function isValidField(field: string): boolean {
