@@ -48,7 +48,7 @@
 }
 
 .scrollableContainer {
-  max-height: calc(100vh - 230px);
+  max-height: calc(100vh - 225px);
   overflow-y: auto;
   flex-grow: 1; /* Allows the container to grow and take available space */
   /* ... other styles ... */
@@ -140,7 +140,7 @@
   margin-top: 0.3rem;
   position: absolute;
   right: 0;
-  /*right: -10px; /* Extend the text area by 10px to the right */
+  right: -20px; /* Extend the text area by 10px to the right */
 }
 
 .loadingContainer {
