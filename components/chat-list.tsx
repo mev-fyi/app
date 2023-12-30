@@ -5,7 +5,7 @@ import { ChatMessage } from '@/components/chat-message';
 
 export interface ChatListProps {
   messages: Message[];
-  lastMessageRole?: 'system' | 'user' | 'assistant' | 'function';
+  lastMessageRole: string; // Add this to accept the lastMessageRole prop
 }
 
 // Update the component to use React.forwardRef
