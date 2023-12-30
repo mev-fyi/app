@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import { ChatList } from '@/components/chat-list'
 import { ChatPanel } from '@/components/chat-panel'
 import { EmptyScreen } from '@/components/empty-screen'
+import ShareButton from '@/components/share-button'
 import { useLocalStorage } from '@/lib/hooks/use-local-storage'
 import { useState, useRef, useEffect } from 'react';
 import { toast } from 'react-hot-toast'
@@ -314,7 +315,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
           </div>
         </div>
 
-
+        {id && <ShareButton chatId={id} />}
 
         {/* Right panel for metadata list */}
         <div className={`${styles.rightPanel}`}>
