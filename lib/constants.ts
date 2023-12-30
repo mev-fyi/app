@@ -58,7 +58,7 @@ export const questions = [
     "What is a searcher?",
     "What is a proposer?",
     // "What is an attester?",
-    "How do searchers, builders, relays and proposers interact with one another?",
+    // "How do searchers, builders, relays and proposers interact with one another?",  // NOTE 2023-12-30: somehow not working anymore ...
     // "How can the user initiating a transaction get shielded from MEV?",
     // "Give me lectures links about mechanism design",
     // "Give me videos links with Hasu",
@@ -130,7 +130,7 @@ export const questions = [
     // "What is Vitalik Buterin's stance on MEV?",
     // "What is danksharding?",
     "What's Eigenlayer?",
-    "Explain what is Eigenlayer's restaking in layman's terms",
+    "Explain what is Eigenlayer's restaking and how it secures other protocols in layman's terms",
     // "What are concrete applications of Eigenlayer's restaking system?",
     "How does Eigenlayer's restaking system differ from LIDO's value proposition?",
     // "What are credible commitments and middlewares referred to in the context of Eigenlayer's restaking?",
@@ -164,8 +164,10 @@ export const questions = [
     // "What are the trade-offs for DeFi protocols to build on an L2 versus their on own app-chain on Cosmos?"
     "Give me an exhaustive understanding of execution tickets and block proposal right market",
     "Tell me everything you know about timing games in Ethereum",
-    "How does L2s, L3s and 'data availability layers' like Celestia relate to one another?",
+    "How do L2s, L3s and 'data availability layers' like Celestia relate to one another?",
     "What's an RPC? How does it relate to MEV?",
+    "Explain what are relays in Ethereum",
+    "How does relays relate to Proposer/Builder Separation (PBS)?",
   ]
   
 
