@@ -251,6 +251,11 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
     [styles.metadataContainerVisible]: metadataContainerVisible,
   });
 
+  // {/* @ts-ignore */}
+  // {
+  //   id && <ShareButton chatId={id} />
+  // }
+
   return (
     <>
       <div className={styles.layoutContainer}>
@@ -315,10 +320,7 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
               setShowChatList={setShowChatList}
             />
           </div>
-          {/* @ts-ignore */}
-          {
-            id && <ShareButton chatId={id} />
-          }
+
 
         </div>
 
