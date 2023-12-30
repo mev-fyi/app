@@ -1,33 +1,22 @@
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { toast } from 'react-hot-toast';
-import { auth } from '@/auth';
 import { LoginButton } from '@/components/login-button';
 import Image from 'next/image';
-import { redirect } from 'next/navigation';
+import { getSession, GetSessionParams } from 'next-auth/react';
+import { toast, Toaster } from 'react-hot-toast';
+import { GetServerSidePropsContext } from 'next';
 
-export default function SignInPage() {
-  const router = useRouter();
+type SignInPageProps = {
+  error?: string;
+};
 
-  useEffect(() => {
-    const checkSession = async () => {
-      const session = await auth();
-      // Redirect to home if the user is already logged in
-      if (session?.user) {
-        redirect('/');
-      }
+export default function SignInPage({ error }: SignInPageProps) {
+  // Display toast if not whitelisted
+  if (error === 'not_whitelisted') {
+    toast.error("You are not on the whitelist.");
+  }
 
-      // Display toast if not whitelisted
-      if (router.query.error === 'not_whitelisted') {
-        toast.error("You are not on the whitelist.");
-      }
-    };
-
-    checkSession();
-  }, [router]);
-  
   return (
     <div className="flex flex-col h-screen items-center justify-center py-10 sm:pb-50">
+      <Toaster />
       {/* Welcome message */}
       <h1 className="mb-4 text-3xl font-bold text-center">mev.fyi</h1>
       <h1 className="mb-4 text-3xl font-bold text-center">The Maximal Extractable Value (MEV) research chatbot</h1>
@@ -38,7 +27,7 @@ export default function SignInPage() {
       
       {/* Welcome image */}
       <div className="mb-8">
-        <img src="android-chrome-512x512.png"/>
+        <Image src="/android-chrome-512x512.png" alt="MEV Logo" width={512} height={512} />
       </div>
       
       {/* Login buttons */}
@@ -48,4 +37,25 @@ export default function SignInPage() {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getSession({ req: context.req } as GetSessionParams);
+
+  // Redirect to home if user is already logged in
+  if (session?.user) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
+  // Pass the error query to the component if it exists
+  const error = context.query.error as string | undefined;
+
+  return {
+    props: { error },
+  };
 }
