@@ -64,8 +64,8 @@ export const {
     // Reuse any other callbacks from the original configuration
   },
   pages: {
-    signIn: '/sign-in',
-    error: '/auth/signin' // Redirect to custom sign-in page on error
+    signIn: '/sign-in', // Make sure this path is correct.
+    error: '/sign-in',  // Change this path to match your sign-in page path.
   },
   // Reuse any other configurations from the original setup
 });
