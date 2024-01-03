@@ -7,8 +7,8 @@
 }
 
 .leftPanel {
-  flex: 1; /* Allows panels to grow */
-  min-width: 400px; /* Minimum width */
+  flex: 0 1 25%; /* Reduce the flex-basis to 25% and allow them to shrink if necessary */
+  min-width: 380px; /* Minimum width */
   max-width: 30%; /* Adjusted maximum width */
   display: flex;
   flex-direction: column;
@@ -18,7 +18,7 @@
 }
 
 .rightPanel {
-  flex: 1; /* Allows panels to grow */
+  flex: 0 1 25%; /* Reduce the flex-basis to 25% and allow them to shrink if necessary */
   min-width: 400px; /* Minimum width */
   max-width: 30%; /* Adjusted maximum width */
   display: flex;
@@ -35,7 +35,7 @@
 
 /* Middle panel for chatlist and prompt form */
 .middlePanel {
-  flex: 1; /* Allows the panel to grow */
+  flex: 0 1 50%; /* Increase the flex-basis to 50% for the middle panel */
   min-width: 500px; /* Minimum width to ensure it doesn't get too small */
   max-width: 40%; /* Adjusted maximum width */
   display: flex;
@@ -51,6 +51,7 @@
   max-height: calc(100vh - 225px);
   overflow-y: auto;
   flex-grow: 1; /* Allows the container to grow and take available space */
+  overflow-x: hidden; /* Hides horizontal scroll */
   /* ... other styles ... */
   /*padding-bottom: 500px;*/
 }
@@ -59,16 +60,22 @@
 .chatListContainer {
   max-height: calc(100vh - 120px - 100px);
   overflow-y: auto; /* Ensures vertical scroll */
-  /* Remove padding if it causes misalignment with the ChatPanel */
+  padding-left: 60px; /* Increase this value to add more space to the left */ /* Remove padding if it causes misalignment with the ChatPanel */
 }
 
 .chatPanelWrapper {
   margin-left: auto;
   margin-right: auto;
-  width: 858px;
+  /*width: 858px;
   max-width: 858px; /* Match the width of .middlePanel */
-  padding-left: calc(3rem + 50px); /* Added 5px more for the broom button visibility */
-  padding-right: calc(1rem - 35px); /* Adjust if necessary for chat list content alignment */
+  width: auto; /* Allow it to size according to the content width */
+  max-width: calc(100% - (60px * 2)); /* Subtract the total horizontal padding from 100% */
+
+  /*padding-left: calc(3rem + 60px); /* Increase left padding for icons */
+  /*padding-right: calc(1rem - 35px); /* Adjust if necessary for chat list content alignment */
+  padding-left: 60px; /* Adjust as needed */
+  padding-right: 60px; /* Adjust as needed */
+
 }
 
 .chatPanel {
@@ -76,10 +83,13 @@
   bottom: 0;
   left: 50%; /* Increase the percentage to move to the right */
   transform: translateX(-49%); /* Decrease the percentage to move to the right */
-  width: calc(850px - 35px); /* Adjust width for right alignment */
+  /*width: calc(850px - 35px); /* Adjust width for right alignment */
   box-sizing: border-box;
   z-index: 10;
+  width: auto; /* Allow it to size according to the content width */
+  max-width: calc(100% - (60px * 2)); /* Match the chatPanelWrapper's max-width */
 }
+
 
 
 .chatPanelContent {
@@ -201,7 +211,7 @@
   white-space: normal; /* Normal text wrapping */
   transition: transform 0.3s; /* Smooth transition for sliding in/out */
   z-index: 10; /* Ensure it's above other content */
-  padding-right: 10%;
+  padding-right: 15%;
   padding-left: 2%;
   opacity: 1; /* Start with invisible */
   transition: opacity 0.5s ease-in-out; /* Smooth transition for opacity */
