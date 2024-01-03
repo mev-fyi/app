@@ -25,7 +25,6 @@
   flex-direction: column;
   align-items: center; /* Horizontally center */
   position: relative; /* Change to relative to make the left property effective */
-  left: 30px;
   left: 50px;
 }
 
@@ -63,41 +62,37 @@
   padding-left: 60px; /* Increase this value to add more space to the left */ /* Remove padding if it causes misalignment with the ChatPanel */
 }
 
-.chatPanelWrapper {
-  margin-left: auto;
-  margin-right: auto;
-  /*width: 858px;
-  max-width: 858px; /* Match the width of .middlePanel */
-  width: auto; /* Allow it to size according to the content width */
-  max-width: calc(100% - (60px * 2)); /* Subtract the total horizontal padding from 100% */
+.chatListMaxWidth {
+  max-width: 2xl; /* Tailwind's max-w-2xl */
+}
 
-  /*padding-left: calc(3rem + 60px); /* Increase left padding for icons */
-  /*padding-right: calc(1rem - 35px); /* Adjust if necessary for chat list content alignment */
-  padding-left: 60px; /* Adjust as needed */
-  padding-right: 60px; /* Adjust as needed */
-
+.chatListPadding {
+  padding: 1rem; /* Tailwind's px-4 */
 }
 
 .chatPanel {
   position: fixed;
   bottom: 0;
-  left: 50%; /* Increase the percentage to move to the right */
-  transform: translateX(-49%); /* Decrease the percentage to move to the right */
-  /*width: calc(850px - 35px); /* Adjust width for right alignment */
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 120px); /* Assuming chatListContainer has 60px padding on each side */
   box-sizing: border-box;
   z-index: 10;
-  width: auto; /* Allow it to size according to the content width */
-  max-width: calc(100% - (60px * 2)); /* Match the chatPanelWrapper's max-width */
+  padding: 1rem; /* Give some space inside the chat panel */
 }
 
-
+.chatPanelWrapper {
+  /* Removed the commented out properties and adjusted the width */
+  margin: 0 auto;
+  max-width: calc(100% - 120px); /* Match the chatPanel width */
+  padding: 1rem; /* Padding inside the wrapper, if needed */
+}
 
 .chatPanelContent {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding: 0 1rem; /* Adjust as needed */
-  margin-top: 4rem; /* Space below the 'Stop Generating' button */
+  justify-content: space-between; /* To distribute space between elements inside */
+  padding: 0; /* Adjust or remove padding as needed */
 }
 
 .broomButton {
@@ -108,24 +103,27 @@
   height: 2rem; /* Increase the height to match the width */
   cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
   margin-bottom: 0.3rem; /* Reduced bottom margin */
+  padding: 0.5rem; /* Adjust padding to ensure it fits within the chatPanel */
+
 }
 
 .promptFormContainer {
   flex-grow: 1;
-  padding: 0;
-  padding-top: 1rem; /* Reduced top padding */
-  padding-bottom: 1rem; /* Reduced bottom padding */
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   background: transparent;
   position: relative;
+  max-width: calc(100% - 4rem - 40px);
 }
 
 .promptForm {
-  width: calc(100% - 4rem);
+  width: 100%;
 }
 
 .promptFormInner {
   display: flex;
   flex-grow: 1;
+  width: 100%;
   align-items: center;
   background-color: transparent;
   position: relative;
@@ -144,13 +142,15 @@
   border: 1px solid rgba(255, 255, 255, 0.2); /* Thin, semi-transparent white border */
   border-radius: 8px; /* Rounded corners */
   padding: 10px; /* Adds padding inside the border */
+  width: 100%;
+  box-sizing: border-box; /* Include padding and border in the element's total width */
 }
 
 .sendButtonContainer {
   margin-top: 0.3rem;
   position: absolute;
-  right: 0;
-  right: 60px;
+  right: 1rem; /* Align with the padding of the chatPanel */
+  /*right: 60px;*/
 }
 
 .loadingContainer {
@@ -163,6 +163,9 @@
   z-index: 11;
   margin-top: 1rem; /* Space above the spinner */
 }
+
+
+
 
 /*.stopGeneratingButtonContainer {
 /*  position: absolute;
