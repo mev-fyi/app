@@ -36,26 +36,21 @@ export function EmptyScreen({ onSubmit, isVisible }: QuestionsOverlayPropsLeftPa
   const overlayClass = isMobile ? `${styles.questionsOverlay} ${styles.mobileHide}` : styles.questionsOverlay;
   const fadeInOutClass = isVisible ? styles.fadeIn : styles.fadeOut;
   
-  return (
-    <div className={`mx-auto max-w-2xl px-4 mb-12 ${fadeInOutClass}`}> {/* Updated margin-bottom class */}
-      <div className="rounded-lg border bg-background p-8 text-left">
+return (
+    <div className={`flex flex-col w-full ${fadeInOutClass}`}> {/* Use flex and flex-col for column layout */}
+      <div className="w-full rounded-lg border bg-background p-8 text-left">
         <h1 className="mb-2 text-lg font-semibold text-white">
           mev.fyi is the Maximal Extractable Value (MEV) research chatbot.
         </h1>
-        {isMobile ? (
-          <p className="mb-4 leading-normal text-muted-foreground">
-            Get started with an example:
-          </p>
-        ) : (
-          <p className="mb-4 leading-normal text-muted-foreground">
-            Find the latest MEV-related research, 
-            across mechanism design, auctions, information privacy, from research papers and YouTube videos.
-          </p>
-        )}
+        <p className="mb-4 leading-normal text-muted-foreground">
+          Find the latest MEV-related research, 
+          across mechanism design, auctions, information privacy, from research papers and YouTube videos.
+        </p>
       </div>
       
+      {/* Only show QuestionsOverlayLeftPanel if on mobile */}
       {isMobile && (
-        <div className={overlayClass}>
+        <div className={`w-full ${overlayClass}`}>
           <QuestionsOverlayLeftPanel onSubmit={onSubmit} showOverlay={true} />
         </div>
       )}

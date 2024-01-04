@@ -25,7 +25,7 @@
   flex-direction: column;
   align-items: center; /* Horizontally center */
   position: relative; /* Change to relative to make the left property effective */
-  left: 25px;
+  /*left: 25px;*/
   right: 30px;
 }
 
@@ -42,8 +42,8 @@
   padding: 60px; /* Adjust padding as needed */
   position: relative; /* Needed for absolute positioning within */
   box-sizing: border-box;
-  align-items: center; /* This will center the child elements */
-
+  /*align-items: center; /* This will center the child elements */
+  align-items: stretch; /* Ensure children stretch to fill the panel width */
 }
 
 .scrollableContainer {
@@ -55,6 +55,7 @@
   width: 100%; /* Full width to contain the chat list */
   display: flex;
   justify-content: center; /* Centers the chat list */
+  display: block; /* Use block instead of flex to avoid horizontal centering */
 }
 
 /* ChatList container with scrollable content */
@@ -79,7 +80,7 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(78% - 120px); /* Assuming chatListContainer has 60px padding on each side */
+  width: calc(80% - 120px); /* Assuming chatListContainer has 60px padding on each side */
   box-sizing: border-box;
   z-index: 10;
   padding: 1rem; /* Give some space inside the chat panel */
@@ -90,6 +91,7 @@
   margin: 0 auto;
   max-width: calc(100% - 120px); /* Match the chatPanel width */
   padding: 1rem; /* Padding inside the wrapper, if needed */
+  padding-left: 100px; /*To align with the chatlist for fully display the user and assistant icons*/
 }
 
 .chatPanelContent {
@@ -102,7 +104,7 @@
 .broomButton {
   background-color: #000000;
   border-radius: 50%;
-  margin-right: 15px;
+  margin-right: 5px;
   width: 2rem; /* Increase the width for more space */
   height: 2rem; /* Increase the height to match the width */
   cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
@@ -153,7 +155,7 @@
 .sendButtonContainer {
   margin-top: 0.3rem;
   position: absolute;
-  right: 1rem; /* Align with the padding of the chatPanel */
+  /*right: 1rem; /* Align with the padding of the chatPanel */
   /*right: 60px;*/
 }
 
