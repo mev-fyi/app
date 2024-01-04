@@ -1,58 +1,64 @@
 /* Main container for the entire layout */
 .layoutContainer {
   display: flex;
-  height: 100vh;
-  justify-content: space-between;
-  align-items: flex-start;
+  height: 100vh; /* Full height of the viewport */
+  justify-content: space-between; /* Space between ensures elements are pushed to the edges */
+  align-items: flex-start; /* Aligns items to the top */
 }
 
-/* Panels */
-.leftPanel, .rightPanel {
-  flex: 0 1 20%;
-  min-width: 200px;
-  max-width: 20%;
+.leftPanel {
+  flex: 0 1 25%; /* Reduce the flex-basis to 25% and allow them to shrink if necessary */
+  min-width: 320px; /* Minimum width */
+  max-width: 25%; /* Adjusted maximum width */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  position: relative;
+  align-items: center; /* Horizontally center */
+  position: relative; /* Change to relative to make the left property effective */
+  padding-top: 100px;
 }
 
 .rightPanel {
-  padding-right: 50px; /* Adjust the right panel padding */
+  flex: 0 1 25%; /* Reduce the flex-basis to 25% and allow them to shrink if necessary */
+  min-width: 350px; /* Minimum width */
+  max-width: 25%; /* Adjusted maximum width */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Horizontally center */
+  position: relative; /* Change to relative to make the left property effective */
+  left: 25px;
+  right: 30px;
 }
 
 
 
 /* Middle panel for chatlist and prompt form */
 .middlePanel {
-  flex: 0 1 60%; /* Increase the flex-basis to 50% for the middle panel */
+  flex: 0 1 50%; /* Increase the flex-basis to 50% for the middle panel */
   min-width: 500px; /* Minimum width to ensure it doesn't get too small */
-  max-width: 60%; /* Adjusted maximum width */
+  max-width: 50%; /* Adjusted maximum width */
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* This pushes the ChatPanel to the bottom */
-  /*box-sizing: border-box;
-  /*padding: 60px; /* Adjust padding as needed */
+  box-sizing: border-box;
+  padding: 60px; /* Adjust padding as needed */
   position: relative; /* Needed for absolute positioning within */
+  box-sizing: border-box;
 }
 
-
 .scrollableContainer {
-  max-height: calc(100vh - 120px);
+  max-height: calc(100vh - 225px);
   overflow-y: auto;
   flex-grow: 1; /* Allows the container to grow and take available space */
   overflow-x: hidden; /* Hides horizontal scroll */
-  padding-right: 20px; /* Consistent padding for the chat list */
-  padding-left: 20px; /* Adjusted padding to match the chatPanel */
   /* ... other styles ... */
   /*padding-bottom: 500px;*/
 }
 
 /* ChatList container with scrollable content */
 .chatListContainer {
-  max-height: calc(100vh - 120px);
+  max-height: calc(100vh - 120px - 100px);
   overflow-y: auto; /* Ensures vertical scroll */
-  /*padding-right: 60px; /* Increase this value to add more space to the left */ /* Remove padding if it causes misalignment with the ChatPanel */
+  padding-right: 60px; /* Increase this value to add more space to the left */ /* Remove padding if it causes misalignment with the ChatPanel */
 }
 
 .chatListMaxWidth {
@@ -68,8 +74,7 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  /*width: calc(60% - 120px); /* Assuming chatListContainer has 60px padding on each side */
-  width: auto; /* Width adjusts to content */
+  width: calc(60% - 120px); /* Assuming chatListContainer has 60px padding on each side */
   box-sizing: border-box;
   z-index: 10;
   padding: 1rem; /* Give some space inside the chat panel */
@@ -78,8 +83,7 @@
 .chatPanelWrapper {
   /* Removed the commented out properties and adjusted the width */
   margin: 0 auto;
-  width: 100%; /* Full width to contain its children */
-  max-width: calc(60% - 40px); /* Adjusted max-width to account for middlePanel padding */
+  max-width: calc(60% - 120px); /* Match the chatPanel width */
   padding: 1rem; /* Padding inside the wrapper, if needed */
 }
 
@@ -87,6 +91,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between; /* To distribute space between elements inside */
+  padding: 0; /* Adjust or remove padding as needed */
 }
 
 .broomButton {
@@ -102,12 +107,12 @@
 }
 
 .promptFormContainer {
-  flex-grow: 0.5;
+  flex-grow: 1;
   padding-top: 1rem;
   padding-bottom: 1rem;
   background: transparent;
   position: relative;
-  max-width: 100%; /* Adjusted to fill the available space */
+  max-width: calc(100% - 4rem - 40px);
 }
 
 .promptForm {
@@ -117,25 +122,25 @@
 .promptFormInner {
   display: flex;
   flex-grow: 1;
+  width: 100%;
   align-items: center;
-  padding: 0; /* Removed unnecessary padding */
   background-color: transparent;
   position: relative;
 }
 
 .promptTextarea {
-  flex-grow: 0.5;
+  flex-grow: 1;
   padding: 1.3rem 0;
   outline: none;
   font-size: 1rem;
   background-color: transparent;
   color: #ffffff;
-  /*margin-right: 2.7rem; /* Reduce by 0.3rem to allow for textarea extension */
-  /*margin-left: -9px; /* Extend by 5px to the left */
+  margin-right: 2.7rem; /* Reduce by 0.3rem to allow for textarea extension */
+  margin-left: -9px; /* Extend by 5px to the left */
   /*margin-right: -2px; /* Extend by 5px to the right */
   border: 1px solid rgba(255, 255, 255, 0.2); /* Thin, semi-transparent white border */
   border-radius: 8px; /* Rounded corners */
-  padding: 15px; /* Adds padding inside the border */
+  padding: 10px; /* Adds padding inside the border */
   width: 100%;
   box-sizing: border-box; /* Include padding and border in the element's total width */
 }
@@ -157,6 +162,7 @@
   z-index: 11;
   margin-top: 1rem; /* Space above the spinner */
 }
+
 
 
 
@@ -196,7 +202,7 @@
 /* Metadata container */
 .metadataContainer {
   width: 100%; /* Use 100% of the rightPanel width */
-  max-width: calc(20% - 60px); /* Adjusted max-width to account for middlePanel padding */
+  max-width: 600px; /* Example max-width */
   max-height: calc(100vh - 120px - 100px);
   margin-left: 10px; /* Align to the left by setting left margin */
   margin-right: auto; /* Keeps right margin automatic */
@@ -207,7 +213,7 @@
   white-space: normal; /* Normal text wrapping */
   transition: transform 0.3s; /* Smooth transition for sliding in/out */
   z-index: 10; /* Ensure it's above other content */
-  padding-right: 3%;
+  padding-right: 15%;
   padding-left: 2%;
   opacity: 1; /* Start with invisible */
   transition: opacity 0.5s ease-in-out; /* Smooth transition for opacity */
@@ -238,11 +244,6 @@
   font-size: 1.5rem;
   margin-bottom: 2rem;
   margin-top: 1rem;
-}
-
-/* Update the gap between panels */
-.layoutContainer > *:not(:last-child) {
-  margin-right: 20px; /* Add space between panels */
 }
 
 .customMarkdownFont {
