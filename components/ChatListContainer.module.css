@@ -18,9 +18,9 @@
 }
 
 .rightPanel {
-  flex: 0 1 25%; /* Reduce the flex-basis to 25% and allow them to shrink if necessary */
+  flex: 0 1 30%; /* Reduce the flex-basis to 25% and allow them to shrink if necessary */
   min-width: 350px; /* Minimum width */
-  max-width: 25%; /* Adjusted maximum width */
+  max-width: 30%; /* Adjusted maximum width */
   display: flex;
   flex-direction: column;
   align-items: center; /* Horizontally center */
@@ -33,9 +33,9 @@
 
 /* Middle panel for chatlist and prompt form */
 .middlePanel {
-  flex: 0 1 50%; /* Increase the flex-basis to 50% for the middle panel */
+  flex: 0 1 45%; /* Increase the flex-basis to 50% for the middle panel */
   min-width: 500px; /* Minimum width to ensure it doesn't get too small */
-  max-width: 50%; /* Adjusted maximum width */
+  max-width: 45%; /* Adjusted maximum width */
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* This pushes the ChatPanel to the bottom */
@@ -50,8 +50,7 @@
   overflow-y: auto;
   flex-grow: 1; /* Allows the container to grow and take available space */
   overflow-x: hidden; /* Hides horizontal scroll */
-  /* ... other styles ... */
-  /*padding-bottom: 500px;*/
+  padding-left: 30px;
 }
 
 /* ChatList container with scrollable content */
@@ -59,7 +58,6 @@
   max-height: calc(100vh - 120px - 100px);
   overflow-y: auto; /* Ensures vertical scroll */
   /*padding-left: 60px; /* Increase this value to add more space to the left */ /* Remove padding if it causes misalignment with the ChatPanel */
-  padding: 50 25
 }
 
 .chatListMaxWidth {
@@ -75,7 +73,7 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(85% - 120px); /* Assuming chatListContainer has 60px padding on each side */
+  width: calc(75% - 120px); /* Assuming chatListContainer has 60px padding on each side */
   box-sizing: border-box;
   z-index: 10;
   padding: 1rem; /* Give some space inside the chat panel */
@@ -215,7 +213,7 @@
   transition: transform 0.3s; /* Smooth transition for sliding in/out */
   z-index: 10; /* Ensure it's above other content */
   padding-right: 10%;
-  padding-left: 2%;
+  padding-left: 5%;
   opacity: 1; /* Start with invisible */
   transition: opacity 0.5s ease-in-out; /* Smooth transition for opacity */
 }
