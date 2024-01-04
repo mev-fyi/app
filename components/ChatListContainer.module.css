@@ -26,7 +26,7 @@
   align-items: center; /* Horizontally center */
   position: relative; /* Change to relative to make the left property effective */
   left: 25px;
-  right: 30px;
+  padding-right: 30px;
 }
 
 
@@ -112,7 +112,7 @@
   padding-bottom: 1rem;
   background: transparent;
   position: relative;
-  max-width: calc(100% - 4rem - 40px);
+  max-width: calc(60% - 120px);
 }
 
 .promptForm {
