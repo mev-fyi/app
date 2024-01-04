@@ -76,6 +76,14 @@
   padding: 1rem; /* Tailwind's px-4 */
 }
 
+.chatPanelWrapper {
+  /* Removed the commented out properties and adjusted the width */
+  margin: 0 auto;
+  max-width: calc(100%); /* Match the chatPanel width */
+  padding: 1rem; /* Padding inside the wrapper, if needed */
+  padding-right: 120px; /*To align with the chatlist for fully display the user and assistant icons*/
+}
+
 .chatPanel {
   position: fixed;
   bottom: 0;
@@ -87,13 +95,6 @@
   padding: 1rem; /* Give some space inside the chat panel */
 }
 
-.chatPanelWrapper {
-  /* Removed the commented out properties and adjusted the width */
-  margin: 0 auto;
-  max-width: calc(100%); /* Match the chatPanel width */
-  padding: 1rem; /* Padding inside the wrapper, if needed */
-  padding-right: 60px; /*To align with the chatlist for fully display the user and assistant icons*/
-}
 
 .chatPanelContent {
   display: flex;
