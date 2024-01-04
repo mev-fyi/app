@@ -8,8 +8,8 @@
 
 .leftPanel {
   flex: 0 1 25%; /* Reduce the flex-basis to 25% and allow them to shrink if necessary */
-  min-width: 320px; /* Minimum width */
-  max-width: 25%; /* Adjusted maximum width */
+  min-width: 300px; /* Minimum width */
+  max-width: 20%; /* Adjusted maximum width */
   display: flex;
   flex-direction: column;
   align-items: center; /* Horizontally center */
@@ -19,14 +19,14 @@
 
 .rightPanel {
   flex: 0 1 25%; /* Reduce the flex-basis to 25% and allow them to shrink if necessary */
-  min-width: 350px; /* Minimum width */
-  max-width: 25%; /* Adjusted maximum width */
+  min-width: 300px; /* Minimum width */
+  max-width: 20%; /* Adjusted maximum width */
   display: flex;
   flex-direction: column;
   align-items: center; /* Horizontally center */
   position: relative; /* Change to relative to make the left property effective */
   left: 25px;
-  padding-right: 30px;
+  padding-right: 50px;
 }
 
 
@@ -35,12 +35,12 @@
 .middlePanel {
   flex: 0 1 50%; /* Increase the flex-basis to 50% for the middle panel */
   min-width: 500px; /* Minimum width to ensure it doesn't get too small */
-  max-width: 50%; /* Adjusted maximum width */
+  max-width: 60%; /* Adjusted maximum width */
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* This pushes the ChatPanel to the bottom */
   box-sizing: border-box;
-  padding: 60px; /* Adjust padding as needed */
+  /*padding: 60px; /* Adjust padding as needed */
   position: relative; /* Needed for absolute positioning within */
   box-sizing: border-box;
 }
@@ -58,7 +58,7 @@
 .chatListContainer {
   max-height: calc(100vh - 120px - 100px);
   overflow-y: auto; /* Ensures vertical scroll */
-  padding-right: 60px; /* Increase this value to add more space to the left */ /* Remove padding if it causes misalignment with the ChatPanel */
+  /*padding-right: 60px; /* Increase this value to add more space to the left */ /* Remove padding if it causes misalignment with the ChatPanel */
 }
 
 .chatListMaxWidth {
