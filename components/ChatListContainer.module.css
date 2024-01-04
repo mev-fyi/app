@@ -51,7 +51,7 @@
   overflow-y: auto;
   flex-grow: 1; /* Allows the container to grow and take available space */
   overflow-x: hidden; /* Hides horizontal scroll */
-  /*padding-left: 30px; /*To fully display the user and assistant icons*/
+  padding-left: 90px; /*To fully display the user and assistant icons*/
   width: 100%; /* Full width to contain the chat list */
   /*display: flex;
   justify-content: center; /* Centers the chat list */
@@ -87,8 +87,8 @@
 .chatPanel {
   position: fixed;
   bottom: 0;
-  left: 45%;
-  transform: translateX(-45%);
+  left: 44%;
+  transform: translateX(-44%);
   width: calc(78% - 120px); /* Assuming chatListContainer has 60px padding on each side */
   box-sizing: border-box;
   z-index: 10;
