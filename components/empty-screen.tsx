@@ -56,3 +56,4 @@ export function EmptyScreen({ onSubmit, isVisible }: QuestionsOverlayPropsLeftPa
       )}
     </div>
   );
+}
