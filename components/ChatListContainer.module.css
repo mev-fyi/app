@@ -75,7 +75,7 @@
 }
 
 .chatPanel {
-  /*position: fixed;*/
+  position: fixed;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
@@ -83,31 +83,19 @@
   box-sizing: border-box;
   z-index: 10;
   padding: 1rem; /* Give some space inside the chat panel */
-
-  position: absolute; /* Changed from fixed to absolute within the middlePanel */
-  left: 0; /* Align to the left edge of the middlePanel */
-  right: 0; /* Align to the right edge of the middlePanel */
-  margin: auto; /* Center within the middlePanel */
-  max-width: 95%; /* Match the chatListContainer's width */
-
 }
-
-
 
 .chatPanelWrapper {
   /* Removed the commented out properties and adjusted the width */
   margin: 0 auto;
-  /*max-width: calc(100% - 120px); /* Match the chatPanel width */
-  width: 100%; /* Full width of ChatPanel */
-  max-width: 95%; /* Match the ChatPanel's max-width */
+  max-width: calc(100% - 120px); /* Match the chatPanel width */
   padding: 1rem; /* Padding inside the wrapper, if needed */
 }
 
 .chatPanelContent {
   display: flex;
   align-items: center;
-  /*justify-content: space-between; /* To distribute space between elements inside */
-  justify-content: center; /* Center the content horizontally */
+  justify-content: space-between; /* To distribute space between elements inside */
   padding: 0; /* Adjust or remove padding as needed */
 }
 
