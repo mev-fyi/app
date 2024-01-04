@@ -55,7 +55,7 @@
   width: 100%; /* Full width to contain the chat list */
   display: flex;
   justify-content: center; /* Centers the chat list */
-  display: block; /* Use block instead of flex to avoid horizontal centering */
+  /*display: block; /* Use block instead of flex to avoid horizontal centering */
 }
 
 /* ChatList container with scrollable content */
@@ -68,7 +68,7 @@
 }
 
 .chatListMaxWidth {
-  max-width: 95%
+  max-width: 100%
 }
 
 .chatListPadding {
@@ -80,7 +80,7 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(80% - 120px); /* Assuming chatListContainer has 60px padding on each side */
+  width: calc(90% - 120px); /* Assuming chatListContainer has 60px padding on each side */
   box-sizing: border-box;
   z-index: 10;
   padding: 1rem; /* Give some space inside the chat panel */
@@ -89,9 +89,9 @@
 .chatPanelWrapper {
   /* Removed the commented out properties and adjusted the width */
   margin: 0 auto;
-  max-width: calc(100% - 120px); /* Match the chatPanel width */
+  max-width: calc(100%); /* Match the chatPanel width */
   padding: 1rem; /* Padding inside the wrapper, if needed */
-  padding-left: 100px; /*To align with the chatlist for fully display the user and assistant icons*/
+  padding-left: 60px; /*To align with the chatlist for fully display the user and assistant icons*/
 }
 
 .chatPanelContent {
@@ -119,7 +119,7 @@
   padding-bottom: 1rem;
   background: transparent;
   position: relative;
-  max-width: calc(100% - 4rem - 40px);
+  max-width: calc(100%);
 }
 
 .promptForm {
@@ -156,7 +156,7 @@
   margin-top: 0.3rem;
   position: absolute;
   /*right: 1rem; /* Align with the padding of the chatPanel */
-  /*right: 60px;*/
+  right: 60px;
 }
 
 .loadingContainer {
