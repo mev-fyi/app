@@ -80,7 +80,7 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(82% - 120px); /* Assuming chatListContainer has 60px padding on each side */
+  width: calc(76% - 120px); /* Assuming chatListContainer has 60px padding on each side */
   box-sizing: border-box;
   z-index: 10;
   padding: 1rem; /* Give some space inside the chat panel */
@@ -104,7 +104,7 @@
 .broomButton {
   background-color: #000000;
   border-radius: 50%;
-  margin-right: 5px;
+  margin-right: 15px;
   width: 2rem; /* Increase the width for more space */
   height: 2rem; /* Increase the height to match the width */
   cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
@@ -156,7 +156,7 @@
   margin-top: 0.3rem;
   position: absolute;
   /*right: 1rem; /* Align with the padding of the chatPanel */
-  right: 60px;
+  right: 55px;
 }
 
 .loadingContainer {
