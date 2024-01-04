@@ -53,9 +53,9 @@
   overflow-x: hidden; /* Hides horizontal scroll */
   padding-left: 40px; /*To fully display the user and assistant icons*/
   width: 100%; /* Full width to contain the chat list */
-  display: flex;
+  /*display: flex;
   justify-content: center; /* Centers the chat list */
-  /*display: block; /* Use block instead of flex to avoid horizontal centering */
+  display: block; /* Use block instead of flex to avoid horizontal centering */
 }
 
 /* ChatList container with scrollable content */
@@ -80,7 +80,7 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(90% - 120px); /* Assuming chatListContainer has 60px padding on each side */
+  width: calc(82% - 120px); /* Assuming chatListContainer has 60px padding on each side */
   box-sizing: border-box;
   z-index: 10;
   padding: 1rem; /* Give some space inside the chat panel */
