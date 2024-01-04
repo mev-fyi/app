@@ -116,13 +116,13 @@
 }
 
 .promptForm {
-  width: 100%;
+  max-width: calc(60% - 120px);
 }
 
 .promptFormInner {
   display: flex;
   flex-grow: 1;
-  width: 100%;
+  max-width: calc(60% - 120px);
   align-items: center;
   background-color: transparent;
   position: relative;
@@ -162,7 +162,6 @@
   z-index: 11;
   margin-top: 1rem; /* Space above the spinner */
 }
-
 
 
 
