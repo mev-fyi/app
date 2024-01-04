@@ -73,7 +73,7 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(75% - 120px); /* Assuming chatListContainer has 60px padding on each side */
+  width: calc(78% - 120px); /* Assuming chatListContainer has 60px padding on each side */
   box-sizing: border-box;
   z-index: 10;
   padding: 1rem; /* Give some space inside the chat panel */
@@ -246,7 +246,7 @@
 }
 
 .customMarkdownFont {
-  font-size: 1.1rem; /* Adjust the font size as needed */
+  font-size: 0.98rem; /* Adjust the font size as needed */
 }
 
 .customMarkdownFontMobile {
