@@ -1,32 +1,24 @@
 /* Main container for the entire layout */
 .layoutContainer {
   display: flex;
-  height: 100vh; /* Full height of the viewport */
-  justify-content: space-between; /* Space between ensures elements are pushed to the edges */
-  align-items: flex-start; /* Aligns items to the top */
+  height: 100vh;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
-.leftPanel {
-  flex: 0 1 20%; /* Reduce the flex-basis to 25% and allow them to shrink if necessary */
-  min-width: 200px; /* Minimum width */
-  max-width: 20%; /* Adjusted maximum width */
+/* Panels */
+.leftPanel, .rightPanel {
+  flex: 0 1 20%;
+  min-width: 200px;
+  max-width: 20%;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Horizontally center */
-  position: relative; /* Change to relative to make the left property effective */
-  padding-top: 100px;
+  align-items: center;
+  position: relative;
 }
 
 .rightPanel {
-  flex: 0 1 20%; /* Reduce the flex-basis to 25% and allow them to shrink if necessary */
-  min-width: 200px; /* Minimum width */
-  max-width: 20%; /* Adjusted maximum width */
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Horizontally center */
-  position: relative; /* Change to relative to make the left property effective */
-  /*left: 25px;*/
-  padding-right: 50px;
+  padding-right: 50px; /* Adjust the right panel padding */
 }
 
 
@@ -39,24 +31,26 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* This pushes the ChatPanel to the bottom */
-  box-sizing: border-box;
+  /*box-sizing: border-box;
   /*padding: 60px; /* Adjust padding as needed */
   position: relative; /* Needed for absolute positioning within */
-  box-sizing: border-box;
 }
 
+
 .scrollableContainer {
-  max-height: calc(100vh - 225px);
+  max-height: calc(100vh - 120px);
   overflow-y: auto;
   flex-grow: 1; /* Allows the container to grow and take available space */
   overflow-x: hidden; /* Hides horizontal scroll */
+  padding-right: 20px; /* Consistent padding for the chat list */
+  padding-left: 20px; /* Adjusted padding to match the chatPanel */
   /* ... other styles ... */
   /*padding-bottom: 500px;*/
 }
 
 /* ChatList container with scrollable content */
 .chatListContainer {
-  max-height: calc(100vh - 120px - 100px);
+  max-height: calc(100vh - 120px);
   overflow-y: auto; /* Ensures vertical scroll */
   /*padding-right: 60px; /* Increase this value to add more space to the left */ /* Remove padding if it causes misalignment with the ChatPanel */
 }
@@ -74,7 +68,8 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: calc(60% - 120px); /* Assuming chatListContainer has 60px padding on each side */
+  /*width: calc(60% - 120px); /* Assuming chatListContainer has 60px padding on each side */
+  width: auto; /* Width adjusts to content */
   box-sizing: border-box;
   z-index: 10;
   padding: 1rem; /* Give some space inside the chat panel */
@@ -83,7 +78,8 @@
 .chatPanelWrapper {
   /* Removed the commented out properties and adjusted the width */
   margin: 0 auto;
-  max-width: calc(60% - 120px); /* Match the chatPanel width */
+  width: 100%; /* Full width to contain its children */
+  max-width: calc(60% - 40px); /* Adjusted max-width to account for middlePanel padding */
   padding: 1rem; /* Padding inside the wrapper, if needed */
 }
 
@@ -91,7 +87,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between; /* To distribute space between elements inside */
-  padding: 0; /* Adjust or remove padding as needed */
 }
 
 .broomButton {
@@ -112,18 +107,18 @@
   padding-bottom: 1rem;
   background: transparent;
   position: relative;
-  max-width: calc(60% - 120px);
+  max-width: 100%; /* Adjusted to fill the available space */
 }
 
 .promptForm {
-  max-width: calc(60% - 120px);
+  width: 100%;
 }
 
 .promptFormInner {
   display: flex;
-  flex-grow: 0.5;
-  max-width: calc(60% - 120px);
+  flex-grow: 1;
   align-items: center;
+  padding: 0; /* Removed unnecessary padding */
   background-color: transparent;
   position: relative;
 }
@@ -201,7 +196,7 @@
 /* Metadata container */
 .metadataContainer {
   width: 100%; /* Use 100% of the rightPanel width */
-  max-width: 600px; /* Example max-width */
+  max-width: calc(20% - 60px); /* Adjusted max-width to account for middlePanel padding */
   max-height: calc(100vh - 120px - 100px);
   margin-left: 10px; /* Align to the left by setting left margin */
   margin-right: auto; /* Keeps right margin automatic */
@@ -212,7 +207,7 @@
   white-space: normal; /* Normal text wrapping */
   transition: transform 0.3s; /* Smooth transition for sliding in/out */
   z-index: 10; /* Ensure it's above other content */
-  padding-right: 15%;
+  padding-right: 3%;
   padding-left: 2%;
   opacity: 1; /* Start with invisible */
   transition: opacity 0.5s ease-in-out; /* Smooth transition for opacity */
@@ -243,6 +238,11 @@
   font-size: 1.5rem;
   margin-bottom: 2rem;
   margin-top: 1rem;
+}
+
+/* Update the gap between panels */
+.layoutContainer > *:not(:last-child) {
+  margin-right: 20px; /* Add space between panels */
 }
 
 .customMarkdownFont {
