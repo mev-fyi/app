@@ -39,10 +39,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* This pushes the ChatPanel to the bottom */
-  box-sizing: border-box;
   padding: 60px; /* Adjust padding as needed */
   position: relative; /* Needed for absolute positioning within */
   box-sizing: border-box;
+  align-items: center; /* This will center the child elements */
+
 }
 
 .scrollableContainer {
@@ -50,13 +51,18 @@
   overflow-y: auto;
   flex-grow: 1; /* Allows the container to grow and take available space */
   overflow-x: hidden; /* Hides horizontal scroll */
-  padding-left: 40px;
+  padding-left: 40px; /*To fully display the user and assistant icons*/
+  width: 100%; /* Full width to contain the chat list */
+  display: flex;
+  justify-content: center; /* Centers the chat list */
 }
 
 /* ChatList container with scrollable content */
 .chatListContainer {
   max-height: calc(100vh - 120px - 100px);
   overflow-y: auto; /* Ensures vertical scroll */
+  max-width: 95%; /* Adjusted max-width for the chat list */
+  margin: 0 auto; /* Center the chat list within its container */
   /*padding-left: 60px; /* Increase this value to add more space to the left */ /* Remove padding if it causes misalignment with the ChatPanel */
 }
 
@@ -69,7 +75,7 @@
 }
 
 .chatPanel {
-  position: fixed;
+  /*position: fixed;*/
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
@@ -77,19 +83,31 @@
   box-sizing: border-box;
   z-index: 10;
   padding: 1rem; /* Give some space inside the chat panel */
+
+  position: absolute; /* Changed from fixed to absolute within the middlePanel */
+  left: 0; /* Align to the left edge of the middlePanel */
+  right: 0; /* Align to the right edge of the middlePanel */
+  margin: auto; /* Center within the middlePanel */
+  max-width: 95%; /* Match the chatListContainer's width */
+
 }
+
+
 
 .chatPanelWrapper {
   /* Removed the commented out properties and adjusted the width */
   margin: 0 auto;
-  max-width: calc(100% - 120px); /* Match the chatPanel width */
+  /*max-width: calc(100% - 120px); /* Match the chatPanel width */
+  width: 100%; /* Full width of ChatPanel */
+  max-width: 95%; /* Match the ChatPanel's max-width */
   padding: 1rem; /* Padding inside the wrapper, if needed */
 }
 
 .chatPanelContent {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* To distribute space between elements inside */
+  /*justify-content: space-between; /* To distribute space between elements inside */
+  justify-content: center; /* Center the content horizontally */
   padding: 0; /* Adjust or remove padding as needed */
 }
 
