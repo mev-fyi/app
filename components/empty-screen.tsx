@@ -36,8 +36,8 @@ export function EmptyScreen({ onSubmit, isVisible }: QuestionsOverlayPropsLeftPa
   const overlayClass = isMobile ? `${styles.questionsOverlay} ${styles.mobileHide}` : styles.questionsOverlay;
   const fadeInOutClass = isVisible ? styles.fadeIn : styles.fadeOut;
   
-return (
-    <div className={`flex flex-col w-full ${fadeInOutClass}`}> {/* Use flex and flex-col for column layout */}
+  return (
+    <div className={`flex flex-col w-full pb-12 ${fadeInOutClass}`}> {/* pb-12 is for padding-bottom */}
       <div className="w-full rounded-lg border bg-background p-8 text-left">
         <h1 className="mb-2 text-lg font-semibold text-white">
           mev.fyi is the Maximal Extractable Value (MEV) research chatbot.
@@ -56,4 +56,3 @@ return (
       )}
     </div>
   );
-}
