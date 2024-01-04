@@ -8,8 +8,8 @@
 
 .leftPanel {
   flex: 0 1 25%; /* Reduce the flex-basis to 25% and allow them to shrink if necessary */
-  min-width: 380px; /* Minimum width */
-  max-width: 30%; /* Adjusted maximum width */
+  min-width: 320px; /* Minimum width */
+  max-width: 25%; /* Adjusted maximum width */
   display: flex;
   flex-direction: column;
   align-items: center; /* Horizontally center */
@@ -19,16 +19,15 @@
 
 .rightPanel {
   flex: 0 1 25%; /* Reduce the flex-basis to 25% and allow them to shrink if necessary */
-  min-width: 400px; /* Minimum width */
-  max-width: 30%; /* Adjusted maximum width */
+  min-width: 350px; /* Minimum width */
+  max-width: 25%; /* Adjusted maximum width */
   display: flex;
   flex-direction: column;
   align-items: center; /* Horizontally center */
   position: relative; /* Change to relative to make the left property effective */
-  left: 50px;
+  left: 25px;
+  right: 30px;
 }
-
-
 
 
 
@@ -36,7 +35,7 @@
 .middlePanel {
   flex: 0 1 50%; /* Increase the flex-basis to 50% for the middle panel */
   min-width: 500px; /* Minimum width to ensure it doesn't get too small */
-  max-width: 40%; /* Adjusted maximum width */
+  max-width: 50%; /* Adjusted maximum width */
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* This pushes the ChatPanel to the bottom */
