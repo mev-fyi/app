@@ -172,6 +172,11 @@ export const questions = [
     "Give me the full composition of an Ethereum block and how it relates to the consensus, data availability, and execution layer",
     "Give me the full composition of an Ethereum proof-of-stake block",
     "What are inclusion lists?",
+    "Return in a markdown table the differences in implementation in ePBS",
+    "Return in a markdown table the differences between ETH proof of work and ETH proof of stake",
+    "Return in a markdown table the differences between Eigenlayer and LIDO",
+    "What is Proto-Danksharding (EIP-4844)?",
+    "What will Proto-Danksharding (EIP-4844) enable?"
   ]
   
 
