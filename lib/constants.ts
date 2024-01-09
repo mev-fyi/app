@@ -172,6 +172,10 @@ export const questions = [
     "Give me the full composition of an Ethereum block and how it relates to the consensus, data availability, and execution layer",
     "Give me the full composition of an Ethereum proof-of-stake block",
     "What are inclusion lists?",
+    "What will Proto-Danksharding (EIP-4844) enable?",
+    "What is PEPC, what does it resolve with respect to ePBS? Is PEPC a solution to the current centralized relay market or is it independent?",
+    "Explain to me the difference between ethereum base layer, data layer, execution layer, and how does that relate with EVMs and 'almost-EVMs'?",
+    "Why are data availability solutions needed?"
   ]
   
 
