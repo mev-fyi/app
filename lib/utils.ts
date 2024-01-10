@@ -54,8 +54,10 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
 
   const parsedEntries: (ParsedMetadataEntry | null)[] = formattedEntries.map((entry, index) => {
     console.log(`Parsing entry ${index + 1}:`, entry);
-    const videoDetails = entry.match(/\[Title\]: (.*?), \[Channel name\]: (.*?), \[Video Link\]: (.*?), \[Published date\]: ([\d-]+|nan)/);
-  const paperDetails = entry.match(/\[Title\]: (.*?), \[Authors\]: (.*?), \[Link\]: (.*?), \[Release date\]: ([\d-]+|nan)/);
+
+    // Updated regex with optional groups for all fields except title
+    const videoDetails = entry.match(/\[Title\]: (.*?)(, \[Channel name\]: (.*?))?(, \[Video Link\]: (.*?))?(, \[Published date\]: ([\d-]+|nan))?/);
+    const paperDetails = entry.match(/\[Title\]: (.*?)(, \[Authors\]: (.*?))?(, \[Link\]: (.*?))?(, \[Release date\]: ([\d-]+|nan))?/);
 
     if (videoDetails) {
       console.log(`Found video details for entry ${index + 1}`);
@@ -76,32 +78,38 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
 }
 
 function createVideoEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
-  const publishedDateString = sanitizeField("Date", details[4]);
-  const publishedDate = publishedDateString.toLowerCase() === 'nan' ? null : new Date(publishedDateString);
-  
+  const title = sanitizeField("Title", details[1]);
+  const channelName = sanitizeField("Channel name", details[3]);
+  const videoLink = sanitizeField("Video Link", details[5]);
+  const publishedDateString = sanitizeField("Date", details[7]);
+  const publishedDate = publishedDateString ? new Date(publishedDateString) : null;
+
   return {
     index: index + 1,
     type: 'youtubeVideo',
-    title: sanitizeField("Title", details[1]),
-    extraInfo: sanitizeField("Authors", details[2]),
-    link: sanitizeField("URL", details[3]),
-    publishedDate: publishedDate, // This will be null if the date is 'nan'
-    publishedDateString: publishedDate ? publishedDateString : '' // Provide a fallback text
+    title: title,
+    extraInfo: channelName,
+    link: videoLink,
+    publishedDate: publishedDate,
+    publishedDateString: publishedDateString
   };
 }
 
 function createPaperEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
-  const publishedDateString = sanitizeField("Date", details[4]);
-  const publishedDate = publishedDateString.toLowerCase() === 'nan' ? null : new Date(publishedDateString);
-  
+  const title = sanitizeField("Title", details[1]);
+  const authors = sanitizeField("Authors", details[3]);
+  const link = sanitizeField("Link", details[5]);
+  const publishedDateString = sanitizeField("Date", details[7]);
+  const publishedDate = publishedDateString ? new Date(publishedDateString) : null;
+
   return {
     index: index + 1,
     type: 'researchPaper',
-    title: sanitizeField("Title", details[1]),
-    extraInfo: processAuthors(sanitizeField("Authors", details[2])),
-    link: sanitizeField("URL", details[3]),
-    publishedDate: publishedDate, // This will be null if the date is 'nan'
-    publishedDateString: publishedDate ? publishedDateString : '' // Provide a fallback text
+    title: title,
+    extraInfo: processAuthors(authors),
+    link: link,
+    publishedDate: publishedDate,
+    publishedDateString: publishedDateString
   };
 }
 
