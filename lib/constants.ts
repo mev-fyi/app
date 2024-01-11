@@ -116,7 +116,7 @@ export const questions = [
     // "Tell me more about optimal on-chain auction designs",
     "How do zero-knowledge proofs impact MEV?",
     "How does threshold encryption impact MEV?",
-    "What is instant finality and how does it relate to MEV?",
+    // "What is instant finality and how does it relate to MEV?",  // NOTE 2024-01-11: no longer works as of date
     "What is Tendermint?",
     // "What is the Inter-Blockchain Communication (IBC) protocol?",
     // "What is Cosmos? How is Cosmos affected by MEV relative to Ethereum?",
@@ -180,7 +180,12 @@ export const questions = [
     "What is PEPC, what does it resolve with respect to ePBS? Is PEPC a solution to the current centralized relay market or is it independent?",
     "Explain to me the difference between ethereum base layer, data layer, execution layer, and how does that relate with EVMs and 'almost-EVMs'?",
     "Why are data availability solutions needed?",
-    "What is Data Sampling Availability (DAS)?"
+    "What is Data Sampling Availability (DAS)?",
+    "What are verkle trees?",
+    "What is the ZK EVM and what does it solve?",
+    "Return a markdown table which does an exhaustive comparison between Optimism and ZK-rollups",
+    "What is an L2 rollup?",
+    "What will proto-danksharding enable from a business standpoint?"
   ]
   
 
