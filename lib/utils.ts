@@ -55,7 +55,8 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
   const parsedEntries: (ParsedMetadataEntry | null)[] = formattedEntries.map((entry, index) => {
     console.log(`Parsing entry ${index + 1}:`, entry);
     const videoDetails = entry.match(/\[Title\]: (.*?), \[Channel name\]: (.*?), \[Video Link\]: (.*?), \[Published date\]: ([\d-]+|nan)/);
-    const paperDetails = entry.match(/\[Title\]: (.*?), \[Authors\]: (.*?), \[Link\]: (.*?), \[Release date\]: ([\d-]+|nan)/);
+    // Updated regex to handle empty release date and include highest score
+    const paperDetails = entry.match(/\[Title\]: (.*?), \[Authors\]: (.*?), \[Link\]: (.*?), \[Release date\]: ([\d-]*|nan), \[Highest Score\]: ([0-9.]+)/);
 
     if (videoDetails) {
       console.log(`Found video details for entry ${index + 1}`);
@@ -94,8 +95,9 @@ function createVideoEntry(details: RegExpMatchArray, index: number): ParsedMetad
 function createPaperEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
   console.log(`Creating paper entry for index ${index + 1}`);
   const publishedDateString = sanitizeField("Date", details[4]);
-  const publishedDate = publishedDateString.toLowerCase() === 'nan' ? null : new Date(publishedDateString);
-  
+  // Handle empty release date
+  const publishedDate = publishedDateString && publishedDateString.toLowerCase() !== 'nan' ? new Date(publishedDateString) : null;
+
   return {
     index: index + 1,
     type: 'researchPaper',
@@ -104,8 +106,10 @@ function createPaperEntry(details: RegExpMatchArray, index: number): ParsedMetad
     link: sanitizeField("URL", details[3]),
     publishedDate: publishedDate,
     publishedDateString: publishedDate ? publishedDateString : ''
+    // Note: 'Highest Score' is not used in the return object as per your current requirements
   };
 }
+
 
 function processAuthors(authors: string): string {
   if (!isValidField(authors)) {
