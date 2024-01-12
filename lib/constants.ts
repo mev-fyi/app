@@ -185,7 +185,8 @@ export const questions = [
     "What is the ZK EVM and what does it solve?",
     "Return a markdown table which does an exhaustive comparison between Optimism and ZK-rollups",
     "What is an L2 rollup?",
-    "What will proto-danksharding enable from a business standpoint?"
+    "What will proto-danksharding enable from a business standpoint?",
+    "What are the effects of MEV?"
   ]
   
 
