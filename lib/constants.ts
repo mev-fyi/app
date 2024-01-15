@@ -186,7 +186,10 @@ export const questions = [
     "Return a markdown table which does an exhaustive comparison between Optimism and ZK-rollups",
     "What is an L2 rollup?",
     "What will proto-danksharding enable from a business standpoint?",
-    "What are the effects of MEV?"
+    "What are the effects of MEV?",
+    "What are consensus mechanisms in Ethereum?",
+    "Return in markdown table the differences between a based- and a sovereign-rollup",
+    "Give me a very exhaustive step by step bullet point list of how to spin off an Ethereum node",
   ]
   
 
