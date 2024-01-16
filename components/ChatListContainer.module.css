@@ -169,7 +169,7 @@
   padding: 0.5rem 1rem;
   z-index: 11;
   margin-top: 1rem; /* Space above the spinner */
-  margin-bottom: 4rem; /* Add this line to increase space below the loading container */
+  margin-bottom: 2rem; /* Add this line to increase space below the loading container */
 }
 
 
