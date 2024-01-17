@@ -199,6 +199,7 @@ export const questions = [
     "What are forward inclusion lists and how do they help censorship resistance?",
     "What are base L2 chains?",
     "What are sovereign rollup chains?",
+    "How do sovereign and base rollup differ?",
   ]
   
 

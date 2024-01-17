@@ -60,7 +60,7 @@
 
 /* ChatList container with scrollable content */
 .chatListContainer {
-  max-height: calc(100vh - 120px - 100px);
+  max-height: calc(100vh - 120px - 120px);
   overflow-y: auto; /* Ensures vertical scroll */
   max-width: 100%; /* Adjusted max-width for the chat list */
   margin: 0 auto; /* Center the chat list within its container */
@@ -212,7 +212,7 @@
 .metadataContainer {
   width: 100%; /* Use 100% of the rightPanel width */
   max-width: 600px; /* Example max-width */
-  max-height: calc(100vh - 120px);
+  max-height: calc(100vh - 150px);
   margin-left: 10px; /* Align to the left by setting left margin */
   margin-right: auto; /* Keeps right margin automatic */
   padding: 1rem;
