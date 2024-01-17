@@ -87,7 +87,7 @@ export const questions = [
     // "What are bribes in the block-building supply chain?",
     // "Tell me more about the block construction market",
     "What is censorship resistance?",
-    "What has social welfare to do in Ethereum?",
+    // "What has social welfare to do in Ethereum?",  // NOTE 2024-01-17: deprecated
     "What are the links between game theory and the MEV supply chain?",
     "What is referred to as 'sequencing rules'?",
     // "What is referred to as the 'blockchain fee markets'?",
@@ -166,13 +166,13 @@ export const questions = [
     "Tell me everything you know about timing games in Ethereum",
     "How do L2s, L3s and 'data availability layers' like Celestia relate to one another?",
     "What's an RPC? How does it relate to MEV?",
-    "Explain what are relays in Ethereum",
+    // "Explain what are relays in Ethereum",
     "How does relays relate to Proposer/Builder Separation (PBS)?",
     "What is the difference between a validator, a proposer, and an attester?",
     "Give me the full composition of an Ethereum block and how it relates to the consensus, data availability, and execution layer",
     "Give me the full composition of an Ethereum proof-of-stake block",
     "What are inclusion lists?",
-    "Return in a markdown table the differences in implementation in ePBS",
+    "Return in a markdown table the differences in implementation in ePBS",  // NOTE 2024-01-17: no longer works as of date :(
     "Return in a markdown table the differences between ETH proof of work and ETH proof of stake",
     "Return in a markdown table the differences between Eigenlayer and LIDO",
     "What is Proto-Danksharding (EIP-4844)?",
@@ -190,6 +190,15 @@ export const questions = [
     "What are consensus mechanisms in Ethereum?",
     "Return in markdown table the differences between a based- and a sovereign-rollup",
     "Give me a very exhaustive step by step bullet point list of how to spin off an Ethereum node",
+    "what is the difference between 'incentive compatible' mechanism and 'strategyproof mechanism'?",
+    "What do we refer to as Direct Acyclic Graph (DAG) protocols?",
+    "How to decentralise zero-knowledge provers and what are the trade-offs?",
+    "Tell me about the Espresso shared sequencer",
+    "What are 'slot vs. block auctions' and what are the trade-offs of either auction type?",
+    "Give me a thorough overview of cryptoeconomics",
+    "What are forward inclusion lists and how do they help censorship resistance?",
+    "What are base L2 chains?",
+    "What are sovereign rollup chains?",
   ]
   
 
