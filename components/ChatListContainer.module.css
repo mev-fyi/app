@@ -47,7 +47,7 @@
 }
 
 .scrollableContainer {
-  max-height: calc(100vh - 235px);
+  max-height: calc(100vh - 225px);
   overflow-y: auto;
   flex-grow: 1; /* Allows the container to grow and take available space */
   overflow-x: hidden; /* Hides horizontal scroll */
@@ -212,8 +212,7 @@
 .metadataContainer {
   width: 100%; /* Use 100% of the rightPanel width */
   max-width: 600px; /* Example max-width */
-  max-height: calc(100vh);
-  padding-top: 40px;
+  max-height: calc(100vh - 120px);
   margin-left: 10px; /* Align to the left by setting left margin */
   margin-right: auto; /* Keeps right margin automatic */
   padding: 1rem;
