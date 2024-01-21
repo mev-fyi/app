@@ -105,6 +105,9 @@
 }
 
 .broomButton {
+  display: flex; /* Use flexbox layout */
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
   background-color: #000000;
   border-radius: 50%;
   margin-right: 15px;
@@ -113,8 +116,8 @@
   cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
   margin-bottom: 0.3rem; /* Reduced bottom margin */
   padding: 0.5rem; /* Adjust padding to ensure it fits within the chatPanel */
-
 }
+
 
 .promptFormContainer {
   flex-grow: 1;
@@ -213,7 +216,7 @@
 .metadataContainer {
   width: 100%; /* Use 100% of the rightPanel width */
   max-width: 600px; /* Example max-width */
-  max-height: calc(100vh - 160px);
+  max-height: calc(100vh - 130px);
   margin-left: 10px; /* Align to the left by setting left margin */
   margin-right: auto; /* Keeps right margin automatic */
   padding: 1rem;
