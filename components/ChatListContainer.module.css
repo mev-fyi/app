@@ -63,7 +63,7 @@
 
 /* ChatList container with scrollable content */
 .chatListContainer {
-  max-height: calc(100vh - 120px - 120px);
+  max-height: calc(100vh - 120px - 100px);
   overflow-y: auto; /* Ensures vertical scroll */
   max-width: 100%; /* Adjusted max-width for the chat list */
   margin: 0 auto; /* Center the chat list within its container */
@@ -95,8 +95,10 @@
   width: calc(75% - 120px);
   box-sizing: border-box;
   z-index: 10;
-  padding: 1rem;
-  /*padding-bottom: 3rem; /* Increase bottom padding to create space for the loading spinner */
+  padding-top: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 0.5rem;
 }
 
 
@@ -169,7 +171,7 @@
 
 .loadingContainer {
   position: absolute;
-  top: -10px; /* Move up by 50 pixels, adjust value as needed */
+  top: -5px; /* Move up by 50 pixels, adjust value as needed */
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
