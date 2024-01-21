@@ -174,7 +174,7 @@ export const questions = [
     "What are inclusion lists?",
     // "Return in a markdown table the differences in implementation in ePBS",  // NOTE 2024-01-17: no longer works as of date :(
     "Return in a markdown table the differences between ETH proof of work and ETH proof of stake",
-    "Return in a markdown table the differences between Eigenlayer and LIDO",
+    // "Return in a markdown table the differences between Eigenlayer and LIDO",  // NOTE 2024-01-21: no longer works as of date :(
     "What is Proto-Danksharding (EIP-4844)?",
     "What will Proto-Danksharding (EIP-4844) enable?",
     "What is PEPC, what does it resolve with respect to ePBS? Is PEPC a solution to the current centralized relay market or is it independent?",
@@ -204,6 +204,14 @@ export const questions = [
     "Give me the full transaction supply chain of a ZK-rollup, from user intent to ZK prover and posting on ETH L1",
     "Make a very exhaustive breakdown of the ZK prover proof creation",
     "How is the concept of rollup-as-a-service, for instance provided by Altlayer, different from the appchain e.g. built on Cosmos SDK?",
+    "What is a 'validium'? What is Plasma?",
+    "What is proof-of-work (PoW)?",
+    "What is proof-of-stake (PoS)?",
+    "Are there other proofs different from proof-of-work and proof-of-stake?",
+    "What is a consensus mechanism?",
+    "What are blockchain systems?",
+    "What are dApps?",
+    "What is the Solidity programming language?",
   ]
   
 
