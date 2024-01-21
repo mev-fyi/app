@@ -48,7 +48,7 @@
 }
 
 .scrollableContainer {
-  max-height: calc(100vh - 225px);
+  max-height: calc(100vh - 225px - 15px);
   overflow-y: auto;
   flex-grow: 1; /* Allows the container to grow and take available space */
   overflow-x: hidden; /* Hides horizontal scroll */
@@ -166,14 +166,16 @@
 
 .loadingContainer {
   position: absolute;
-  top: 0;
-  width: 100%;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust for exact centering */
+  width: 100%; /* Keep the width to 100% for now */
   display: flex;
   justify-content: center;
   padding: 0.5rem 1rem;
   z-index: 11;
-  margin-top: 1rem; /* Space above the spinner */
-  margin-bottom: 2rem; /* Add this line to increase space below the loading container */
+  margin-top: -2rem; /* Adjust as needed for spacing */
+  margin-bottom: 2rem; /* Increase bottom margin */
 }
 
 
