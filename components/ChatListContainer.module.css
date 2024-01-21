@@ -94,7 +94,7 @@
   box-sizing: border-box;
   z-index: 10;
   padding: 1rem;
-  padding-bottom: 3rem; /* Increase bottom padding to create space for the loading spinner */
+  /*padding-bottom: 3rem; /* Increase bottom padding to create space for the loading spinner */
 }
 
 
@@ -167,7 +167,7 @@
 
 .loadingContainer {
   position: absolute;
-  top: -50px; /* Move up by 50 pixels, adjust value as needed */
+  top: -10px; /* Move up by 50 pixels, adjust value as needed */
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
