@@ -50,7 +50,7 @@
 }
 
 .scrollableContainer {
-  max-height: calc(100vh - 225px - 15px);
+  max-height: calc(100vh - 225px);
   overflow-y: auto;
   flex-grow: 1; /* Allows the container to grow and take available space */
   overflow-x: hidden; /* Hides horizontal scroll */
