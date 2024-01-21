@@ -200,7 +200,7 @@ export const questions = [
     "What are base L2 chains?",
     "What are sovereign rollup chains?",
     "How do sovereign and base rollup differ?",
-    "Tell me everything you know about token engineering",
+    // "Tell me everything you know about token engineering",
     "Give me the full transaction supply chain of a ZK-rollup, from user intent to ZK prover and posting on ETH L1",
     "Make a very exhaustive breakdown of the ZK prover proof creation",
     "How is the concept of rollup-as-a-service, for instance provided by Altlayer, different from the appchain e.g. built on Cosmos SDK?",
