@@ -7,7 +7,7 @@ export function FooterText({ className, ...props }: React.ComponentProps<'p'>) {
   return (
     <p
       className={cn(
-        'px-2 pb-3 text-center text-xs leading-normal text-muted-foreground', // Updated padding-bottom class
+        'px-2 pb-2 text-center text-xs leading-normal text-muted-foreground', // Updated padding-bottom class
         className
       )}
       {...props}
