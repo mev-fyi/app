@@ -212,7 +212,7 @@
 .metadataContainer {
   width: 100%; /* Use 100% of the rightPanel width */
   max-width: 600px; /* Example max-width */
-  max-height: calc(100vh - 155px);
+  max-height: calc(100vh - 160px - 60px); /* remove 60px from top padding */
   margin-left: 10px; /* Align to the left by setting left margin */
   margin-right: auto; /* Keeps right margin automatic */
   padding: 1rem;
@@ -226,6 +226,7 @@
   padding-left: 5%;
   opacity: 1; /* Start with invisible */
   transition: opacity 0.5s ease-in-out; /* Smooth transition for opacity */
+  padding-top: 60px; /* Aligns the top padding with the middle panel (has padding: 60px) */
 }
 
 /* Class to make metadataContainer visible */
@@ -252,7 +253,7 @@
   font-weight: bold;
   font-size: 1.5rem;
   margin-bottom: 2rem;
-  margin-top: 1rem;
+  /*margin-top: 1rem;*/ /*remove marign top now that we have metadataContainer-level padding*/
 }
 
 .customMarkdownFont {
