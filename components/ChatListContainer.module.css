@@ -40,8 +40,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* This pushes the ChatPanel to the bottom */
-  /* padding-left: 60px; /* Left padding */
-  /* padding-right: 60px; /* Right padding */
   padding-bottom: 60px; /* Bottom padding */
   padding-top: 30px; /* Reduced top padding, adjust the value as needed */
   position: relative; /* Needed for absolute positioning within */
@@ -55,11 +53,10 @@
   flex-grow: 1; /* Allows the container to grow and take available space */
   overflow-x: hidden; /* Hides horizontal scroll */
   padding-left: 40px; /*To fully display the user and assistant icons*/
+  padding-right: 40px; /* Add right padding to balance the left padding */
   width: 100%; /* Full width to contain the chat list */
-  max-width: 900px; /* Set a max width */
+  max-width: 800px; /* Set a max width */
   margin: 0 auto; /* Center horizontally */
-  /*display: flex;
-  justify-content: center; /* Centers the chat list */
   display: block; /* Use block instead of flex to avoid horizontal centering */
 }
 
@@ -67,14 +64,14 @@
 .chatListContainer {
   max-height: calc(100vh - 120px - 80px);
   overflow-y: auto; /* Ensures vertical scroll */
-  max-width: 900px; /* Set a max width */
+  max-width: 800px; /* Set a max width */
   margin: 0 auto; /* Center the chat list within its container */
   align-items: center; /* Horizontally center */
   /*padding-left: 60px; /* Increase this value to add more space to the left */ /* Remove padding if it causes misalignment with the ChatPanel */
 }
 
 .chatListMaxWidth {
-  max-width: 900px; /* Set a max width */
+  max-width: 800px; /* Set a max width */
 }
 
 .chatListPadding {
