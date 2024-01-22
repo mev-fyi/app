@@ -56,6 +56,7 @@
   overflow-x: hidden; /* Hides horizontal scroll */
   padding-left: 90px; /*To fully display the user and assistant icons*/
   width: 100%; /* Full width to contain the chat list */
+  max-width: 800px; /* Set a max width */
   /*display: flex;
   justify-content: center; /* Centers the chat list */
   display: block; /* Use block instead of flex to avoid horizontal centering */
@@ -65,14 +66,14 @@
 .chatListContainer {
   max-height: calc(100vh - 120px - 80px);
   overflow-y: auto; /* Ensures vertical scroll */
-  max-width: 100%; /* Adjusted max-width for the chat list */
+  max-width: 800px; /* Set a max width */
   margin: 0 auto; /* Center the chat list within its container */
   align-items: center; /* Horizontally center */
   /*padding-left: 60px; /* Increase this value to add more space to the left */ /* Remove padding if it causes misalignment with the ChatPanel */
 }
 
 .chatListMaxWidth {
-  max-width: 100%
+  max-width: 800px; /* Set a max width */
 }
 
 .chatListPadding {
@@ -82,7 +83,7 @@
 .chatPanelWrapper {
   /* Removed the commented out properties and adjusted the width */
   margin: 0 auto;
-  max-width: calc(100%); /* Match the chatPanel width */
+  max-width: 800px; /* Set a max width */
   padding: 1rem; /* Padding inside the wrapper, if needed */
   padding-right: 120px; /*To align with the chatlist for fully display the user and assistant icons*/
 }
@@ -93,6 +94,7 @@
   left: 46%;
   transform: translateX(-46%);
   width: calc(75% - 120px);
+  max-width: 800px; /* Set a max width */
   box-sizing: border-box;
   z-index: 10;
   padding-top: 1rem;
@@ -130,7 +132,7 @@
   padding-bottom: 1rem;
   background: transparent;
   position: relative;
-  max-width: calc(100%);
+  max-width: 800px; /* Set a max width */
 }
 
 .promptForm {
@@ -141,6 +143,7 @@
   display: flex;
   flex-grow: 1;
   width: 100%;
+  max-width: 800px; /* Set a max width */
   align-items: center;
   background-color: transparent;
   position: relative;
@@ -159,6 +162,7 @@
   border-radius: 8px; /* Rounded corners */
   padding-right: 55px; /* Adjust this padding to prevent text from going under the send button */
   width: calc(100% - 55px); /* Subtract the padding from the width to maintain the layout */
+  max-width: 800px; /* Set a max width */
   box-sizing: border-box; /* Include padding and border in the element's total width */
 }
 
