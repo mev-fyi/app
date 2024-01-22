@@ -57,6 +57,7 @@
   padding-left: 90px; /*To fully display the user and assistant icons*/
   width: 100%; /* Full width to contain the chat list */
   max-width: 800px; /* Set a max width */
+  margin: 0 auto; /* Center horizontally */
   /*display: flex;
   justify-content: center; /* Centers the chat list */
   display: block; /* Use block instead of flex to avoid horizontal centering */
@@ -91,8 +92,8 @@
 .chatPanel {
   position: fixed;
   bottom: 0;
-  left: 46%;
-  transform: translateX(-46%);
+  left: 50%;
+  transform: translateX(-50%);
   width: calc(75% - 120px);
   max-width: 800px; /* Set a max width */
   box-sizing: border-box;
