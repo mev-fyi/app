@@ -93,8 +93,8 @@
 .chatPanel {
   position: fixed;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 46%;
+  transform: translateX(-46%);
   width: calc(75% - 120px);
   box-sizing: border-box;
   z-index: 10;
