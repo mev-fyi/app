@@ -40,8 +40,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* This pushes the ChatPanel to the bottom */
-  padding-left: 60px; /* Left padding */
-  padding-right: 60px; /* Right padding */
+  /* padding-left: 60px; /* Left padding */
+  /* padding-right: 60px; /* Right padding */
   padding-bottom: 60px; /* Bottom padding */
   padding-top: 30px; /* Reduced top padding, adjust the value as needed */
   position: relative; /* Needed for absolute positioning within */
@@ -54,7 +54,7 @@
   overflow-y: auto;
   flex-grow: 1; /* Allows the container to grow and take available space */
   overflow-x: hidden; /* Hides horizontal scroll */
-  padding-left: 90px; /*To fully display the user and assistant icons*/
+  padding-left: 40px; /*To fully display the user and assistant icons*/
   width: 100%; /* Full width to contain the chat list */
   max-width: 900px; /* Set a max width */
   margin: 0 auto; /* Center horizontally */
@@ -80,6 +80,8 @@
 .chatListPadding {
   padding: 1rem; /* Tailwind's px-4 */
 }
+
+
 
 .chatPanelWrapper {
   /* Removed the commented out properties and adjusted the width */
