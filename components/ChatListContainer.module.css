@@ -132,7 +132,7 @@
   padding-bottom: 1rem;
   background: transparent;
   position: relative;
-  max-width: 800px; /* Set a max width */
+  max-width: 1600px; /* Set a max width */
 }
 
 .promptForm {
