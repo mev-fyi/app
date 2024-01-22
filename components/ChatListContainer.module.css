@@ -52,8 +52,6 @@
   overflow-y: auto;
   flex-grow: 1; /* Allows the container to grow and take available space */
   overflow-x: hidden; /* Hides horizontal scroll */
-  left: 54%;
-  transform: translateX(-54%);
   padding-left: 40px; /*To fully display the user and assistant icons*/
   padding-right: 40px; /* Add right padding to balance the left padding */
   width: 100%; /* Full width to contain the chat list */
