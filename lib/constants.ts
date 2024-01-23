@@ -185,7 +185,7 @@ export const questions = [
     "What is the ZK EVM and what does it solve?",
     "Return a markdown table which does an exhaustive comparison between Optimism and ZK-rollups",
     "What is an L2 rollup?",
-    "What will proto-danksharding enable from a business standpoint?",
+    "What will proto-danksharding (EIP-4844) enable from a business standpoint?",
     "What are the effects of MEV?",
     "What are consensus mechanisms in Ethereum?",
     "Return in markdown table the differences between a based- and a sovereign-rollup",
@@ -212,6 +212,7 @@ export const questions = [
     "What are blockchain systems?",
     "What are dApps?",
     "What is the Solidity programming language?",
+    "What is the difference between an ERC and an EIP?",
   ]
   
 
