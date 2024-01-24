@@ -273,54 +273,41 @@
   font-size: 0.89rem; /* Set your desired font size for mobile */
 }
 
+/* Mobile-specific styles */
 @media (max-width: 767px) {
-  .customMarkdownFont {
-    font-size: 0.89rem !important; /* Adjust the font size as needed */
-  }
-
+  /* Hide the left and right panels on mobile */
   .leftPanel, .rightPanel {
-    display: none; /* Hide left and right panels on mobile */
+    display: none;
   }
 
+  /* Ensure the middle panel takes the full viewport width and has a minimum width */
   .middlePanel {
-    position: static;
-    left: auto;
-    transform: none;
+    flex: 1; /* Allow the middle panel to grow to fill the space left by the hidden panels */
     width: 100%; /* Full width of the viewport */
-    max-width: none;
-    min-width: 0; /* Remove minimum width for mobile */
-    padding-bottom: 20px; /* Adjust padding for mobile */
+    min-width: 320px; /* Minimum width to prevent it from becoming too thin */
+    max-width: none; /* Override any max-width set */
+    padding: 20px; /* Adjust padding for mobile, this can be changed as per design */
+    box-sizing: border-box; /* Ensure padding is included in the width calculation */
+    position: static; /* Reset any absolute positioning */
+    align-items: center; /* Center align the children */
   }
 
+  /* Adjust the scrollableContainer for mobile */
+  .scrollableContainer {
+    padding: 0; /* Remove padding or adjust as needed */
+    max-height: calc(100vh - 40px); /* Adjust max-height based on the new padding */
+    max-width: none; /* Allow it to expand to full width */
+    min-width: 320px; /* Minimum width to prevent it from becoming too thin */
+    margin: 0 auto; /* Center it within the middlePanel */
+  }
+
+  /* Adjust the chatListContainer for mobile */
   .chatListContainer {
-    padding: 20px; /* Adjusted padding for mobile */
-    width: 100%; /* Ensure it takes full width */
-    max-height: calc(100vh - 20px); /* Adjust max-height for mobile */
-    margin: 0; /* Reset margin */
-    padding-top: 35px;
-    padding-bottom: 200px;
+    /* Ensure it doesn't exceed the width of the scrollableContainer */
+    max-width: calc(100% - 40px); /* Subtract any padding you've set on scrollableContainer */
+    min-width: 320px; /* Minimum width */
+    margin: 0 auto; /* Center it */
   }
-  
-  .metadataContainer {
-    position: fixed; /* Fixed position for mobile */
-    top: 0;
-    right: -100%; /* Initially off-screen */
-    height: 100%;
-    width: 80%; /* Adjust width as needed */
-    transform: translateX(100%); /* Positioned off-screen */
-    transition: transform 0.3s; /* Smooth transition */
-    z-index: 30; /* Above other elements */
-  }
-
-  .metadataContainerActive {
-    transform: translateX(0); /* Bring into view */
-  }
-
-  .toggleMetadataButton {
-    display: block; /* Show the toggle button on mobile */
-  }
-
-}
 
 
 @media screen and (max-width: 768px) {
