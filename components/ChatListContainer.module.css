@@ -286,7 +286,7 @@
     width: 100%; /* Full width of the viewport */
     min-width: 320px; /* Minimum width to prevent it from becoming too thin */
     max-width: none; /* Override any max-width set */
-    padding-top: 60px; /* Increase top padding */
+    padding-top: 100px; /* Increase top padding */
     padding-left: 20px; /* Adjust left padding for mobile */
     padding-right: 20px; /* Adjust right padding for mobile */
     padding-bottom: 20px; /* Adjust bottom padding for mobile */
@@ -303,6 +303,7 @@
     max-width: none; /* Allow it to expand to full width */
     min-width: 320px; /* Minimum width to prevent it from becoming too thin */
     margin: 0 auto; /* Center it within the middlePanel */
+    padding-top: 60px; /* Increase top padding */
   }
 
   /* Adjust the chatListContainer for mobile */
