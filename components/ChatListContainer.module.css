@@ -308,7 +308,7 @@
     min-width: 320px; /* Minimum width */
     margin: 0 auto; /* Center it */
   }
-
+}
 
 @media screen and (max-width: 768px) {
   .mobileHide {
