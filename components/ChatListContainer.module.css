@@ -275,39 +275,68 @@
 
 /* Mobile-specific styles */
 @media (max-width: 767px) {
-  /* Hide the left and right panels on mobile */
-  .leftPanel, .rightPanel {
-    display: none;
-  }
+ /* Hide the left and right panels on mobile */
+ .leftPanel, .rightPanel {
+  display: none;
+}
 
-  /* Ensure the middle panel takes the full viewport width and has a minimum width */
-  .middlePanel {
-    flex: 1; /* Allow the middle panel to grow to fill the space left by the hidden panels */
-    width: 100%; /* Full width of the viewport */
-    min-width: 320px; /* Minimum width to prevent it from becoming too thin */
-    max-width: none; /* Override any max-width set */
-    padding: 20px; /* Adjust padding for mobile, this can be changed as per design */
-    box-sizing: border-box; /* Ensure padding is included in the width calculation */
-    position: static; /* Reset any absolute positioning */
-    align-items: center; /* Center align the children */
-  }
+/* Ensure the middle panel takes the full viewport width and has a minimum width */
+.middlePanel {
+  flex: 1; /* Allow the middle panel to grow to fill the space left by the hidden panels */
+  width: 100%; /* Full width of the viewport */
+  min-width: 320px; /* Minimum width to prevent it from becoming too thin */
+  max-width: none; /* Override any max-width set */
+  padding: 20px; /* Adjust padding for mobile */
+  box-sizing: border-box; /* Ensure padding is included in the width calculation */
+  position: static; /* Reset any absolute positioning */
+  align-items: center; /* Center align the children */
+  justify-content: flex-start; /* Align content to the top */
+}
 
-  /* Adjust the scrollableContainer for mobile */
-  .scrollableContainer {
-    padding: 0; /* Remove padding or adjust as needed */
-    max-height: calc(100vh - 40px); /* Adjust max-height based on the new padding */
-    max-width: none; /* Allow it to expand to full width */
-    min-width: 320px; /* Minimum width to prevent it from becoming too thin */
-    margin: 0 auto; /* Center it within the middlePanel */
-  }
+/* Adjust the scrollableContainer for mobile */
+.scrollableContainer {
+  padding: 0; /* Remove padding */
+  max-height: calc(100vh - 40px); /* Adjust max-height based on the new padding */
+  max-width: none; /* Allow it to expand to full width */
+  min-width: 320px; /* Minimum width to prevent it from becoming too thin */
+  margin: 0 auto; /* Center it within the middlePanel */
+}
 
-  /* Adjust the chatListContainer for mobile */
-  .chatListContainer {
-    /* Ensure it doesn't exceed the width of the scrollableContainer */
-    max-width: calc(100% - 40px); /* Subtract any padding you've set on scrollableContainer */
-    min-width: 320px; /* Minimum width */
-    margin: 0 auto; /* Center it */
-  }
+/* Adjust the chatListContainer for mobile */
+.chatListContainer {
+  max-width: none; /* Allow it to expand to full width */
+  min-width: 320px; /* Minimum width */
+  margin: 0 auto; /* Center it */
+}
+
+/* Adjust the chatPanelWrapper for mobile */
+.chatPanelWrapper {
+  max-width: none; /* Allow it to expand to full width */
+  min-width: 320px; /* Minimum width */
+  padding: 0; /* Remove padding or adjust as needed */
+}
+
+/* Adjust the chatPanel for mobile */
+.chatPanel {
+  position: static; /* Remove fixed positioning for mobile */
+  width: 100%; /* Full width */
+  min-width: 320px; /* Minimum width to prevent it from becoming too thin */
+  padding: 1rem; /* Padding inside the wrapper, if needed */
+  box-sizing: border-box; /* Include padding in width calculation */
+  margin-bottom: 1rem; /* Space from the bottom */
+}
+
+/* Adjust the chatPanelContent for mobile */
+.chatPanelContent {
+  flex-direction: column; /* Stack elements vertically */
+  padding: 0; /* Remove padding or adjust as needed */
+}
+
+/* Adjust the promptFormContainer for mobile */
+.promptFormContainer {
+  width: 100%; /* Full width */
+  min-width: 320px; /* Minimum width to prevent it from becoming too thin */
+}
 }
 
 @media screen and (max-width: 768px) {
