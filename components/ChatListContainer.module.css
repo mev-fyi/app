@@ -280,73 +280,31 @@
     display: none;
   }
 
-  /* Ensure the middle panel takes the full viewport width */
+  /* Ensure the middle panel takes the full viewport width and has enough padding at the top */
   .middlePanel {
-    flex: 1; /* Allow the middle panel to grow to fill the space */
+    flex: 1; /* Allow the middle panel to grow to fill the space left by the hidden panels */
     width: 100%; /* Full width of the viewport */
-    min-width: 320px; /* Minimum width */
+    min-width: 320px; /* Minimum width to prevent it from becoming too thin */
     max-width: none; /* Override any max-width set */
-    padding-top: 40px; /* Top padding */
-    padding-left: 20px; /* Left padding */
-    padding-right: 20px; /* Right padding */
-    padding-bottom: 20px; /* Bottom padding */
-    box-sizing: border-box; /* Include padding in width */
+    padding-top: 40px; /* Increase top padding */
+    padding-left: 20px; /* Adjust left padding for mobile */
+    padding-right: 20px; /* Adjust right padding for mobile */
+    padding-bottom: 20px; /* Adjust bottom padding for mobile */
+    box-sizing: border-box; /* Ensure padding is included in the width calculation */
     position: static; /* Reset any absolute positioning */
     align-items: center; /* Center align the children */
     justify-content: flex-start; /* Align content to the top */
   }
 
-  .scrollableContainer {
+  /* Adjust the scrollableContainer for mobile */
+  .chatPanel .scrollableContainer {
     padding: 0; /* Remove padding */
-    max-height: calc(100vh - 60px - 40px); /* Adjust height */
-    margin: 0 auto; /* Center within the middlePanel */
-  }
-
-  .chatListContainer {
-    margin: 0 auto; /* Center it */
-    padding-top: 1rem; /* Add padding to the top */
-  }
-
-  .chatPanelWrapper {
-    padding: 0; /* Remove padding or adjust as needed */
-  }
-
-  .chatPanel {
-    position: fixed; /* Keep it at the bottom */
-    bottom: 0; /* Align to the bottom */
-    left: 0; /* Align to the left */
-    right: 0; /* Align to the right */
-    width: 100%; /* Full width */
-    padding: 1rem; /* Padding for spacing */
-    z-index: 10; /* Above other content */
-    display: flex; /* Use flex layout */
-    justify-content: center; /* Center horizontally */
-  }
-
-  .chatPanelContent {
-    width: 100%; /* Full width */
-    flex-direction: column; /* Stack elements vertically */
-  }
-
-  .promptFormContainer {
-    width: 100%; /* Full width */
-  }
-
-  .promptFormInner {
-    flex-direction: column; /* Stack elements vertically */
-  }
-
-  .promptTextarea {
-    width: calc(100% - 2rem); /* Full width minus padding */
-    margin: 0; /* Reset margin */
-  }
-
-  .sendButtonContainer {
-    padding-top: 0.5rem; /* Padding on top */
-  }
-
-  .loadingContainer {
-    top: 1rem; /* Position below the top */
+    max-height: calc(100vh - 60px - 40px); /* Height minus chatPanel and top padding */
+    max-width: none; /* Allow it to expand to full width */
+    min-width: 320px; /* Minimum width to prevent it from becoming too thin */
+    margin: 0 auto; /* Center it within the middlePanel */
+    padding-top: 20px; /* Increase top padding */
+    padding-bottom: 10px; /* Increase top padding */
   }
 }
 
