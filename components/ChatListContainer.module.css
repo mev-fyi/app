@@ -280,31 +280,23 @@
     display: none;
   }
 
-  /* Ensure the middle panel takes the full viewport width and has enough padding at the top */
+  /* Ensure the middle panel takes the full viewport width */
   .middlePanel {
-    flex: 1; /* Allow the middle panel to grow to fill the space left by the hidden panels */
-    width: 100%; /* Full width of the viewport */
-    min-width: 320px; /* Minimum width to prevent it from becoming too thin */
-    max-width: none; /* Override any max-width set */
-    padding-top: 40px; /* Increase top padding */
-    padding-left: 20px; /* Adjust left padding for mobile */
-    padding-right: 20px; /* Adjust right padding for mobile */
-    padding-bottom: 20px; /* Adjust bottom padding for mobile */
-    box-sizing: border-box; /* Ensure padding is included in the width calculation */
-    position: static; /* Reset any absolute positioning */
-    align-items: center; /* Center align the children */
-    justify-content: flex-start; /* Align content to the top */
+    flex: 1;
+    width: 100%;
+    min-width: 320px;
+    max-width: none;
+    padding-top: 20px;
+    padding-bottom: 60px; /* Space for chatPanel */
+    box-sizing: border-box;
+    position: relative; /* Allows absolute positioning within */
   }
 
   /* Adjust the scrollableContainer for mobile */
   .scrollableContainer {
-    padding: 0; /* Remove padding */
-    max-height: calc(100vh - 60px - 40px); /* Height minus chatPanel and top padding */
-    max-width: none; /* Allow it to expand to full width */
-    min-width: 320px; /* Minimum width to prevent it from becoming too thin */
-    margin: 0 auto; /* Center it within the middlePanel */
-    padding-top: 20px; /* Increase top padding */
-    padding-bottom: 10px; /* Increase top padding */
+    overflow-y: auto;
+    max-height: calc(100vh - 120px); /* Adjust height for chatPanel */
+    padding: 0 20px; /* Horizontal padding */
   }
 
   /* Chat Panel */
@@ -313,15 +305,15 @@
     bottom: 0;
     left: 0;
     width: 100%;
+    background-color: #fff;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+    padding: 10px;
     z-index: 10;
-    background-color: #fff; /* Ensure background color for readability */
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.2); /* Add shadow for elevation effect */
-    padding: 10px; /* Adjust padding for mobile */
   }
 
   .chatPanelWrapper {
-    max-width: 100%; /* Ensure it takes the full width */
-    padding: 0; /* Remove additional padding */
+    max-width: 100%;
+    padding: 0;
   }
 
   .promptFormContainer {
@@ -331,22 +323,21 @@
 
   .promptTextarea {
     flex-grow: 1;
-    border: 1px solid #ccc; /* Add border for clarity */
-    padding: 8px; /* Adjust padding */
-    border-radius: 4px; /* Rounded corners */
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 4px;
   }
 
   .sendButtonContainer {
     position: absolute;
-    right: 15px; /* Align with the right edge */
+    right: 15px;
     top: 50%;
-    transform: translateY(-50%); /* Center vertically */
+    transform: translateY(-50%);
   }
 
-  /* Adjustments for Loader */
+  /* Loader adjustment */
   .loadingContainer {
-    position: absolute;
-    top: -40px; /* Position above the chatPanel */
+    top: -40px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 11;
