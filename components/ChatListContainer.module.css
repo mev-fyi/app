@@ -306,7 +306,6 @@
     box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
     padding: 10px;
     z-index: 10;
-    background-color: #fff; /* Ensuring readability */
   }
 
   .chatPanelWrapper {
@@ -321,7 +320,6 @@
 
   .promptTextarea {
     flex-grow: 1;
-    border: 1px solid #ccc;
     padding: 8px;
     border-radius: 4px;
   }
