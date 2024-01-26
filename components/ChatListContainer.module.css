@@ -287,15 +287,14 @@
     min-width: 320px;
     max-width: none;
     padding-top: 20px;
-    padding-bottom: 60px; /* Space for chatPanel */
     box-sizing: border-box;
-    position: relative; /* Allows absolute positioning within */
+    position: relative; /* Allows positioning of ChatPanel */
   }
 
   /* Adjust the scrollableContainer for mobile */
   .scrollableContainer {
     overflow-y: auto;
-    max-height: calc(100vh - 120px); /* Adjust height for chatPanel */
+    max-height: calc(100vh - 140px); /* Adjust height for ChatPanel */
     padding: 0 20px; /* Horizontal padding */
   }
 
@@ -303,12 +302,11 @@
   .chatPanel {
     position: fixed;
     bottom: 0;
-    left: 0;
     width: 100%;
-    background-color: #fff;
     box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
     padding: 10px;
     z-index: 10;
+    background-color: #fff; /* Ensuring readability */
   }
 
   .chatPanelWrapper {
@@ -337,6 +335,7 @@
 
   /* Loader adjustment */
   .loadingContainer {
+    position: absolute;
     top: -40px;
     left: 50%;
     transform: translateX(-50%);
