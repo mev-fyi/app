@@ -18,6 +18,7 @@ export default async function IndexPage() {
 
   return (
     <>
+      {/* @ts-ignore */}
       <ShareChatHeader chatId={id} userId={session.user.id}/>
       <Chat id={id} />
     </>
