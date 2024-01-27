@@ -26,7 +26,7 @@ export const questions = [
     "What are commit/reveal schemes?",
     "What is the impact of latency in MEV?",
     "What is Protocol Enforced Proposer Commitments (PEPC)?",
-    "Are roll-ups real?",
+    // "Are roll-ups real?",  // NOTE 2024-01-27: this doesnt really work anymore, it gets weird because it continues the text from the "rollups arent real" dba article
     "Are intents real?",
     // "What are relays?",
     // "How does MEV compare across chains for instance Ethereum, Solana, Arbitrum?",
@@ -213,6 +213,7 @@ export const questions = [
     "What are dApps?",
     "What is the Solidity programming language?",
     "What is the difference between an ERC and an EIP?",
+    "What are the risks for Ethereum to enshrine more items to its protocol?",
   ]
   
 
