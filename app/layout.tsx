@@ -37,7 +37,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <Head>
         {/* Your metadata tags here */}
         <title>mev.fyi MEV Research Chatbot</title>
-        <meta name="description" content="An AI-powered chatbot built with Next.js and Vercel." />
+        <meta name="description" content="An AI-powered chatbot template built with Next.js and Vercel." />
         {/* Other head elements */}
       </Head>
       <body
@@ -51,8 +51,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Providers attribute="class" defaultTheme="dark" enableSystem={false}>
           <div className="flex flex-col min-h-screen">
             {/* Header component if needed */}
-            {/* @ts-ignore */}
-            <Header />
+            {/* <Header /> */}
             <main className="flex flex-col flex-1 bg-muted/50">{children}</main>
           </div>
           <TailwindIndicator />
