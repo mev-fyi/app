@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react';
 import { getChat, getChats, shareChat } from '@/app/actions';
 import { toast } from 'react-hot-toast';
