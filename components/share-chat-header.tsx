@@ -12,6 +12,7 @@ interface ShareChatHeaderProps {
   chat?: Chat | null; // Update the type to include null
 }
 
+// TODO 2024-01-28: fix such that the share copies into the clipboard on mobile too!
 const ShareChatHeader: React.FC<ShareChatHeaderProps> = ({ userId, chatId, chat }) => {
     const handleShareClick = async () => {
       try {
