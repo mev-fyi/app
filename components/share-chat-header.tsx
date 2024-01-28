@@ -42,13 +42,24 @@ const ShareChatHeader: React.FC<ShareChatHeaderProps> = ({ userId, chatId }) => 
   };
 
   return (
-    <header style={{ backgroundColor: 'transparent', position: 'relative', width: '100%' }}>
-      <div style={{ position: 'absolute', top: 10, right: 20 }}>
-        <button onClick={handleShareClick} style={{ all: 'unset', cursor: 'pointer' }}>
-          <IconShare />
-          <span className="sr-only">Share Chat</span>
-        </button>
-      </div>
+    <header style={{ 
+      position: 'absolute', 
+      top: '10px', 
+      right: '50%', 
+      transform: 'translateX(50%)', 
+      zIndex: 1000
+    }}>
+      <button onClick={handleShareClick} style={{ 
+        background: 'none', 
+        border: 'none', 
+        cursor: 'pointer',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <IconShare style={{ fontSize: '24px' }} />
+        <span className="sr-only">Share Chat</span>
+      </button>
     </header>
   );
 };
