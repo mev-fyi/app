@@ -27,14 +27,16 @@ export interface ChatProps extends React.ComponentProps<'div'> {
   id?: string;
   showQuestionsOverlay?: boolean; // Prop to toggle QuestionsOverlay visibility
   shared_chat?: boolean; // Prop to toggle shared_chat visibility
+  structured_metadata?: ParsedMetadataEntry[]; // Optional structured metadata prop
 }
 
 export function Chat({
   id,
   initialMessages,
   className,
-  showQuestionsOverlay = true, // Default to true for QuestionsOverlay
-  shared_chat = false, // Add the shared_chat parameter with a default value of false
+  showQuestionsOverlay = true,
+  shared_chat = false,
+  structured_metadata = [], // Initialize structured_metadata with an empty array
 }: ChatProps) {
   const [previewToken, setPreviewToken] = useLocalStorage<string | null>(
     'ai-token',
@@ -42,7 +44,7 @@ export function Chat({
   )
 
   // State to hold structured metadata entries
-  const [structuredMetadataEntries, setStructuredMetadataEntries] = useState<ParsedMetadataEntry[]>([]);
+  const [structuredMetadataEntries, setStructuredMetadataEntries] = useState<ParsedMetadataEntry[]>(structured_metadata);
   // State to control the visibility of "Top Sources" title
   const [showTopSources, setShowTopSources] = useState(false);
   const [newMessages, setMessages] = useState(initialMessages || []);

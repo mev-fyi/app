@@ -49,7 +49,7 @@ export default async function SharePage({ params }: SharePageProps) {
           </div>
         </div>
         {/* Pass the lastMessageRole to the ChatList */}
-        <Chat id={chat.id} initialMessages={chat.messages} shared_chat={true}/>
+        <Chat id={chat.id} initialMessages={chat.messages} structured_metadata={chat.structured_metadata} shared_chat={true}/>
       </div>
       <FooterText className="py-8" />
     </>
