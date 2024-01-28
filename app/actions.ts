@@ -6,6 +6,7 @@ import { kv } from '@vercel/kv'
 
 import { auth } from '@/auth'
 import { type Chat } from '@/lib/types'
+import { nanoid } from '@/lib/utils'
 
 export async function getChats(userId?: string | null) {
   if (!userId) {
@@ -116,19 +117,26 @@ export async function shareChat(chat: Chat) {
     };
   }
 
-  const payload = {
+  // Generate a new ID for the shared chat
+  const sharedChatId = nanoid();
+
+  const sharedPayload = {
     ...chat,
-    sharePath: `/share/${chat.id}`
+    id: sharedChatId,
+    originalChatId: chat.id, // Reference to the original chat
+    readOnly: true, // Mark as read-only
+    sharePath: `/share/${sharedChatId}`
   };
 
-  console.log("Payload for hmset:", payload);
+  console.log("Payload for shared chat:", sharedPayload);
 
   try {
-    await kv.hmset(`chat:${chat.id}`, payload);
-    console.log("hmset operation successful");
+    await kv.hmset(`chat:${sharedChatId}`, sharedPayload);
+    console.log("Shared chat stored successfully");
   } catch (error) {
-    console.error("Error in hmset operation:", error);
+    console.error("Error in storing shared chat:", error);
+    return { error: 'Internal Server Error' };
   }
 
-  return payload;
+  return sharedPayload;
 }

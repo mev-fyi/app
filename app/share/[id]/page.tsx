@@ -35,6 +35,7 @@ export default async function SharePage({ params }: SharePageProps) {
   // Get the role of the last message
   const lastMessageRole = chat.messages[chat.messages.length - 1]?.role;
 
+  // TODO 2024-01-28: add functionality to continue the chat, moving the user into another window with the same chat content but new chat ID
   return (
     <>
       <div className="flex-1 space-y-6">

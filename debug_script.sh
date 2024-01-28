@@ -3,12 +3,15 @@
 # Define an array of file paths
 FILES=(
   "app/chat/[id]/page.tsx"  
-  "app/page.tsx"  
-  "components/share-chat-header.tsx"
+  "app/api/chat/route.ts"
+  "app/page.tsx"    
   "app/share/[id]/page.tsx"
 )
+# "components/share-chat-header.tsx"
 # "components/sidebar-list.tsx"
 # "components/sidebar-actions.tsx"
+#  "auth.ts"
+
 # "app/api/auth/[...nextauth]/route.ts"
 # "app/api/chat/route.ts"
 # "app/chat/[id]/page.tsx"
@@ -27,5 +30,5 @@ for file in "${FILES[@]}"; do
     echo "================================="
     echo ""
 done
-# tree -I "node_modules|public|components|lib|assets"
+tree -I "node_modules|public|components|lib|assets"
 
