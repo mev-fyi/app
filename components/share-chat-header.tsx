@@ -41,7 +41,8 @@ const ShareChatHeader: React.FC<ShareChatHeaderProps> = ({ userId, chatId, chat 
           console.error("Error in shareChat:", result.error);
           toast.error(result.error);
         } else {
-          navigator.clipboard.writeText(result.sharePath);
+          const shareUrl = `mev.fyi${result.sharePath}`; // Prepend mev.fyi
+          navigator.clipboard.writeText(shareUrl);
           toast.success('Share link copied to clipboard');
           console.log("Share operation successful");
         }
