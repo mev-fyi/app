@@ -117,6 +117,15 @@ export function Chat({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  useEffect(() => {
+    // Set initialLoad to false after the component has mounted
+    setInitialLoad(false);
+
+    // Set showChatList to true when shared_chat is true
+    if (shared_chat) {
+      setShowChatList(true);
+    }
+  }, [shared_chat]);
 
   // Function to handle user input submission
   const handleUserInputSubmit = async (value: string) => {
