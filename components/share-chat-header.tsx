@@ -1,21 +1,29 @@
 import React from 'react';
-import { shareChat, getChat } from '@/app/actions';
+import { getChats, getChat, shareChat } from '@/app/actions';
 import { toast } from 'react-hot-toast';
 import { IconShare } from '@/components/ui/icons';
 
 interface ShareChatHeaderProps {
-  chatId: string;
-  userId: string;
+    userId: string;
+    chatId?: string;
 }
 
-const ShareChatHeader: React.FC<ShareChatHeaderProps> = ({ chatId, userId }) => {
+const ShareChatHeader: React.FC<ShareChatHeaderProps> = ({ userId, chatId }) => {
   const handleShare = async () => {
     try {
-      const chat = await getChat(chatId, userId);
+      let chat;
+      if (chatId) {
+        chat = await getChat(chatId, userId);
+      } else {
+        const chats = await getChats(userId);
+        chat = chats[chats.length - 1]; // Select the last chat
+      }
+
       if (!chat) {
         toast.error("Chat not found");
         return;
       }
+
       const result = await shareChat(chat);
       if (result && 'error' in result) {
         toast.error(result.error);
