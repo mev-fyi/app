@@ -26,7 +26,7 @@ export interface ChatProps extends React.ComponentProps<'div'> {
   initialMessages?: MetadataMessage[];
   id?: string;
   showQuestionsOverlay?: boolean; // Prop to toggle QuestionsOverlay visibility
-  showChatPanel?: boolean; // Prop to toggle ChatPanel visibility
+  shared_chat?: boolean; // Prop to toggle shared_chat visibility
 }
 
 export function Chat({
@@ -34,7 +34,7 @@ export function Chat({
   initialMessages,
   className,
   showQuestionsOverlay = true, // Default to true for QuestionsOverlay
-  showChatPanel = true, // Default to true for ChatPanel
+  shared_chat = false, // Add the shared_chat parameter with a default value of false
 }: ChatProps) {
   const [previewToken, setPreviewToken] = useLocalStorage<string | null>(
     'ai-token',
@@ -259,26 +259,19 @@ export function Chat({
     [styles.metadataContainerVisible]: metadataContainerVisible,
   });
 
-  // {/* @ts-ignore */}
-  // {
-  //   id && <ShareButton chatId={id} />
-  // }
-
   return (
     <>
       <div className={styles.layoutContainer}>
         <div className={styles.leftPanel}>
           <div className={leftPanelOverlayClass} onAnimationEnd={onAnimationEnd}>
-            {/* Render conditionally based on fadeOutCompleted */}
-            {showLeftPanelOverlay || !fadeOutCompleted ? (
+            {/* Render conditionally based on fadeOutCompleted and shared_chat */}
+            {!shared_chat && (showLeftPanelOverlay || !fadeOutCompleted) ? (
               <QuestionsOverlayLeftPanel onSubmit={handleUserInputSubmit} showOverlay={showLeftPanelOverlay} />
             ) : null}
           </div>
         </div>
 
-        <div className={styles.middlePanel}> {/* Middle panel for chatlist and chat panel */}
-
-          {/* Scrollable container for ChatList or EmptyScreen */}
+        <div className={styles.middlePanel}>
           <div className={styles.scrollableContainer}>
             {/* Conditional rendering for ChatList */}
             {showChatList && (
@@ -288,7 +281,7 @@ export function Chat({
             )}
 
             {/* Conditional rendering for EmptyScreen */}
-            {!showChatList && showEmptyScreen && (
+            {!shared_chat && !showChatList && showEmptyScreen && (
               <div className={QuestionsOverlayStyles.fadeIn}>
                 <EmptyScreen onSubmit={handleUserInputSubmit} showOverlay={showMiddlePanelOverlay} isVisible={showEmptyScreen} />
               </div>
@@ -301,7 +294,7 @@ export function Chat({
             )}
           </div>
           
-          {showChatPanel && (
+          {!shared_chat && (
             <div className={styles.chatPanel}>
               <ChatPanel
                 id={id}
@@ -328,16 +321,11 @@ export function Chat({
           )}
         </div>
 
-
-        {/* Right panel for metadata list */}
         <div className={`${styles.rightPanel}`}>
-          {/* Metadata section */}
           <div className={metadataContainerClass}>
-
-            {newMessages.length > 0 && ( // Only show metadataTitle if there are messages
+            {newMessages.length > 0 && (
               <div className={styles.metadataTitle}>Top Sources</div>
             )}
-
             <MetadataList entries={structuredMetadataEntries} />
           </div>
         </div>
