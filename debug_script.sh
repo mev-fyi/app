@@ -2,14 +2,21 @@
 
 # Define an array of file paths
 FILES=(
-    "app/api/auth/[...nextauth]/route.ts"
-    "app/api/chat/route.ts"
-    "app/chat/[id]/page.tsx"
-    "app/share/[id]/opengraph-image.tsx"
-    "app/share/[id]/page.tsx"
-    "app/actions.ts"
-    "app/page.tsx"
+  "app/chat/[id]/page.tsx"  
+  "app/page.tsx"  
+  "components/sidebar-list.tsx"
+  "components/sidebar-actions.tsx"
+  "components/share-chat-header.tsx"
 )
+
+# "app/api/auth/[...nextauth]/route.ts"
+# "app/api/chat/route.ts"
+# "app/chat/[id]/page.tsx"
+# "app/share/[id]/opengraph-image.tsx"
+# "app/share/[id]/page.tsx"
+# "app/actions.ts"
+# "app/page.tsx"
+
 
 # Loop over the array and display each file's name and content
 for file in "${FILES[@]}"; do
@@ -20,5 +27,5 @@ for file in "${FILES[@]}"; do
     echo "================================="
     echo ""
 done
-tree -I "node_modules|public|components|lib|assets"
+# tree -I "node_modules|public|components|lib|assets"
 

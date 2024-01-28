@@ -101,20 +101,31 @@ export async function getSharedChat(id: string) {
 }
 
 export async function shareChat(chat: Chat) {
-  const session = await auth()
+  console.log("Entering shareChat function");
+
+  const session = await auth();
+  console.log("Session data:", session);
 
   if (!session?.user?.id || session.user.id !== chat.userId) {
+    console.error("Unauthorized access attempt in shareChat");
     return {
       error: 'Unauthorized'
-    }
+    };
   }
 
   const payload = {
     ...chat,
     sharePath: `/share/${chat.id}`
+  };
+
+  console.log("Payload for hmset:", payload);
+
+  try {
+    await kv.hmset(`chat:${chat.id}`, payload);
+    console.log("hmset operation successful");
+  } catch (error) {
+    console.error("Error in hmset operation:", error);
   }
 
-  await kv.hmset(`chat:${chat.id}`, payload)
-
-  return payload
+  return payload;
 }
