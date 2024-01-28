@@ -102,6 +102,49 @@ export function Chat({
   }, [structuredMetadataEntries]);
 
 
+  // Function to parse messages and apply structured metadata
+  const parseMessagesAndMetadata = (messages: MetadataMessage[], metadata: ParsedMetadataEntry[]) => {
+    const parsedMessages = messages.map((message) => {
+      if (message.role === 'assistant') {
+        try {
+          // Try to parse the content as JSON
+          const parsedContent = JSON.parse(message.content);
+  
+          // Check if parsedContent has a messages array and it's not empty
+          if (parsedContent.messages && parsedContent.messages.length > 0) {
+            // Replace content with the last message of the messages array
+            message.content = parsedContent.messages[parsedContent.messages.length - 1].content;
+          }
+        } catch (error) {
+          // If parsing fails or doesn't meet criteria, leave content as is
+          console.error("Error parsing message content:", error);
+        }
+      }
+      return message;
+    });
+  
+    // Apply structured metadata
+    setMessages(parsedMessages);
+    setLastMessageRole('assistant');
+    setStructuredMetadataEntries(metadata);
+  };
+
+  useEffect(() => {
+    // Set initialLoad to false after the component has mounted
+    setInitialLoad(false);
+    
+    // Check if initialMessages and structured_metadata are not empty and apply parsing
+    if (initialMessages && initialMessages.length > 0 && structured_metadata && structured_metadata.length > 0) {
+      parseMessagesAndMetadata(initialMessages, structured_metadata);
+    }
+
+    // Set showChatList to true when shared_chat is true
+    if (shared_chat) {
+      setShowChatList(true);
+    }
+  }, [shared_chat]);
+
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -117,7 +160,7 @@ export function Chat({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  useEffect(() => {
+    useEffect(() => {
     // Set initialLoad to false after the component has mounted
     setInitialLoad(false);
 
@@ -215,29 +258,10 @@ export function Chat({
           const response = originalResponse.clone();
           try {
             const responseData = await response.json();
-            setStructuredMetadataEntries(responseData.structured_metadata || []);
-            responseData.messages = responseData.messages.map((message: Message) => {
-              if (message.role === "assistant") {
-                  try {
-                      // Try to parse the content as JSON
-                      const parsedContent = JSON.parse(message.content);
-                      
-                      // Check if parsedContent has a messages array and it's not empty
-                      if (parsedContent.messages && parsedContent.messages.length > 0) {
-                          // Replace content with the last message of the messages array
-                          message.content = parsedContent.messages[parsedContent.messages.length - 1].content;
-                      }
-                  } catch (error) {
-                      // If parsing fails or doesn't meet criteria, leave content as is
-                      console.error("Error parsing message content:", error);
-                  }
-              }
-              return message;
-            
-            });
-            setMessages(responseData.messages);
-            setLastMessageRole('assistant');
-
+      
+            // Call the parseMessagesAndMetadata function to handle message parsing and metadata application
+            parseMessagesAndMetadata(responseData.messages, responseData.structured_metadata || []);
+      
           } catch (error) {
             console.error('Error reading response data:', error);
             toast.error('Error reading response data');
