@@ -16,20 +16,22 @@ export const {
   auth,
   CSRF_experimental // will be removed in future
 } = NextAuth({
-  providers: [GitHub,
+  providers: [
+    GitHub,
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  })],
+    })
+  ],
   callbacks: {
-    // TODO 2024-01-28: FIX: parse the google auth provider to assign user id to the session the same way as github auth, else user is undefined.
     jwt({ token, profile }) {
       if (profile) {
-        token.id = profile.id
-        token.image = profile.avatar_url || profile.picture
+        // Assign ID based on the provider
+        token.id = profile.provider === 'github' ? profile.id : profile.sub; 
+        token.image = profile.avatar_url || profile.picture;
       }
       return token
-    },
+    },    
     authorized({ auth }) {
       return !!auth?.user // this ensures there is a logged in user for -every- request
     }
