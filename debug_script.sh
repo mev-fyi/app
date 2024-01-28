@@ -4,11 +4,11 @@
 FILES=(
   "app/chat/[id]/page.tsx"  
   "app/page.tsx"  
-  "components/sidebar-list.tsx"
-  "components/sidebar-actions.tsx"
   "components/share-chat-header.tsx"
+  "app/share/[id]/page.tsx"
 )
-
+# "components/sidebar-list.tsx"
+# "components/sidebar-actions.tsx"
 # "app/api/auth/[...nextauth]/route.ts"
 # "app/api/chat/route.ts"
 # "app/chat/[id]/page.tsx"

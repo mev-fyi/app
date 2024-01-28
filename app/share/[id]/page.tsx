@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 
 import { formatDate } from '@/lib/utils'
 import { getSharedChat } from '@/app/actions'
-import { ChatList } from '@/components/chat-list'
+import { Chat } from '@/components/chat'
 import { FooterText } from '@/components/footer'
 
 export const runtime = 'edge'
@@ -49,7 +49,7 @@ export default async function SharePage({ params }: SharePageProps) {
           </div>
         </div>
         {/* Pass the lastMessageRole to the ChatList */}
-        <ChatList messages={chat.messages} lastMessageRole={lastMessageRole} />
+        <Chat id={chat.id} initialMessages={chat.messages} />
       </div>
       <FooterText className="py-8" />
     </>
