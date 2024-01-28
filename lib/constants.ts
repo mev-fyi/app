@@ -170,7 +170,7 @@ export const questions = [
     "How does relays relate to Proposer/Builder Separation (PBS)?",
     "What is the difference between a validator, a proposer, and an attester?",
     "Give me the full composition of an Ethereum block and how it relates to the consensus, data availability, and execution layer",
-    "Give me the full composition of an Ethereum proof-of-stake block",
+    "Give me the full composition of an Ethereum proof-of-stake block with a schema",
     "What are inclusion lists?",
     // "Return in a markdown table the differences in implementation in ePBS",  // NOTE 2024-01-17: no longer works as of date :(
     "Return in a markdown table the differences between ETH proof of work and ETH proof of stake",
