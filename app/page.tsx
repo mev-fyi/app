@@ -10,7 +10,8 @@ export default async function IndexPage() {
   const session = await auth()
 
   if (!session?.user) {
-    redirect('/sign-in'); // Redirect to sign-in page if not authenticated
+    redirect('/sign-in');
+    console.error('Authentication required.'); // Log the error to the console
     return;
   }
 

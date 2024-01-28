@@ -40,10 +40,12 @@ export default async function ChatPage({ params }: ChatPageProps) {
   const chat = await getChat(params.id, session.user.id)
 
   if (!chat) {
+    console.error('Chat not found:', params.id); // Log the error to the console
     notFound()
   }
 
   if (chat?.userId !== session?.user?.id) {
+    console.error('Permission denied for chat:', params.id); // Log the error to the console
     notFound()
   }
 
