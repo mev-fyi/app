@@ -1,20 +1,22 @@
 import React from 'react';
-import { getChats, getChat, shareChat } from '@/app/actions';
+import { getChat, getChats, shareChat } from '@/app/actions';
 import { toast } from 'react-hot-toast';
 import { IconShare } from '@/components/ui/icons';
 
 interface ShareChatHeaderProps {
-    userId: string;
-    chatId?: string;
+  userId: string;
+  chatId?: string;
 }
 
 const ShareChatHeader: React.FC<ShareChatHeaderProps> = ({ userId, chatId }) => {
-  const handleShare = async () => {
+  const handleShareClick = async () => {
     try {
       let chat;
       if (chatId) {
+        // If chatId is provided, use it directly
         chat = await getChat(chatId, userId);
       } else {
+        // Otherwise, fetch the latest chat
         const chats = await getChats(userId);
         chat = chats[chats.length - 1]; // Select the last chat
       }
@@ -24,6 +26,7 @@ const ShareChatHeader: React.FC<ShareChatHeaderProps> = ({ userId, chatId }) => 
         return;
       }
 
+      // Share the chat
       const result = await shareChat(chat);
       if (result && 'error' in result) {
         toast.error(result.error);
@@ -39,7 +42,7 @@ const ShareChatHeader: React.FC<ShareChatHeaderProps> = ({ userId, chatId }) => 
   return (
     <header style={{ backgroundColor: 'transparent', position: 'relative', width: '100%' }}>
       <div style={{ position: 'absolute', top: 10, right: 20 }}>
-        <button onClick={handleShare} style={{ all: 'unset', cursor: 'pointer' }}>
+        <button onClick={handleShareClick} style={{ all: 'unset', cursor: 'pointer' }}>
           <IconShare />
           <span className="sr-only">Share Chat</span>
         </button>
