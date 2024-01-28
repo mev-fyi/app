@@ -17,7 +17,7 @@ export const questions = [
     "What is account abstraction?",
     "What is account abstraction (ERC-4337)?",
     "What is EIP-1559?",
-    "How will account abstraction affect the MEV supply chain?",
+    // "How will account abstraction affect the MEV supply chain?",  // NOTE 2024-01-28: since it can't find it resources it won't state about it, which is side-effect of prompt-tuning which state to not respond if it cant find info.
     // "What is the difference between account abstraction and intents?",
     // "Is it bad that MEV is a centralizing force?",
     // "Tell me about MEV on Solana",
@@ -132,7 +132,7 @@ export const questions = [
     "What's Eigenlayer?",
     "Explain what is Eigenlayer's restaking and how it secures other protocols in layman's terms",
     // "What are concrete applications of Eigenlayer's restaking system?",
-    "How does Eigenlayer's restaking system differ from LIDO's value proposition?",
+    // "How does Eigenlayer's restaking system differ from LIDO's value proposition?", // NOTE 2024-01-28: doesn't know as side effect of prompt-tuning where it refuses to answer if it cant find it in sources.
     // "What are credible commitments and middlewares referred to in the context of Eigenlayer's restaking?",
     "What is Sybil resistance in consensus protocols?",
     // "What is deplatforming?",
