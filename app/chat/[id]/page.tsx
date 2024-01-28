@@ -31,37 +31,45 @@ export async function generateMetadata({
 }
 
 export default async function ChatPage({ params }: ChatPageProps) {
-  const session = await auth()
+  console.log('ChatPage: Start - Params:', params);
+
+  const session = await auth();
+  console.log('ChatPage: Session data:', session);
 
   if (!session?.user) {
-    redirect(`/sign-in?next=/chat/${params.id}`)
+    console.log('ChatPage: No user in session, redirecting to sign-in');
+    redirect(`/sign-in?next=/chat/${params.id}`);
+    return; // Ensure the function exits here
   }
 
-  const chat = await getChat(params.id, session.user.id)
+  const chat = await getChat(params.id, session.user.id);
+  console.log('ChatPage: Chat data:', chat);
 
   if (!chat) {
-    console.error('Chat not found:', params.id); // Log the error to the console
-    notFound()
+    console.error('Chat not found:', params.id);
+    notFound();
+    return;
   }
 
   if (chat.readOnly) {
+    console.log('ChatPage: Chat is read-only, redirecting to sharePath');
     if (chat.sharePath) {
-      // Delay the redirection for 3 seconds (3000 milliseconds)
-      setTimeout(() => {
-        redirect(chat.sharePath as string); // Type assertion used here
-      }, 3000);
+      console.log('ChatPage: Redirecting now to', chat.sharePath);
+      redirect(chat.sharePath as string);
     } else {
       console.error('ReadOnly chat does not have a sharePath:', params.id);
       notFound();
     }
     return;
   }
-  
+
   if (chat?.userId !== session?.user?.id) {
-    console.error('Permission denied for chat:', params.id); // Log the error to the console
-    notFound()
+    console.error('Permission denied for chat:', params.id);
+    notFound();
+    return;
   }
 
+  console.log('ChatPage: Rendering Chat and ShareChatHeader components');
   // TODO 2024-01-28: will need to fix such that chatlist and metadatacontainer are populated and such that we can still continue them
   return (
     <>
