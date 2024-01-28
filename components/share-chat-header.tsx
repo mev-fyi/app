@@ -1,39 +1,42 @@
 'use client'
 
 import React from 'react';
-import { getChat, getChats, shareChat } from '@/app/actions';
+import { shareChat, getChat, getChats } from '@/app/actions';
 import { toast } from 'react-hot-toast';
 import { IconShare } from '@/components/ui/icons';
+import { Chat } from '@/lib/types'; // Import the Chat type
 
 interface ShareChatHeaderProps {
   userId: string;
   chatId?: string;
+  chat?: Chat | null; // Update the type to include null
 }
 
-const ShareChatHeader: React.FC<ShareChatHeaderProps> = ({ userId, chatId }) => {
+const ShareChatHeader: React.FC<ShareChatHeaderProps> = ({ userId, chatId, chat }) => {
     const handleShareClick = async () => {
       try {
         console.log("handleShareClick invoked with userId:", userId, "and chatId:", chatId);
-  
-        let chat;
-        if (chatId) {
+
+        // Use the provided chat object if available, otherwise fetch it
+        let chatToShare = chat;
+        if (!chatToShare && chatId) {
           console.log("Fetching chat using chatId");
-          chat = await getChat(chatId, userId);
-        } else {
+          chatToShare = await getChat(chatId, userId);
+        } else if (!chatToShare) {
           console.log("Fetching latest chat for user");
           const chats = await getChats(userId);
-          chat = chats[chats.length - 1];
+          chatToShare = chats[chats.length - 1];
         }
-  
-        if (!chat) {
+
+        if (!chatToShare) {
           console.error("Chat not found");
           toast.error("Chat not found");
           return;
         }
-  
-        console.log("Chat found, attempting to share:", chat);
-        const result = await shareChat(chat);
-  
+
+        console.log("Chat found, attempting to share:", chatToShare);
+        const result = await shareChat(chatToShare);
+
         if (result && 'error' in result) {
           console.error("Error in shareChat:", result.error);
           toast.error(result.error);

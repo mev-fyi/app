@@ -52,7 +52,7 @@ export default async function ChatPage({ params }: ChatPageProps) {
   return (
     <>
       <Chat id={chat.id} initialMessages={chat.messages} />
-      <ShareChatHeader chatId={chat.id} userId={session.user.id}/>
+      <ShareChatHeader chatId={chat.id} userId={session.user.id} chat={chat}/>
     </>
   );
 }
