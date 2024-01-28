@@ -23,11 +23,19 @@ export interface MetadataMessage extends Message {
 
 const IS_PREVIEW = process.env.VERCEL_ENV === 'preview'
 export interface ChatProps extends React.ComponentProps<'div'> {
-  initialMessages?: MetadataMessage[]
-  id?: string
+  initialMessages?: MetadataMessage[];
+  id?: string;
+  showQuestionsOverlay?: boolean; // Prop to toggle QuestionsOverlay visibility
+  showChatPanel?: boolean; // Prop to toggle ChatPanel visibility
 }
 
-export function Chat({ id, initialMessages, className }: ChatProps) {
+export function Chat({
+  id,
+  initialMessages,
+  className,
+  showQuestionsOverlay = true, // Default to true for QuestionsOverlay
+  showChatPanel = true, // Default to true for ChatPanel
+}: ChatProps) {
   const [previewToken, setPreviewToken] = useLocalStorage<string | null>(
     'ai-token',
     null
@@ -286,42 +294,38 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
               </div>
             )}
 
-            {/* Conditional rendering for QuestionsOverlay */}
-            {newMessages.length === 0 && !isMobile && (
+            {newMessages.length === 0 && !isMobile && showQuestionsOverlay && (
               <div className={`${overlayClass} ${showMiddlePanelOverlay ? QuestionsOverlayStyles.fadeIn : QuestionsOverlayStyles.fadeOut}`}>
                 <QuestionsOverlay onSubmit={handleUserInputSubmit} showOverlay={showMiddlePanelOverlay} />
               </div>
             )}
           </div>
           
-
-
-          {/* Fixed ChatPanel at the bottom */}
-          <div className={styles.chatPanel}>
-            <ChatPanel
-              id={id}
-              isLoading={isLoading}
-              stop={stop}
-              append={append}
-              reload={reload}
-              messages={newMessages}
-              input={input}
-              setInput={setInput}
-              onSubmit={handleUserInputSubmit}
-              setMessages={setMessages}
-              setStructuredMetadataEntries={setStructuredMetadataEntries}
-              setLastMessageRole={setLastMessageRole}
-              setShowTopSources={setShowTopSources}
-              setFadeOutCompleted={setFadeOutCompleted}
-              setMetadataContainerVisible={setMetadataContainerVisible}
-              setShowLeftPanelOverlay={setShowLeftPanelOverlay}
-              setShowMiddlePanelOverlay={setShowMiddlePanelOverlay}
-              setShowEmptyScreen={setShowEmptyScreen}
-              setShowChatList={setShowChatList}
-            />
-          </div>
-
-
+          {showChatPanel && (
+            <div className={styles.chatPanel}>
+              <ChatPanel
+                id={id}
+                isLoading={isLoading}
+                stop={stop}
+                append={append}
+                reload={reload}
+                messages={newMessages}
+                input={input}
+                setInput={setInput}
+                onSubmit={handleUserInputSubmit}
+                setMessages={setMessages}
+                setStructuredMetadataEntries={setStructuredMetadataEntries}
+                setLastMessageRole={setLastMessageRole}
+                setShowTopSources={setShowTopSources}
+                setFadeOutCompleted={setFadeOutCompleted}
+                setMetadataContainerVisible={setMetadataContainerVisible}
+                setShowLeftPanelOverlay={setShowLeftPanelOverlay}
+                setShowMiddlePanelOverlay={setShowMiddlePanelOverlay}
+                setShowEmptyScreen={setShowEmptyScreen}
+                setShowChatList={setShowChatList}
+              />
+            </div>
+          )}
         </div>
 
 
@@ -336,8 +340,8 @@ export function Chat({ id, initialMessages, className }: ChatProps) {
 
             <MetadataList entries={structuredMetadataEntries} />
           </div>
+        </div>
       </div>
-    </div>
     </>
-  )
+  );
 }
