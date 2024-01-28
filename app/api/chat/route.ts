@@ -95,7 +95,8 @@ export async function POST(req: Request) {
   };
 
   try {
-    await kv.set(`chat:${id}`, JSON.stringify(payload));
+    // await kv.set(`chat:${id}`, JSON.stringify(payload));
+    await kv.hmset(`chat:${id}`, payload);
     await kv.zadd(`user:chat:${session.user.id}`, { score: createdAt, member: `chat:${id}` });
     console.log('route.ts: Chat record stored');
   } catch (error) {
