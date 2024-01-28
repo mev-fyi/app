@@ -49,8 +49,8 @@ export default async function ChatPage({ params }: ChatPageProps) {
 
   return (
     <>
-      <ShareChatHeader chatId={chat.id} userId={session.user.id}/>
       <Chat id={chat.id} initialMessages={chat.messages} />
+      <ShareChatHeader chatId={chat.id} userId={session.user.id}/>
     </>
   );
 }

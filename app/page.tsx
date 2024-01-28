@@ -18,8 +18,8 @@ export default async function IndexPage() {
 
   return (
     <>
-      <ShareChatHeader chatId={id} userId={session.user.id}/>
       <Chat id={id} />
+      <ShareChatHeader chatId={id} userId={session.user.id}/>
     </>
   );
 }
