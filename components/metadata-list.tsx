@@ -17,7 +17,7 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
       thumbnailUrl = '/default-thumbnail.jpg';
     }
   
-    console.log(`Thumbnail URL for ${entry.title}: ${thumbnailUrl}`);
+    // console.log(`Thumbnail URL for ${entry.title}: ${thumbnailUrl}`);
     return thumbnailUrl;
   };
   

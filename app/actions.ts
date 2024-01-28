@@ -34,11 +34,14 @@ export async function getChat(id: string, userId: string) {
   const chat = await kv.hgetall<Chat>(`chat:${id}`)
 
   if (!chat || (userId && chat.userId !== userId)) {
+    console.log("Chat not found or userId mismatch:", id, userId);
     return null
   }
 
+  console.log("Chat found:", chat);
   return chat
 }
+
 
 export async function removeChat({ id, path }: { id: string; path: string }) {
   const session = await auth()
