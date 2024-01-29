@@ -1,4 +1,4 @@
-// app/api/create-shared-chat.ts
+// /api/create-shared-chat.ts
 
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { kv } from '@vercel/kv';
