@@ -1,7 +1,7 @@
 // app/api/create-shared-chat.ts
 
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { kv } from '@vercel/kv';
+// import { kv } from '@vercel/kv';
 import { shareChat } from '@/app/actions';
 import { nanoid } from '@/lib/utils';
 import { parseMetadata } from '@/lib/utils';
@@ -43,8 +43,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             structured_metadata: structuredMetadata,
             };
 
-            await kv.hmset(`chat:${chatId}`, newChat);
-            await kv.zadd(`user:chat:${APP_USER_ID}`, { score: createdAt.getTime(), member: `chat:${chatId}` });
+            // await kv.hmset(`chat:${chatId}`, newChat);
+            // await kv.zadd(`user:chat:${APP_USER_ID}`, { score: createdAt.getTime(), member: `chat:${chatId}` });
 
 
             const sharedChat = await shareChat(newChat);
