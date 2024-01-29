@@ -3,10 +3,7 @@
 // import type { NextApiRequest, NextApiResponse } from 'next';
 // import { kv } from '@vercel/kv';
 
-const API_KEY = process.env.BACKEND_API_KEY;
-const APP_USER_ID = process.env.APP_BACKEND_USER_ID || 'defaultUserId'; // Fallback to a default value if undefined
-
-export async function POTS(req: Request) {
+export async function POST(req: Request) {
     console.log(`Received request on /api/create-shared-chat with method: ${req.method}`);
     
     // if (req.headers['x-api-key'] !== API_KEY) {
