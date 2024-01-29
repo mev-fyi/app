@@ -51,18 +51,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
             // Check if sharedChat contains sharePath
             if ('sharePath' in sharedChat) {
-            res.status(200).json({ message: 'Shared chat created successfully', sharedChatLink: sharedChat.sharePath });
+                return res.status(200).json({ message: 'Shared chat created successfully', sharedChatLink: sharedChat.sharePath });
             } else {
             // Handle the case where sharedChat is an error object
-            res.status(500).json({ error: 'Failed to create shared chat' });
+                return res.status(500).json({ error: 'Failed to create shared chat' });
             }
         } catch (error) {
             console.error(`Caught error in /api/create-shared-chat: ${error}`);
-            res.status(500).json({ error: 'Internal Server Error' });
+            return res.status(500).json({ error: 'Internal Server Error' });
         }
     } else {
         console.log(`Received non-POST method: ${req.method}`);
         res.setHeader('Allow', ['POST']);
-        res.status(405).end(`Method ${req.method} Not Allowed`);
+        return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }

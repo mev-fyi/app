@@ -30,5 +30,5 @@ export async function handler(req: Request, res: Response) {
         structuredMetadata = parseMetadata(responseBody.formatted_metadata);
         console.log('route.ts: Parsed metadata:', structuredMetadata);
     }
-
+    return "success"
 }
