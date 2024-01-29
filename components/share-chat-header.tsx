@@ -13,6 +13,7 @@ interface ShareChatHeaderProps {
 }
 
 // TODO 2024-01-28: fix such that the share copies into the clipboard on mobile too!
+// TODO 2024-01-28: nicer share icon
 const ShareChatHeader: React.FC<ShareChatHeaderProps> = ({ userId, chatId, chat }) => {
     const handleShareClick = async () => {
       try {

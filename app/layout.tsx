@@ -36,7 +36,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" suppressHydrationWarning>
       <Head>
         {/* Your metadata tags here */}
-        <title>mev.fyi MEV Research Chatbot</title>
+        <title>mev.fyi the MEV research chatbot</title>
         <meta name="description" content="The Flashbots-grant-recipient Maximal Extractable Value (MEV) research chatbot" />
         {/* Other head elements */}
       </Head>

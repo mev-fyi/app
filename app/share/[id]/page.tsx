@@ -15,6 +15,9 @@ interface SharePageProps {
   }
 }
 
+// TODO 2024-01-28: fix bug where, if the link is opened on mobile, then it prompts to log in. If then we open that same link to the web-browser from the messaging app,
+//  then it does the same. However if we copy paste the link in the web browser directly, then it is 
+//  Somehow the shared-view in the messaging-app works but only once logged in.
 export async function generateMetadata({
   params
 }: SharePageProps): Promise<Metadata> {
