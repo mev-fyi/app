@@ -31,7 +31,7 @@ export async function POST(request: Request) {
         const createdAt = new Date();
         const chatId = nanoid();
         const path = `/chat/${chatId}`;
-        const title = "New Chat"; // Default title, modify as needed
+        const title =  requestData.response.substring(0, 100) || "New Chat";
         let structuredMetadata: ParsedMetadataEntry[] = [];
         if (requestData.formatted_metadata) {
           structuredMetadata = parseMetadata(requestData.formatted_metadata);
