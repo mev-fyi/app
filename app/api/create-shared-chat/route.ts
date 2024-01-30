@@ -61,7 +61,7 @@ export async function POST(request: Request) {
         await kv.hmset(`chat:${chatId}`, newChat);
         await kv.zadd(`user:chat:${APP_USER_ID}`, { score: createdAt.getTime(), member: `chat:${chatId}` });
 
-        const sharedChat = await shareChat(newChat);
+        const sharedChat = await shareChat(newChat, true);  // Pass true to use API key authentication
 
         if ('sharePath' in sharedChat) {
             return new Response(JSON.stringify({ message: 'Shared chat created successfully', sharedChatLink: sharedChat.sharePath }), { status: 200 });

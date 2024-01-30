@@ -104,13 +104,25 @@ export async function getSharedChat(id: string) {
   return chat
 }
 
-export async function shareChat(chat: Chat) {
+export async function shareChat(chat: Chat, useApiKeyAuth: boolean = false) {
+  const APP_USER_ID = process.env.APP_BACKEND_USER_ID || 'defaultUserId';
   console.log("Entering shareChat function");
 
-  const session = await auth();
-  console.log("Session data:", session);
+  let isAuthorized = false;
 
-  if (!session?.user?.id || session.user.id !== chat.userId) {
+  if (useApiKeyAuth) {
+    // Ensure both chat.userId and APP_USER_ID are strings for comparison
+    isAuthorized = chat.userId === APP_USER_ID;
+  } else {
+    // In case of session-based authentication
+    const session = await auth();
+    console.log("Session data:", session);
+
+    // Ensure session.user.id is a string and matches chat.userId
+    isAuthorized = session?.user?.id === chat.userId;
+  }
+
+  if (!isAuthorized) {
     console.error("Unauthorized access attempt in shareChat");
     return {
       error: 'Unauthorized'
@@ -119,7 +131,6 @@ export async function shareChat(chat: Chat) {
 
   // Generate a new ID for the shared chat
   const sharedChatId = nanoid();
-
   const sharedPayload = {
     ...chat,
     id: sharedChatId,
