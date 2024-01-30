@@ -1,5 +1,6 @@
-/** @type {import('next').NextConfig} */
-module.exports = {
+import { remotePatterns } from 'next/image'
+
+export default {
   reactStrictMode: true,
   experimental: {
     serverActions: true,
@@ -14,4 +15,4 @@ module.exports = {
       },
     ],
   },
-};
+}
