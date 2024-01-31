@@ -41,7 +41,7 @@
   flex-direction: column;
   justify-content: space-between; /* This pushes the ChatPanel to the bottom */
   padding-bottom: 60px; /* Bottom padding */
-  padding-top: 30px; /* Reduced top padding, adjust the value as needed */
+  padding-top: 40px; /* Reduced top padding, adjust the value as needed */
   position: relative; /* Needed for absolute positioning within */
   box-sizing: border-box;
   align-items: stretch; /* Ensure children stretch to fill the panel width */
