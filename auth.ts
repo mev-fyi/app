@@ -1,7 +1,7 @@
 import NextAuth, { type DefaultSession } from 'next-auth'
 import GitHub from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google';
-import { createHash } from 'crypto';
+import { sha256 } from 'hash.js';
 
 declare module 'next-auth' {
   interface Session {
@@ -32,14 +32,11 @@ export const {
       if (account?.provider === 'google') {
         // Generate a consistent userId for Google users based on their email
         if (user?.email) {
-          const hash = createHash('sha256');
-          hash.update(user.email);
-          token.id = hash.digest('hex');
+          token.id = sha256().update(user.email).digest('hex');
         } else {
           console.warn('Google authenticated user without an email.');
         }
       } else if (profile && account?.provider === 'github') {
-        // Assign ID based on the provider (GitHub)
         token.id = profile.id; 
         token.image = profile.avatar_url;
       }
