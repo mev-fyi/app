@@ -3,7 +3,6 @@
 import React from 'react';
 import { shareChat, getChat, getChats } from '@/app/actions';
 import { toast } from 'react-hot-toast';
-import { IconShare } from '@/components/ui/icons';
 import { Chat } from '@/lib/types'; // Import the Chat type
 
 interface ShareChatHeaderProps {
@@ -88,7 +87,11 @@ const ShareChatHeader: React.FC<ShareChatHeaderProps> = ({ userId, chatId, chat 
         alignItems: 'center',
         justifyContent: 'center'
       }}>
-        <IconShare style={{ fontSize: '24px' }} />
+        <img 
+          src="/107-1076520_share-png-youtube-share-button-png-clipart-3995698516.png" 
+          alt="Share"
+          style={{ width: '24px', height: 'auto' }} // Adjust size as needed
+        />
         <span className="sr-only">Share Chat</span>
       </button>
     </header>
