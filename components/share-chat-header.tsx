@@ -42,7 +42,7 @@ const ShareChatHeader: React.FC<ShareChatHeaderProps> = ({ userId, chatId, chat 
         if (successful) {
           toast.success('Share link copied to clipboard', { duration: 5000 }); // Adjust duration as needed
         } else {
-          toast.error('Failed to copy link. Please copy and paste the link manually: ' + text, { duration: 10000 }); // Adjust duration as needed
+          toast.error('Failed to copy link. Please copy and paste the link manually:\n' + text, { duration: 10000 }); // Adjust duration as needed
         }
       };
   
