@@ -119,10 +119,10 @@ export function ChatPanel({
   // )}
   // </div>
 
-
+  // <ButtonScrollToBottom />
   return (
     <div className={styles.chatPanel}>
-      <ButtonScrollToBottom />
+      
       <div className={styles.chatPanelWrapper}>
         {/* Loader positioned at the top of the container */}
         {isLoading && (
