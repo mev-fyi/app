@@ -12,29 +12,40 @@ interface ShareChatHeaderProps {
 }
 
 const ShareChatHeader: React.FC<ShareChatHeaderProps> = ({ userId, chatId, chat }) => {
-  const copyToClipboard = async (text: string) => {
-    if ('clipboard' in navigator) {
-      try {
-        await navigator.clipboard.writeText(text);
-        toast.success('Share link copied to clipboard');
-      } catch (err) {
-        toast.error('Failed to copy link');
-      }
-    } else {
-      // Fallback for browsers without clipboard API support
-      const textarea = document.createElement('textarea');
-      textarea.value = text;
-      document.body.appendChild(textarea);
-      textarea.select();
-      try {
-        const successful = document.execCommand('copy');
-        successful ? toast.success('Share link copied to clipboard') : toast.error('Failed to copy link');
-      } catch (err) {
-        toast.error('Error copying link');
-      }
-      document.body.removeChild(textarea);
-    }
-  };
+    const copyToClipboard = async (text: string) => {
+        let successful = false;
+        try {
+          if ('clipboard' in navigator && navigator.clipboard) {
+            await navigator.clipboard.writeText(text);
+            successful = true;
+          }
+        } catch (error) {
+          // Handle errors silently, no need to show a toast here
+        }
+      
+        if (!successful) {
+          // Fallback for browsers without clipboard API support
+          const textarea = document.createElement('textarea');
+          textarea.value = text;
+          document.body.appendChild(textarea);
+          textarea.select();
+      
+          try {
+            successful = document.execCommand('copy');
+          } catch (error) {
+            // Handle errors silently, no need to show a toast here
+          } finally {
+            document.body.removeChild(textarea);
+          }
+        }
+      
+        if (successful) {
+          toast.success('Share link copied to clipboard', { duration: 5000 }); // Adjust duration as needed
+        } else {
+          toast.error('Failed to copy link. Please copy and paste the link manually: ' + text, { duration: 10000 }); // Adjust duration as needed
+        }
+      };
+  
 
   const handleShareClick = async () => {
     try {
