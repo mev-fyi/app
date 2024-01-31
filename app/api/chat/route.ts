@@ -77,6 +77,23 @@ export async function POST(req: Request) {
   const id = json.id ?? nanoid();
   const createdAt = Date.now();
   const path = `/chat/${id}`;
+
+  // Check for null or undefined values
+  const checkForInvalidValues = (obj: Record<string, any>): boolean => {
+    for (const key in obj) {
+      if (obj[key] === null || obj[key] === undefined) {
+        console.error(`Invalid value found at key: ${key}`);
+        return true;
+      }
+      if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+        if (checkForInvalidValues(obj[key])) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+
   const payload = {
     id,
     title,
@@ -87,12 +104,16 @@ export async function POST(req: Request) {
       ...messages,
       {
         content: responseBody.response?.response || responseBody.response,
-        role: 'assistant'//,
-        //structured_metadata: structuredMetadata,
+        role: 'assistant',
       },
     ],
     structured_metadata: structuredMetadata,
   };
+
+  if (checkForInvalidValues(payload)) {
+    console.error('Payload contains invalid values. Aborting storage.');
+    return new Response('Invalid payload', { status: 400 });
+  }
 
   try {
     // await kv.set(`chat:${id}`, JSON.stringify(payload));
