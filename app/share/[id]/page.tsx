@@ -53,7 +53,7 @@ export default async function SharePage({ params }: SharePageProps) {
             </div>
           </div>
         </div>
-        <Chat id={chat.id} initialMessages={chat.messages} structured_metadata={chat.structured_metadata} shared_chat={true} bottomPadding="50px" className="pb-12" /> {/* Applied bottom padding directly to Chat if needed */}
+        <Chat id={chat.id} initialMessages={chat.messages} structured_metadata={chat.structured_metadata} shared_chat={true} enableBottomPadding={true} className="pb-12" /> {/* Applied bottom padding directly to Chat if needed */}
       </div>
       <FooterText className="py-12" />
     </>
