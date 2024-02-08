@@ -42,7 +42,7 @@ export default async function SharePage({ params }: SharePageProps) {
   // TODO 2024-01-30: add bottom padding to metadata container
   return (
     <>
-      <div className="flex-1 space-y-6 pb-50"> {/* Added bottom padding to the whole container */}
+      <div className="flex-1 space-y-6 pb-300"> {/* Added bottom padding to the whole container */}
         <div className="px-4 py-6 border-b bg-background md:px-6 md:py-8">
           <div className="max-w-2xl mx-auto md:px-6">
             <div className="space-y-1 md:-mx-8">
