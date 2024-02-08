@@ -28,6 +28,7 @@ export interface ChatProps extends React.ComponentProps<'div'> {
   showQuestionsOverlay?: boolean; // Prop to toggle QuestionsOverlay visibility
   shared_chat?: boolean; // Prop to toggle shared_chat visibility
   structured_metadata?: ParsedMetadataEntry[]; // Optional structured metadata prop
+  bottomPadding?: string; // New optional bottom padding property
 }
 
 export function Chat({
@@ -37,6 +38,7 @@ export function Chat({
   showQuestionsOverlay = true,
   shared_chat = false,
   structured_metadata = [], // Initialize structured_metadata with an empty array
+  bottomPadding = "0", // Default to "0" if not provided
 }: ChatProps) {
   const [previewToken, setPreviewToken] = useLocalStorage<string | null>(
     'ai-token',
@@ -294,6 +296,11 @@ export function Chat({
     [styles.metadataContainerVisible]: metadataContainerVisible,
   });
 
+  // Adjust scrollableContainer style to include dynamic bottom padding
+  const scrollableContainerStyle = {
+    paddingBottom: bottomPadding,
+  };
+
   return (
     <>
       <div className={styles.layoutContainer}>
@@ -307,7 +314,7 @@ export function Chat({
         </div>
 
         <div className={styles.middlePanel}>
-          <div className={styles.scrollableContainer}>
+          <div className="scrollableContainer" style={scrollableContainerStyle}>
             {/* Conditional rendering for ChatList */}
             {showChatList && (
               <div className={QuestionsOverlayStyles.fadeIn}>
