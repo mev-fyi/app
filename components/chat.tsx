@@ -297,13 +297,13 @@ export function Chat({
   });
 
  // Use cn utility to conditionally apply classes
- const middlePanelClass = cn(styles.middlePanel, {
-  [styles.middlePanelWithPadding]: enableBottomPadding,
+ const layoutContainerClass = cn(styles.layoutContainer, {
+  [styles.layoutContainerWithPadding]: enableBottomPadding,
   });
 
   return (
     <>
-      <div className={styles.layoutContainer}>
+      <div className={layoutContainerClass}>
         <div className={styles.leftPanel}>
           <div className={leftPanelOverlayClass} onAnimationEnd={onAnimationEnd}>
             {/* Render conditionally based on fadeOutCompleted and shared_chat */}
@@ -313,7 +313,7 @@ export function Chat({
           </div>
         </div>
 
-        <div className={middlePanelClass}>
+        <div className={styles.middlePanel}>
           <div className={styles.scrollableContainer}>
             {/* Conditional rendering for ChatList */}
             {showChatList && (

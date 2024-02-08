@@ -6,6 +6,11 @@
   align-items: flex-start; /* Aligns items to the top */
 }
 
+
+.layoutContainerWithPadding {
+  padding-bottom: 100px; /* Adjust the padding as needed */
+}
+
 .leftPanel {
   flex: 0 1 20%; /* Reduce the flex-basis to 25% and allow them to shrink if necessary */
   min-width: 320px; /* Minimum width */
@@ -47,9 +52,6 @@
   align-items: stretch; /* Ensure children stretch to fill the panel width */
 }
 
-.middlePanelWithPadding {
-  padding-bottom: 100px; /* Adjust the padding as needed */
-}
 
 .scrollableContainer {
   max-height: calc(100vh - 205px);
