@@ -7,5 +7,6 @@ export const config = {
     '/((?!api|_next/static|_next/image|favicon.ico).*)', // Exclude API routes, Next.js static files, and favicon.ico
     '/share/[id]', // Allow rendering pages under the /share/[id] path without authentication
     '/app/share/[id]', // Allow rendering pages under the /share/[id] path without authentication
+    '/app/share/.*', // Allow rendering pages under the /share/[id] path without authentication
   ],
 };
