@@ -47,6 +47,10 @@
   align-items: stretch; /* Ensure children stretch to fill the panel width */
 }
 
+.middlePanelWithPadding {
+  padding-bottom: 100px; /* Adjust the padding as needed */
+}
+
 .scrollableContainer {
   max-height: calc(100vh - 205px);
   overflow-y: auto;
