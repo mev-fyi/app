@@ -4,7 +4,15 @@ export { auth as middleware } from './auth';
 
 export const config = {
   matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico|app/share/|share/).*)', // Exclude API routes, Next.js static files, favicon.ico, and incorrectly specified /app/share/ paths
-    '/share/:path*', // Correctly allow rendering pages under the /share/[id] path without authentication
+    '/((?!api|_next/static|_next/image|favicon.ico).*)', // Keep excluding API routes, Next.js static files, and favicon.ico
+    // Adding multiple exclusion patterns for shared paths
+    '!/share/:path*', // Exclude shared links with dynamic segments
+    '!/share/*', // Exclude shared links (broad match)
+    '!/app/share/:path*', // Exclude if any paths mistakenly include /app prefix
+    '!/app/share/*', // Broad match for /app prefix inclusion
+    '!/share/[a-zA-Z0-9]+', // Exclude alphanumeric IDs following /share/
+    '!/share/[a-zA-Z0-9]+/*', // Broad match for any following path segments after alphanumeric ID
+    '!/share/[a-zA-Z0-9]+/page', // Specific match for /page after ID
+    '!/share/[a-zA-Z0-9]+/page.tsx', // Specific match for .tsx files (if applicable)
   ],
 };
