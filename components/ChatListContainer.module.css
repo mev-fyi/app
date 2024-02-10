@@ -35,6 +35,9 @@
   padding-top: 30px; /* Aligns the top padding with the middle panel (has top-padding: 30px) */
 }
 
+.rightPanelNoPaddingTop {
+  padding-top: 0;
+}
 
 
 /* Middle panel for chatlist and prompt form */
@@ -52,6 +55,9 @@
   align-items: stretch; /* Ensure children stretch to fill the panel width */
 }
 
+.middlePanelNoPaddingTop {
+  padding-top: 0;
+}
 
 .scrollableContainer {
   max-height: calc(100vh - 205px);

@@ -28,7 +28,7 @@ export interface ChatProps extends React.ComponentProps<'div'> {
   showQuestionsOverlay?: boolean; // Prop to toggle QuestionsOverlay visibility
   shared_chat?: boolean; // Prop to toggle shared_chat visibility
   structured_metadata?: ParsedMetadataEntry[]; // Optional structured metadata prop
-  enableBottomPadding?: boolean; // New optional bottom padding property
+  noPaddingTop?: boolean; // New optional bottom padding property
 }
 
 export function Chat({
@@ -38,7 +38,7 @@ export function Chat({
   showQuestionsOverlay = true,
   shared_chat = false,
   structured_metadata = [], // Initialize structured_metadata with an empty array
-  enableBottomPadding = false, // New boolean prop for bottom padding
+  noPaddingTop = false, // New boolean prop for bottom padding
 }: ChatProps) {
   const [previewToken, setPreviewToken] = useLocalStorage<string | null>(
     'ai-token',
@@ -296,14 +296,19 @@ export function Chat({
     [styles.metadataContainerVisible]: metadataContainerVisible,
   });
 
- // Use cn utility to conditionally apply classes
- const layoutContainerClass = cn(styles.layoutContainer, {
-  [styles.layoutContainerWithPadding]: enableBottomPadding,
+ // Assuming noPaddingTop is a boolean that dictates the presence of padding-top
+ const middlePanelClass = cn(styles.middlePanel, {
+   [styles.middlePanelNoPaddingTop]: noPaddingTop,
+ });
+
+ // Assuming noPaddingTop is a boolean that dictates the presence of padding-top
+ const rightPanelClass = cn(styles.rightPanel, {
+  [styles.rightPanelNoPaddingTop]: noPaddingTop,
   });
 
   return (
     <>
-      <div className={layoutContainerClass}>
+      <div className={styles.layoutContainer}>
         <div className={styles.leftPanel}>
           <div className={leftPanelOverlayClass} onAnimationEnd={onAnimationEnd}>
             {/* Render conditionally based on fadeOutCompleted and shared_chat */}
@@ -313,7 +318,7 @@ export function Chat({
           </div>
         </div>
 
-        <div className={styles.middlePanel}>
+        <div className={middlePanelClass}>
           <div className={styles.scrollableContainer}>
             {/* Conditional rendering for ChatList */}
             {showChatList && (
@@ -363,7 +368,7 @@ export function Chat({
           )}
         </div>
 
-        <div className={`${styles.rightPanel}`}>
+        <div className={rightPanelClass}>
           <div className={metadataContainerClass}>
             {newMessages.length > 0 && (
               <div className={styles.metadataTitle}>Top Sources</div>
