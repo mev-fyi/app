@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     default: 'mev.fyi MEV Research Chatbot',
     template: `%s - mev.fyi MEV Research Chatbot`
   },
-  description: 'The Flashbots-grant-recipient Maximal Extractable Value (MEV) research chatbot',
+  description: 'The Flashbots-grantee Maximal Extractable Value (MEV) research chatbot',
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: 'white' },
     { media: '(prefers-color-scheme: dark)', color: 'black' }
@@ -37,7 +37,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <Head>
         {/* Your metadata tags here */}
         <title>mev.fyi the MEV research chatbot</title>
-        <meta name="description" content="The Flashbots-grant-recipient Maximal Extractable Value (MEV) research chatbot" />
+        <meta name="description" content="The Flashbots-grantee Maximal Extractable Value (MEV) research chatbot" />
         {/* Other head elements */}
       </Head>
       <body
