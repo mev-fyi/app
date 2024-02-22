@@ -31,7 +31,15 @@ export async function POST(req: Request) {
     return new Response('Unauthorized', { status: 401 });
   }
 
-  console.log('route.ts: User authenticated, user ID:', session.user.id);
+  // Provide a default userId if session.user.id is undefined, indicating legacy code usage
+  const userId = typeof session?.user?.id !== 'undefined' ? session.user.id : 'default-legacy-user-id';
+
+  if (!userId) {
+    console.error('route.ts: Unauthorized request: No session user found and default userId is used.: ', userId);
+    return new Response('Unauthorized', { status: 401 });
+  }
+
+  console.log('route.ts: User authenticated, user ID:', userId);
 
   if (previewToken) {
     console.log('route.ts: Using preview token for API key');
@@ -97,7 +105,7 @@ export async function POST(req: Request) {
   const payload = {
     id,
     title,
-    userId: session.user.id,
+    userId: userId,
     createdAt,
     path,
     messages: [
