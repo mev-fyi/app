@@ -43,6 +43,11 @@
     @apply bg-background text-foreground;
     overflow-x: hidden; /* Should not exist */
     overflow-y: hidden; /* Add this line to hide the vertical scrollbar */
+    font-family: var(--font-sans), sans-serif;
+  }
+
+  code, pre {
+    font-family: var(--font-mono), monospace;
   }
 }
 

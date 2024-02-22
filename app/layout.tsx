@@ -43,8 +43,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body
         className={cn(
           'font-sans antialiased',
-          fontSans.variable,
-          fontMono.variable
         )}
       >
         <Toaster />
