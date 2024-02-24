@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button';
 import { questions } from '@/lib/constants'; // Ensure the path is correct
 import styles from './QuestionsOverlay.module.css'; // Import the CSS module
-import { IconRecycle } from '@/components/ui/icons'
+import { IconReloadQuestions } from '@/components/ui/icons'
 
 interface QuestionListProps {
   onSubmit: (value: string) => void; // Function to submit the chat input
@@ -101,14 +101,15 @@ export const QuestionListLeftPanel: React.FC<QuestionListProps> = ({ onSubmit, s
 
   return (
     <div className={containerClass}>
+      
       <Button
-        variant="outline"
-        className={`${styles.shuffleButton} rounded-full w-9 h-9`}
-        onClick={pickRandomQuestions}
-        backgroundImage='/19-_Loading-512-2320706499.png'
-      >
-        <span className="sr-only">Shuffle Questions</span>
+      variant="outline"
+      className={`${styles.shuffleButton} rounded-full w-9 h-9`}
+      onClick={pickRandomQuestions}>
+      <IconReloadQuestions className="icon-class" />
+      <span className="sr-only">Shuffle Questions</span>
       </Button>
+
       <div className={styles.questionsOverlayLeftPanel}>
         {selectedQuestions.map((question, index) => (
           <div key={index} className={styles.questionBoxLeftPanel} onClick={() => handleQuestionSelect(question)}>
