@@ -36,7 +36,7 @@ export const questions = [
     "What is Trusted Execution Environment (TEE)?",
     "What is Multi Party Computation (MPC)?",
     // "How does Trusted Execution Environment (TEE) and Multi Party Computation (MPC) relate to MEV?", // 2023-12-30: does not do well on those
-    "What is Ethereum alignment?",
+    // "What is Ethereum alignment?",  // note longer working as of 2024-02-25
     // "Return a selection of papers and videos that will introduce me to MEV",
     // "What is the role of the Ethereum Foundation?",
     // "How does Flashbots contribute to the MEV space?",
