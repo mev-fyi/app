@@ -86,7 +86,7 @@ const ShareChatHeader: React.FC<ShareChatHeaderProps> = ({ userId, chatId, chat 
     <header style={{ 
       position: 'absolute', 
       top: '10px', 
-      left: '10%', // Adjust this value to move the button more to the left
+      left: '40%', // Adjust this value to move the button more to the left
       zIndex: 1000 
     }}>
       <button onClick={handleShareClick} style={{ 
