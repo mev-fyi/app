@@ -53,6 +53,7 @@
   align-items: center; /* Align items vertically in the center */
   justify-content: center; /* Horizontally center the content */
   margin: 10px auto; /* Add margin above and below */
+  cursor: pointer; /* Changes the cursor to a hand icon on hover */
 }
 
 .questionBox:hover {
