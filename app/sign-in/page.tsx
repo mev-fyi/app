@@ -21,7 +21,7 @@ export default async function SignInPage() {
       
       {/* Welcome image */}
       <div className="mb-8">
-        <img src="android-chrome-512x512.png"/>
+        <img src="/android-chrome-512x512.png"/>
       </div>
       
       {/* Login buttons */}
