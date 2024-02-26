@@ -50,9 +50,9 @@ export function ChatMessage({ message, ...props }: ChatMessageProps) {
         )}
       >
         {message.role === 'user' ? (
-          <img src="/ui_icons/user_2.svg" style={{ width: '100%', height: '100%' }} />
+          <img src="/ui_icons/user_2.svg" style={{ width: '90%', height: '90%' }} />
         ) : (
-          <img src="/ui_icons/chatbot_1.svg" style={{ width: '100%', height: '100%' }} />
+          <img src="/ui_icons/chatbot_1.svg" style={{ width: '90%', height: '90%' }} />
         )}
       </div>
       <div className="flex-1 px-1 ml-4 space-y-2 overflow-hidden">

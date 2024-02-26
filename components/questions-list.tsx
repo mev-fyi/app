@@ -72,7 +72,7 @@ export const QuestionList: React.FC<QuestionListProps> = ({ onSubmit, showOverla
     <div className={containerClass}>
       <Button
         variant="outline"
-        className={`${styles.shuffleButton} rounded-full w-9 h-9 bg-black`}
+        className={`${styles.shuffleButton} rounded-full w-10 h-10`}
         onClick={pickRandomQuestions}
         style={{ backgroundImage: 'url(/ui_icons/refresh_reload_2.svg)', backgroundSize: 'cover' }}
       >
