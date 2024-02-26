@@ -34,7 +34,7 @@
   padding: 0; /* Resets padding as it's no longer needed for text */
   cursor: pointer;
   background-color: transparent; /* Makes the background transparent */
-  background-image: url('/ui_icons/refresh_reload_2.svg'); /* Sets the background image */
+  background-image: url('/ui_icons/refresh_reload_2_blue.svg'); /* Sets the background image */
   background-repeat: no-repeat; /* Prevents the background image from repeating */
   background-position: center; /* Centers the background image */
   background-size: 80%; /* Adjusts the SVG size to take up 80% of the button space */
