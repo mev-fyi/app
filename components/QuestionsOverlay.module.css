@@ -72,6 +72,7 @@
   justify-content: center; /* Horizontally center the content */
   margin: auto;
   transition: background-color 0.3s; /* Smooth transition for background color */
+  cursor: pointer; /* Changes the cursor to a hand icon on hover */
 }
 
 .questionBoxLeftPanel:hover {
