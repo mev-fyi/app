@@ -177,17 +177,26 @@
   box-sizing: border-box; /* Include padding and border in the element's total width */
 }
 
-.sendButtonContainer button,
-.sendButtonContainer button:active,
-.sendButtonContainer button:focus,
-.sendButtonContainer button:hover {
+.sendButtonContainer {
+  position: absolute;
+  margin-top: 0.3rem;
+  right: 55px;
+  top: 50%; /* Adjust this value as needed to center the button vertically within the form */
+  transform: translateY(-50%); /* This will center the button vertically relative to its container */
+}
+
+.sendButtonContainer button {
   background-color: transparent; /* Ensures the button has no background */
   border: none;  /* Removes any border */
   outline: none;  /* Removes focus outline */
+  cursor: pointer; /* Changes the cursor to a hand icon on hover */
 }
 
-.sendButtonContainer img {
-  background-color: transparent; /* Ensures the SVG has no background */
+.sendButtonContainer button img {
+  width: 90%; /* Resize SVG to 90% of the button's width */
+  height: 90%; /* Resize SVG to 90% of the button's height */
+  display: block; /* This ensures that the img tag does not have any extra space around it */
+  margin: auto; /* This will center the image within the button */
 }
 
 .loadingContainer {
