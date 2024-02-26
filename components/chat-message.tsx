@@ -50,7 +50,20 @@ export function ChatMessage({ message, ...props }: ChatMessageProps) {
         )}
       >
         
-        {message.role === 'user' ? <IconUser /> : '🤖'}
+        {message.role === 'user' ? 
+          <img 
+            src="/ui_icons/user_2_32px.png" 
+            alt="User" 
+            style={{ width: '32px', height: '32px' }}
+          /> 
+          : 
+          <img 
+            src="/ui_icons/chatbot_1_32px.png" 
+            alt="Chatbot" 
+            style={{ width: '32px', height: '32px' }}
+          />
+        }
+
       </div>
       <div className="flex-1 px-1 ml-4 space-y-2 overflow-hidden">
         <MemoizedReactMarkdown

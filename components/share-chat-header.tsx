@@ -86,7 +86,7 @@ const ShareChatHeader: React.FC<ShareChatHeaderProps> = ({ userId, chatId, chat 
     <header style={{ 
       position: 'absolute', 
       top: '10px', 
-      left: '45%', // Adjust this value to move the button more to the left
+      left: '43%', // Adjust this value to move the button more to the left
       zIndex: 1000 
     }}>
       <button onClick={handleShareClick} style={{ 
@@ -98,9 +98,9 @@ const ShareChatHeader: React.FC<ShareChatHeaderProps> = ({ userId, chatId, chat 
         justifyContent: 'center'
       }}>
         <img 
-          src="/107-1076520_share-png-youtube-share-button-png-clipart-3995698516.png" 
+          src="/ui_icons/share_chat_1_32px.png" 
           alt="Share"
-          style={{ width: '24px', height: 'auto' }}
+          style={{ width: '32px', height: '32px' }} // Updated to use the specified image and size
         />
         <span className="sr-only">Share Chat</span>
       </button>

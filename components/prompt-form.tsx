@@ -84,7 +84,11 @@ export function PromptForm({
           <Tooltip>
             <TooltipTrigger asChild>
               <Button type="submit" size="icon" disabled={isLoading || input === ''}>
-                <IconArrowElbow />
+                <img 
+                  src="/ui_icons/send_chat_2_32px.png" 
+                  alt="Send"
+                  style={{ width: '32px', height: '32px' }} // Ensure the icon displays at the intended size
+                />
                 <span className="sr-only">Send message</span>
               </Button>
             </TooltipTrigger>

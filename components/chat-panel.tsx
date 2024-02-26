@@ -156,7 +156,11 @@ export function ChatPanel({
                 }}
                 className={styles.broomButton}
               >
-                🧹 {/* Broom emoji */}
+                <img 
+                  src="/ui_icons/clear_the_chat_1_32px.png" 
+                  alt="New Chat"
+                  style={{ width: '32px', height: '32px' }} // Ensuring the icon is displayed at the intended size
+                />
                 <span className="sr-only">New Chat</span>
               </button>
             </TooltipTrigger>
