@@ -19,11 +19,6 @@ export default async function SignInPage() {
           across mechanism design, auctions, information privacy, from research papers and YouTube videos.
       </p>
       
-      {/* Welcome image */}
-      <div className="mb-8">
-        <img src="/android-chrome-512x512.png"/>
-      </div>
-      
       {/* Login buttons */}
       <div>
         <LoginButton loginType="github" text="Login with GitHub" showIcon />
