@@ -98,7 +98,7 @@ const ShareChatHeader: React.FC<ShareChatHeaderProps> = ({ userId, chatId, chat 
         justifyContent: 'center'
       }}>
         <img 
-          src="/ui_icons/share_chat_1.svg" 
+          src="/ui_icons/share_chat_2.svg" 
           alt="Share" 
           style={{ width: '20px', height: 'auto' }}
         />
