@@ -37,7 +37,7 @@
   background-image: url('/ui_icons/refresh_reload_2.svg'); /* Sets the background image */
   background-repeat: no-repeat; /* Prevents the background image from repeating */
   background-position: center; /* Centers the background image */
-  background-size: cover; /* Ensures the background image covers the entire element */
+  background-size: 80%; /* Adjusts the SVG size to take up 80% of the button space */
   border: none; /* Removes any border */
 }
 
