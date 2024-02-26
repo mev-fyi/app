@@ -177,11 +177,17 @@
   box-sizing: border-box; /* Include padding and border in the element's total width */
 }
 
-.sendButtonContainer {
-  margin-top: 0.3rem;
-  position: absolute;
-  /*right: 1rem; /* Align with the padding of the chatPanel */
-  right: 55px;
+.sendButtonContainer button,
+.sendButtonContainer button:active,
+.sendButtonContainer button:focus,
+.sendButtonContainer button:hover {
+  background-color: transparent; /* Ensures the button has no background */
+  border: none;  /* Removes any border */
+  outline: none;  /* Removes focus outline */
+}
+
+.sendButtonContainer img {
+  background-color: transparent; /* Ensures the SVG has no background */
 }
 
 .loadingContainer {

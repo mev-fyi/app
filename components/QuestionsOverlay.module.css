@@ -28,14 +28,17 @@
   display: inline-flex; /* Ensures flexbox properties apply, aligning children centrally */
   align-items: center;
   justify-content: center;
-  width: 36px; /* Adjusted to fit the icon size plus some padding */
-  height: 36px; /* Adjusted to fit the icon size plus some padding */
+  width: 44px; /* Adjusted to fit the icon size plus some padding */
+  height: 44px; /* Adjusted to fit the icon size plus some padding */
   border-radius: 50%; /* Ensures the button is perfectly circular */
   padding: 0; /* Resets padding as it's no longer needed for text */
   cursor: pointer;
-  font-weight: bold; /* May not be necessary unless there's text involved */
-  text-align: center; /* May not be necessary unless there's text involved */
-  background-color: black; /* Ensures the background is black, might be redundant with bg-black in className */
+  background-color: transparent; /* Makes the background transparent */
+  background-image: url('/ui_icons/refresh_reload_2.svg'); /* Sets the background image */
+  background-repeat: no-repeat; /* Prevents the background image from repeating */
+  background-position: center; /* Centers the background image */
+  background-size: cover; /* Ensures the background image covers the entire element */
+  border: none; /* Removes any border */
 }
 
 .questionBox {
