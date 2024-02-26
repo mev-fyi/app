@@ -100,7 +100,7 @@ const ShareChatHeader: React.FC<ShareChatHeaderProps> = ({ userId, chatId, chat 
         <img 
           src="/ui_icons/share_chat_1.svg" 
           alt="Share" 
-          style={{ width: '24px', height: 'auto' }}
+          style={{ width: '20px', height: 'auto' }}
         />
         <span className="sr-only">Share Chat</span>
       </button>
