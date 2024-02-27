@@ -54,9 +54,9 @@ export const questions = [
     // "What are all the subjects you are an expert in?",
     // "What is MEV-Share?",
     // "What is MEV-Boost?",
-    "What is a builder?",
-    "What is a searcher?",
-    "What is a proposer?",
+    "What is a builder in Ethereum?",
+    "What is a searcher in Ethereum?",
+    "What is a proposer in Ethereum?",
     // "What is an attester?",
     // "How do searchers, builders, relays and proposers interact with one another?",  // NOTE 2023-12-30: somehow not working anymore ...
     // "How can the user initiating a transaction get shielded from MEV?",
