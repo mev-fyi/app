@@ -3,6 +3,17 @@ import GitHub from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google';
 import { sha256 } from 'hash.js';
 
+// Ensure environment variables are set
+if (!process.env.AUTH_GITHUB_ID || !process.env.AUTH_GITHUB_SECRET) {
+  console.error("GitHub client ID or client secret is not set. Please check your environment variables.");
+  process.exit(1);
+}
+
+if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
+  console.error("Google client ID or client secret is not set. Please check your environment variables.");
+  process.exit(1);
+}
+
 declare module 'next-auth' {
   interface Session {
     user: {
@@ -19,8 +30,8 @@ export const {
 } = NextAuth({
   providers: [
     GitHub({
-      clientId: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      clientId: process.env.AUTH_GITHUB_ID,
+      clientSecret: process.env.AUTH_GITHUB_SECRET,
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -38,7 +49,7 @@ export const {
         }
       } else if (profile && account?.provider === 'github') {
         token.id = profile.id; 
-        token.image = profile.avatar_url;
+        token.image = profile.avatar_url || profile.picture;
       }
       return token;
     },
