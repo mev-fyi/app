@@ -12,18 +12,19 @@ export default async function SignInPage() {
   return (
     <div className="flex flex-col h-screen items-center justify-center py-10 sm:pb-50">
       {/* Container for the title and text, limiting its width */}
-      <div className="w-full max-w-xl px-4">
+      <div className="w-full max-w-xl px-10">
         {/* Welcome message */}
         <h1 className="mb-4 text-3xl font-bold text-center">mev.fyi</h1>
         <h1 className="mb-4 text-3xl font-bold text-center">The Flashbots-grantee Maximal Extractable Value (MEV) research chatbot</h1>
-        {/* Text block with preformatted text */}
-        <pre className="mb-4 text-muted-foreground whitespace-pre-wrap">
+        {/* Text block */}
+        <p className="mb-6 leading-normal text-muted-foreground">
           Find the latest MEV-related research, across mechanism design, auctions, information privacy, from docs, research papers, articles and YouTube videos.
-          
+        </p>
+        <p className="leading-normal text-muted-foreground">
           To keep our platform friendly and secure, we use GitHub or Google login solely as a spam prevention measure. 
           We promise not to collect any data from you. Once you&apos;re logged in, you&apos;re all set to explore without any hassle.
           Thanks for helping us keep the community safe and sound!
-        </pre>
+        </p>
       </div>
       {/* Login buttons */}
       <div>
