@@ -10,11 +10,11 @@ export default async function SignInPage() {
     redirect('/')
   }
   return (
-    <div className="flex items-center justify-center h-screen flex-col py-10 sm:pb-50">
+    <div className="flex flex-col h-screen items-center justify-center py-10 sm:pb-50">
       {/* Welcome message */}
-      <h1 className="text-3xl font-bold text-center mb-4">mev.fyi</h1>
-      <h1 className="text-3xl font-bold text-center mb-4">The Flashbots-grantee Maximal Extractable Value (MEV) research chatbot</h1>
-      <p className="mb-4 text-muted-foreground leading-normal">
+      <h1 className="mb-4 text-3xl font-bold text-center">mev.fyi</h1>
+      <h1 className="mb-4 text-3xl font-bold text-center">The Flashbots-grantee Maximal Extractable Value (MEV) research chatbot</h1>
+      <p className="mb-4 leading-normal text-muted-foreground">
           Find the latest MEV-related research, 
           across mechanism design, auctions, information privacy, from docs, research papers, articles and YouTube videos.
 
