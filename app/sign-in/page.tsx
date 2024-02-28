@@ -10,17 +10,15 @@ export default async function SignInPage() {
     redirect('/')
   }
   return (
-    <div className="flex flex-col h-screen items-center justify-center py-6 sm:pb-50">
-      {/* Increased the max width class to max-w-4xl for larger text size */}
-      <div className="w-full max-w-4xl px-3">
-        <h1 className="mb-4 text-4xl font-bold text-center">mev.fyi</h1>
-        <h1 className="mb-4 text-4xl font-bold text-center">The Flashbots-grantee Maximal Extractable Value (MEV) research chatbot</h1>
+    <div className="flex flex-col h-screen justify-start pt-20 sm:pt-32">
+      <div className="w-full max-w-4xl px-3 mx-auto text-center">
+        <h1 className="mb-4 text-4xl font-bold">mev.fyi</h1>
+        <h1 className="mb-4 text-4xl font-bold">The Flashbots-grantee Maximal Extractable Value (MEV) research chatbot</h1>
         
         <p className="mb-6 leading-normal text-muted-foreground text-lg">
           Find the latest MEV-related research, across mechanism design, auctions, information privacy, from docs, research papers, articles and YouTube videos.
         </p>
         
-        {/* Reduced vertical spacing */}
         <p className="my-4"></p>
         
         <p className="leading-normal text-muted-foreground text-lg">
@@ -30,10 +28,9 @@ export default async function SignInPage() {
         </p>
       </div>
       
-      {/* Reduced vertical spacing */}
       <p className="my-4"></p>
       
-      <div>
+      <div className="w-full px-3 mx-auto flex justify-center">
         <LoginButton loginType="github" text="Login with GitHub" showIcon />
         <LoginButton loginType="google" text="Login with Google" showIcon />
       </div>
