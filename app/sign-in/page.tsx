@@ -11,7 +11,7 @@ export default async function SignInPage() {
   }
   return (
     <div className="flex flex-col h-screen justify-start pt-20 sm:pt-32">
-      <div className="w-full max-w-6xl px-3 mx-auto text-center">
+      <div className="w-full max-w-8xl px-3 mx-auto text-center">
         <h1 className="mb-4 text-4xl font-bold">mev.fyi</h1>
         <h1 className="mb-4 text-4xl font-bold">The Flashbots-grantee Maximal Extractable Value (MEV) research chatbot</h1>
         
@@ -29,7 +29,7 @@ export default async function SignInPage() {
         <p className="leading-normal text-muted-foreground text-lg">
           Once you&apos;re logged in, you&apos;re all set to explore without any hassle.
         </p>  
-        
+
         <p className="leading-normal text-muted-foreground text-lg">
           Thanks for helping us keep the community safe and sound!
         </p>
