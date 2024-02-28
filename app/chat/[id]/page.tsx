@@ -1,3 +1,4 @@
+// app/chat/[id]/page.tsx
 import { type Metadata } from 'next'
 import { notFound, redirect } from 'next/navigation'
 

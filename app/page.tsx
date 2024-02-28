@@ -1,3 +1,4 @@
+// app/page.tsx
 import { nanoid } from '@/lib/utils'
 import { Chat } from '@/components/chat'
 import ShareChatHeader from '@/components/share-chat-header';
