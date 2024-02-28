@@ -11,7 +11,8 @@ export default async function SignInPage() {
   }
   return (
     <div className="flex flex-col h-screen items-center justify-center py-10 sm:pb-50">
-      <div className="w-full max-w-xl px-3">
+      {/* Increase the max width class to max-w-2xl or more */}
+      <div className="w-full max-w-2xl px-3">
         <h1 className="mb-4 text-3xl font-bold text-center">mev.fyi</h1>
         <h1 className="mb-4 text-3xl font-bold text-center">The Flashbots-grantee Maximal Extractable Value (MEV) research chatbot</h1>
         
@@ -28,7 +29,7 @@ export default async function SignInPage() {
           Thanks for helping us keep the community safe and sound!
         </p>
       </div>
-
+      
       {/* Empty paragraph for spacing */}
       <p className="my-6"></p>
       
