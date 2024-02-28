@@ -14,14 +14,14 @@ export default async function SignInPage() {
       {/* Welcome message */}
       <h1 className="mb-4 text-3xl font-bold text-center">mev.fyi</h1>
       <h1 className="mb-4 text-3xl font-bold text-center">The Flashbots-grantee Maximal Extractable Value (MEV) research chatbot</h1>
-      <p className="mb-4 leading-normal text-muted-foreground">
-          Find the latest MEV-related research, 
-          across mechanism design, auctions, information privacy, from docs, research papers, articles and YouTube videos.
+      {/* Text block with preformatted text */}
+      <pre className="mb-4 text-muted-foreground whitespace-pre-wrap">
+        Find the latest MEV-related research, across mechanism design, auctions, information privacy, from docs, research papers, articles and YouTube videos.
 
-          To keep our platform friendly and secure, we use GitHub or Google login solely as a spam prevention measure. 
-          We promise not to collect any data from you. Once you&apos;re logged in, you&apos;re all set to explore without any hassle. 
-          Thanks for helping us keep the community safe and sound!
-      </p>
+        To keep our platform friendly and secure, we use GitHub or Google login solely as a spam prevention measure. 
+        We promise not to collect any data from you. Once you're logged in, you're all set to explore without any hassle.
+        Thanks for helping us keep the community safe and sound!
+      </pre>
       {/* Login buttons */}
       <div>
         <LoginButton loginType="github" text="Login with GitHub" showIcon />
