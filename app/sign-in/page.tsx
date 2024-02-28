@@ -23,7 +23,14 @@ export default async function SignInPage() {
         
         <p className="leading-normal text-muted-foreground text-lg">
           To keep our platform friendly and secure, we use GitHub or Google login solely as a spam prevention measure. 
-          We promise not to collect any data from you. Once you&apos;re logged in, you&apos;re all set to explore without any hassle.
+          We promise not to collect any data from you! 
+        </p>
+
+        <p className="leading-normal text-muted-foreground text-lg">
+          Once you&apos;re logged in, you&apos;re all set to explore without any hassle.
+        </p>  
+        
+        <p className="leading-normal text-muted-foreground text-lg">
           Thanks for helping us keep the community safe and sound!
         </p>
       </div>
