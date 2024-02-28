@@ -11,7 +11,7 @@ export default async function SignInPage() {
   }
   return (
     <div className="flex flex-col h-screen items-center justify-center py-10 sm:pb-50">
-      <div className="w-full max-w-xl px-40">
+      <div className="w-full max-w-xl px-3">
         <h1 className="mb-4 text-3xl font-bold text-center">mev.fyi</h1>
         <h1 className="mb-4 text-3xl font-bold text-center">The Flashbots-grantee Maximal Extractable Value (MEV) research chatbot</h1>
         
