@@ -12,12 +12,12 @@ const configuration = new Configuration({
 });
 
 export async function POST(req: Request) {
-  console.log('route.ts: Received POST request');
+  console.log('route.ts: Received POST request from user');
 
   let json;
   try {
     json = await req.json();
-    console.log('route.ts: JSON body parsed:', json);
+    // console.log('route.ts: JSON body parsed:', json);
   } catch (error) {
     console.error('route.ts: Error parsing JSON body:', error);
     return new Response('Bad request', { status: 400 });
@@ -39,29 +39,30 @@ export async function POST(req: Request) {
     return new Response('Unauthorized', { status: 401 });
   }
 
-  console.log('route.ts: User authenticated, user ID:', userId);
+  // console.log('route.ts: User authenticated, user ID:', userId);
+  console.log('route.ts: User authenticated!');
 
   if (previewToken) {
-    console.log('route.ts: Using preview token for API key');
+    // console.log('route.ts: Using preview token for API key');
     configuration.apiKey = previewToken;
   }
 
   const mostRecentMessageContent = messages.length > 0 ? messages[messages.length - 1].content : "No messages yet.";
-  console.log('route.ts: All messages:', messages);
-  console.log('route.ts: Most recent message content:', mostRecentMessageContent);
+  // console.log('route.ts: All messages:', messages);
+  // console.log('route.ts: Most recent message content:', mostRecentMessageContent);
 
   const backendChatUrl = `${process.env.REACT_APP_BACKEND_URL}/chat`;
-  console.log('route.ts: Backend chat URL:', backendChatUrl);
+  // console.log('route.ts: Backend chat URL:', backendChatUrl);
 
   let chatResponse;
   try {
-    console.log('route.ts: Attempting to send request to backend: ', mostRecentMessageContent)
+    // console.log('route.ts: Attempting to send request to backend: ', mostRecentMessageContent)
     chatResponse = await fetch(backendChatUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: mostRecentMessageContent, chat_history: messages })
     });
-    console.log('route.ts: Chat response received', chatResponse);
+    // console.log('route.ts: Chat response received', chatResponse);
   } catch (error) {
     console.error('route.ts: Fetch to backend chat failed:', error);
     return new Response('Internal Server Error', { status: 500 });
@@ -73,12 +74,12 @@ export async function POST(req: Request) {
   }
 
   const responseBody = await chatResponse.json();
-  console.log(`route.ts: Received response from backend:`, responseBody);
+  // console.log(`route.ts: Received response from backend:`, responseBody);
 
   let structuredMetadata: ParsedMetadataEntry[] = [];
   if (responseBody.formatted_metadata) {
     structuredMetadata = parseMetadata(responseBody.formatted_metadata);
-    console.log('route.ts: Parsed metadata:', structuredMetadata);
+    // console.log('route.ts: Parsed metadata:', structuredMetadata);
   }
 
   const title = messages[0]?.content.substring(0, 100) || "New Chat";
