@@ -28,8 +28,8 @@
   display: inline-flex; /* Ensures flexbox properties apply, aligning children centrally */
   align-items: center;
   justify-content: center;
-  width: 44px; /* Adjusted to fit the icon size plus some padding */
-  height: 44px; /* Adjusted to fit the icon size plus some padding */
+  width: 24px; /* Adjusted to fit the icon size plus some padding */
+  height: 24px; /* Adjusted to fit the icon size plus some padding */
   border-radius: 50%; /* Ensures the button is perfectly circular */
   padding: 0; /* Resets padding as it's no longer needed for text */
   cursor: pointer;
