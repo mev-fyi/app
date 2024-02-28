@@ -19,7 +19,7 @@ export default async function SignInPage() {
         Find the latest MEV-related research, across mechanism design, auctions, information privacy, from docs, research papers, articles and YouTube videos.
 
         To keep our platform friendly and secure, we use GitHub or Google login solely as a spam prevention measure. 
-        We promise not to collect any data from you. Once you're logged in, you're all set to explore without any hassle.
+        We promise not to collect any data from you. Once you&apos;re logged in, you&apos;re all set to explore without any hassle.
         Thanks for helping us keep the community safe and sound!
       </pre>
       {/* Login buttons */}
