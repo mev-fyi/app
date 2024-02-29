@@ -36,3 +36,6 @@ yarn-error.log*
 .env
 .vercel
 .vscode
+
+test_create_shared_chat_api.sh
+test_curl

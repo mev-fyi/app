@@ -208,7 +208,7 @@ export const questions = [
     "What is a 'validium'? What is Plasma?",
     "What is proof-of-work (PoW)?",
     "What is proof-of-stake (PoS)?",
-    "Are there other proofs different from proof-of-work and proof-of-stake?",
+    "What are other consensus mechanisms for blockchain besides proof-of-work and proof-of-stake?",
     "What is a consensus mechanism?",
     "What are blockchain systems?",
     "What are dApps?",
