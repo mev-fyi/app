@@ -19,7 +19,7 @@
   flex-direction: column;
   align-items: center; /* Horizontally center */
   position: relative; /* Change to relative to make the left property effective */
-  padding-top: 45px;
+  padding-top: 50px;
 }
 
 .rightPanel {
