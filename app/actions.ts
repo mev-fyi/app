@@ -139,7 +139,7 @@ export async function shareChat(chat: Chat, useApiKeyAuth: boolean = false) {
     sharePath: `/share/${sharedChatId}`
   };
 
-  console.log("Payload for shared chat:", sharedPayload);
+  // console.log("Payload for shared chat:", sharedPayload);
 
   try {
     await kv.hmset(`chat:${sharedChatId}`, sharedPayload);
