@@ -11,7 +11,7 @@ export default async function SignInPage() {
   }
   return (
     <div className="flex flex-col h-screen justify-start items-center pt-20 sm:pt-32">
-      <div className="w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl px-3 mx-auto text-center">
+      <div className="w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-4xl 2xl:max-w-5xl px-3 mx-auto text-center">
         <h1 className="mb-4 text-4xl font-bold">mev.fyi</h1>
         <h1 className="mb-4 text-2xl sm:text-3xl md:text-4xl font-bold">
           The Flashbots-grantee Maximal Extractable Value (MEV) research chatbot
