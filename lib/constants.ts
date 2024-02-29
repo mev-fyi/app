@@ -13,16 +13,15 @@ export const questions = [
     "Tell me about transaction ordering on L2s",
     "What are Order Flow Auctions (OFAs)?",
     // "Can you tell me how the definition of MEV evolved over the years?",
-    "What is MEV burn?",
-    "What is account abstraction?",
-    "What is account abstraction (ERC-4337)?",
+    "What is MEV-Burn?",
+    "What is account abstraction and ERC-4337?",
     "What is EIP-1559?",
-    // "How will account abstraction affect the MEV supply chain?",  // NOTE 2024-01-28: since it can't find it resources it won't state about it, which is side-effect of prompt-tuning which state to not respond if it cant find info.
-    // "What is the difference between account abstraction and intents?",
-    // "Is it bad that MEV is a centralizing force?",
-    // "Tell me about MEV on Solana",
-    // "Explain to me the differences between Uniswap v2, v3 and v4",  # NOTE 2023-12-27: somehow refuses to answer this one despite the context
-    "What is Uniswap V4 and what are the differences with V3?",
+    // "How will account abstraction affect the MEV supply chain?",  // NOTE 2024-01-28: since it can't find it resources it won't state about it, which is side-effect of prompt-tuning which state to not respond if it cant find info".
+    // What is the difference between account abstraction and intents?",
+    // Is it bad that MEV is a centralizing force?",
+    // Tell me about MEV on Solana",
+    // Explain to me the differences between Uniswap v2, v3 and v4",  # NOTE 2023-12-27: somehow refuses to answer this one despite the contex"t
+    "Explain Uniswap V4 and the differences compared to V3",
     "What are commit/reveal schemes?",
     "What is the impact of latency in MEV?",
     "What is Protocol Enforced Proposer Commitments (PEPC)?",
@@ -49,8 +48,7 @@ export const questions = [
     "What are credible commitments?",
     // "What is at the intersection of AI and crypto?",
     // "Would a spot ETH ETF be good for the crypto ecosystem? Would that be a centralising force?",
-    "How can auction theory be used to design a better MEV auction?",
-    "What are all the subjects that are needed to understand MEV?",
+    "How can auction theory be used to design better MEV protocols?",
     // "What are all the subjects you are an expert in?",
     // "What is MEV-Share?",
     // "What is MEV-Boost?",
@@ -58,7 +56,7 @@ export const questions = [
     "What is a searcher in Ethereum?",
     "What is a proposer in Ethereum?",
     // "What is an attester?",
-    // "How do searchers, builders, relays and proposers interact with one another?",  // NOTE 2023-12-30: somehow not working anymore ...
+    // "How do searchers, builders, relays and proposers interact with one another?",  // NOTE 2023-12-30: somehow not working anymore ..".
     // "How can the user initiating a transaction get shielded from MEV?",
     // "Give me lectures links about mechanism design",
     // "Give me videos links with Hasu",
@@ -69,21 +67,18 @@ export const questions = [
     // "Give me videos links with Dan Robinson",
     // "What are the contributions of Jason Milionis to research?",
     // "What are the contributions of Ciamac Moallemi to LVR and MEV?",
-    
-    // "Give me videos about Trusted Execution Environment (TEE)",    // NOTE 2023-12-29: no longer works with reranking since we penalise youtube videos and we do not retrieve enough chunks
-    // "Give me videos about Order Flow Auctions (OFAs)",    // NOTE 2023-12-29: no longer works with reranking since we penalise youtube videos and we do not retrieve enough chunks
-    // "Give me videos about intents",   // NOTE 2023-12-29: no longer works with reranking since we penalise youtube videos and we do not retrieve enough chunks
+    // "Give me videos about Trusted Execution Environment (TEE)",    // NOTE 2023-12-29: no longer works with reranking since we penalise youtube videos and we do not retrieve enough chunk"s
+    // "Give me videos about Order Flow Auctions (OFAs)",    // NOTE 2023-12-29: no longer works with reranking since we penalise youtube videos and we do not retrieve enough chunk"s
+    // "Give me videos about intents",   // NOTE 2023-12-29: no longer works with reranking since we penalise youtube videos and we do not retrieve enough chunk"s
     // "Give me videos discussing Uniswap v4",
-
     "What's an automated market maker (AMM)?",
     "What are the different types of AMMs?",
     "What are Uniswap v4 hooks? Illustrate with examples",
-    "What is the mempool?",
+    "Explain the Ethereum mempool",
     "How could private mempools influence MEV?",
-    // "How does the design of a private mempool relate to traditional finance dark pools?",
-    "What protections can we use against MEV?",
-
-    "What is blockchain censorship?",
+    // How does the design of a private mempool relate to traditional finance dark pools?",
+    "How can I protect myself against MEV?",
+    "Explain blockchain censorship",
     // "What are bribes in the block-building supply chain?",
     // "Tell me more about the block construction market",
     "What is censorship resistance?",
@@ -106,7 +101,7 @@ export const questions = [
     // "How does ETH staking relate to blockchain centralization?",
     // "How can I mathematically compute MEV?",
     "How do 'frontrunning' and 'backrunning' relate to MEV?",
-    "What is non-toxic orderflow?",
+    "What is toxic and non-toxic orderflow?",
     "Tell me about optimal liquidity provision",
     "What is Just in Time (JIT) liquidity?",
     // "How does market microstructure and MEV supply chain relate to one another?",
@@ -116,11 +111,10 @@ export const questions = [
     // "Tell me more about optimal on-chain auction designs",
     "How do zero-knowledge proofs impact MEV?",
     "How does threshold encryption impact MEV?",
-    // "What is instant finality and how does it relate to MEV?",  // NOTE 2024-01-11: no longer works as of date
-    "What is Tendermint?",
+    // "What is instant finality and how does it relate to MEV?",  // NOTE 2024-01-11: no longer works as of dat"e
+    "What is Comet (formerly Tendermint)?",
     // "What is the Inter-Blockchain Communication (IBC) protocol?",
     // "What is Cosmos? How is Cosmos affected by MEV relative to Ethereum?",
-    "What is delegated proof-of-stake (DPoS)?",
     "How can large staking protocols like LIDO and Rocket Pool influence MEV?",
     "What are different Byzantine Fault Tolerance (BFT) protocols?",
     // "What are the consensus-level differences of Ethereum and Solana?",
@@ -129,20 +123,21 @@ export const questions = [
     // "What is sharding?",
     // "What is Vitalik Buterin's stance on MEV?",
     // "What is danksharding?",
-    "What's Eigenlayer?",
-    "Explain what is Eigenlayer's restaking and how it secures other protocols in layman's terms",
+    // "What's Eigenlayer?",
+    // "Explain what is Eigenlayer's restaking and how it secures other protocols in layman's terms",
     // "What are concrete applications of Eigenlayer's restaking system?",
-    // "How does Eigenlayer's restaking system differ from LIDO's value proposition?", // NOTE 2024-01-28: doesn't know as side effect of prompt-tuning where it refuses to answer if it cant find it in sources.
+    // "How does Eigenlayer's restaking system differ from LIDO's value proposition?", // NOTE 2024-01-28: doesn't know as side effect of prompt-tuning where it refuses to answer if it cant find it in sources".
     // "What are credible commitments and middlewares referred to in the context of Eigenlayer's restaking?",
-    "What is Sybil resistance in consensus protocols?",
+    "How does consensus mechanism achieve sybil resistance?",
     // "What is deplatforming?",
     // "What the foundational design principles in building crypto technology?",
     "What is fair ordering?",
-    // "What is WASM?",
+    // What is WASM?",
     "What are 'ZK circuits'?",
-    // "What is Celestia?",
-    "What do we refer to as: consensus, data availability layer, and execution layer respectively?",
-    "What are merkle trees?",
+    // What is Celestia?",
+    "What is a Modular blockchain?",
+    "What are the definitions of the following layers: consensus, data availability, settlement, and execution?",
+    "What is a Merkle tree?",
     // "Who is developing Gnosis chain and what is its value proposition relative to other chains?",
     // "What is Gnosis Safe?",
     // "What are governance attacks?",
@@ -162,29 +157,28 @@ export const questions = [
     // "What is ERC-7265?",
     // "What are Verkle trees?",
     // "What are the trade-offs for DeFi protocols to build on an L2 versus their on own app-chain on Cosmos?"
-    "Give me an exhaustive understanding of execution tickets and block proposal right market",
-    "Tell me everything you know about timing games in Ethereum",
+    "What are execution tickets and block proposal right market?",
+    "What are timing games in Ethereum?",
     "How do L2s, L3s and 'data availability layers' like Celestia relate to one another?",
     "What's an RPC? How does it relate to MEV?",
     // "Explain what are relays in Ethereum",
     "How does relays relate to Proposer/Builder Separation (PBS)?",
     "What is the difference between a validator, a proposer, and an attester?",
-    "Give me the full composition of an Ethereum block and how it relates to the consensus, data availability, and execution layer",
+    "Give me the full composition of an Ethereum block and how it relates to the consensus, data availability, settlement, and execution layer",
     "Give me the full composition of an Ethereum proof-of-stake block with a schema",
     "What are inclusion lists?",
     // "Return in a markdown table the differences in implementation in ePBS",  // NOTE 2024-01-17: no longer works as of date :(
     "Return in a markdown table the differences between ETH proof of work and ETH proof of stake",
     // "Return in a markdown table the differences between Eigenlayer and LIDO",  // NOTE 2024-01-21: no longer works as of date :(
-    "What is Proto-Danksharding (EIP-4844)?",
     "What will Proto-Danksharding (EIP-4844) enable?",
     "What is PEPC, what does it resolve with respect to ePBS? Is PEPC a solution to the current centralized relay market or is it independent?",
-    "Explain to me the difference between ethereum base layer, data layer, execution layer, and how does that relate with EVMs and 'almost-EVMs'?",
-    "Why are data availability solutions needed?",
+    "Explain to me the difference between Ethereum base layer, data availability layer, execution layer, and how does that relate with EVMs and 'almost-EVMs'?",
+    "Why is data availability needed?",
     "What is Data Sampling Availability (DAS)?",
     "What are verkle trees?",
     "What is the ZK EVM and what does it solve?",
     "Return a markdown table which does an exhaustive comparison between Optimism and ZK-rollups",
-    "What is an L2 rollup?",
+    "What is a rollup?",
     "What will proto-danksharding (EIP-4844) enable from a business standpoint?",
     "What are the effects of MEV?",
     "What are consensus mechanisms in Ethereum?",
@@ -215,7 +209,7 @@ export const questions = [
     "What is the Solidity programming language?",
     "What is the difference between an ERC and an EIP?",
     "What are the risks for Ethereum to enshrine more items to its protocol?",
-  ]
-  
+]
 
-  
+
+
