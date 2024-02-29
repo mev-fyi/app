@@ -116,7 +116,7 @@ export async function shareChat(chat: Chat, useApiKeyAuth: boolean = false) {
   } else {
     // In case of session-based authentication
     const session = await auth();
-    console.log("Session data:", session);
+    // console.log("Session data:", session);
 
     // Ensure session.user.id is a string and matches chat.userId
     isAuthorized = session?.user?.id === chat.userId;
