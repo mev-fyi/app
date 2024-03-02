@@ -172,7 +172,7 @@ export const questions = [
     // "Return in a markdown table the differences between Eigenlayer and LIDO",  // NOTE 2024-01-21: no longer works as of date :(
     "What will Proto-Danksharding (EIP-4844) enable?",
     "What is PEPC, what does it resolve with respect to ePBS? Is PEPC a solution to the current centralized relay market or is it independent?",
-    "Explain to me the difference between Ethereum base layer, data availability layer, execution layer, and how does that relate with EVMs and 'almost-EVMs'?",
+    "What are the following layers: Ethereum base, data availability, settlement, execution? How are they related to EVMs and 'almost-EVMs'?",
     "Why is data availability needed?",
     "What is Data Sampling Availability (DAS)?",
     "What are verkle trees?",
@@ -196,7 +196,7 @@ export const questions = [
     "How do sovereign and base rollup differ?",
     // "Tell me everything you know about token engineering",
     "Detail to me the transaction supply chain from the point where the sequencer gives the pre-confirmation to the user to having the ZK prover's proof posted on ETH L1",
-    "What are pre-confirmations?",
+    "What are preconfirmations?",
     "Make a very exhaustive breakdown of the ZK prover proof creation",
     "How is the concept of rollup-as-a-service, for instance provided by Altlayer, different from the appchain e.g. built on Cosmos SDK?",
     "What is a 'validium'? What is Plasma?",
