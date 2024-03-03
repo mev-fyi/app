@@ -191,7 +191,6 @@ export const questions = [
     "What are 'slot vs. block auctions' and what are the trade-offs of either auction type?",
     "Give me a thorough overview of cryptoeconomics",
     "What are forward inclusion lists and how do they help censorship resistance?",
-    "What are base L2 chains?",
     "What are sovereign rollup chains?",
     "How do sovereign and base rollup differ?",
     // "Tell me everything you know about token engineering",
