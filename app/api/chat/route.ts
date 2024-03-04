@@ -124,10 +124,18 @@ export async function POST(req: Request) {
     console.error('Payload contains invalid values. Aborting storage.');
     return new Response('Invalid payload', { status: 400 });
   }
-
+  
+  console.log("Logging size of each message:");
+  // Log sizes of all messages individually
+  payload.messages.forEach((message, index) => {
+    console.log(`Message ${index} size:`, new Blob([JSON.stringify(message)]).size);
+  });
+  
+  // Log the total sizes of major components and the total payload
   console.log("Total payload size:", new Blob([JSON.stringify(payload)]).size);
   console.log("Messages size:", new Blob([JSON.stringify(payload.messages)]).size);
-  console.log("Metadata size:", new Blob([JSON.stringify(payload.structured_metadata)]).size); 
+  console.log("Metadata size:", new Blob([JSON.stringify(payload.structured_metadata)]).size);
+  
 
   try {
     // await kv.set(`chat:${id}`, JSON.stringify(payload));
@@ -139,7 +147,6 @@ export async function POST(req: Request) {
       console.error('Failed to store chat record:', error);
       return new Response('Internal Server Error', { status: 500 });
   }
-  
 
   return new Response(JSON.stringify(payload), {
     headers: { 'Content-Type': 'application/json' },

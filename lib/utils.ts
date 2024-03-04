@@ -49,23 +49,23 @@ export function formatDate(input: string | number | Date): string {
 }
 
 export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] {
-  console.log('Parsing metadata...');
+  // console.log('Parsing metadata...');
   const formattedEntries = formattedMetadata.split('\n');
 
   const parsedEntries: (ParsedMetadataEntry | null)[] = formattedEntries.map((entry, index) => {
-    console.log(`Parsing entry ${index + 1}:`, entry);
+    // console.log(`Parsing entry ${index + 1}:`, entry);
     const videoDetails = entry.match(/\[Title\]: (.*?), \[Channel name\]: (.*?), \[Video Link\]: (.*?), \[Published date\]: ([\d-]+|nan)/);
     // Updated regex to handle empty release date and include highest score
     const paperDetails = entry.match(/\[Title\]: (.*?), \[Authors\]: (.*?), \[Link\]: (.*?), \[Release date\]: ([\d-]*|nan), \[Highest Score\]: ([0-9.]+)/);
 
     if (videoDetails) {
-      console.log(`Found video details for entry ${index + 1}`);
+      // console.log(`Found video details for entry ${index + 1}`);
       return createVideoEntry(videoDetails, index);
     } else if (paperDetails) {
-      console.log(`Found paper details for entry ${index + 1}`);
+      // console.log(`Found paper details for entry ${index + 1}`);
       return createPaperEntry(paperDetails, index);
     } else {
-      console.log(`No valid details found for entry ${index + 1}`);
+      // console.log(`No valid details found for entry ${index + 1}`);
     }
 
     return null;
@@ -77,7 +77,7 @@ export function parseMetadata(formattedMetadata: string): ParsedMetadataEntry[] 
 }
 
 function createVideoEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
-  console.log(`Creating video entry for index ${index + 1}`);
+  // console.log(`Creating video entry for index ${index + 1}`);
   const publishedDateString = sanitizeField("Date", details[4]);
   const publishedDate = publishedDateString.toLowerCase() === 'nan' ? null : new Date(publishedDateString);
 
@@ -93,7 +93,7 @@ function createVideoEntry(details: RegExpMatchArray, index: number): ParsedMetad
 }
 
 function createPaperEntry(details: RegExpMatchArray, index: number): ParsedMetadataEntry {
-  console.log(`Creating paper entry for index ${index + 1}`);
+  // console.log(`Creating paper entry for index ${index + 1}`);
   const publishedDateString = sanitizeField("Date", details[4]);
   // Handle empty release date
   const publishedDate = publishedDateString && publishedDateString.toLowerCase() !== 'nan' ? new Date(publishedDateString) : null;
