@@ -107,23 +107,16 @@ export function Chat({
   // Function to parse messages and apply structured metadata
   // TODO 2024-03-04: to deprecate if new response format from route.ts is good
   const parseMessagesAndMetadata = (messages: MetadataMessage[], metadata: ParsedMetadataEntry[]) => {
-    console.log("parseMessagesAndMetadata started")
     const parsedMessages = messages.map((message) => {
       if (message.role === 'assistant') {
         try {
           // Try to parse the content as JSON
-          console.log("parsing json for each message")
-          console.log("Message Content:", message.content)
-          
           const parsedContent = JSON.parse(message.content);
-          
-          console.log("Parsed Content:", parsedContent);
           
           // Check if parsedContent has a messages array and it's not empty
           if (parsedContent.message) {
             // Replace content with the last message of the messages array
             message.content = parsedContent.message.content
-            console.log("Last message.content:", message.content);
           }
         } catch (error) {
           // If parsing fails or doesn't meet criteria, leave content as is
@@ -137,7 +130,6 @@ export function Chat({
     setMessages(parsedMessages);
     setLastMessageRole('assistant');
     setStructuredMetadataEntries(metadata);
-    console.log("parseMessagesAndMetadata ended")
   };
 
   useEffect(() => {
@@ -147,7 +139,6 @@ export function Chat({
     // Check if initialMessages and structured_metadata are not empty and apply parsing
     if (initialMessages && initialMessages.length > 0 && structured_metadata && structured_metadata.length > 0) {
       // useEffect in shared chat
-      console.log("useEffect in shared chat started")
       parseMessagesAndMetadata(initialMessages, structured_metadata);
     }
 
@@ -155,7 +146,6 @@ export function Chat({
     if (shared_chat) {
       setShowChatList(true);
     }
-    console.log("useEffect in shared chat ended")
   }, [shared_chat]);
 
 
@@ -270,9 +260,7 @@ export function Chat({
         } else if (originalResponse.ok) {
           const response = originalResponse.clone();
           try {
-            console.log("onResponse started");
             const responseData = await response.json();
-            console.log("Response Data:", responseData);
       
             // Adjust for the simplified payload structure
             const newMessageFromServer = {
