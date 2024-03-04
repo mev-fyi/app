@@ -125,6 +125,10 @@ export async function POST(req: Request) {
     return new Response('Invalid payload', { status: 400 });
   }
 
+  console.log("Total payload size:", new Blob([JSON.stringify(payload)]).size);
+  console.log("Messages size:", new Blob([JSON.stringify(payload.messages)]).size);
+  console.log("Metadata size:", new Blob([JSON.stringify(payload.structured_metadata)]).size); 
+
   try {
     // await kv.set(`chat:${id}`, JSON.stringify(payload));
     await kv.hmset(`chat:${id}`, payload);
@@ -142,7 +146,7 @@ export async function POST(req: Request) {
       };
   
       try {
-        await kv.set(`chat:${id}`, JSON.stringify(reducedPayload));
+        await kv.set(`chat:${id}`, reducedPayload);
         console.log('route.ts: Chat record stored with reduced message count');
       } catch (secondError) {
         console.error('Failed again to store chat record:', secondError);
