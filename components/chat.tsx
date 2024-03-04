@@ -174,6 +174,7 @@ export function Chat({
 
   // Function to handle user input submission
   const handleUserInputSubmit = async (value: string) => {
+    console.log("Current input value:", input); // Log the current value of `input`
     // Fade out EmptyScreen and QuestionsOverlay
     setShowMiddlePanelOverlay(false);
 
@@ -194,6 +195,7 @@ export function Chat({
       structured_metadata: []  // Assuming this matches the type in MetadataMessage
     };
     setMessages(prevMessages => [...prevMessages, newUserMessage]);
+    console.log("Current messages:", newMessages); // This will log all messages
     append(newUserMessage);
     setLastMessageRole('user');
     // Hide the QuestionsOverlayLeftPanel on user input
