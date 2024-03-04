@@ -160,10 +160,10 @@ export async function POST(req: Request) {
     userId: payload.userId,
     createdAt: payload.createdAt,
     path: payload.path,
-    messages: [{
+    message: {
       content: responseBody.response?.response || responseBody.response,
       role: 'assistant',
-    },],
+    },
     structured_metadata: payload.structured_metadata,
   };
 

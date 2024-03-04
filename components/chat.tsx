@@ -105,6 +105,7 @@ export function Chat({
 
 
   // Function to parse messages and apply structured metadata
+  // TODO 2024-03-04: to deprecate if new response format from route.ts is good
   const parseMessagesAndMetadata = (messages: MetadataMessage[], metadata: ParsedMetadataEntry[]) => {
     console.log("parseMessagesAndMetadata started")
     const parsedMessages = messages.map((message) => {
@@ -139,6 +140,7 @@ export function Chat({
     setMessages(parsedMessages);
     setLastMessageRole('assistant');
     setStructuredMetadataEntries(metadata);
+    console.log("parseMessagesAndMetadata ended")
   };
 
   useEffect(() => {
@@ -266,24 +268,38 @@ export function Chat({
       },
       onResponse: async (originalResponse) => {
         if (originalResponse.status === 401) {
-          toast.error(originalResponse.statusText)
+          toast.error(originalResponse.statusText);
         } else if (originalResponse.ok) {
-          // Clone the response before reading it to avoid "already read" errors
           const response = originalResponse.clone();
           try {
             console.log("onResponse started");
             const responseData = await response.json();
-            console.log("Response Data:", responseData); // This line logs the responseData
-
-            // Call the parseMessagesAndMetadata function to handle message parsing and metadata application
-            parseMessagesAndMetadata(responseData.messages, responseData.structured_metadata || []);
+            console.log("Response Data:", responseData);
       
+            // Adjust for the simplified payload structure
+            const newMessageFromServer = {
+              id: responseData.message.id || '', // Generate or use an existing ID
+              role: responseData.message.role,
+              content: responseData.message.content,
+              structured_metadata: responseData.message.structured_metadata || []
+            };
+            // Update the chat list with the new message from the server
+            setMessages(prevMessages => [...prevMessages, newMessageFromServer]);
+            
+            // Update structured metadata state if it's part of the response
+            if (responseData.structured_metadata) {
+              setStructuredMetadataEntries(responseData.structured_metadata);
+            }
+      
+            // Update structured metadata state
+            setLastMessageRole('assistant');
+
+            console.log("onResponse ended");
           } catch (error) {
             console.error('Error reading response data:', error);
             toast.error('Error reading response data');
           }
         }
-        console.log("onResponse ended");
       }
     })
 
