@@ -122,7 +122,7 @@ export function Chat({
           // Check if parsedContent has a messages array and it's not empty
           if (parsedContent.message) {
             // Replace content with the last message of the messages array
-            message.content = parsedContent.message.message.content
+            message.content = parsedContent.message.content
             console.log("Last message.content:", message.content);
           }
         } catch (error) {
