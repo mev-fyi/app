@@ -6,6 +6,7 @@ import { parseMetadata } from '@/lib/utils';
 import { ParsedMetadataEntry } from '@/lib/types';
 
 // export const runtime = 'edge'
+export const maxDuration =60;
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY
