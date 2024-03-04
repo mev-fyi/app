@@ -25,7 +25,6 @@ export async function POST(req: Request) {
   }
 
   const { messages, previewToken } = json;
-  console.log("Extracted messages from request:", messages);
   const session = await auth();
 
   if (!session?.user) {
@@ -40,8 +39,6 @@ export async function POST(req: Request) {
     console.error('route.ts: Unauthorized request: No session user found and default userId is used.: ', userId);
     return new Response('Unauthorized', { status: 401 });
   }
-
-  console.log('route.ts: User authenticated!');
 
   if (previewToken) {
     // console.log('route.ts: Using preview token for API key');
@@ -114,30 +111,12 @@ export async function POST(req: Request) {
     ],
     structured_metadata: structuredMetadata,
   };
-  console.log("Payload to save:", payload);
 
 
   if (checkForInvalidValues(payload)) {
     console.error('Payload contains invalid values. Aborting storage.');
     return new Response('Invalid payload', { status: 400 });
   }
-  
-  console.log("Logging size and content of each message:");
-  // Log sizes and content of all messages individually
-  payload.messages.forEach((message, index) => {
-    console.log(`Message ${index} size:`, new Blob([JSON.stringify(message)]).size);
-    console.log(`Message ${index} content:`, message.content);
-  });
-  
-  // Log the total sizes of major components and the total payload
-  console.log("Total payload size:", new Blob([JSON.stringify(payload)]).size);
-  console.log("Messages size:", new Blob([JSON.stringify(payload.messages)]).size);
-  console.log("Metadata size:", new Blob([JSON.stringify(payload.structured_metadata)]).size);
-  
-  // Log the total sizes of major components and the total payload
-  console.log("Total payload size:", new Blob([JSON.stringify(payload)]).size);
-  console.log("Messages size:", new Blob([JSON.stringify(payload.messages)]).size);
-  console.log("Metadata size:", new Blob([JSON.stringify(payload.structured_metadata)]).size);
   
 
   try {
@@ -150,8 +129,6 @@ export async function POST(req: Request) {
       console.error('Failed to store chat record:', error);
       return new Response('Internal Server Error', { status: 500 });
   }
-
-  const lastMessage = payload.messages[payload.messages.length - 1];
 
   // Create a new payload with only the last message
   const responsePayload = {
@@ -167,7 +144,6 @@ export async function POST(req: Request) {
     structured_metadata: payload.structured_metadata,
   };
 
-  console.log("Sending payload:", JSON.stringify(responsePayload));
   return new Response(JSON.stringify(responsePayload), {  // TODO 2024-03-04: why sending whole chat back instead of the last response?
     headers: { 'Content-Type': 'application/json' },
   });

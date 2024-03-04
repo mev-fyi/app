@@ -118,22 +118,13 @@ export function Chat({
           const parsedContent = JSON.parse(message.content);
           
           console.log("Parsed Content:", parsedContent);
-
-  
-          // Check if parsedContent has a messages array and it's not empty
-          if (parsedContent.messages && parsedContent.messages.length > 0) {
-            // Replace content with the last message of the messages array
-            message.content = parsedContent.messages[parsedContent.messages.length - 1].content;
-            console.log("Last message:", parsedContent.messages[parsedContent.messages.length - 1]);
-            
-            console.log("Last message.content:", message.content);
-          }
+          
         } catch (error) {
           // If parsing fails or doesn't meet criteria, leave content as is
           console.error("Error parsing message content:", error);
         }
       }
-      return message;
+      return message.content;
     });
   
     // Apply structured metadata
@@ -158,6 +149,7 @@ export function Chat({
     if (shared_chat) {
       setShowChatList(true);
     }
+    console.log("useEffect in shared chat ended")
   }, [shared_chat]);
 
 
@@ -294,7 +286,6 @@ export function Chat({
             // Update structured metadata state
             setLastMessageRole('assistant');
 
-            console.log("onResponse ended");
           } catch (error) {
             console.error('Error reading response data:', error);
             toast.error('Error reading response data');
