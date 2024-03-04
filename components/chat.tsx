@@ -119,12 +119,20 @@ export function Chat({
           
           console.log("Parsed Content:", parsedContent);
           
+          // Check if parsedContent has a messages array and it's not empty
+          if (parsedContent.message) {
+            // Replace content with the last message of the messages array
+            message.content = parsedContent.message.message.content
+            console.log("Last message:", parsedContent.messages[parsedContent.messages.length - 1]);
+            
+            console.log("Last message.content:", message.content);
+          }
         } catch (error) {
           // If parsing fails or doesn't meet criteria, leave content as is
           console.error("Error parsing message content:", error);
         }
       }
-      return message.content;
+      return message;
     });
   
     // Apply structured metadata
