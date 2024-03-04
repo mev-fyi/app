@@ -5,7 +5,7 @@ import { nanoid } from '@/lib/utils'
 import { parseMetadata } from '@/lib/utils';
 import { ParsedMetadataEntry } from '@/lib/types';
 
-export const runtime = 'edge'
+// export const runtime = 'edge'
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY
