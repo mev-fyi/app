@@ -146,6 +146,8 @@ export function Chat({
     
     // Check if initialMessages and structured_metadata are not empty and apply parsing
     if (initialMessages && initialMessages.length > 0 && structured_metadata && structured_metadata.length > 0) {
+      // useEffect in shared chat
+      console.log("useEffect in shared chat started")
       parseMessagesAndMetadata(initialMessages, structured_metadata);
     }
 
@@ -268,6 +270,7 @@ export function Chat({
           // Clone the response before reading it to avoid "already read" errors
           const response = originalResponse.clone();
           try {
+            console.log("onResponse started");
             const responseData = await response.json();
             console.log("Response Data:", responseData); // This line logs the responseData
 

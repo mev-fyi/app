@@ -149,7 +149,8 @@ export async function POST(req: Request) {
       return new Response('Internal Server Error', { status: 500 });
   }
 
-  return new Response(JSON.stringify(payload), {
+  console.log("Sending payload:", JSON.stringify(payload));
+  return new Response(JSON.stringify(payload), {  // TODO 2024-03-04: why sending whole chat back instead of the last response?
     headers: { 'Content-Type': 'application/json' },
   });
 }
