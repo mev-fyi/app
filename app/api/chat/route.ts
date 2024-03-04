@@ -112,6 +112,8 @@ export async function POST(req: Request) {
     ],
     structured_metadata: structuredMetadata,
   };
+  console.log("Payload to save:", payload);
+
 
   if (checkForInvalidValues(payload)) {
     console.error('Payload contains invalid values. Aborting storage.');
