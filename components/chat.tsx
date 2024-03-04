@@ -106,11 +106,12 @@ export function Chat({
 
   // Function to parse messages and apply structured metadata
   const parseMessagesAndMetadata = (messages: MetadataMessage[], metadata: ParsedMetadataEntry[]) => {
+    console.log("parseMessagesAndMetadata started")
     const parsedMessages = messages.map((message) => {
       if (message.role === 'assistant') {
         try {
           // Try to parse the content as JSON
-          console.log("parseMessagesAndMetadata started")
+          console.log("parsing json for each message")
           console.log("Message Content:", message.content)
           
           const parsedContent = JSON.parse(message.content);
@@ -282,6 +283,7 @@ export function Chat({
             toast.error('Error reading response data');
           }
         }
+        console.log("onResponse ended");
       }
     })
 
