@@ -123,8 +123,6 @@ export function Chat({
           if (parsedContent.message) {
             // Replace content with the last message of the messages array
             message.content = parsedContent.message.message.content
-            console.log("Last message:", parsedContent.messages[parsedContent.messages.length - 1]);
-            
             console.log("Last message.content:", message.content);
           }
         } catch (error) {
