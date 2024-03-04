@@ -97,6 +97,8 @@ export async function POST(req: Request) {
     return false;
   };
 
+  // todo 2024-03-04: im sending a whole payload. containing everything. 
+  // then the client side receives it, parses it entirely once again. 
   const payload = {
     id,
     title,
@@ -149,8 +151,24 @@ export async function POST(req: Request) {
       return new Response('Internal Server Error', { status: 500 });
   }
 
-  console.log("Sending payload:", JSON.stringify(payload));
-  return new Response(JSON.stringify(payload), {  // TODO 2024-03-04: why sending whole chat back instead of the last response?
+  const lastMessage = payload.messages[payload.messages.length - 1];
+
+  // Create a new payload with only the last message
+  const responsePayload = {
+    id: payload.id,
+    title: payload.title,
+    userId: payload.userId,
+    createdAt: payload.createdAt,
+    path: payload.path,
+    messages: [{
+      content: responseBody.response?.response || responseBody.response,
+      role: 'assistant',
+    },],
+    structured_metadata: payload.structured_metadata,
+  };
+
+  console.log("Sending payload:", JSON.stringify(responsePayload));
+  return new Response(JSON.stringify(responsePayload), {  // TODO 2024-03-04: why sending whole chat back instead of the last response?
     headers: { 'Content-Type': 'application/json' },
   });
 }
