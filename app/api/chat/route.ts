@@ -6,7 +6,7 @@ import { parseMetadata } from '@/lib/utils';
 import { ParsedMetadataEntry } from '@/lib/types';
 
 // export const runtime = 'edge'
-export const maxDuration =60;
+// export const maxDuration = 60;  // https://vercel.com/docs/functions/configuring-functions/duration https://stackoverflow.com/questions/71994305/how-to-configure-next-js-api-timeout
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY
