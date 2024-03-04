@@ -125,11 +125,17 @@ export async function POST(req: Request) {
     return new Response('Invalid payload', { status: 400 });
   }
   
-  console.log("Logging size of each message:");
-  // Log sizes of all messages individually
+  console.log("Logging size and content of each message:");
+  // Log sizes and content of all messages individually
   payload.messages.forEach((message, index) => {
     console.log(`Message ${index} size:`, new Blob([JSON.stringify(message)]).size);
+    console.log(`Message ${index} content:`, message.content);
   });
+  
+  // Log the total sizes of major components and the total payload
+  console.log("Total payload size:", new Blob([JSON.stringify(payload)]).size);
+  console.log("Messages size:", new Blob([JSON.stringify(payload.messages)]).size);
+  console.log("Metadata size:", new Blob([JSON.stringify(payload.structured_metadata)]).size);
   
   // Log the total sizes of major components and the total payload
   console.log("Total payload size:", new Blob([JSON.stringify(payload)]).size);
