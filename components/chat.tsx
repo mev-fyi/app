@@ -260,7 +260,8 @@ export function Chat({
           const response = originalResponse.clone();
           try {
             const responseData = await response.json();
-      
+            console.log("Response Data:", responseData); // This line logs the responseData
+
             // Call the parseMessagesAndMetadata function to handle message parsing and metadata application
             parseMessagesAndMetadata(responseData.messages, responseData.structured_metadata || []);
       
