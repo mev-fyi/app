@@ -66,7 +66,6 @@ const ShareChatHeader: React.FC<ShareChatHeaderProps> = ({ userId, chatId, chat 
         return;
       }
 
-      console.log("Chat found, attempting to share:", chatToShare);
       const result = await shareChat(chatToShare);
       if (result && 'error' in result) {
         console.error("Error in shareChat:", result.error);
