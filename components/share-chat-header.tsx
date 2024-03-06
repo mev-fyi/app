@@ -49,34 +49,27 @@ const ShareChatHeader: React.FC<ShareChatHeaderProps> = ({ userId, chatId, chat 
 
   const handleShareClick = async () => {
     try {
-      console.log("handleShareClick invoked with userId:", userId, "and chatId:", chatId);
       let chatToShare = chat;
       if (!chatToShare && chatId) {
-        console.log("Fetching chat using chatId");
         chatToShare = await getChat(chatId, userId);
       } else if (!chatToShare) {
-        console.log("Fetching latest chat for user");
         const chats = await getChats(userId);
         chatToShare = chats[chats.length - 1];
       }
 
       if (!chatToShare) {
-        console.error("Chat not found");
         toast.error("Chat not found");
         return;
       }
 
       const result = await shareChat(chatToShare);
       if (result && 'error' in result) {
-        console.error("Error in shareChat:", result.error);
         toast.error(result.error);
       } else {
         const shareUrl = `mev.fyi${result.sharePath}`;
         copyToClipboard(shareUrl);
-        console.log("Share operation successful");
       }
     } catch (error) {
-      console.error("Error in handleShareClick:", error);
       toast.error("Error sharing chat");
     }
   };
