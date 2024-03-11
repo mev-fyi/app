@@ -45,6 +45,8 @@ export function EmptyScreen({ onSubmit, isVisible }: QuestionsOverlayPropsLeftPa
         <p className="mb-4 leading-normal text-muted-foreground">
           Find the latest MEV-related research, 
           across mechanism design, auctions, information privacy, from research papers and YouTube videos.
+
+          In maintenance from 2024-03-12 midnight CET to 2:00 am CET.
         </p>
       </div>
       
