@@ -170,7 +170,6 @@ export function ChatPanel({
                 setResponseReceived(false);
                 if (onSubmit) {
                   await onSubmit(value);
-                  console.log("onSubmit value: ", value);  
                 } else {
                   await append({
                     id,
@@ -178,7 +177,6 @@ export function ChatPanel({
                     role: 'user',
                   });
                 }
-                console.log("onSubmit value: ", value);
                 setResponseReceived(true);
               }}
               input={input}

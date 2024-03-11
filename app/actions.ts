@@ -106,19 +106,19 @@ export async function getSharedChat(id: string) {
 
 export async function shareChat(chat: Chat, useApiKeyAuth: boolean = false) {
   // Provide a default userId if session.user.id is undefined, indicating legacy code usage
-  let userId = 'defaultUserId'; // Default userId initialization
+  let userId = 'default-legacy-user-id'; // Default userId initialization
   if (!useApiKeyAuth) {
     const session = await auth();
-    userId = typeof session?.user?.id !== 'undefined' ? session.user.id : 'defaultUserId';
+    userId = typeof session?.user?.id !== 'undefined' ? session.user.id : 'default-legacy-user-id';
   } else {
-    userId = process.env.APP_BACKEND_USER_ID || 'defaultUserId';
+    userId = process.env.APP_BACKEND_USER_ID || 'default-legacy-user-id';
   }
   console.log("Entering shareChat function");
 
   let isAuthorized = chat.userId === userId;
 
   if (!isAuthorized) {
-    console.error("Unauthorized access attempt in shareChat");
+    console.error("Unauthorized access attempt in shareChat: chat.userId:", chat.userId, "userId:", userId);
     return {
       error: 'Unauthorized'
     };
