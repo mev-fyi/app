@@ -104,8 +104,16 @@ export function Chat({
   }, [structuredMetadataEntries]);
 
 
+  // Process the response content to replace specified phrases with "MEV"
+  const processResponseContent = (content: string): string => {
+    let processedContent = content;
+    processedContent = processedContent.replace(/MEV \(Maximal Extractable Value\)/g, "MEV");
+    processedContent = processedContent.replace(/Maximal Extractable Value \(MEV\)/g, "MEV");
+    processedContent = processedContent.replace(/Maximal Extractable Value/g, "MEV");
+    return processedContent;
+  };
+
   // Function to parse messages and apply structured metadata
-  // TODO 2024-03-04: to deprecate if new response format from route.ts is good
   const parseMessagesAndMetadata = (messages: MetadataMessage[], metadata: ParsedMetadataEntry[]) => {
     const parsedMessages = messages.map((message) => {
       if (message.role === 'assistant') {
@@ -116,7 +124,7 @@ export function Chat({
           // Check if parsedContent has a messages array and it's not empty
           if (parsedContent.message) {
             // Replace content with the last message of the messages array
-            message.content = parsedContent.message.content
+            message.content = processResponseContent(parsedContent.message.content);
           }
         } catch (error) {
           // If parsing fails or doesn't meet criteria, leave content as is
