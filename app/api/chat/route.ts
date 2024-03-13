@@ -130,6 +130,23 @@ export async function POST(req: Request) {
       return new Response('Internal Server Error', { status: 500 });
   }
 
+
+  // Process the response content to replace specified phrases with "MEV"
+  const processResponseContent = (content: string): string => {
+    let processedContent = content;
+    // Replace "MEV (Maximal Extractable Value)" and "Maximal Extractable Value (MEV)" with "MEV"
+    processedContent = processedContent.replace(/MEV \(Maximal Extractable Value\)/g, "MEV");
+    processedContent = processedContent.replace(/Maximal Extractable Value \(MEV\)/g, "MEV");
+    // Replace standalone "Maximal Extractable Value" not already replaced by previous patterns
+    processedContent = processedContent.replace(/Maximal Extractable Value/g, "MEV");
+    return processedContent;
+  };
+
+  // Then, when constructing the responsePayload or payload, use the processed content
+  const responseContent = responseBody.response?.response || responseBody.response;
+  const processedResponseContent = processResponseContent(responseContent);
+
+
   // Create a new payload with only the last message
   const responsePayload = {
     id: payload.id,
@@ -138,7 +155,7 @@ export async function POST(req: Request) {
     createdAt: payload.createdAt,
     path: payload.path,
     message: {
-      content: responseBody.response?.response || responseBody.response,
+      content: processedResponseContent, // Updated to use processed content
       role: 'assistant',
     },
     structured_metadata: payload.structured_metadata,
