@@ -274,7 +274,7 @@ export function Chat({
             const newMessageFromServer = {
               id: responseData.message.id || '', // Generate or use an existing ID
               role: responseData.message.role,
-              content: responseData.message.content,
+              content: processResponseContent(responseData.message.content),
               structured_metadata: responseData.message.structured_metadata || []
             };
             // Update the chat list with the new message from the server
