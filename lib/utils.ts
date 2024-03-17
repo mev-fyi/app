@@ -102,7 +102,7 @@ function createPaperEntry(details: RegExpMatchArray, index: number): ParsedMetad
     index: index + 1,
     type: 'researchPaper',
     title: sanitizeField("Title", details[1]),
-    extraInfo: processAuthors(sanitizeField("Authors", details[2])),
+    extraInfo: processAuthors(sanitizeField("Authors", details[2]), details[3]),
     link: sanitizeField("URL", details[3]),
     publishedDate: publishedDate,
     publishedDateString: publishedDate ? publishedDateString : ''
