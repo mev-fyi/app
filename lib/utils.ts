@@ -112,19 +112,25 @@ function createPaperEntry(details: RegExpMatchArray, index: number): ParsedMetad
 
 
 function processAuthors(authors: string, link: string): string {
-  if (!isValidField(authors)) {
-    const url = new URL(link);
-    const domain = url.hostname;
-    const parts = domain.split('.');
-    // If the domain ends with a common extension and has more than 2 parts, format as requested
-    const commonExtensions = ['com', 'xyz', 'io', 'org', 'net'];
-    if (commonExtensions.includes(parts[parts.length - 1]) && parts.length > 2) {
-      // Return the domain without the subdomain and capitalize the first letter if it's a common extension
-      return parts.slice(-2).join('.').charAt(0).toUpperCase() + parts.slice(-2).join('.').slice(1);
-    } else {
-      // For domains with less common extensions or not matching the criteria, return the last two parts
-      return parts.slice(-2).join('.');
+  try {
+    if (!isValidField(authors) && link) {
+      const url = new URL(link);
+      const domain = url.hostname;
+      const parts = domain.split('.');
+      const commonExtensions = ['com', 'xyz', 'io', 'org', 'net'];
+      if (commonExtensions.includes(parts[parts.length - 1]) && parts.length > 2) {
+        return parts.slice(-2, -1)[0].charAt(0).toUpperCase() + parts.slice(-2, -1)[0].slice(1);
+      } else {
+        return parts.slice(-2).join('.');
+      }
     }
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      console.error(`Error parsing URL: ${e.message}. Using full URL as fallback.`);
+    } else {
+      console.error(`An unexpected error occurred. Using full URL as fallback.`);
+    }
+    return link; // Fallback to using the full URL
   }
 
   const authorsArray = authors.split(', ');
