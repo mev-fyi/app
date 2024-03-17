@@ -113,22 +113,21 @@ function createPaperEntry(details: RegExpMatchArray, index: number): ParsedMetad
 
 function processAuthors(authors: string, link: string): string {
   if (!isValidField(authors)) {
-    // Extract the domain from the URL
     const url = new URL(link);
     const domain = url.hostname;
-    // Split the domain to check for common extensions
     const parts = domain.split('.');
-    const lastPart = parts[parts.length - 1];
+    // If the domain ends with a common extension and has more than 2 parts, format as requested
     const commonExtensions = ['com', 'xyz', 'io', 'org', 'net'];
-    if (commonExtensions.includes(lastPart) || parts.length === 2) {
-      return parts[0].charAt(0).toUpperCase() + parts[0].slice(1); // Capitalize the first letter
+    if (commonExtensions.includes(parts[parts.length - 1]) && parts.length > 2) {
+      // Return the domain without the subdomain and capitalize the first letter if it's a common extension
+      return parts.slice(-2).join('.').charAt(0).toUpperCase() + parts.slice(-2).join('.').slice(1);
     } else {
-      return domain; // Use the full domain for less common extensions
+      // For domains with less common extensions or not matching the criteria, return the last two parts
+      return parts.slice(-2).join('.');
     }
   }
 
   const authorsArray = authors.split(', ');
-
   if (authorsArray.every(author => isValidField(author) && author.match(/^https?:\/\//))) {
     return authorsArray.map(author => {
       const lastSegment = author.split('/').filter(Boolean).pop();
