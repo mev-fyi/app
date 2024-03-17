@@ -37,7 +37,15 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
       const encodedTitle = encodeURIComponent(entry.title) + '.png';
       thumbnailUrl = `/research_paper_thumbnails/${domain}/${encodedTitle}`;
     } else {
-      thumbnailUrl = '/default-thumbnail.jpg';
+      try { 
+        const encodedTitle = encodeURIComponent(entry.title) + '.png';
+        // case for research papers with no parent directory
+        thumbnailUrl = `/research_paper_thumbnails/${encodedTitle}`;
+      } catch (error) {
+        console.error(`Error parsing URL: ${error}. Using default thumbnail as fallback.`);
+        thumbnailUrl = '/default-thumbnail.jpg';
+      }
+      
     }
   
     return thumbnailUrl;
