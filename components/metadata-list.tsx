@@ -11,13 +11,17 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
       const videoId = new URL(entry.link).searchParams.get('v');
       thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : '/default-youtube-thumbnail.jpg';
     } else if (entry.type === 'researchPaper') {
+      // Parse domain from the link
+      const url = new URL(entry.link);
+      const domain = url.hostname.split('.').slice(-2).join('.'); // Get only the domain and TLD
+
+      // Use the domain as a subdirectory and the title for the filename
       const encodedTitle = encodeURIComponent(entry.title) + '.png';
-      thumbnailUrl = `/research_paper_thumbnails/${encodedTitle}`;
+      thumbnailUrl = `/research_paper_thumbnails/${domain}/${encodedTitle}`;
     } else {
       thumbnailUrl = '/default-thumbnail.jpg';
     }
   
-    // console.log(`Thumbnail URL for ${entry.title}: ${thumbnailUrl}`);
     return thumbnailUrl;
   };
   
