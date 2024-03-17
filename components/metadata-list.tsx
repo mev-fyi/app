@@ -22,32 +22,49 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
   };
 
 
+  // List of domains to check against
+  // NOTE 2024-03-17: lazy fix, manually hardcode the predefined domains from the research papers. in which case we only fetch for the title. This is because the 
+  //   thumbnail generation for reseacrh papers on the data side isn't matched and stored under the subdirectory corresponding to the domain.
+  const predefinedDomains = [
+    'papers.ssrn.com', 'www.sciencedirect.com', 'www.researchgate.net', 'xenophonlabs.com', 'moallemi.com','uniswap.org', 'www.sec.gov', 'cms.nil.foundation',
+    'arxiv.org', 'dl.acm.org', 'eprint.iacr.org', 'www.nature.com',    'angeris.github.io', 'fc24.ifca.ai', 'people.eecs.berkeley.edu', 'pub.tik.ee.ethz.ch',
+    'anthonyleezhang.github.io', 'atiselsts.github.io', 'lamport.azurewebsites.net', 'pmg.csail.mit.edu', 'business.columbia.edu','www.cs.purdue.edu',
+    'www.cfainstitute.org',
+  ];
+
   // Function to get thumbnail URL
   const getThumbnailUrl = (entry: ParsedMetadataEntry) => {
     let thumbnailUrl;
-  
+
     if (entry.type === 'youtubeVideo') {
       const videoId = entry.link ? new URL(entry.link).searchParams.get('v') : null;
       thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : '/default-youtube-thumbnail.jpg';
     } else if (entry.type === 'researchPaper' && entry.link) {
-      // Use the entire hostname for the domain, including subdomains, safely
-      const domain = extractDomain(entry.link);
+      // Extract the domain from the entry's link
+      const url = new URL(entry.link);
+      const domain = url.hostname;
 
-      // Use the domain as a subdirectory and the title for the filename
-      const encodedTitle = encodeURIComponent(entry.title) + '.png';
-      thumbnailUrl = `/research_paper_thumbnails/${domain}/${encodedTitle}`;
+      // Check if the domain is in the predefined list or part of the domains extracted from your provided list
+      if (predefinedDomains.includes(domain)) {
+        // Use only the title for the filename
+        const encodedTitle = encodeURIComponent(entry.title) + '.png';
+        thumbnailUrl = `/research_paper_thumbnails/${encodedTitle}`;
+      } else {
+        // Use the domain as a subdirectory and the title for the filename
+        const encodedTitle = encodeURIComponent(entry.title) + '.png';
+        thumbnailUrl = `/research_paper_thumbnails/${domain}/${encodedTitle}`;
+      }
     } else {
       try { 
         const encodedTitle = encodeURIComponent(entry.title) + '.png';
-        // case for research papers with no parent directory
+        // Case for research papers with no parent directory
         thumbnailUrl = `/research_paper_thumbnails/${encodedTitle}`;
       } catch (error) {
         console.error(`Error parsing URL: ${error}. Using default thumbnail as fallback.`);
         thumbnailUrl = '/default-thumbnail.jpg';
       }
-      
     }
-  
+
     return thumbnailUrl;
   };
   
