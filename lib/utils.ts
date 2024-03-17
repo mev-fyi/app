@@ -111,9 +111,20 @@ function createPaperEntry(details: RegExpMatchArray, index: number): ParsedMetad
 }
 
 
-function processAuthors(authors: string): string {
+function processAuthors(authors: string, link: string): string {
   if (!isValidField(authors)) {
-    return '';
+    // Extract the domain from the URL
+    const url = new URL(link);
+    const domain = url.hostname;
+    // Split the domain to check for common extensions
+    const parts = domain.split('.');
+    const lastPart = parts[parts.length - 1];
+    const commonExtensions = ['com', 'xyz', 'io', 'org', 'net'];
+    if (commonExtensions.includes(lastPart) || parts.length === 2) {
+      return parts[0].charAt(0).toUpperCase() + parts[0].slice(1); // Capitalize the first letter
+    } else {
+      return domain; // Use the full domain for less common extensions
+    }
   }
 
   const authorsArray = authors.split(', ');
