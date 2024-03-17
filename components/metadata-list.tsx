@@ -11,9 +11,9 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
       const videoId = new URL(entry.link).searchParams.get('v');
       thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : '/default-youtube-thumbnail.jpg';
     } else if (entry.type === 'researchPaper') {
-      // Parse domain from the link
+      // Use the entire hostname for the domain, including subdomains
       const url = new URL(entry.link);
-      const domain = url.hostname.split('.').slice(-2).join('.'); // Get only the domain and TLD
+      const domain = url.hostname; // Full subdomain.domain.extension
 
       // Use the domain as a subdirectory and the title for the filename
       const encodedTitle = encodeURIComponent(entry.title) + '.png';
