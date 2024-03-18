@@ -7,7 +7,7 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
   const [docMappings, setDocMappings] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
-    const url = '/public/docs_mapping.json';
+    const url = '/docs_mapping.json';
     console.log(`Fetching document mappings from ${url}`);
     fetch(url)
       .then(response => {
