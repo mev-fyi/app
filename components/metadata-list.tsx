@@ -14,32 +14,11 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
   const [docsDetails, setDocsDetails] = useState<DocDetail[]>([]);
 
   useEffect(() => {
-    fetch('/public/docs_details.csv')
-      .then(response => response.text())
-      .then(csvText => {
-        const rows = csvText.trim().split('\n');
-        // Safely check if headers are defined and split, providing an empty array as a fallback
-        const headers = rows.shift()?.split(',') || [];
-        // Define data as an array of DocDetail, ensuring we directly map CSV rows to this structure
-        const data: DocDetail[] = rows.map(row => {
-          const values = row.split(',');
-          // Initialize an object to temporarily store our row data with Partial<DocDetail> typing
-          let tempObj: Partial<DocDetail> = {};
-          headers.forEach((header, index) => {
-            // Map each value to the corresponding header, casting the header as a key of DocDetail
-            tempObj[header as keyof DocDetail] = values[index];
-          });
-          // Return a new object, ensuring it matches the DocDetail structure
-          return {
-            title: tempObj.title || '',
-            authors: tempObj.authors || '',
-            pdf_link: tempObj.pdf_link || '',
-            release_date: tempObj.release_date || '',
-            document_name: tempObj.document_name || '',
-          };
-        });
-        // Update state with the parsed and typed data
-        setDocsDetails(data);
+    fetch('/public/docs_mapping.json')
+      .then(response => response.json())
+      .then(data => {
+        // Assuming data is the mapping from URL to document name
+        setDocsDetails(data); // Adjust how you use this data based on your needs
       });
   }, []);
 
