@@ -10,6 +10,7 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
     fetch('/public/docs_mapping.json')
       .then(response => response.json())
       .then(data => {
+        console.log("Document mappings loaded:", data); // Log loaded data
         setDocMappings(data);
       });
   }, []);
@@ -41,7 +42,9 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
   ];
 
   const getDocumentName = (link: string) => {
-    return docMappings[link] || null;
+    const documentName = docMappings[link] || null;
+    console.log(`Matching document for URL '${link}':`, documentName); // Log the matching process
+    return documentName;
   };
 
   const getThumbnailUrl = (entry: ParsedMetadataEntry) => {
@@ -59,20 +62,24 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
       } else if (predefinedDomains.includes(domain)) {
         const encodedTitle = encodeURIComponent(entry.title) + '.png';
         thumbnailUrl = `/research_paper_thumbnails/${encodedTitle}`;
+        console.log(`Using predefined domain for '${entry.title}':`, domain); // Log the predefined domain
       } else {
         const encodedTitle = encodeURIComponent(entry.title) + '.png';
         thumbnailUrl = `/research_paper_thumbnails/${domain}/${encodedTitle}`;
+        console.log(`Using domain for '${entry.title}':`, domain); // Log the domain
       }
     } else {
       try {
         const encodedTitle = encodeURIComponent(entry.title) + '.png';
         thumbnailUrl = `/research_paper_thumbnails/${encodedTitle}`;
+        console.log(`Could not get documentName for '${entry.title}'. Using title as fallback.`);
       } catch (error) {
         console.error(`Error parsing URL: ${error}. Using default thumbnail as fallback.`);
         thumbnailUrl = '/default-thumbnail.jpg';
       }
     }
 
+    console.log(`Thumbnail URL for '${entry.title}':`, thumbnailUrl); // Log the final thumbnail URL
     return thumbnailUrl;
   };
 
