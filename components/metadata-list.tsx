@@ -2,23 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { ParsedMetadataEntry } from '@/lib/types';
 import styles from './MetadataList.module.css';
 
-interface DocDetail {
-  title: string;
-  authors: string;
-  pdf_link: string;
-  release_date: string;
-  document_name: string;
-}
 
 const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries }) => {
-  const [docsDetails, setDocsDetails] = useState<DocDetail[]>([]);
+  const [docMappings, setDocMappings] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
     fetch('/public/docs_mapping.json')
       .then(response => response.json())
       .then(data => {
-        // Assuming data is the mapping from URL to document name
-        setDocsDetails(data); // Adjust how you use this data based on your needs
+        setDocMappings(data);
       });
   }, []);
 
@@ -49,8 +41,7 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
   ];
 
   const getDocumentName = (link: string) => {
-    const matchedDocument = docsDetails.find(doc => doc.pdf_link === link);
-    return matchedDocument ? matchedDocument.document_name : null;
+    return docMappings[link] || null;
   };
 
   const getThumbnailUrl = (entry: ParsedMetadataEntry) => {
