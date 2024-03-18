@@ -8,7 +8,6 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
 
   useEffect(() => {
     const url = '/docs_mapping.json';
-    console.log(`Fetching document mappings from ${url}`);
     fetch(url)
       .then(response => {
         if (!response.ok) {
@@ -17,11 +16,9 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
         return response.json();
       })
       .then(data => {
-        console.log("Document mappings loaded successfully:", data);
         setDocMappings(data);
       })
       .catch(error => {
-        console.error("Failed to load document mappings:", error);
       });
   }, []);
   
@@ -30,7 +27,6 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
       const url = new URL(link);
       return url.hostname;
     } catch (error) {
-      console.error(`Error parsing URL: ${error}. Using regex as fallback.`);
       const regexMatch = link.match(/^(?:https?:\/\/)?([^\/]+)/);
       if (regexMatch && regexMatch[1]) {
         return regexMatch[1];
@@ -61,7 +57,6 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
   const getDocumentName = (link: string) => {
     const normalizedLink = normalizeUrl(link); // This is now correctly a string
     const documentName = docMappings[normalizedLink] || null; // No error as normalizedLink is a string
-    console.log(`Matching document for normalized URL '${normalizedLink}':`, documentName); // Log the matching process
     return documentName;
   };
   
@@ -77,28 +72,23 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
 
       if (documentName) {
         thumbnailUrl = `/research_paper_thumbnails/${domain}/${encodeURIComponent(documentName)}`;
-        console.log(`Using documentName for '${entry.title}':`, documentName); // Log the documentName
       } else if (predefinedDomains.includes(domain)) {
         const encodedTitle = encodeURIComponent(entry.title) + '.png';
         thumbnailUrl = `/research_paper_thumbnails/${encodedTitle}`;
-        console.log(`Using predefined domain for '${entry.title}':`, domain); // Log the predefined domain
       } else {
         const encodedTitle = encodeURIComponent(entry.title) + '.png';
         thumbnailUrl = `/research_paper_thumbnails/${domain}/${encodedTitle}`;
-        console.log(`Fallback using title-only for '${entry.title}':`, domain); // Log the domain
       }
     } else {
       try {
         const encodedTitle = encodeURIComponent(entry.title) + '.png';
         thumbnailUrl = `/research_paper_thumbnails/${encodedTitle}`;
-        console.log(`Could not get documentName for '${entry.title}'. Using title as fallback.`);
       } catch (error) {
         console.error(`Error parsing URL: ${error}. Using default thumbnail as fallback.`);
         thumbnailUrl = '/default-thumbnail.jpg';
       }
     }
 
-    console.log(`Thumbnail URL for '${entry.title}':`, thumbnailUrl); // Log the final thumbnail URL
     return thumbnailUrl;
   };
 
