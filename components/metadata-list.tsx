@@ -7,14 +7,24 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
   const [docMappings, setDocMappings] = useState<{ [key: string]: string }>({});
 
   useEffect(() => {
-    fetch('/public/docs_mapping.json')
-      .then(response => response.json())
+    const url = '/public/docs_mapping.json';
+    console.log(`Fetching document mappings from ${url}`);
+    fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
       .then(data => {
-        console.log("Document mappings loaded:", data); // Log loaded data
+        console.log("Document mappings loaded successfully:", data);
         setDocMappings(data);
+      })
+      .catch(error => {
+        console.error("Failed to load document mappings:", error);
       });
   }, []);
-
+  
   const extractDomain = (link: string): string => {
     try {
       const url = new URL(link);
