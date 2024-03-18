@@ -41,12 +41,20 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
     'www.cfainstitute.org',
   ];
 
+  const normalizeUrl = (url: string) => {
+    const urlObj = new URL(url);
+    const normalizedUrl = urlObj.origin + urlObj.pathname.replace(/\/$/, ""); // Remove trailing slash and directly return the string
+    // Further normalization steps can be added here as needed
+    return normalizedUrl;
+  };
+  
   const getDocumentName = (link: string) => {
-    const documentName = docMappings[link] || null;
-    console.log(`Matching document for URL '${link}':`, documentName); // Log the matching process
+    const normalizedLink = normalizeUrl(link); // This is now correctly a string
+    const documentName = docMappings[normalizedLink] || null; // No error as normalizedLink is a string
+    console.log(`Matching document for normalized URL '${normalizedLink}':`, documentName); // Log the matching process
     return documentName;
   };
-
+  
   const getThumbnailUrl = (entry: ParsedMetadataEntry) => {
     let thumbnailUrl;
 
@@ -59,6 +67,7 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
 
       if (documentName) {
         thumbnailUrl = `/research_paper_thumbnails/${domain}/${encodeURIComponent(documentName)}`;
+        console.log(`Using documentName for '${entry.title}':`, documentName); // Log the documentName
       } else if (predefinedDomains.includes(domain)) {
         const encodedTitle = encodeURIComponent(entry.title) + '.png';
         thumbnailUrl = `/research_paper_thumbnails/${encodedTitle}`;
@@ -66,7 +75,7 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
       } else {
         const encodedTitle = encodeURIComponent(entry.title) + '.png';
         thumbnailUrl = `/research_paper_thumbnails/${domain}/${encodedTitle}`;
-        console.log(`Using domain for '${entry.title}':`, domain); // Log the domain
+        console.log(`Fallback using title-only for '${entry.title}':`, domain); // Log the domain
       }
     } else {
       try {
