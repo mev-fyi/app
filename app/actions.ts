@@ -1,3 +1,5 @@
+// actions.ts
+
 'use server'
 
 import { revalidatePath } from 'next/cache'
@@ -79,7 +81,7 @@ export async function clearChats() {
 
   const chats: string[] = await kv.zrange(`user:chat:${session.user.id}`, 0, -1)
   if (!chats.length) {
-  return redirect('/')
+    return redirect('/')
   }
   const pipeline = kv.pipeline()
 
@@ -105,11 +107,11 @@ export async function getSharedChat(id: string) {
 }
 
 export async function shareChat(chat: Chat, useApiKeyAuth: boolean = false) {
-  // Provide a default userId if session.user.id is undefined, indicating legacy code usage
-  let userId = 'default-legacy-user-id'; // Default userId initialization
+  // Ensure userId is always a string
+  let userId: string;
   if (!useApiKeyAuth) {
     const session = await auth();
-    userId = typeof session?.user?.id !== 'undefined' ? session.user.id : 'default-legacy-user-id';
+    userId = session?.user?.id ?? 'default-legacy-user-id'; // Ensure userId is string
   } else {
     userId = process.env.APP_BACKEND_USER_ID || 'default-legacy-user-id';
   }

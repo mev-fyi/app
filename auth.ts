@@ -1,16 +1,38 @@
-import NextAuth, { type DefaultSession } from 'next-auth'
-import GitHub from 'next-auth/providers/github'
+// auth.ts
+import NextAuth, {
+  NextAuthOptions,
+  Session,
+  DefaultSession,
+  User,
+  Account,
+  Profile,
+} from 'next-auth';
+import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 import { sha256 } from 'hash.js';
+import { getServerSession } from 'next-auth/next';
+import { headers, cookies as getCookies } from 'next/headers';
+import { JWT } from 'next-auth/jwt';
+import { nanoid } from 'nanoid';
 
-// Ensure environment variables are set
+// Define a custom type for GitHub profile
+interface GitHubProfile extends Profile {
+  id: string;
+  avatar_url?: string;
+  picture?: string;
+}
+
 if (!process.env.AUTH_GITHUB_ID || !process.env.AUTH_GITHUB_SECRET) {
-  console.error("GitHub client ID or client secret is not set. Please check your environment variables.");
+  console.error(
+    'GitHub client ID or client secret is not set. Please check your environment variables.'
+  );
   process.exit(1);
 }
 
 if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
-  console.error("Google client ID or client secret is not set. Please check your environment variables.");
+  console.error(
+    'Google client ID or client secret is not set. Please check your environment variables.'
+  );
   process.exit(1);
 }
 
@@ -18,28 +40,34 @@ declare module 'next-auth' {
   interface Session {
     user: {
       /** The user's id. */
-      id: string
-    } & DefaultSession['user']
+      id: string | null; // Allow null for anonymous users
+    } & DefaultSession['user'];
   }
 }
 
-export const {
-  handlers: { GET, POST },
-  auth,
-  CSRF_experimental // will be removed in future
-} = NextAuth({
+export const authOptions: NextAuthOptions = {
   providers: [
-    GitHub({
-      clientId: process.env.AUTH_GITHUB_ID,
-      clientSecret: process.env.AUTH_GITHUB_SECRET,
+    GitHubProvider({
+      clientId: process.env.AUTH_GITHUB_ID!,
+      clientSecret: process.env.AUTH_GITHUB_SECRET!,
     }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    })
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
   ],
   callbacks: {
-    jwt({ token, user, account, profile }) {
+    jwt({
+      token,
+      user,
+      account,
+      profile,
+    }: {
+      token: JWT;
+      user?: User;
+      account?: Account | null;
+      profile?: Profile;
+    }) {
       if (account?.provider === 'google') {
         // Generate a consistent userId for Google users based on their email
         if (user?.email) {
@@ -47,23 +75,69 @@ export const {
         } else {
           console.warn('Google authenticated user without an email.');
         }
-      } else if (profile && account?.provider === 'github') {
-        token.id = profile.id; 
-        token.image = profile.avatar_url || profile.picture;
+      } else if (account?.provider === 'github' && profile) {
+        // Cast profile to GitHubProfile for GitHub-specific fields
+        const githubProfile = profile as GitHubProfile;
+        token.id = githubProfile.id;
+        token.image = githubProfile.avatar_url || githubProfile.picture;
       }
       return token;
     },
-    session({ session, token }) {
+    session({
+      session,
+      token,
+    }: {
+      session: Session;
+      token: JWT;
+    }) {
       if (token?.id) {
         session.user.id = token.id as string; // Cast token.id as string
+      } else {
+        session.user.id = null; // Set id to null for anonymous users
       }
       return session;
     },
-    authorized({ auth }) {
-      return !!auth?.user // Ensure there is a logged in user for every request
-    }
   },
   pages: {
-    signIn: '/sign-in' // Custom sign-in page
+    signIn: '/sign-in', // Custom sign-in page
+  },
+};
+
+// Initialize NextAuth
+export default NextAuth(authOptions);
+
+// Export GET and POST handlers
+export const GET = (req: Request) => NextAuth(authOptions)(req);
+export const POST = (req: Request) => NextAuth(authOptions)(req);
+
+// Custom auth function
+export async function auth() {
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    return session;
   }
-});
+
+  // Get the hostname from the request headers
+  const headersList = headers();
+  const host = headersList.get('host') || '';
+
+  if (host.startsWith('app.mev.fyi')) {
+    // Read 'anonymousId' from cookies
+    const cookieStore = getCookies();
+    const anonymousId = cookieStore.get('anonymousId')?.value;
+
+    if (anonymousId) {
+      // Return the session with the anonymousId
+      return { user: { id: anonymousId, name: 'Anonymous' } };
+    } else {
+      // This should not happen since middleware sets the cookie
+      // But as a fallback, generate a new anonymousId
+      const newAnonymousId = nanoid();
+      return { user: { id: newAnonymousId, name: 'Anonymous' } };
+    }
+  }
+
+  // For other hosts, return null to enforce authentication
+  return null;
+}

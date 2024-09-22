@@ -1,15 +1,13 @@
-import { kv } from '@vercel/kv'
-import { Configuration } from 'openai-edge'
-import { auth } from '@/auth'
-import { nanoid } from '@/lib/utils'
+import { kv } from '@vercel/kv';
+import { Configuration } from 'openai-edge';
+import { auth } from '@/auth';
+import { nanoid } from '@/lib/utils';
 import { parseMetadata } from '@/lib/utils';
 import { ParsedMetadataEntry } from '@/lib/types';
 
-// export const runtime = 'edge'
-// export const maxDuration = 60;  // https://vercel.com/docs/functions/configuring-functions/duration https://stackoverflow.com/questions/71994305/how-to-configure-next-js-api-timeout
-
+// Configuration for OpenAI API
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 export async function POST(req: Request) {
@@ -18,7 +16,6 @@ export async function POST(req: Request) {
   let json;
   try {
     json = await req.json();
-    // console.log('route.ts: JSON body parsed:', json);
   } catch (error) {
     console.error('route.ts: Error parsing JSON body:', error);
     return new Response('Bad request', { status: 400 });
@@ -27,26 +24,20 @@ export async function POST(req: Request) {
   const { messages, previewToken } = json;
   const session = await auth();
 
-  if (!session?.user) {
+  // Check for anonymous user or authenticated user
+  const isAnonymous = !session?.user?.id || session.user.id === null;
+  const userId = isAnonymous ? 'anonymous' : session.user.id;
+
+  if (!userId && !isAnonymous) {
     console.error('route.ts: Unauthorized request: No session user found.');
     return new Response('Unauthorized', { status: 401 });
   }
 
-  // Provide a default userId if session.user.id is undefined, indicating legacy code usage
-  const userId = typeof session?.user?.id !== 'undefined' ? session.user.id : 'default-legacy-user-id';
-
-  if (!userId) {
-    console.error('route.ts: Unauthorized request: No session user found and default userId is used.: ', userId);
-    return new Response('Unauthorized', { status: 401 });
-  }
-
   if (previewToken) {
-    // console.log('route.ts: Using preview token for API key');
     configuration.apiKey = previewToken;
   }
 
   const mostRecentMessageContent = messages.length > 0 ? messages[messages.length - 1].content : "No messages yet.";
-
   const backendChatUrl = `${process.env.REACT_APP_BACKEND_URL}/chat`;
 
   let chatResponse;
@@ -54,7 +45,7 @@ export async function POST(req: Request) {
     chatResponse = await fetch(backendChatUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: mostRecentMessageContent, chat_history: messages })
+      body: JSON.stringify({ message: mostRecentMessageContent, chat_history: messages }),
     });
   } catch (error) {
     console.error('route.ts: Fetch to backend chat failed:', error);
@@ -94,8 +85,6 @@ export async function POST(req: Request) {
     return false;
   };
 
-  // todo 2024-03-04: im sending a whole payload. containing everything. 
-  // then the client side receives it, parses it entirely once again. 
   const payload = {
     id,
     title,
@@ -112,32 +101,28 @@ export async function POST(req: Request) {
     structured_metadata: structuredMetadata,
   };
 
-
   if (checkForInvalidValues(payload)) {
     console.error('Payload contains invalid values. Aborting storage.');
     return new Response('Invalid payload', { status: 400 });
   }
-  
 
   try {
     // await kv.set(`chat:${id}`, JSON.stringify(payload));
     await kv.hmset(`chat:${id}`, payload);
-    await kv.zadd(`user:chat:${session.user.id}`, { score: createdAt, member: `chat:${id}` });
+    if (!isAnonymous) {
+      await kv.zadd(`user:chat:${session.user.id}`, { score: createdAt, member: `chat:${id}` });
+    }
     console.log('route.ts: Chat record stored');
   } catch (error) {
-    const typedError = error as Error; // Type assertion
-      console.error('Failed to store chat record:', error);
-      return new Response('Internal Server Error', { status: 500 });
+    console.error('Failed to store chat record:', error);
+    return new Response('Internal Server Error', { status: 500 });
   }
-
 
   // Process the response content to replace specified phrases with "MEV"
   const processResponseContent = (content: string): string => {
     let processedContent = content;
-    // Replace "MEV (Maximal Extractable Value)" and "Maximal Extractable Value (MEV)" with "MEV"
     processedContent = processedContent.replace(/MEV \(Maximal Extractable Value\)/g, "MEV");
     processedContent = processedContent.replace(/Maximal Extractable Value \(MEV\)/g, "MEV");
-    // Replace standalone "Maximal Extractable Value" not already replaced by previous patterns
     processedContent = processedContent.replace(/Maximal Extractable Value/g, "MEV");
     return processedContent;
   };

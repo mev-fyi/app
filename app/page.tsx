@@ -11,8 +11,9 @@ export default async function IndexPage() {
   const session = await auth()
 
   if (!session?.user) {
+    // This should not happen since we handle anonymous sessions
     redirect('/sign-in');
-    console.error('Authentication required.'); // Log the error to the console
+    console.error('Authentication required.');
     return;
   }
 
@@ -21,7 +22,10 @@ export default async function IndexPage() {
   return (
     <>
       <Chat id={id} />
-      <ShareChatHeader chatId={id} userId={session.user.id}/>
+      {/* Only show ShareChatHeader if the user is authenticated */}
+      {session.user.id && (
+        <ShareChatHeader chatId={id} userId={session.user.id} />
+      )}
     </>
   );
 }

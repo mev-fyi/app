@@ -21,8 +21,11 @@ export async function generateMetadata({
 }: ChatPageProps): Promise<Metadata> {
   const session = await auth()
 
-  if (!session?.user) {
-    return {}
+  if (!session?.user || session.user.id === null) {
+    // Return default metadata for anonymous users
+    return {
+      title: 'Chat'
+    }
   }
 
   const chat = await getChat(params.id, session.user.id)
@@ -37,13 +40,22 @@ export default async function ChatPage({ params }: ChatPageProps) {
   const session = await auth();
   console.log('ChatPage: Session data:', session);
 
-  if (!session?.user) {
-    console.log('ChatPage: No user in session, redirecting to sign-in');
-    redirect(`/sign-in?next=/chat/${params.id}`);
-    return; // Ensure the function exits here
+  const isAnonymous = !session?.user || session.user.id === null;
+  
+  // Ensure userId is always a string
+  const userId: string = isAnonymous ? 'anonymous' : (session.user.id ?? 'anonymous');
+
+  // For authenticated users, perform standard authentication checks
+  if (!isAnonymous) {
+    if (!userId) {
+      // This should not happen since we handle anonymous sessions
+      redirect(`/sign-in?next=/chat/${params.id}`);
+      console.error('Authentication required.');
+      return;
+    }
   }
 
-  const chat = await getChat(params.id, session.user.id);
+  const chat = await getChat(params.id, userId);
   console.log('ChatPage: Chat data:', chat);
 
   if (!chat) {
@@ -64,18 +76,20 @@ export default async function ChatPage({ params }: ChatPageProps) {
     return;
   }
 
-  if (chat?.userId !== session?.user?.id) {
+  if (!isAnonymous && chat.userId && chat.userId !== userId) {
     console.error('Permission denied for chat:', params.id);
     notFound();
     return;
   }
 
   console.log('ChatPage: Rendering Chat and ShareChatHeader components');
-  // TODO 2024-01-28: will need to fix such that chatlist and metadatacontainer are populated and such that we can still continue them
   return (
     <>
       <Chat id={chat.id} initialMessages={chat.messages} structured_metadata={chat.structured_metadata} />
-      <ShareChatHeader chatId={chat.id} userId={session.user.id} chat={chat}/>
+      {/* Only show ShareChatHeader if the user is authenticated */}
+      {!isAnonymous && (
+        <ShareChatHeader chatId={chat.id} userId={userId} chat={chat} />
+      )}
     </>
   );
 }
