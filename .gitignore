@@ -39,3 +39,4 @@ yarn-error.log*
 
 test_create_shared_chat_api.sh
 test_curl
+app/api/test-env/route.ts
