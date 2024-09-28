@@ -22,19 +22,34 @@ interface GitHubProfile extends Profile {
   picture?: string;
 }
 
-if (!process.env.AUTH_GITHUB_ID || !process.env.AUTH_GITHUB_SECRET) {
+if (!process.env.GITHUB_ID) {
   console.error(
-    'GitHub client ID or client secret is not set. Please check your environment variables.'
+    '[GITHUB_ID] GitHub client ID is not set. Please check your environment variables.'
   );
   process.exit(1);
 }
 
-if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
+if (!process.env.GOOGLE_ID) {
   console.error(
-    'Google client ID or client secret is not set. Please check your environment variables.'
+    '[GOOGLE_ID] Google client ID is not set. Please check your environment variables.'
   );
   process.exit(1);
 }
+
+if (!process.env.GITHUB_SECRET) {
+  console.error(
+    '[GITHUB_SECRET] GitHub client secret is not set. Please check your environment variables.'
+  );
+  process.exit(1);
+}
+
+if (!process.env.GOOGLE_SECRET) {
+  console.error(
+    '[GOOGLE_SECRET] Google client secret is not set. Please check your environment variables.'
+  );
+  process.exit(1);
+}
+
 
 declare module 'next-auth' {
   interface Session {
@@ -48,12 +63,12 @@ declare module 'next-auth' {
 export const authOptions: NextAuthOptions = {
   providers: [
     GitHubProvider({
-      clientId: process.env.AUTH_GITHUB_ID!,
-      clientSecret: process.env.AUTH_GITHUB_SECRET!,
+      clientId: process.env.GITHUB_ID!,
+      clientSecret: process.env.GITHUB_SECRET!,
     }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      clientId: process.env.GOOGLE_ID!,
+      clientSecret: process.env.GOOGLE_SECRET!,
     }),
   ],
   callbacks: {
