@@ -5,8 +5,6 @@ import ShareChatHeader from '@/components/share-chat-header';
 import { auth } from '@/auth'
 import { redirect } from 'next/navigation';
 
-export const runtime = 'edge'
-
 export default async function IndexPage() {
   const session = await auth()
 

@@ -7,7 +7,6 @@ import { getChat } from '@/app/actions'
 import { Chat } from '@/components/chat'
 import ShareChatHeader from '@/components/share-chat-header';
 
-export const runtime = 'edge'
 export const preferredRegion = 'home'
 
 export interface ChatPageProps {

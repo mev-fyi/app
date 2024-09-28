@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
+const nextConfig = {
   reactStrictMode: true,
   experimental: {
-    serverActions: true,
+    serverActions: true, // Enable Server Actions
   },
   images: {
     remotePatterns: [
@@ -14,4 +14,15 @@ module.exports = {
       },
     ],
   },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        crypto: false, // Prevent polyfilling 'crypto'
+      };
+    }
+    return config;
+  },
 };
+
+module.exports = nextConfig;

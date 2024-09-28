@@ -1,9 +1,12 @@
-import { FC, memo } from 'react'
-import ReactMarkdown, { Options } from 'react-markdown'
+// components/markdown.tsx
 
-export const MemoizedReactMarkdown: FC<Options> = memo(
+import { memo } from 'react';
+import ReactMarkdown from 'react-markdown';
+
+// Memoize ReactMarkdown to prevent unnecessary re-renders
+export const MemoizedReactMarkdown = memo(
   ReactMarkdown,
   (prevProps, nextProps) =>
     prevProps.children === nextProps.children &&
     prevProps.className === nextProps.className
-)
+) as typeof ReactMarkdown;

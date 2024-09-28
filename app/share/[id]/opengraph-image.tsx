@@ -1,8 +1,6 @@
-import { ImageResponse } from 'next/server'
+import { ImageResponse } from 'next/og'
 
 import { getSharedChat } from '@/app/actions'
-
-export const runtime = 'edge'
 
 export const alt = 'AI Chatbot'
 

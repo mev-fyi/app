@@ -7,8 +7,6 @@ import { parseMetadata } from '@/lib/utils';
 import { ParsedMetadataEntry } from '@/lib/types';
 import { type Message } from 'ai'
 
-export const runtime = 'edge';
-
 const API_KEY = process.env.BACKEND_API_KEY;
 const APP_USER_ID = process.env.APP_BACKEND_USER_ID || 'defaultUserId';
 

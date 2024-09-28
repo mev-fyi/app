@@ -2,29 +2,12 @@
 
 # Define an array of file paths
 FILES=(
-  "app/api/auth/[...nextauth]/route.ts"
-  "app/api/chat/route.ts"
-  "app/api/create-shared-chat/route.ts"
-  "app/chat/[id]/page.tsx"  
-  "app/share/[id]/page.tsx"
-  "app/page.tsx"
-  "auth.ts"
-  "middleware.ts"
-  "components/share-chat-header.tsx"
-  "app/actions.ts"
+  "vercel.json"
+  "tsconfig.json"
+  "tailwind.config.js"
+  "package.json"
+  "next.config.js"
 )
-# "components/share-chat-header.tsx"
-# "components/sidebar-list.tsx"
-# "components/sidebar-actions.tsx"
-#  "auth.ts"
-
-# "app/api/auth/[...nextauth]/route.ts"
-# "app/api/chat/route.ts"
-# "app/chat/[id]/page.tsx"
-# "app/share/[id]/opengraph-image.tsx"
-# "app/share/[id]/page.tsx"
-# "app/actions.ts"
-# "app/page.tsx"
 
 remove_comments="${1:-true}"  # Default to true if no parameter is provided
 

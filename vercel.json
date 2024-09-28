@@ -1,7 +1,14 @@
 {
   "functions": {
+    "app/api/auth/[...nextauth]/route.ts": {
+      "runtime": "nodejs18.x"
+    },
     "app/api/chat/route.ts": {
-      "maxDuration": 60
+      "maxDuration": 60,
+      "runtime": "nodejs18.x"
+    },
+    "app/api/create-shared-chat/route.ts": {
+      "runtime": "nodejs18.x"
     }
   }
 }
