@@ -1,8 +1,6 @@
 // app/share/[id]/opengraph-image.tsx
 import { ImageResponse } from '@vercel/og'
-import { NextRequest } from 'next/server'
-import { fontSans } from '@/lib/fonts'
-import { getSharedChat } from '@/app/actions';
+import { getSharedChat } from '@/app/actions'
 import fs from 'fs'
 import path from 'path'
 
@@ -14,9 +12,9 @@ export const size = {
 }
 export const contentType = 'image/png'
 
-// Load font data using fs or path module for Edge runtime support
-const interRegularBuffer = fs.readFileSync(path.join(process.cwd(), 'public/fonts/Inter-Regular.woff'))
-const interBoldBuffer = fs.readFileSync(path.join(process.cwd(), 'public/fonts/Inter-Bold.woff'))
+// Manually load font data for Edge runtime
+const interRegular = fs.readFileSync(path.resolve('./public/fonts/Inter-Regular.woff'))
+const interBold = fs.readFileSync(path.resolve('./public/fonts/Inter-Bold.woff'))
 
 interface ImageProps {
   params: {
@@ -63,7 +61,7 @@ export default async function Image({ params }: ImageProps) {
           backgroundColor: '#09090b',
           color: 'white',
           padding: '80px',
-          fontFamily: 'var(--font-sans), sans-serif',
+          fontFamily: 'Inter, sans-serif', // Use font loaded manually
         }}
       >
         <div style={{ display: 'flex', alignItems: 'flex-start' }}>
@@ -169,13 +167,13 @@ export default async function Image({ params }: ImageProps) {
       fonts: [
         {
           name: 'Inter',
-          data: interRegularBuffer,
+          data: interRegular, // Load manually using fs
           style: 'normal',
           weight: 400,
         },
         {
           name: 'Inter',
-          data: interBoldBuffer,
+          data: interBold, // Load manually using fs
           style: 'normal',
           weight: 700,
         },
