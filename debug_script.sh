@@ -12,6 +12,7 @@ FILES=(
   "middleware.ts"
   "components/share-chat-header.tsx"
   "app/actions.ts"
+  "app/globals.css"
 )
 # "components/share-chat-header.tsx"
 # "components/sidebar-list.tsx"
