@@ -31,8 +31,8 @@ console.log('Current working directory (process.cwd()):', process.cwd());
 // Log the directory structure of process.cwd() for debugging
 console.log('Directory structure of current working directory:');
 logDirectoryTree(process.cwd(), 0);
-const interRegular = fs.readFileSync(path.join(process.cwd(), '/share/[id]/fonts/Inter-Regular.woff'))
-const interBold = fs.readFileSync(path.join(process.cwd(), '/share/[id]/fonts/Inter-Bold.woff'))
+const interRegular = fs.readFileSync(path.join(process.cwd(), 'app/share/[id]/fonts/Inter-Regular.woff'))
+const interBold = fs.readFileSync(path.join(process.cwd(), 'app/share/[id]/fonts/Inter-Bold.woff'))
 
 interface ImageProps {
   params: {
