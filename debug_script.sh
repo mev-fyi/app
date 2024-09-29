@@ -61,7 +61,7 @@ for file in "${FILES[@]}"; do
 done
 
 # Print directory structure of the specified path excluding certain paths
-tree "$tree_dir" -I "node_modules|public|components|lib|assets|data|venv|tokens|src/cosmos_token_listing/tokens|src/cosmos_token_listing/tokens/*|utils|logs|fonts|cache|__pycache__" -L 4
+tree "$tree_dir" -I "node_modules|public|components|lib|assets|venv|utils|logs|fonts|cache" -L 4
 
 # Conditionally add the pre-error context and error section if logs were processed
 if [ "$logs_processed" = true ]; then
