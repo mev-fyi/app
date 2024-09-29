@@ -13,8 +13,9 @@ export const size = {
 export const contentType = 'image/png'
 
 // Manually load font data for Edge runtime
-const interRegular = fs.readFileSync(path.resolve('./public/fonts/Inter-Regular.woff'))
-const interBold = fs.readFileSync(path.resolve('./public/fonts/Inter-Bold.woff'))
+console.log('Current working directory (process.cwd()):', process.cwd());
+const interRegular = fs.readFileSync(path.join(process.cwd(), 'app/share/[id]/fonts/Inter-Regular.woff'))
+const interBold = fs.readFileSync(path.join(process.cwd(), 'app/share/[id]/fonts/Inter-Bold.woff'))
 
 interface ImageProps {
   params: {

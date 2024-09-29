@@ -5,6 +5,9 @@ FILES=(
   "app/api/create-shared-chat/route.ts"
   "components/share-chat-header.tsx"  
   "app/share/[id]/opengraph-image.tsx"
+  "app/page.tsx"
+  "app/layout.tsx"
+  "app/globals.css"
 )
 # "app/api/chat/route.ts"
 # "app/actions.ts"
