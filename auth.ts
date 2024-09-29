@@ -61,6 +61,7 @@ declare module 'next-auth' {
 }
 
 export const authOptions: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     GitHubProvider({
       clientId: process.env.GITHUB_ID!,
@@ -156,3 +157,4 @@ export async function auth() {
   // For other hosts, return null to enforce authentication
   return null;
 }
+
