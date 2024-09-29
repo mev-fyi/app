@@ -1,3 +1,4 @@
+// components/share-chat-header.tsx
 'use client'
 
 import React from 'react';
@@ -12,40 +13,39 @@ interface ShareChatHeaderProps {
 }
 
 const ShareChatHeader: React.FC<ShareChatHeaderProps> = ({ userId, chatId, chat }) => {
-    const copyToClipboard = async (text: string) => {
-        let successful = false;
-        try {
-          if ('clipboard' in navigator && navigator.clipboard) {
-            await navigator.clipboard.writeText(text);
-            successful = true;
-          }
-        } catch (error) {
-          // Handle errors silently, no need to show a toast here
-        }
-      
-        if (!successful) {
-          // Fallback for browsers without clipboard API support
-          const textarea = document.createElement('textarea');
-          textarea.value = text;
-          document.body.appendChild(textarea);
-          textarea.select();
-      
-          try {
-            successful = document.execCommand('copy');
-          } catch (error) {
-            // Handle errors silently, no need to show a toast here
-          } finally {
-            document.body.removeChild(textarea);
-          }
-        }
-      
-        if (successful) {
-          toast.success('Share link copied to clipboard', { duration: 5000 }); // Adjust duration as needed
-        } else {
-          toast.error('Failed to copy link. Please copy and paste the link manually:\n' + text, { duration: 10000 }); // Adjust duration as needed
-        }
-      };
-  
+  const copyToClipboard = async (text: string) => {
+    let successful = false;
+    try {
+      if ('clipboard' in navigator && navigator.clipboard) {
+        await navigator.clipboard.writeText(text);
+        successful = true;
+      }
+    } catch (error) {
+      // Handle errors silently, no need to show a toast here
+    }
+
+    if (!successful) {
+      // Fallback for browsers without clipboard API support
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+
+      try {
+        successful = document.execCommand('copy');
+      } catch (error) {
+        // Handle errors silently, no need to show a toast here
+      } finally {
+        document.body.removeChild(textarea);
+      }
+    }
+
+    if (successful) {
+      toast.success('Share link copied to clipboard', { duration: 5000 }); // Adjust duration as needed
+    } else {
+      toast.error('Failed to copy link. Please copy and paste the link manually:\n' + text, { duration: 10000 }); // Adjust duration as needed
+    }
+  };
 
   const handleShareClick = async () => {
     try {
@@ -66,7 +66,7 @@ const ShareChatHeader: React.FC<ShareChatHeaderProps> = ({ userId, chatId, chat 
       if (result && 'error' in result) {
         toast.error(result.error);
       } else {
-        const shareUrl = `mev.fyi${result.sharePath}`;
+        const shareUrl = `${process.env.NEXT_PUBLIC_NEXTAUTH_URL || 'https://mev.fyi'}${result.sharePath}`;
         copyToClipboard(shareUrl);
       }
     } catch (error) {

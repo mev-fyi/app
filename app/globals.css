@@ -1,3 +1,4 @@
+/* app/globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -42,7 +43,7 @@
   body {
     @apply bg-background text-foreground;
     overflow-x: hidden; /* Should not exist */
-    overflow-y: hidden; /* Add this line to hide the vertical scrollbar */
+    overflow-y: hidden; /* Hide vertical scrollbar */
     font-family: var(--font-sans), sans-serif;
   }
 

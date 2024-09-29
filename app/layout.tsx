@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import { Toaster } from 'react-hot-toast'
 
 import '@/app/globals.css'
-import { fontMono, fontSans } from '@/lib/fonts'
+import { fontSans } from '@/lib/fonts'
 import { cn } from '@/lib/utils'
 import { TailwindIndicator } from '@/components/tailwind-indicator'
 import { Providers } from '@/components/providers'
@@ -62,7 +62,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
         className={cn(
           'font-sans antialiased',
           fontSans.variable,
-          fontMono.variable
         )}
       >
         <Toaster />

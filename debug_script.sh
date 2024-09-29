@@ -2,18 +2,12 @@
 
 # Define an array of file paths
 FILES=(
-  "app/api/auth/[...nextauth]/route.ts"
-  "app/api/chat/route.ts"
   "app/api/create-shared-chat/route.ts"
-  "app/chat/[id]/page.tsx"  
-  "app/share/[id]/page.tsx"
-  "app/page.tsx"
-  "auth.ts"
-  "middleware.ts"
-  "components/share-chat-header.tsx"
-  "app/actions.ts"
-  "app/globals.css"
+  "components/share-chat-header.tsx"  
+  "app/share/[id]/opengraph-image.tsx"
 )
+# "app/api/chat/route.ts"
+# "app/actions.ts"
 # "components/share-chat-header.tsx"
 # "components/sidebar-list.tsx"
 # "components/sidebar-actions.tsx"
