@@ -1,3 +1,5 @@
+/* components/ChatListContainer.module.css */
+
 /* Main container for the entire layout */
 .layoutContainer {
   display: flex;
@@ -6,13 +8,12 @@
   align-items: flex-start; /* Aligns items to the top */
 }
 
-
 .layoutContainerWithPadding {
   padding-bottom: 100px; /* Adjust the padding as needed */
 }
 
 .leftPanel {
-  flex: 0 1 20%; /* Reduce the flex-basis to 25% and allow them to shrink if necessary */
+  flex: 0 1 20%; /* Reduce the flex-basis to 20% and allow them to shrink if necessary */
   min-width: 320px; /* Minimum width */
   max-width: 20%; /* Adjusted maximum width */
   display: flex;
@@ -23,7 +24,7 @@
 }
 
 .rightPanel {
-  flex: 0 1 30%; /* Reduce the flex-basis to 25% and allow them to shrink if necessary */
+  flex: 0 1 30%; /* Reduce the flex-basis to 30% and allow them to shrink if necessary */
   min-width: 350px; /* Minimum width */
   max-width: 30%; /* Adjusted maximum width */
   display: flex;
@@ -220,9 +221,7 @@
 /*  justify-content: center;
 /*  z-index: 10;
 /*  bottom:4 rem;
-/*}
-
-
+/*}*/
 
 
 /* For WebKit (Chrome, Safari, newer versions of Opera): */
@@ -285,11 +284,11 @@
 }
 
 .metadataTitle {
-  color: #fff;
+  color: #fff; /* White text */
   font-weight: bold;
   font-size: 1.5rem;
   margin-bottom: 2rem;
-  /*margin-top: 1rem;*/ /*remove marign top now that we have metadataContainer-level padding*/
+  /*margin-top: 1rem;*/ /*remove margin top now that we have metadataContainer-level padding*/
 }
 
 .customMarkdownFont {
@@ -369,6 +368,13 @@
     transform: translateX(-50%);
     z-index: 11;
   }
+
+  /* Make the "View Sources" button smaller on mobile */
+  .viewSourcesButton {
+    padding: 0.3rem 0.6rem; /* Smaller padding */
+    font-size: 0.8rem; /* Smaller font size */
+    margin: 0.5rem auto; /* Less margin */
+  }
 }
 
 
@@ -404,19 +410,23 @@
 .viewSourcesButton {
   display: none; /* Hidden by default */
   
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  /* Remove fixed positioning to place it within the layout */
+  /* position: fixed; */
+  /* bottom: 20px; */
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
+  
   background-color: #333;
   color: #fff;
-  padding: 0.75rem 1.5rem;
+  padding: 0.5rem 1rem; /* Smaller padding */
   border: none;
   border-radius: 9999px;
   cursor: pointer;
   z-index: 100; /* Above other elements */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  font-size: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem; /* Smaller font size */
+  margin: 1rem auto; /* Centered with some margin */
+  display: block;
 }
 
 /* Show the button on mobile */
@@ -426,13 +436,6 @@
   }
 }
 
-/* Modal Title */
-.modalTitle {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  text-align: center;
-}
 
 /* Adjust the metadataContainer for modal */
 .metadataContainer {

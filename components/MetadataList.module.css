@@ -1,3 +1,8 @@
+/* components/MetadataList.module.css */
+
+/* Desktop Styles */
+
+/* Remove or adjust padding-right if necessary for desktop */
 .metadataList {
   list-style: none;
   padding: 0;
@@ -24,7 +29,8 @@
   border-bottom: none;
 }
 
-.metadataListLink, .metadataListSpan {
+.metadataListLink,
+.metadataListSpan {
   color: #ffffff;
   text-decoration: none;
   font-weight: bold;
@@ -39,7 +45,6 @@
   word-break: break-word;
 }
 
-
 .metadataListExtraInfo {
   margin-right: 0.5rem;
 }
@@ -48,7 +53,6 @@
   font-size: 1.5rem;
   line-height: 0;
 }
-
 
 .metadataInfo {
   display: block;
@@ -64,7 +68,6 @@
   margin-right: 20px;
   overflow: hidden;
 }
-
 
 .metadataThumbnail img {
   width: 100%;
@@ -89,7 +92,6 @@
   object-fit: contain;
 }
 
-
 .metadataContent {
   flex-grow: 1;
   font-size: 1.05rem;
@@ -109,7 +111,9 @@
   color: #666;
 }
 
-.metadataTop, .metadataMiddle, .metadataBottom {
+.metadataTop,
+.metadataMiddle,
+.metadataBottom {
   display: block;
 }
 
@@ -121,4 +125,66 @@
 .authorLink:hover {
   color: #0056b3; /* Darker blue on hover */
   text-decoration: none; /* Remove underline on hover */
+}
+
+/* Mobile Styles */
+@media (max-width: 767px) {
+  /* Adjust metadataListItem to stack elements vertically */
+  .metadataListItem {
+    flex-direction: column;
+    align-items: center;
+    min-width: 0; /* Remove min-width to allow flexibility */
+    max-height: none; /* Remove max-height to accommodate content */
+    margin-bottom: 20px; /* Reduce bottom margin for tighter spacing */
+    padding: 0.5rem; /* Add some padding */
+    background-color: transparent; /* Remove background on mobile */
+  }
+
+  /* Add a thin blue outline around each thumbnail on mobile */
+  .metadataThumbnailLink {
+    border: 1px solid #0000ff; /* Thin blue outline */
+    border-radius: 4px; /* Rounded corners */
+    padding: 2px; /* Space between image and border */
+    display: inline-block; /* Ensure proper sizing */
+    transition: border-color 0.2s;
+    margin-right: 0; /* Remove right margin */
+    margin-bottom: 10px; /* Add bottom margin */
+    width: 100px; /* Reduce width for mobile */
+    height: 75px; /* Reduce height for mobile */
+  }
+
+  .metadataThumbnailLink:hover {
+    border-color: #1e90ff; /* Darker blue on hover */
+  }
+
+  /* Adjust thumbnail size on mobile */
+  .metadataThumbnail {
+    width: 100px; /* Smaller width */
+    height: 75px; /* Smaller height */
+    margin-right: 0; /* Remove right margin */
+    margin-bottom: 10px; /* Add bottom margin */
+  }
+
+  /* Center the metadataContent and adjust font sizes */
+  .metadataContent {
+    margin-left: 0;
+    text-align: center; /* Center text */
+    font-size: 0.9rem; /* Slightly smaller font on mobile */
+    height: auto; /* Allow height to adjust based on content */
+  }
+
+  /* Adjust links and spans for better readability on mobile */
+  .metadataListLink {
+    font-size: 1rem; /* Maintain readability */
+  }
+
+  .metadataListSpan {
+    font-size: 0.85rem; /* Slightly smaller for mobile */
+    color: #ccc; /* Lighter grey for better contrast */
+  }
+
+  /* Optional: Adjust metadataList to remove padding-right on mobile */
+  .metadataList {
+    padding-right: 0;
+  }
 }

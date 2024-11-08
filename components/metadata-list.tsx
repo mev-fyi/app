@@ -1,6 +1,8 @@
+// components/metadata-list.tsx
 import React, { useState, useEffect } from 'react';
 import { ParsedMetadataEntry } from '@/lib/types';
 import styles from './MetadataList.module.css';
+import { toast } from 'react-hot-toast'; // Import toast
 
 const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries }) => {
   const [docMappings, setDocMappings] = useState<{ [key: string]: string }>({});
@@ -74,7 +76,7 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
         thumbnailUrl = `/research_paper_thumbnails/${encodedTitle}`;
       } else {
         const encodedTitle = encodeURIComponent(entry.title) + '.png';
-        thumbnailUrl = `/research_paper_thumbnails/${domain}/${encodedTitle}`;
+        thumbnailUrl = `/research_paper_thumbnails/${domain}/${encodeURIComponent(entry.title)}.png`;
       }
     } else {
       try {
@@ -93,9 +95,15 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
     <ol className={styles.metadataList}>
       {entries.map((entry, index) => (
         <li key={index} className={styles.metadataListItem}>
-          <a href={entry.link} target="_blank" rel="noopener noreferrer" className={styles.metadataThumbnailLink}>
+          <a
+            href={entry.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.metadataThumbnailLink}
+            onClick={() => toast.success('Opened in a new tab!')} // Show toast on click
+          >
             <div className={styles.metadataThumbnail}>
-              <img src={getThumbnailUrl(entry)} alt={entry.title} />
+              <img src={getThumbnailUrl(entry)} alt={entry.title} loading="lazy" />
             </div>
           </a>
           <div className={styles.metadataContent}>

@@ -74,6 +74,9 @@ export function Chat({
   // State for Modal
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // State to control the visibility of the "View Sources" button
+  const [showViewSourcesButton, setShowViewSourcesButton] = useState(false);
+
   useEffect(() => {
     // Set initialLoad to false after the component has mounted
     setInitialLoad(false);
@@ -211,6 +214,9 @@ export function Chat({
     // Hide the middle panel overlay on user input
     setShowMiddlePanelOverlay(false);
     setFadeOutCompleted(false); // Animation starts, not yet completed
+
+    // Hide the "View Sources" button when user sends a message
+    setShowViewSourcesButton(false);
   };
   
   // Add an animation end handler
@@ -225,7 +231,6 @@ export function Chat({
     // Show the overlay only if there are messages and the last message is from the assistant
     setShowLeftPanelOverlay(newMessages.length > 0 && lastMessageRole === 'assistant');
   }, [newMessages, lastMessageRole]);
-
   
   // Create a ref for the end of the chat list
   const chatListEndRef = useRef<HTMLDivElement>(null);
@@ -284,6 +289,9 @@ export function Chat({
             // Update structured metadata state
             setLastMessageRole('assistant');
 
+            // Show the "View Sources" button when assistant responds
+            setShowViewSourcesButton(true);
+  
           } catch (error) {
             console.error('Error reading response data:', error);
             toast.error('Error reading response data');
@@ -361,6 +369,16 @@ export function Chat({
             )}
           </div>
           
+          {/* View Sources Button */}
+          {showViewSourcesButton && isMobile && (
+            <button
+              className={styles.viewSourcesButton}
+              onClick={() => setIsModalOpen(true)}
+            >
+              View Sources →
+            </button>
+          )}
+
           {!shared_chat && (
             <div className={styles.chatPanel}>
               <ChatPanel
@@ -398,14 +416,6 @@ export function Chat({
         </div>
       </div>
 
-      {/* View Sources Button - visible only on mobile */}
-      <button
-        className={styles.viewSourcesButton}
-        onClick={() => setIsModalOpen(true)}
-      >
-        View Sources →
-      </button>
-
       {/* Modal to display MetadataList on mobile */}
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <h2 className={styles.modalTitle}>Top Sources</h2>
@@ -414,3 +424,5 @@ export function Chat({
     </>
   );
 }
+
+export default Chat;
