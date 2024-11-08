@@ -14,6 +14,18 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add('modal-open');
+    } else {
+      document.body.classList.remove('modal-open');
+    }
+
+    return () => {
+      document.body.classList.remove('modal-open');
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
     if (isOpen && modalRef.current) {
       modalRef.current.focus();
     }
@@ -30,6 +42,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
         ref={modalRef}
         aria-modal="true"
         role="dialog"
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
       >
         <button className={styles.closeButton} onClick={onClose} aria-label="Close Modal">×</button>
         {children}
