@@ -82,15 +82,22 @@
   margin-left: auto; /* Centers the container horizontally */
   margin-right: auto; /* Centers the container horizontally */
   align-items: center; /* Horizontally center */
-  /*padding-left: 60px; /* Increase this value to add more space to the left */ /* Remove padding if it causes misalignment with the ChatPanel */
+}
+
+/* Additional class for chat messages to control container styling */
+.chatMessageContainer {
+  padding-left: 5px; /* Push icons closer to the edge */
+  padding-right: 5px;
+}
+
+/* Adjust chatListPadding to allow more message width */
+.chatListPadding {
+  padding: 0.5rem; /* Reduced padding */
 }
 
 .chatListMaxWidth {
-  max-width: 800px; /* Set a max width */
-}
-
-.chatListPadding {
-  padding: 1rem; /* Tailwind's px-4 */
+  max-width: 100%; /* Allow full width on mobile */
+  padding: 0 10px; /* Optional: Add slight padding for better readability */
 }
 
 /* CHAT PANEL SECTION */
@@ -295,7 +302,7 @@
 }
 
 .customMarkdownFontMobile {
-  font-size: 0.89rem; /* Set your desired font size for mobile */
+  font-size: 1rem; /* Slightly larger for better readability on mobile */
 }
 
 /* Mobile-specific styles */
@@ -320,7 +327,46 @@
   .scrollableContainer {
     overflow-y: auto;
     max-height: calc(100vh - 140px); /* Adjust height for ChatPanel */
-    padding: 0 20px; /* Horizontal padding */
+    padding: 0 10px; /* Reduced horizontal padding */
+  }
+
+  /* Reduce padding in chatListPadding to allow more message width */
+  .chatListPadding {
+    padding: 0.5rem; /* Reduced padding */
+  }
+
+  /* Adjust chatListMaxWidth to occupy more screen space */
+  .chatListMaxWidth {
+    max-width: 100%; /* Allow full width on mobile */
+    padding: 0 10px; /* Optional: Add slight padding for better readability */
+  }
+
+  /* Adjust ChatMessage container to have minimal horizontal padding */
+  .chatMessageContainer {
+    padding-left: 5px; /* Push icons closer to the edge */
+    padding-right: 5px;
+  }
+
+  /* Ensure ChatMessage icons are closer to screen edges */
+  .chatMessageIcon {
+    width: 35px; /* Slightly larger icons for better touch targets */
+    height: 35px;
+    margin-left: 5px; /* Further reduce left margin */
+    margin-right: 5px; /* Further reduce right margin */
+  }
+  
+  /* Adjust the main chat message content area */
+  .chatMessageContent {
+    padding-left: 8px; /* Reduce padding */
+    padding-right: 8px;
+  }
+  
+  /* Ensure metadataContainer uses full width on mobile */
+  .metadataContainer {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 1rem 5px; /* Reduced horizontal padding */
   }
 
   /* Chat Panel */
@@ -373,6 +419,13 @@
     padding: 0.3rem 0.6rem; /* Smaller padding */
     font-size: 0.8rem; /* Smaller font size */
     margin: 0.5rem auto; /* Less margin */
+  }
+
+  /* Make the "Top Sources" title bigger and bolder on mobile */
+  .metadataTitle {
+    font-size: 2rem; /* Larger font size on mobile */
+    font-weight: 800; /* Heavier boldness on mobile */
+    text-align: center; /* Center the title */
   }
 }
 

@@ -409,7 +409,7 @@ export function Chat({
 
       {/* Modal to display MetadataList on mobile */}
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <h2 className={styles.modalTitle}>Top Sources</h2>
+        <h2 className={styles.metadataTitle}>Top Sources</h2>
         <MetadataList entries={structuredMetadataEntries} />
       </Modal>
     </>

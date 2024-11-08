@@ -25,7 +25,7 @@ const ChatListComponent = ({ messages, lastMessageRole, onViewSources, isMobile 
         const isAssistant = message.role === 'assistant';
         return (
           <React.Fragment key={index}>
-            <div ref={attachRef ? ref : null}>
+            <div ref={attachRef ? ref : null} className={styles.chatMessageContainer}>
               <ChatMessage message={message} />
             </div>
             {/* Insert "View Sources" button after assistant messages on mobile */}

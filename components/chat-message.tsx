@@ -1,4 +1,5 @@
-"use client";
+// components/chat-message.tsx
+'use client';
 // Inspired by Chatbot-UI and modified to fit the needs of this project
 // @see https://github.com/mckaywrigley/chatbot-ui/blob/main/components/Chat/ChatMessage.tsx
 
@@ -10,7 +11,6 @@ import remarkMath from 'remark-math';
 import { cn } from '@/lib/utils';
 import { CodeBlock } from '@/components/ui/codeblock';
 import { MemoizedReactMarkdown } from '@/components/markdown';
-import { IconOpenAI, IconUser } from '@/components/ui/icons';
 import { ChatMessageActions } from '@/components/chat-message-actions';
 import styles from './ChatListContainer.module.css'; // Import the CSS module
 
@@ -90,8 +90,8 @@ export function ChatMessage({ message, ...props }: ChatMessageProps) {
     >
       <div
         className={cn(
-          'flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-md border shadow bg-background'
-          // You can conditionally apply classes based on message.role if needed
+          'flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-md border shadow bg-background',
+          styles.chatMessageIcon // Apply the chatMessageIcon class
         )}
       >
         {message.role === 'user' ? (
@@ -112,7 +112,7 @@ export function ChatMessage({ message, ...props }: ChatMessageProps) {
           />
         )}
       </div>
-      <div className="flex-1 px-1 ml-4 space-y-2 overflow-hidden">
+      <div className={cn("flex-1 px-1 ml-4 space-y-2 overflow-hidden", styles.chatMessageContent)}>
         <MemoizedReactMarkdown
           className={`prose break-words dark:prose-invert prose-p:leading-relaxed prose-pre:p-0 
           ${isMobile ? styles.customMarkdownFontMobile : styles.customMarkdownFont}`}

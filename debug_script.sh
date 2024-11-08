@@ -8,6 +8,7 @@ FILES=(
   "components/Modal.module.css"
   "components/Modal.tsx"
   "components/chat-list.tsx"
+  "components/markdown.tsx"
 )
 
 

@@ -45,8 +45,14 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
         aria-labelledby="modal-title"
         aria-describedby="modal-description"
       >
-        <button className={styles.closeButton} onClick={onClose} aria-label="Close Modal">×</button>
+        <button className={styles.closeButton} onClick={onClose} aria-label="Close Modal">
+          ×
+        </button>
         {children}
+        {/* Additional Transparent Close Button */}
+        <button className={styles.transparentCloseButton} onClick={onClose} aria-label="Close Top Sources">
+          ✕
+        </button>
       </div>
     </div>
   );
