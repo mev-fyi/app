@@ -8,6 +8,9 @@ FILES=(
   "app/page.tsx"
   "app/layout.tsx"
   "app/globals.css"
+  "app/api/auth/[...nextauth]/route.ts"
+  "auth.ts"
+  "middleware.ts"
 )
 # "app/api/chat/route.ts"
 # "app/actions.ts"

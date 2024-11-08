@@ -1,10 +1,11 @@
 // app/page.tsx
-import { Metadata } from 'next'
-import { nanoid } from '@/lib/utils'
-import { Chat } from '@/components/chat'
+import { Metadata } from 'next';
+import { nanoid } from '@/lib/utils';
+import { Chat } from '@/components/chat';
 import ShareChatHeader from '@/components/share-chat-header';
-import { auth } from '@/auth'
+import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
+import { headers } from 'next/headers'; // Ensure headers is imported
 
 export const metadata: Metadata = {
   title: 'Home - mev.fyi MEV Research Chatbot',
@@ -23,19 +24,20 @@ export const metadata: Metadata = {
     description: 'Interact with the mev.fyi MEV research chatbot to explore Maximal Extractable Value (MEV) insights.',
     images: ['/twitter-image.png'],
   },
-}
-
-interface RootLayoutProps {
-  children: React.ReactNode
-}
+};
 
 export default async function IndexPage() {
-  const session = await auth()
+  const session = await auth();
 
-  if (!session?.user) {
-    // This should not happen since we handle anonymous sessions
+  // Retrieve the host to determine the domain
+  const headersList = headers();
+  const host = headersList.get('host') || '';
+  const isMevSubdomain = host.startsWith('app.mev.fyi');
+
+  if (isMevSubdomain && !session?.user) {
+    // Redirect to sign-in only if on app.mev.fyi and not authenticated
     redirect('/sign-in');
-    console.error('Authentication required.');
+    console.error('Authentication required for app.mev.fyi.');
     return;
   }
 
@@ -44,8 +46,8 @@ export default async function IndexPage() {
   return (
     <>
       <Chat id={id} />
-      {/* Only show ShareChatHeader if the user is authenticated */}
-      {session.user.id && (
+      {/* Always render ShareChatHeader if userId is present */}
+      {session?.user?.id && (
         <ShareChatHeader chatId={id} userId={session.user.id} />
       )}
     </>

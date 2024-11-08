@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { nanoid } from 'nanoid';
 import { kv } from '@vercel/kv';
-import { CookieSerializeOptions } from 'cookie'; // Ensure this is installed
+import { CookieSerializeOptions } from 'cookie';
 
 // Rate limiting configuration
 const RATE_LIMIT = 100; // Max requests per window
@@ -11,10 +11,9 @@ const RATE_LIMIT_WINDOW = 60; // Window size in seconds
 
 export async function middleware(req: NextRequest) {
   const response = NextResponse.next();
-
   const host = req.headers.get('host') || '';
-  const isMevSubdomain = host.startsWith('app.mev.fyi');
-
+  const isMevMainDomain = host === 'mev.fyi' || host === `mev.fyi:${process.env.PORT}`;
+  
   // Rate limiting
   const forwardedFor = req.headers.get('x-forwarded-for');
   const ip = forwardedFor ? forwardedFor.split(',')[0].trim() : req.ip || 'unknown';
@@ -40,8 +39,8 @@ export async function middleware(req: NextRequest) {
     }
   }
 
-  // Handle anonymous users for app.mev.fyi
-  if (isMevSubdomain) {
+  // Handle anonymous users for mev.fyi
+  if (isMevMainDomain) {
     const anonymousIdCookie = req.cookies.get('anonymousId');
 
     if (!anonymousIdCookie) {
@@ -58,6 +57,10 @@ export async function middleware(req: NextRequest) {
 
       // Set the 'anonymousId' cookie
       response.cookies.set('anonymousId', anonymousId, cookieOptions);
+
+      console.log(`Set anonymousId cookie for ${host}: ${anonymousId}`);
+    } else {
+      console.log(`Existing anonymousId cookie for ${host}: ${anonymousIdCookie.value}`);
     }
   }
 

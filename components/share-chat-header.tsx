@@ -7,7 +7,7 @@ import { toast } from 'react-hot-toast';
 import { Chat } from '@/lib/types';
 
 interface ShareChatHeaderProps {
-  userId: string;
+  userId: string; // Ensure this is always a string, either authenticated ID or anonymousId
   chatId?: string;
   chat?: Chat | null;
 }

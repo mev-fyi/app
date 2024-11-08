@@ -50,7 +50,6 @@ if (!process.env.GOOGLE_SECRET) {
   process.exit(1);
 }
 
-
 declare module 'next-auth' {
   interface Session {
     user: {
@@ -138,7 +137,9 @@ export async function auth() {
   const headersList = headers();
   const host = headersList.get('host') || '';
 
-  if (host.startsWith('app.mev.fyi')) {
+  const isMevMainDomain = host === 'mev.fyi' || host === `mev.fyi:${process.env.PORT}`;
+
+  if (isMevMainDomain) {
     // Read 'anonymousId' from cookies
     const cookieStore = getCookies();
     const anonymousId = cookieStore.get('anonymousId')?.value;
@@ -150,11 +151,11 @@ export async function auth() {
       // This should not happen since middleware sets the cookie
       // But as a fallback, generate a new anonymousId
       const newAnonymousId = nanoid();
+      console.warn('anonymousId cookie missing for mev.fyi. Middleware should set it.');
       return { user: { id: newAnonymousId, name: 'Anonymous' } };
     }
   }
 
-  // For other hosts, return null to enforce authentication
+  // For other hosts (app.mev.fyi), enforce authentication
   return null;
 }
-
