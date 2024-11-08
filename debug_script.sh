@@ -2,30 +2,16 @@
 
 # Define an array of file paths
 FILES=(
-  "app/api/create-shared-chat/route.ts"
-  "components/share-chat-header.tsx"  
-  "app/share/[id]/opengraph-image.tsx"
-  "app/page.tsx"
   "app/layout.tsx"
   "app/globals.css"
-  "app/api/auth/[...nextauth]/route.ts"
-  "auth.ts"
-  "middleware.ts"
+  "components/chat.tsx"
+  "components/metadata-list.tsx"
+  "components/ChatListContainer.module.css"
+  "components/Modal.module.css"
+  "components/Modal.tsx"
 )
-# "app/api/chat/route.ts"
-# "app/actions.ts"
-# "components/share-chat-header.tsx"
-# "components/sidebar-list.tsx"
-# "components/sidebar-actions.tsx"
-#  "auth.ts"
 
-# "app/api/auth/[...nextauth]/route.ts"
-# "app/api/chat/route.ts"
-# "app/chat/[id]/page.tsx"
-# "app/share/[id]/opengraph-image.tsx"
-# "app/share/[id]/page.tsx"
-# "app/actions.ts"
-# "app/page.tsx"
+
 
 remove_comments="${1:-true}"  # Default to true if no parameter is provided
 

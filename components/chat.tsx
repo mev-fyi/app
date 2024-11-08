@@ -1,5 +1,7 @@
+// components/chat.tsx
 'use client'
 
+import React, { useState, useRef, useEffect } from 'react';
 import { useChat, type Message } from 'ai/react';
 import { cn } from '@/lib/utils'
 import { ChatList } from '@/components/chat-list'
@@ -7,14 +9,13 @@ import { ChatPanel } from '@/components/chat-panel'
 import { EmptyScreen } from '@/components/empty-screen'
 import ShareButton from '@/components/share-button'
 import { useLocalStorage } from '@/lib/hooks/use-local-storage'
-import { useState, useRef, useEffect } from 'react';
 import { toast } from 'react-hot-toast'
 import MetadataList from '@/components/metadata-list';
 import styles from './ChatListContainer.module.css'; // Import the CSS module
 import QuestionsOverlayStyles from './QuestionsOverlay.module.css'; // Import the CSS module
 import { QuestionsOverlay, QuestionsOverlayLeftPanel } from './question-overlay';
 import { ParsedMetadataEntry } from 'lib/types';
-
+import Modal from '@/components/Modal'; // Import the Modal component
 
 // Extend the Message type to include structured_metadata
 export interface MetadataMessage extends Message {
@@ -70,16 +71,16 @@ export function Chat({
   const [showChatList, setShowChatList] = useState(false); // New state for ChatList visibility
   const [isMobile, setIsMobile] = useState(false);
 
+  // State for Modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     // Set initialLoad to false after the component has mounted
     setInitialLoad(false);
   }, []);
 
-
-
- // Effect to toggle visibility of metadataContainer based on structuredMetadataEntries
- useEffect(() => {
+  // Effect to toggle visibility of metadataContainer based on structuredMetadataEntries
+  useEffect(() => {
     let timer1: number | null = null;
     let timer2: number | null = null;
 
@@ -102,7 +103,6 @@ export function Chat({
       if (timer2 !== null) clearTimeout(timer2);
     };
   }, [structuredMetadataEntries]);
-
 
   // Process the response content to replace specified phrases with "MEV"
   const processResponseContent = (content: string): string => {
@@ -156,7 +156,6 @@ export function Chat({
     }
   }, [shared_chat]);
 
-
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -172,7 +171,7 @@ export function Chat({
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-    useEffect(() => {
+  useEffect(() => {
     // Set initialLoad to false after the component has mounted
     setInitialLoad(false);
 
@@ -197,7 +196,7 @@ export function Chat({
       setShowChatList(true); // Show ChatList with fade-in
     }, 300); // Delay should match the fade-out duration
   
-      const newUserMessage: MetadataMessage = {
+    const newUserMessage: MetadataMessage = {
       id: id || '',  // Provide a fallback value for 'id' to ensure it's not undefined
       content: value,
       role: 'user',  // Assuming 'user' is an acceptable value for 'role'
@@ -227,7 +226,6 @@ export function Chat({
     setShowLeftPanelOverlay(newMessages.length > 0 && lastMessageRole === 'assistant');
   }, [newMessages, lastMessageRole]);
 
-
   
   // Create a ref for the end of the chat list
   const chatListEndRef = useRef<HTMLDivElement>(null);
@@ -252,10 +250,8 @@ export function Chat({
     return () => clearTimeout(timeoutId);
   }, [newMessages, lastMessageRole]);
 
-
-
   const { messages, append, reload, stop, isLoading, input, setInput } =
-  useChat({
+    useChat({
       initialMessages,
       id,
       body: {
@@ -313,8 +309,8 @@ export function Chat({
 
   // Determine the overlay class for QuestionsOverlayLeftPanel
   const leftPanelOverlayClass = showLeftPanelOverlay 
-  ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}` 
-  : `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}`;
+    ? `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeIn}` 
+    : `${styles.questionsOverlay} ${QuestionsOverlayStyles.fadeOut}`;
 
   const metadataContainerClass = cn(styles.metadataContainer, {
     [styles.metadataContainerVisible]: metadataContainerVisible,
@@ -401,6 +397,20 @@ export function Chat({
           </div>
         </div>
       </div>
+
+      {/* View Sources Button - visible only on mobile */}
+      <button
+        className={styles.viewSourcesButton}
+        onClick={() => setIsModalOpen(true)}
+      >
+        View Sources →
+      </button>
+
+      {/* Modal to display MetadataList on mobile */}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <h2 className={styles.modalTitle}>Top Sources</h2>
+        <MetadataList entries={structuredMetadataEntries} />
+      </Modal>
     </>
   );
 }

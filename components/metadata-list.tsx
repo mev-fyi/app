@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { ParsedMetadataEntry } from '@/lib/types';
 import styles from './MetadataList.module.css';
 
-
 const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries }) => {
   const [docMappings, setDocMappings] = useState<{ [key: string]: string }>({});
 
@@ -19,6 +18,7 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
         setDocMappings(data);
       })
       .catch(error => {
+        console.error('Error fetching document mappings:', error);
       });
   }, []);
   
@@ -37,9 +37,7 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
   };
 
 
-  // List of domains to check against
-  // NOTE 2024-03-17: lazy fix, manually hardcode the predefined domains from the research papers. in which case we only fetch for the title. This is because the 
-  //   thumbnail generation for reseacrh papers on the data side isn't matched and stored under the subdirectory corresponding to the domain.
+  // List of predefined domains for research papers
   const predefinedDomains = [
     'papers.ssrn.com', 'www.sciencedirect.com', 'www.researchgate.net', 'xenophonlabs.com', 'moallemi.com', 'uniswap.org', 'www.sec.gov', 'cms.nil.foundation',
     'arxiv.org', 'dl.acm.org', 'eprint.iacr.org', 'www.nature.com', 'angeris.github.io', 'fc24.ifca.ai', 'people.eecs.berkeley.edu', 'pub.tik.ee.ethz.ch',
@@ -50,7 +48,6 @@ const MetadataList: React.FC<{ entries: ParsedMetadataEntry[] }> = ({ entries })
   const normalizeUrl = (url: string) => {
     const urlObj = new URL(url);
     const normalizedUrl = urlObj.origin + urlObj.pathname.replace(/\/$/, ""); // Remove trailing slash and directly return the string
-    // Further normalization steps can be added here as needed
     return normalizedUrl;
   };
   

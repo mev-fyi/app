@@ -5,6 +5,7 @@
 
 @layer base {
   .dark {
+    /* Theme colors */
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
 
