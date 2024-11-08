@@ -2,13 +2,12 @@
 
 # Define an array of file paths
 FILES=(
-  "app/layout.tsx"
-  "app/globals.css"
   "components/chat.tsx"
   "components/metadata-list.tsx"
   "components/ChatListContainer.module.css"
   "components/Modal.module.css"
   "components/Modal.tsx"
+  "components/chat-list.tsx"
 )
 
 

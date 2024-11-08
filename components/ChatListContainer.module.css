@@ -65,7 +65,7 @@
   overflow-y: auto;
   flex-grow: 1; /* Allows the container to grow and take available space */
   overflow-x: hidden; /* Hides horizontal scroll */
-  padding-left: 40px; /*To fully display the user and assistant icons*/
+  padding-left: 40px; /* To fully display the user and assistant icons */
   padding-right: 40px; /* Add right padding to balance the left padding */
   width: 100%; /* Full width to contain the chat list */
   max-width: 800px; /* Set a max width */
@@ -93,14 +93,14 @@
   padding: 1rem; /* Tailwind's px-4 */
 }
 
-/*CHAT PANEL SECTION*/
+/* CHAT PANEL SECTION */
 
 .chatPanelWrapper {
   /* Removed the commented out properties and adjusted the width */
   margin: 0 auto;
   max-width: 900px; /* Set a max width */
   padding: 1rem; /* Padding inside the wrapper, if needed */
-  padding-right: 120px; /*To align with the chatlist for fully display the user and assistant icons*/
+  padding-right: 120px; /* To align with the chatlist for fully display the user and assistant icons */
 }
 
 .chatPanel {
@@ -138,7 +138,6 @@
   margin-bottom: 0.3rem; /* Reduced bottom margin */
   padding: 0.5rem; /* Adjust padding to ensure it fits within the chatPanel */
 }
-
 
 .promptFormContainer {
   flex-grow: 1;
@@ -202,7 +201,7 @@
 
 .loadingContainer {
   position: absolute;
-  top: -5px; /* Move up by 50 pixels, adjust value as needed */
+  top: -5px; /* Move up by 5 pixels, adjust value as needed */
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -214,14 +213,14 @@
 
 
 /*.stopGeneratingButtonContainer {
-/*  position: absolute;
-/*  top: 4rem; /* Position the button below the spinner */
-/*  width: 100%;
-/*  display: flex;
-/*  justify-content: center;
-/*  z-index: 10;
-/*  bottom:4 rem;
-/*}*/
+  position: absolute;
+  top: 4rem; /* Position the button below the spinner */
+  /* width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 10;
+  bottom:4 rem;
+}*/
 
 
 /* For WebKit (Chrome, Safari, newer versions of Opera): */
@@ -260,7 +259,7 @@
   z-index: 10; /* Ensure it's above other content */
   padding-right: 10%;
   padding-left: 5%;
-  opacity: 1; /* Start with invisible */
+  opacity: 0; /* Start with invisible */
   transition: opacity 0.5s ease-in-out; /* Smooth transition for opacity */
 }
 
@@ -378,7 +377,6 @@
 }
 
 
-
 /* Ensure that all components are vertically stacked and centered in the viewport */
 @media screen and (max-width: 768px) {
   .mobileHide {
@@ -408,66 +406,56 @@
 
 /* View Sources Button */
 .viewSourcesButton {
-  display: none; /* Hidden by default */
-  
-  /* Remove fixed positioning to place it within the layout */
-  /* position: fixed; */
-  /* bottom: 20px; */
-  /* left: 50%; */
-  /* transform: translateX(-50%); */
-  
   background-color: #333;
   color: #fff;
-  padding: 0.5rem 1rem; /* Smaller padding */
-  border: none;
-  border-radius: 9999px;
-  cursor: pointer;
-  z-index: 100; /* Above other elements */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  font-size: 0.9rem; /* Smaller font size */
+  padding: 0.5rem 1rem; /* Suitable padding for mobile tap */
+  border: none; /* Remove default border */
+  border-radius: 9999px; /* Fully rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  z-index: 100; /* Ensure it appears above other elements */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  font-size: 0.9rem; /* Readable font size */
   margin: 1rem auto; /* Centered with some margin */
   display: block;
+  width: 80%; /* Occupy 80% width on mobile for better tap area */
+  max-width: 300px; /* Prevents the button from being too wide */
+  text-align: center; /* Center the text within the button */
 }
 
-/* Show the button on mobile */
+/* Remove blue outline around images within MetadataList on mobile */
+.metadataThumbnailLink img {
+  border: none; /* Remove any default borders */
+  outline: none; /* Remove outlines */
+  width: 100%; /* Ensure images fill the container */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Cover the container */
+}
+
+/* Ensure images within ChatMessage are larger on mobile */
+@media (max-width: 767px) {
+  .metadataThumbnailLink img {
+    width: 100%; /* Full width */
+    height: auto; /* Adjust height based on aspect ratio */
+  }
+
+  /* Optional: Adjust ChatMessage icons if needed */
+  .chatMessageIcon {
+    width: 40px; /* Increase size */
+    height: 40px;
+  }
+}
+
+/* Ensure the "View Sources" button is hidden on desktop */
+@media (min-width: 768px) {
+  .viewSourcesContainer {
+    display: none; /* Hide the button on desktop */
+  }
+}
+
+/* Additional styles for better mobile responsiveness */
 @media (max-width: 767px) {
   .viewSourcesButton {
-    display: block;
-  }
-}
-
-
-/* Adjust the metadataContainer for modal */
-.metadataContainer {
-  width: 100%;
-  padding: 1rem;
-}
-
-.metadataContainerVisible {
-  opacity: 1;
-}
-
-/* Adjust scrollableContainer padding on mobile */
-@media (max-width: 767px) {
-  .scrollableContainer {
-    padding-left: 20px; /* Reduced from 40px */
-    padding-right: 20px; /* Adjust if necessary */
-  }
-}
-
-@media (max-width: 767px) {
-  .sendButtonContainer {
-    right: 30px; /* Increase from 55px to provide more space */
-  }
-
-  .promptTextarea {
-    margin-left: -5px; /* Adjust as necessary */
-    padding-left: 5px; /* Add more left padding */
-  }
-}
-
-@media (max-width: 767px) {
-  .rightPanel {
-    display: none;
+    width: 90%; /* Slightly wider on smaller screens */
+    max-width: 250px; /* Adjust as needed */
   }
 }

@@ -74,8 +74,6 @@ export function Chat({
   // State for Modal
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // State to control the visibility of the "View Sources" button
-  const [showViewSourcesButton, setShowViewSourcesButton] = useState(false);
 
   useEffect(() => {
     // Set initialLoad to false after the component has mounted
@@ -214,9 +212,6 @@ export function Chat({
     // Hide the middle panel overlay on user input
     setShowMiddlePanelOverlay(false);
     setFadeOutCompleted(false); // Animation starts, not yet completed
-
-    // Hide the "View Sources" button when user sends a message
-    setShowViewSourcesButton(false);
   };
   
   // Add an animation end handler
@@ -290,8 +285,7 @@ export function Chat({
             setLastMessageRole('assistant');
 
             // Show the "View Sources" button when assistant responds
-            setShowViewSourcesButton(true);
-  
+
           } catch (error) {
             console.error('Error reading response data:', error);
             toast.error('Error reading response data');
@@ -351,7 +345,13 @@ export function Chat({
             {/* Conditional rendering for ChatList */}
             {showChatList && (
               <div className={QuestionsOverlayStyles.fadeIn}>
-                <ChatList ref={chatListEndRef} messages={newMessages} lastMessageRole={lastMessageRole} />
+                <ChatList 
+                  ref={chatListEndRef} 
+                  messages={newMessages} 
+                  lastMessageRole={lastMessageRole}
+                  onViewSources={() => setIsModalOpen(true)}
+                  isMobile={isMobile}
+                />
               </div>
             )}
 
@@ -369,15 +369,6 @@ export function Chat({
             )}
           </div>
           
-          {/* View Sources Button */}
-          {showViewSourcesButton && isMobile && (
-            <button
-              className={styles.viewSourcesButton}
-              onClick={() => setIsModalOpen(true)}
-            >
-              View Sources →
-            </button>
-          )}
 
           {!shared_chat && (
             <div className={styles.chatPanel}>

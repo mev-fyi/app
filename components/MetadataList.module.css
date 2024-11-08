@@ -140,29 +140,29 @@
     background-color: transparent; /* Remove background on mobile */
   }
 
-  /* Add a thin blue outline around each thumbnail on mobile */
+  /* Remove the thin blue outline around thumbnails */
   .metadataThumbnailLink {
-    border: 1px solid #0000ff; /* Thin blue outline */
-    border-radius: 4px; /* Rounded corners */
-    padding: 2px; /* Space between image and border */
-    display: inline-block; /* Ensure proper sizing */
-    transition: border-color 0.2s;
-    margin-right: 0; /* Remove right margin */
-    margin-bottom: 10px; /* Add bottom margin */
-    width: 100px; /* Reduce width for mobile */
-    height: 75px; /* Reduce height for mobile */
+    border: none; /* Remove blue outline */
+    border-radius: 0; /* Remove rounded corners if any */
+    padding: 0; /* Remove padding */
+    display: block; /* Ensure proper sizing */
+    width: 100%; /* Make thumbnail fill the container */
+    height: auto; /* Allow height to adjust based on image */
+    margin: 0 0 10px 0; /* Add bottom margin for spacing */
   }
 
-  .metadataThumbnailLink:hover {
-    border-color: #1e90ff; /* Darker blue on hover */
-  }
-
-  /* Adjust thumbnail size on mobile */
+  /* Increase thumbnail size to fill mobile width */
   .metadataThumbnail {
-    width: 100px; /* Smaller width */
-    height: 75px; /* Smaller height */
+    width: 100%; /* Full width */
+    height: auto; /* Automatic height */
     margin-right: 0; /* Remove right margin */
     margin-bottom: 10px; /* Add bottom margin */
+  }
+
+  .metadataThumbnail img {
+    width: 100%;
+    height: auto; /* Adjust height to maintain aspect ratio */
+    object-fit: cover; /* Cover the container */
   }
 
   /* Center the metadataContent and adjust font sizes */
